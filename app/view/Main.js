@@ -26,7 +26,8 @@ Ext.define ('Earsip.view.Main', {
 			xtype	: 'content'
 		}]
 	}]
-,	initComponent	: function() {
+,	initComponent	: function ()
+	{
 		this.callParent (arguments);
 	}
 });

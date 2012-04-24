@@ -23,7 +23,8 @@ Ext.define ('Earsip.view.MainToolbar', {
 			console.log ('Administrasi');
 		}
 	}]
-,	initComponent	: function () {
+,	initComponent	: function ()
+	{
 		this.callParent (arguments);
 	}
 });

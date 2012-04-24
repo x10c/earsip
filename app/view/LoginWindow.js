@@ -1,3 +1,5 @@
+Ext.require (['Earsip.view.Main']);
+
 Ext.define ('Earsip.view.LoginWindow', {
 	extend			: 'Ext.Window'
 ,	alias			: 'widget.loginwindow'
@@ -11,40 +13,39 @@ Ext.define ('Earsip.view.LoginWindow', {
 ,	layout			: 'fit'
 ,	border			: false
 ,	modal			: true
-,	initComponent	: function() {
-		Ext.apply(this, {
-			items	: [{
-				xtype		: 'form'
-			,	plain		: true
-			,	frame		: true
-			,	border		: 0
-			,	bodyPadding	: 5
-			,	items: [{
-					xtype			: 'textfield'
-				,	itemId			: 'userName'
-				,	fieldLabel		: 'Username'
-				,	name			: 'userName'
-				,	allowBlank		: false
-				,	anchor			: '100%'
-				,	selectOnFocus	: true
-          		},{
-					xtype			: 'textfield'
-				,	fieldLabel		: 'Password'
-				,	name			: 'password'
-				,	allowBlank		: false
-				,	inputType		: 'password'
-				,	anchor			: '100%'
-				,	selectOnFocus	: true
-				}],
-			}]
-		});
-		this.callParent(arguments);
-	}
-,	buttons	: [{
-		text	: 'Login'
-,		type	: 'submit'
-,		action	: 'login'
-,		formBind: true
+,	items			: [{
+		xtype			: 'form'
+	,	url				: 'data/login.jsp'
+	,	plain			: true
+	,	frame			: true
+	,	border			: 0
+	,	bodyPadding		: 5
+	,	defaults		: {
+			xtype			: 'textfield'
+		,	allowBlank		: false
+		,	anchor			: '100%'
+		,	selectOnFocus	: true
+		}
+	,	items			: [{
+			fieldLabel		: 'NIP'
+		,	itemId			: 'user_nip'
+		,	name			: 'user_nip'
+		},{
+			fieldLabel		: 'Password'
+		,	inputType		: 'password'
+		,	name			: 'user_psw'
+		}]
+	}]
+,	defaultFocus	: 'user_name'
+,	buttons			: [{
+		text			: 'Login'
+	,	type			: 'submit'
+	,	action			: 'login'
+	,	formBind		: true
     }]
-,	defaultFocus: 'userName'
+
+,	initComponent	: function ()
+	{
+		this.callParent (arguments);
+	}
 });

@@ -16,12 +16,20 @@ Ext.application ({
 		'Login'
 	]
 ,	launch		: function () {
-		Ext.create ('Earsip.view.LoginWindow', {}).show();
-		Ext.create ('Ext.container.Viewport', {
+		var win			= Ext.create ('Earsip.view.LoginWindow', {});
+		var mainview	= Ext.create ('Earsip.view.Main', {});
+		var viewport	= Ext.create ('Ext.container.Viewport', {
 			layout	: 'fit'
-		,	items	: [{
-				xtype: 'mainview'
-			}]
+		,	items	: [ mainview ]
 		});
+
+		viewport.show ();
+
+		if (is_login) {
+			win.hide ();
+			mainview.getLayout ().setActiveItem ('main');
+		} else {
+			win.show ();
+		}
 	}
 });
