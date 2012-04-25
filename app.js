@@ -10,10 +10,15 @@ Ext.application ({
 		'DirList'
 	]
 ,	views		: [
-		'Main', 'Trees', 'DirList', 'SharedList'
+		'Main'
+	,	'MainToolbar'
+	,	'Trees'
+	,	'DirList'
+	,	'SharedList'
 	]
 ,	controllers	: [
 		'Login'
+	,	'MainToolbar'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});

@@ -9,8 +9,8 @@ ResultSet			rs					= null;
 Cookie				c_sid				= null;
 Cookie				c_user_subdiv_id	= null;
 Cookie				c_user_id			= null;
-Cookie				c_user_name			= null;
 Cookie				c_user_nip			= null;
+Cookie				c_user_name			= null;
 String				db_url				= "";
 String				q					= "";
 String				sid					= "";
@@ -69,6 +69,7 @@ try {
 
 	c_sid				= new Cookie ("earsip.sid", session.getId ());
 	c_user_id			= new Cookie ("earsip.user.id", user_id);
+	c_user_nip			= new Cookie ("earsip.user.nip", user_nip);
 	c_user_subdiv_id	= new Cookie ("earsip.user.subdiv_id", user_subdiv_id);
 	c_user_name			= new Cookie ("earsip.user.name", user_name);
 
@@ -76,6 +77,8 @@ try {
 	c_sid.setPath (c_path);
 	c_user_id.setMaxAge (c_max_age);
 	c_user_id.setPath (c_path);
+	c_user_nip.setMaxAge (c_max_age);
+	c_user_nip.setPath (c_path);
 	c_user_subdiv_id.setMaxAge (c_max_age);
 	c_user_subdiv_id.setPath (c_path);
 	c_user_name.setMaxAge (c_max_age);
@@ -83,6 +86,7 @@ try {
 
 	response.addCookie (c_sid);
 	response.addCookie (c_user_id);
+	response.addCookie (c_user_nip);
 	response.addCookie (c_user_subdiv_id);
 	response.addCookie (c_user_name);
 

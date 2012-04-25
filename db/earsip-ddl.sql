@@ -80,7 +80,7 @@ ARSIP_ID
 create table MENU_ACCESS (
    USER_ID              INT4                 not null,
    MENU_ID              INT4                 not null,
-   ACCESS_LEVEL         CHAR(1)              null,
+   ACCESS_LEVEL         INT                  null,
    constraint PK_MENU_ACCESS primary key (USER_ID, MENU_ID)
 );
 
@@ -222,7 +222,7 @@ CREATOR_USER_ID
 /*==============================================================*/
 create table M_DIVISI (
    DIV_ID               SERIAL               not null,
-   DIV_KODE             VARCHAR(4)           not null,
+   DIV_KODE             VARCHAR(8)           not null,
    DIV_NAME             VARCHAR(255)         null,
    DIV_LEADER           VARCHAR(255)         null,
    constraint PK_M_DIVISI primary key (DIV_ID),
@@ -266,7 +266,7 @@ USER_ID
 /*==============================================================*/
 create table M_MENU (
    MENU_ID              SERIAL               not null,
-   MENU_PARENT_ID       INT8                 null,
+   MENU_PARENT_ID       INT                  null,
    MENU_NAME            VARCHAR(255)         null,
    MENU_INDEX           VARCHAR(64)          null,
    constraint PK_M_MENU primary key (MENU_ID)
@@ -285,7 +285,7 @@ MENU_ID
 create table M_SUBDIV (
    SUBDIV_ID            SERIAL               not null,
    DIV_ID               INT4                 not null,
-   SUBDIV_CODE          VARCHAR(4)           not null,
+   SUBDIV_CODE          VARCHAR(8)           not null,
    SUBDIV_NAME          VARCHAR(255)         null,
    SUBDIV_LEADER        VARCHAR(255)         null,
    constraint PK_M_SUBDIV primary key (SUBDIV_ID),

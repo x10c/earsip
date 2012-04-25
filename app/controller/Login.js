@@ -3,6 +3,9 @@ Ext.define ('Earsip.controller.Login', {
 ,	refs	: [{
 		ref		: 'mainview'
 	,	selector: 'mainview'
+	},{
+		ref		: 'maintoolbar'
+	,	selector: 'maintoolbar'
 	}]
 
 ,	init	: function ()
@@ -30,6 +33,7 @@ Ext.define ('Earsip.controller.Login', {
 					if (action.result.success == true) {
 						win.hide ();
 						this.getMainview ().getLayout ().setActiveItem ('main');
+						this.getMaintoolbar ().do_load_menu ();
 					} else {
 						Ext.Msg.alert ('Kesalahan', action.result.info);
 					}

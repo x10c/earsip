@@ -36,6 +36,8 @@ if (cookies != null) {
 			user_subdiv_id	= cookies[i].getValue ();
 		} else if (c_name.equalsIgnoreCase ("earsip.user.name")) {
 			user_name		= cookies[i].getValue ();
+		} else if (c_name.equalsIgnoreCase ("earsip.user.nip")) {
+			user_nip		= cookies[i].getValue ();
 		}
 	}
 }
