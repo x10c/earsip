@@ -7,14 +7,16 @@ Connection			db_con				= null;
 PreparedStatement	db_stmt				= null;
 ResultSet			rs					= null;
 Cookie				c_sid				= null;
-Cookie				c_user_subdiv_id	= null;
 Cookie				c_user_id			= null;
+Cookie				c_user_div_id		= null;
+Cookie				c_user_subdiv_id	= null;
 Cookie				c_user_nip			= null;
 Cookie				c_user_name			= null;
 String				db_url				= "";
 String				q					= "";
 String				sid					= "";
 String				user_id				= "";
+String				user_div_id			= "";
 String				user_subdiv_id		= "";
 String				user_name			= "";
 String				user_nip			= "";
@@ -40,12 +42,15 @@ try {
 		session.setAttribute("db.con", (Object) db_con);
 	}
 
-	q	=" select	user_id"
-		+" ,		subdiv_id"
-		+" ,		user_name"
-		+" from		m_user"
-		+" where	user_nip	= ?"
-		+" and		user_psw	= ?";
+	q	=" select	A.user_id"
+		+" ,		B.div_id"
+		+" ,		A.subdiv_id"
+		+" ,		A.user_name"
+		+" from		m_user		A"
+		+" ,		m_subdiv	B"
+		+" where	A.user_nip	= ?"
+		+" and		A.user_psw	= ?"
+		+" and		A.subdiv_id	= B.subdiv_id";
 
 	db_stmt = db_con.prepareStatement (q);
 	db_stmt.setString (1, user_nip);
@@ -59,10 +64,12 @@ try {
 	}
 
 	user_id			= rs.getString ("user_id");
+	user_div_id	= rs.getString ("div_id");
 	user_subdiv_id	= rs.getString ("subdiv_id");
 	user_name		= rs.getString ("user_name");
 
 	session.setAttribute ("user.id", user_id);
+	session.setAttribute ("user.div_id", user_id);
 	session.setAttribute ("user.subdiv_id", user_subdiv_id);
 	session.setAttribute ("user.name", user_name);
 	session.setAttribute ("user.nip", user_nip);
@@ -70,6 +77,7 @@ try {
 	c_sid				= new Cookie ("earsip.sid", session.getId ());
 	c_user_id			= new Cookie ("earsip.user.id", user_id);
 	c_user_nip			= new Cookie ("earsip.user.nip", user_nip);
+	c_user_div_id		= new Cookie ("earsip.user.div_id", user_div_id);
 	c_user_subdiv_id	= new Cookie ("earsip.user.subdiv_id", user_subdiv_id);
 	c_user_name			= new Cookie ("earsip.user.name", user_name);
 
@@ -79,6 +87,8 @@ try {
 	c_user_id.setPath (c_path);
 	c_user_nip.setMaxAge (c_max_age);
 	c_user_nip.setPath (c_path);
+	c_user_div_id.setMaxAge (c_max_age);
+	c_user_div_id.setPath (c_path);
 	c_user_subdiv_id.setMaxAge (c_max_age);
 	c_user_subdiv_id.setPath (c_path);
 	c_user_name.setMaxAge (c_max_age);
@@ -87,6 +97,7 @@ try {
 	response.addCookie (c_sid);
 	response.addCookie (c_user_id);
 	response.addCookie (c_user_nip);
+	response.addCookie (c_user_div_id);
 	response.addCookie (c_user_subdiv_id);
 	response.addCookie (c_user_name);
 

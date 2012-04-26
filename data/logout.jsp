@@ -14,6 +14,11 @@
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
 				response.addCookie (cookies[i]);
+			} else if (c_name.equalsIgnoreCase ("earsip.user.div_id")) {
+				cookies[i].setMaxAge (0);
+				cookies[i].setPath (c_path);
+				response.addCookie (cookies[i]);
+			} else if (c_name.equalsIgnoreCase ("earsip.user.div_id")) {
 			} else if (c_name.equalsIgnoreCase ("earsip.user.subdiv_id")) {
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
@@ -31,9 +36,11 @@
 	}
 
 	session.removeAttribute ("user.id");
+	session.removeAttribute ("user.div_id");
 	session.removeAttribute ("user.subdiv_id");
 	session.removeAttribute ("user.name");
 	session.removeAttribute ("user.nip");
+	session.removeAttribute ("sys.repository_root");
 
 	out.print ("{success:true}");
 %>

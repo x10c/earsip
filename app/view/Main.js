@@ -7,7 +7,7 @@ Ext.define ('Earsip.view.Main', {
 ,	alias		: 'widget.mainview'
 ,	layout		: 'card'
 ,	defaults	: {
-		border	:false
+		border		: false
 	}
 ,	activeItem	: 0
 ,	items		: [{
@@ -16,9 +16,9 @@ Ext.define ('Earsip.view.Main', {
 	},{
 		id		: 'main'
 	,	xtype	: 'panel'
-	,	tbar	: [{
-			xtype	: 'maintoolbar'
-		}]
+	,	tbar	: [
+			Ext.create('Earsip.view.MainToolbar')
+		]
 	,	layout	: 'border'
 	,	items	: [{
 			xtype	: 'trees'

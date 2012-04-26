@@ -1,12 +1,13 @@
 Ext.define ('Earsip.view.MainToolbar', {
 	extend			: 'Ext.toolbar.Toolbar'
 ,	alias			: 'widget.maintoolbar'
+,	id				: 'maintoolbar'
 ,	flex			: 1
 ,	height			: 30
 ,	initComponent	: function ()
 	{
 		this.callParent (arguments);
-		if (this.items.length <= 0) {
+		if (this.items.length > 0) {
 			this.do_load_menu ();
 		}
 	}

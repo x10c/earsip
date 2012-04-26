@@ -15,6 +15,7 @@ Ext.application ({
 	,	'Trees'
 	,	'DirList'
 	,	'SharedList'
+	,	'AdmSistem'
 	]
 ,	controllers	: [
 		'Login'
@@ -33,6 +34,11 @@ Ext.application ({
 		if (is_login) {
 			win.hide ();
 			mainview.getLayout ().setActiveItem ('main');
+
+			var comp	= mainview.getLayout ().getActiveItem ();
+			var tb		= comp.down ('#maintoolbar');
+
+			tb.do_load_menu ();
 		} else {
 			win.show ();
 		}

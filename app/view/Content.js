@@ -6,6 +6,9 @@ Ext.define ('Earsip.view.Content', {
 ,	alias		: 'widget.content'
 ,	region		: 'center'
 ,	margins		: '5 5 0 0'
+,	defaults	: {
+		autoScroll	: true
+	}
 ,	items		: [{
 		xtype	: 'dirlist'
 	},{

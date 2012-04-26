@@ -191,7 +191,7 @@ create table M_DIREKTORI (
    DIR_NAME             VARCHAR(255)         null,
    DIR_DATE_CREATED     DATE                 null,
    DIR_DEL_STATUS       BOOL                 null,
-   RAK_N0               INT4                 null,
+   RAK_NO               INT4                 null,
    BOX_NO               INT4                 null,
    constraint PK_M_DIREKTORI primary key (DIR_ID)
 );
@@ -310,17 +310,7 @@ DIV_ID
 /* Table: M_SYSCONFIG                                           */
 /*==============================================================*/
 create table M_SYSCONFIG (
-   SYSCONF_ID           SERIAL               not null,
-   SYSCONF_NAME         VARCHAR(255)         null,
-   SYSCONF_VALUE        VARCHAR(64)          null,
-   constraint PK_M_SYSCONFIG primary key (SYSCONF_ID)
-);
-
-/*==============================================================*/
-/* Index: M_SYSCONFIG_PK                                        */
-/*==============================================================*/
-create unique index M_SYSCONFIG_PK on M_SYSCONFIG (
-SYSCONF_ID
+   REPOSITORY_ROOT		VARCHAR(1024)        not null
 );
 
 /*==============================================================*/

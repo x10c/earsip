@@ -24,7 +24,8 @@ Ext.define ('Earsip.view.Trees', {
 			}]
 		}]
     }
-,	initComponent	: function() {
+,	initComponent	: function()
+	{
 		this.callParent (arguments);
 	}
 });

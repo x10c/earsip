@@ -1,3 +1,5 @@
+Ext.require ('Earsip.view.AdmSistem');
+
 Ext.define ('Earsip.controller.MainToolbar', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
@@ -9,6 +11,9 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	},{
 		ref		: 'maintoolbar'
 	,	selector: 'maintoolbar'
+	},{
+		ref		: 'content'
+	,	selector: 'content'
 	}]
 
 ,	init	: function ()
@@ -25,7 +30,11 @@ Ext.define ('Earsip.controller.MainToolbar', {
 
 ,	menuitem_on_click : function (button)
 	{
-		console.log (button.itemId);
+		var tabpanel = this.getContent ();
+
+		tabpanel.add ({
+			xtype: button.itemId
+		});
 	}
 
 ,	do_logout : function (button)
