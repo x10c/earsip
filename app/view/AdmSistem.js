@@ -2,7 +2,7 @@ Ext.define ('Earsip.view.AdmSistem', {
 	extend			: 'Ext.form.Panel'
 ,	alias			: 'widget.adm_sistem'
 ,	itemId			: 'adm_sistem'
-,	title			: 'Sistem Administration'
+,	title			: 'Administrasi Sistem'
 ,	closable		: true
 ,	plain			: true
 ,	bodyPadding		: 10
@@ -28,6 +28,7 @@ Ext.define ('Earsip.view.AdmSistem', {
 	,	flex			: 1
 	,	items			: [{
 			text			: 'Simpan'
+		,	itemId			: 'save'
 		,	scope			: this
 		,	handler			: function (button, event)
 			{
@@ -44,6 +45,14 @@ Ext.define ('Earsip.view.AdmSistem', {
 		activate		: function (comp)
 		{
 			this.do_load ();
+
+			var b_save = this.down ('#save');
+
+			if (Earsip.acl < 3) {
+				b_save.setDisabled (true);
+			} else {
+				b_save.setDisabled (false);
+			}
 		}
 	,	removed			: function (comp)
 		{

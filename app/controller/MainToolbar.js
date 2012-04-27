@@ -1,4 +1,5 @@
 Ext.require ('Earsip.view.AdmSistem');
+Ext.require ('Earsip.view.AdmHakAkses');
 
 Ext.define ('Earsip.controller.MainToolbar', {
 	extend	: 'Ext.app.Controller'
@@ -32,9 +33,15 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	{
 		var tabpanel = this.getContent ();
 
-		tabpanel.add ({
-			xtype: button.itemId
-		});
+		Earsip.acl = button.acl;
+
+		var c = tabpanel.getComponent (button.itemId);
+		if (c == undefined) {
+			tabpanel.add ({
+				xtype	: button.itemId
+			});
+		}
+		tabpanel.setActiveTab (button.itemId);
 	}
 
 ,	do_logout : function (button)

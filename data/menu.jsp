@@ -15,6 +15,7 @@ String				menu		= "";
 int					menu_id		= 0;
 String				menu_name	= "";
 String				menu_index	= "";
+String				menu_acl	= "";
 String				tmp			= "";
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
@@ -43,6 +44,7 @@ try {
 	q	=" select	A.menu_id"
 		+" ,		A.menu_name"
 		+" ,		A.menu_index"
+		+" ,		B.access_level"
 		+" from		m_menu		A"
 		+" ,		menu_access	B"
 		+" where	A.menu_id = B.menu_id"
@@ -81,9 +83,11 @@ try {
 				menu_id		= mc_rs.getInt ("menu_id");
 				menu_name	= mc_rs.getString ("menu_name");
 				menu_index	= mc_rs.getString ("menu_index");
+				menu_acl	= mc_rs.getString ("access_level");
 
 				menu	+="\t\t\t{ text:'"+ menu_name +"'\n"
 						+ "\t\t\t, itemId:'"+ menu_index +"'\n"
+						+ "\t\t\t, acl:'"+ menu_acl +"'\n"
 						+ "\t\t\t},\n";
 			} while (mc_rs.next ());
 
