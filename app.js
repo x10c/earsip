@@ -67,7 +67,7 @@ Ext.application ({
 ,	views		: [
 		'Main'
 	,	'MainToolbar'
-	,	'Trees'
+	,	'DirTree'
 	,	'DirList'
 	,	'SharedList'
 	,	'AdmSistem'
@@ -80,6 +80,7 @@ Ext.application ({
 		'Login'
 	,	'MainToolbar'
 	,	'AdmHakAkses'
+	,	'DirTree'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
@@ -97,8 +98,10 @@ Ext.application ({
 
 			var comp	= mainview.getLayout ().getActiveItem ();
 			var tb		= comp.down ('#maintoolbar');
+			var tree	= comp.down ('#dirtree');
 
 			tb.do_load_menu ();
+			tree.do_load_tree ();
 		} else {
 			win.show ();
 		}

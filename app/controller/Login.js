@@ -6,6 +6,9 @@ Ext.define ('Earsip.controller.Login', {
 	},{
 		ref		: 'maintoolbar'
 	,	selector: 'maintoolbar'
+	},{
+		ref		: 'dirtree'
+	,	selector: 'dirtree'
 	}]
 
 ,	init	: function ()
@@ -34,6 +37,7 @@ Ext.define ('Earsip.controller.Login', {
 						win.hide ();
 						this.getMainview ().getLayout ().setActiveItem ('main');
 						this.getMaintoolbar ().do_load_menu ();
+						this.getDirtree ().do_load_tree ();
 					} else {
 						Ext.Msg.alert ('Kesalahan', action.result.info);
 					}

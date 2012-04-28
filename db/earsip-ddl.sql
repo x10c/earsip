@@ -118,10 +118,10 @@ create table M_ARSIP (
    ARSIP_TIPE_ID        INT4                 null,
    ARSIP_NAME           VARCHAR(255)         null,
    ARSIP_AUTHOR         VARCHAR(255)         null,
-   ARSIP_DATE_CREATED   DATE                 not null,
+   ARSIP_DATE_CREATED   DATE                 not null default current_date,
    ARSIP_STATUS         CHAR(1)              not null,
    ARSIP_JRA            INT2                 null,
-   ARSIP_DEL_STATUS     BOOL                 null,
+   ARSIP_DEL_STATUS     BOOL                 null default false,
    constraint PK_M_ARSIP primary key (ARSIP_ID)
 );
 
@@ -187,14 +187,19 @@ SUBDIV_ID
 create table M_DIREKTORI (
    DIR_ID               SERIAL               not null,
    PARENT_DIR_ID        INT4                 null,
-   CREATOR_USER_ID      INT4                 null,
+   USER_ID              INT4                 null,
    DIR_NAME             VARCHAR(255)         null,
-   DIR_DATE_CREATED     DATE                 null,
-   DIR_DEL_STATUS       BOOL                 null,
-   RAK_NO               INT4                 null,
-   BOX_NO               INT4                 null,
+   DIR_DATE_CREATED     DATE                 null default current_date,
+   DIR_DEL_STATUS       BOOL                 null default false,
+   RAK_NO               INT4                 null default 0,
+   BOX_NO               INT4                 null default 0,
    constraint PK_M_DIREKTORI primary key (DIR_ID)
 );
+
+--
+-- root direktori
+--
+insert into m_direktori (dir_id, parent_dir_id, user_id, dir_name) values (0, 0, 1, '/');
 
 /*==============================================================*/
 /* Index: M_DIREKTORI_PK                                        */

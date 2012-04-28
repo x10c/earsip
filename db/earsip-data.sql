@@ -1,8 +1,7 @@
 --
 -- m_sysconf
 --
-insert into m_sysconfig (repository_root)
-values ('/');
+insert into m_sysconfig (repository_root) values ('/repository');
 
 --
 -- m_divisi

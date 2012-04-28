@@ -1,11 +1,11 @@
-Ext.define ('Earsip.store.DirList', {
+Ext.define ('Earsip.store.SharedList', {
 	extend		: 'Ext.data.Store'
-,	model		: 'Earsip.model.DirList'
+,	model		: 'Earsip.model.SharedList'
 ,	autoSync	: false
 ,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
-	,	url			: 'data/dirlist.jsp'
+	,	url			: 'data/sharedlist.jsp'
 	,	reader		: {
 			type		: 'json'
 		,	root		: 'data'

@@ -40,7 +40,6 @@
 	session.removeAttribute ("user.subdiv_id");
 	session.removeAttribute ("user.name");
 	session.removeAttribute ("user.nip");
-	session.removeAttribute ("sys.repository_root");
 
 	out.print ("{success:true}");
 %>

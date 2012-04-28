@@ -19,7 +19,13 @@ Ext.define ('Earsip.view.DirList', {
 		text		: 'Status'
 	,	dataIndex	: 'state'
 	}]
-,	initComponent	: function() {
+,	initComponent	: function ()
+	{
 		this.callParent (arguments);
+	}
+
+,	do_load_list : function (dir_id)
+	{
+		console.log ('dir_id:'+ dir_id);
 	}
 });

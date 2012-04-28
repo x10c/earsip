@@ -4,8 +4,8 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="org.json.simple.JSONObject" %>
-<%@ page import="org.json.simple.JSONValue" %>
+<%@ page import="org.json.JSONObject" %>
+<%@ page import="org.json.JSONValue" %>
 <%
 Connection	db_con	= null;
 Statement	db_stmt	= null;

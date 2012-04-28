@@ -29,16 +29,18 @@ try {
 		session.setAttribute("db.con", (Object) db_con);
 	}
 
-	Enumeration<String>	params	= request.getParameterNames ();
-	String	rep_root = request.getParameter ("repository_root");
+	Enumeration<String>	params		= request.getParameterNames ();
+	String				repo_root	= request.getParameter ("repository_root");
 
 	db_stmt = db_con.createStatement ();
 
 	q	=" update	m_sysconfig"
 		+" set ";
 
-	if (rep_root != null) {
-		q += " repository_root = '"+ rep_root +"'";
+	if (repo_root != null) {
+		q += " repository_root = '"+ repo_root +"'";
+
+		session.setAttribute ("sys.repository_root", repo_root);
 	}
 
 	db_stmt.executeUpdate (q);

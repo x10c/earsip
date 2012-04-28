@@ -19,22 +19,21 @@ Ext.define ('Earsip.view.MainToolbar', {
 		,	success	: function (response) {
 				var o = Ext.decode(response.responseText);
 				if (o.success == true) {
-					var tb = this;
-
-					tb.suspendLayout = true;
+					this.suspendLayout = true;
+					this.removeAll (true);
 
 					for (var i = 0; i < o.menu.length; i++) {
-						tb.add (o.menu[i]);
-						tb.add ('-');
+						this.add (o.menu[i]);
+						this.add ('-');
 					}
 
-					tb.add ('->');
-					tb.add ('-');
-					tb.add ({ text		: 'Logout'
+					this.add ('->');
+					this.add ('-');
+					this.add ({ text	: 'Logout'
 							, action	: 'logout'});
 
-					tb.suspendLayout = false;
-					tb.doLayout();
+					this.suspendLayout = false;
+					this.doLayout();
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);
 				}

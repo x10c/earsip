@@ -1,10 +1,13 @@
+<%@ page import="java.io.File" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%
 Connection			db_con				= null;
-PreparedStatement	db_stmt				= null;
+PreparedStatement	db_pstmt			= null;
+Statement			db_stmt				= null;
 ResultSet			rs					= null;
 Cookie				c_sid				= null;
 Cookie				c_user_id			= null;
@@ -15,12 +18,14 @@ Cookie				c_user_name			= null;
 String				db_url				= "";
 String				q					= "";
 String				sid					= "";
+String				repo_root			= "";
 String				user_id				= "";
 String				user_div_id			= "";
 String				user_subdiv_id		= "";
 String				user_name			= "";
 String				user_nip			= "";
 String				user_psw			= "";
+String				user_dir			= "";
 String				c_path				= request.getContextPath ();
 int					c_max_age			= 60 * 60 * 24 * 30;
 try {
@@ -52,11 +57,11 @@ try {
 		+" and		A.user_psw	= ?"
 		+" and		A.subdiv_id	= B.subdiv_id";
 
-	db_stmt = db_con.prepareStatement (q);
-	db_stmt.setString (1, user_nip);
-	db_stmt.setString (2, user_psw);
+	db_pstmt = db_con.prepareStatement (q);
+	db_pstmt.setString (1, user_nip);
+	db_pstmt.setString (2, user_psw);
 
-	rs = db_stmt.executeQuery ();
+	rs = db_pstmt.executeQuery ();
 
 	if (! rs.next ()) {
 		out.print (	"{success:false,info:'Password anda salah!'}");
@@ -64,7 +69,7 @@ try {
 	}
 
 	user_id			= rs.getString ("user_id");
-	user_div_id	= rs.getString ("div_id");
+	user_div_id		= rs.getString ("div_id");
 	user_subdiv_id	= rs.getString ("subdiv_id");
 	user_name		= rs.getString ("user_name");
 
@@ -101,7 +106,33 @@ try {
 	response.addCookie (c_user_subdiv_id);
 	response.addCookie (c_user_name);
 
-	out.print ("{success:true}");
+	/* create user repository if it doesn't exist yet */
+	repo_root = (String) session.getAttribute ("sys.repository_root");
+
+	if (repo_root != null) {
+		user_dir	= config.getServletContext().getRealPath("/") + repo_root +"/"+ user_nip;
+		File d		= new File (user_dir);
+
+		d.mkdir ();
+
+		q	=" select	dir_id"
+			+" from		m_direktori"
+			+" where	dir_name		='"+ user_nip +"'"
+			+" and		parent_dir_id	= 0";
+
+		db_stmt = db_con.createStatement ();
+
+		rs = db_stmt.executeQuery (q);
+
+		if (! rs.next ()) {
+			q	=" insert into m_direktori (parent_dir_id, user_id, dir_name)"
+				+" values (0, "+ user_id +",'"+ user_nip +"')";
+
+			db_stmt.executeUpdate (q);
+		}
+	}
+
+	out.print ("{success:true, user_dir:'"+ user_dir +"'}");
 	rs.close ();
 }
 catch (Exception e) {

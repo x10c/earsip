@@ -1,9 +1,9 @@
-Ext.require ('Earsip.store.DirList');
+Ext.require ('Earsip.store.SharedList');
 
 Ext.define ('Earsip.view.SharedList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.sharedlist'
-,	store		: 'DirList' 
+,	store		: 'SharedList'
 ,	title		: 'Berkas Berbagi'
 ,	columns		: [{
 		text		: 'Nama'
@@ -19,7 +19,8 @@ Ext.define ('Earsip.view.SharedList', {
 		text		: 'Status'
 	,	dataIndex	: 'state'
 	}]
-,	initComponent	: function() {
+,	initComponent	: function ()
+	{
 		this.callParent (arguments);
 	}
 });

@@ -56,7 +56,7 @@ rs	= db_stmt.executeQuery (q);
 if (rs.next ()) {
 	repo_root = rs.getString ("repository_root");
 
-	if (repo_root != null) {
+	if (repo_root != null || ! repo_root.isEmpty ()) {
 		session.setAttribute ("sys.repository_root", (Object) repo_root);
 	}
 }

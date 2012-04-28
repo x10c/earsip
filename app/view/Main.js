@@ -1,5 +1,5 @@
 Ext.require ('Earsip.view.MainToolbar');
-Ext.require ('Earsip.view.Trees');
+Ext.require ('Earsip.view.DirTree');
 Ext.require ('Earsip.view.Content');
 
 Ext.define ('Earsip.view.Main', {
@@ -21,7 +21,7 @@ Ext.define ('Earsip.view.Main', {
 		]
 	,	layout	: 'border'
 	,	items	: [{
-			xtype	: 'trees'
+			xtype	: 'dirtree'
 		},{
 			xtype	: 'content'
 		}]
