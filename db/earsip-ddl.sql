@@ -1,42 +1,166 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     04/18/2012 23:22:58                          */
+/* Created on:     4/29/2012 10:02:12 AM                        */
 /*==============================================================*/
 
 
 /*==============================================================*/
-/* Table: ARSIP_ACCESS                                          */
+/* Table: M_DIVISI                                              */
 /*==============================================================*/
-create table ARSIP_ACCESS (
+create table M_DIVISI (
+   DIV_ID               SERIAL               not null,
+   DIV_KODE             VARCHAR(8)           not null,
+   DIV_NAME             VARCHAR(255)         null,
+   DIV_LEADER           VARCHAR(255)         null,
+   constraint PK_M_DIVISI primary key (DIV_ID),
+   constraint AK_KEY_2_M_DIVISI unique (DIV_KODE)
+);
+
+/*==============================================================*/
+/* Table: M_SUBDIV                                              */
+/*==============================================================*/
+create table M_SUBDIV (
+   SUBDIV_ID            SERIAL               not null,
+   DIV_ID               INT4                 not null,
+   SUBDIV_KODE          VARCHAR(8)           not null,
+   SUBDIV_NAME          VARCHAR(255)         null,
+   SUBDIV_LEADER        VARCHAR(255)         null,
+   constraint PK_M_SUBDIV primary key (SUBDIV_ID),
+   constraint AK_KEY_2_M_SUBDIV unique (SUBDIV_KODE),
+   constraint FK_M_SUBDIV_REF_DIV___M_DIVISI foreign key (DIV_ID)
+      references M_DIVISI (DIV_ID)
+      on delete restrict on update restrict
+);
+
+/*==============================================================*/
+/* Table: M_USER                                                */
+/*==============================================================*/
+create table M_USER (
+   USER_ID              SERIAL               not null,
+   SUBDIV_ID            INT4                 null,
+   USER_NIP             VARCHAR(255)         not null,
+   USER_PSW             VARCHAR(255)         null,
+   USER_NAME            VARCHAR(255)         null,
+   constraint PK_M_USER primary key (USER_ID),
+   constraint AK_KEY_2_M_USER unique (USER_NIP),
+   constraint FK_M_USER_REF_SUBDI_M_SUBDIV foreign key (SUBDIV_ID)
+      references M_SUBDIV (SUBDIV_ID)
+      on delete restrict on update restrict
+);
+
+/*==============================================================*/
+/* Table: R_ARSIP_TIPE                                          */
+/*==============================================================*/
+create table R_ARSIP_TIPE (
+   ID                   SERIAL               not null,
+   NAME                 VARCHAR(255)         null,
+   COMMENT              VARCHAR(1024)        null,
+   constraint PK_R_ARSIP_TIPE primary key (ID)
+);
+
+comment on table R_ARSIP_TIPE is
+'Arsip tipe bersifat dinamis, bisa dirubah oleh user.';
+
+/*==============================================================*/
+/* Table: M_ARSIP                                               */
+/*==============================================================*/
+create table M_ARSIP (
+   ID                   SERIAL               not null,
+   PID                  INT4                 null,
+   NODE_TYPE            INT2                 null default 0,
+   NAME                 VARCHAR(255)         null,
+   USER_ID              INT4                 null,
+   DATE_CREATED         DATE                 null default CURRENT_DATE,
+   ARSIP_TIPE_ID        INT4                 null,
+   STATUS               INT2                 null,
+   JRA                  INT2                 null,
+   DEL_STATUS           BOOL                 null default false,
+   KODE_RAK             VARCHAR(12)          null,
+   KODE_BOX             VARCHAR(12)          null,
+   constraint PK_M_ARSIP primary key (ID),
+   constraint FK_M_ARSIP_REF_TIPE__R_ARSIP_ foreign key (ARSIP_TIPE_ID)
+      references R_ARSIP_TIPE (ID)
+      on delete restrict on update restrict,
+   constraint FK_M_ARSIP_R__M_ARSI_M_USER foreign key (USER_ID)
+      references M_USER (USER_ID)
+      on delete restrict on update restrict
+);
+
+comment on column M_ARSIP.STATUS is
+'1:Ada - Aktif
+2:Ada - Inaktif, tapi arsip masih ada di unit/cabang.
+3:Ada - Inaktif, arsip telah berada di unit arsip.
+4:Ada - Dipinjam/keluar
+5:Tidak ada - Musnah
+6:Tidak ada - Hilang';
+
+comment on column M_ARSIP.JRA is
+'Masa JRA dalam tahun';
+
+/*==============================================================*/
+/* Table: ARSIP_SHARED                                          */
+/*==============================================================*/
+create table ARSIP_SHARED (
    USER_ID              INT4                 not null,
-   DIR_ID               INT4                 not null,
-   ACCESS_LEVEL         CHAR(1)              not null,
-   constraint PK_ARSIP_ACCESS primary key (USER_ID, DIR_ID)
+   ID                   INT4                 not null,
+   ACCESS_LEVEL         INT2                 not null,
+   constraint FK_ARSIP_SH_REF_USER__M_USER foreign key (USER_ID)
+      references M_USER (USER_ID)
+      on delete restrict on update restrict,
+   constraint FK_ARSIP_SH_REF_DIR___M_ARSIP foreign key (ID)
+      references M_ARSIP (ID)
+      on delete restrict on update restrict
 );
 
-comment on column ARSIP_ACCESS.ACCESS_LEVEL is
-'0 = NO VIEW; 1 = VIEW; 2 = INSERT; 3 = UPDATE; 4 = DELETE';
+comment on table ARSIP_SHARED is
+'Untuk keamanan hanya dokumen yang dapat di bagi ke user lain.';
 
-/*==============================================================*/
-/* Index: ARSIP_ACCESS_PK                                       */
-/*==============================================================*/
-create unique index ARSIP_ACCESS_PK on ARSIP_ACCESS (
-USER_ID,
-DIR_ID
-);
+comment on column ARSIP_SHARED.ACCESS_LEVEL is
+'0 = NO ACCESS
+1 = VIEW
+2 = INSERT
+3 = UPDATE
+4 = DELETE';
 
 /*==============================================================*/
 /* Index: REF_USER__ACCESS_FK                                   */
 /*==============================================================*/
-create  index REF_USER__ACCESS_FK on ARSIP_ACCESS (
+create  index REF_USER__ACCESS_FK on ARSIP_SHARED (
 USER_ID
 );
 
 /*==============================================================*/
 /* Index: REF_DIR__ARSP_ACS_FK                                  */
 /*==============================================================*/
-create  index REF_DIR__ARSP_ACS_FK on ARSIP_ACCESS (
-DIR_ID
+create  index REF_DIR__ARSP_ACS_FK on ARSIP_SHARED (
+ID
+);
+
+/*==============================================================*/
+/* Table: BERITA_ACARA                                          */
+/*==============================================================*/
+create table BERITA_ACARA (
+   ID                   SERIAL               not null,
+   SUBDIV_ID            INT4                 not null,
+   BERITA_ACARA_SK      CHAR(255)            null,
+   constraint PK_BERITA_ACARA primary key (ID),
+   constraint FK_BERITA_A_REF_SUBDI_M_SUBDIV foreign key (SUBDIV_ID)
+      references M_SUBDIV (SUBDIV_ID)
+      on delete restrict on update restrict
+);
+
+/*==============================================================*/
+/* Index: M_BERITA_ACARA_PK                                     */
+/*==============================================================*/
+create unique index M_BERITA_ACARA_PK on BERITA_ACARA (
+ID
+);
+
+/*==============================================================*/
+/* Index: REF_SUBDIV__ACARA_FK                                  */
+/*==============================================================*/
+create  index REF_SUBDIV__ACARA_FK on BERITA_ACARA (
+SUBDIV_ID
 );
 
 /*==============================================================*/
@@ -45,20 +169,18 @@ DIR_ID
 create table BERITA_ACARA_RINCIAN (
    BERITA_ACARA_ID      INT4                 not null,
    ARSIP_ID             INT4                 not null,
-   CHECK_STATUS         CHAR(1)              null,
-   constraint PK_BERITA_ACARA_RINCIAN primary key (BERITA_ACARA_ID, ARSIP_ID)
+   CHECK_STATUS         INT2                 null,
+   constraint FK_BERITA_A_REF_BRT_A_BERITA_A foreign key (BERITA_ACARA_ID)
+      references BERITA_ACARA (ID)
+      on delete restrict on update restrict,
+   constraint FK_BERITA_A_REF_ARSIP_M_ARSIP foreign key (ARSIP_ID)
+      references M_ARSIP (ID)
+      on delete restrict on update restrict
 );
 
 comment on column BERITA_ACARA_RINCIAN.CHECK_STATUS is
-'0 = NOT OK; 1 = OK';
-
-/*==============================================================*/
-/* Index: BERITA_ACARA_RINCIAN_PK                               */
-/*==============================================================*/
-create unique index BERITA_ACARA_RINCIAN_PK on BERITA_ACARA_RINCIAN (
-BERITA_ACARA_ID,
-ARSIP_ID
-);
+'0:Not OK, arsip tidak ada dalam kotak saat di cek di unit arsip
+1:OK, arsip ada dalam kotal saat di cek di unit arsip';
 
 /*==============================================================*/
 /* Index: REF_BRT_ACR__BRT_RINCI_FK                             */
@@ -75,25 +197,68 @@ ARSIP_ID
 );
 
 /*==============================================================*/
+/* Table: M_MENU                                                */
+/*==============================================================*/
+create table M_MENU (
+   MENU_ID              SERIAL               not null,
+   MENU_PARENT_ID       INT4                 null,
+   MENU_NAME            VARCHAR(255)         null,
+   MENU_INDEX           VARCHAR(64)          null,
+   constraint PK_M_MENU primary key (MENU_ID)
+);
+
+/*==============================================================*/
+/* Table: LOG                                                   */
+/*==============================================================*/
+create table LOG (
+   ID                   DATE                 not null,
+   USER_ID              INT4                 null,
+   MENU_ID              INT4                 null,
+   ACTION               VARCHAR(255)         null,
+   constraint PK_LOG primary key (ID),
+   constraint FK_LOG_REF_USER__M_USER foreign key (USER_ID)
+      references M_USER (USER_ID)
+      on delete restrict on update restrict,
+   constraint FK_LOG_REF_LOG___M_MENU foreign key (MENU_ID)
+      references M_MENU (MENU_ID)
+      on delete restrict on update restrict
+);
+
+/*==============================================================*/
+/* Index: M_LOG_PK                                              */
+/*==============================================================*/
+create unique index M_LOG_PK on LOG (
+ID
+);
+
+/*==============================================================*/
+/* Index: REF_USER__LOG_FK                                      */
+/*==============================================================*/
+create  index REF_USER__LOG_FK on LOG (
+USER_ID
+);
+
+/*==============================================================*/
 /* Table: MENU_ACCESS                                           */
 /*==============================================================*/
 create table MENU_ACCESS (
    USER_ID              INT4                 not null,
    MENU_ID              INT4                 not null,
-   ACCESS_LEVEL         INT                  null,
-   constraint PK_MENU_ACCESS primary key (USER_ID, MENU_ID)
+   ACCESS_LEVEL         INT2                 null default 0,
+   constraint FK_MENU_ACC_REF_USER__M_USER foreign key (USER_ID)
+      references M_USER (USER_ID)
+      on delete restrict on update restrict,
+   constraint FK_MENU_ACC_REF_MNU___M_MENU foreign key (MENU_ID)
+      references M_MENU (MENU_ID)
+      on delete restrict on update restrict
 );
 
 comment on column MENU_ACCESS.ACCESS_LEVEL is
-'0 = NO VIEW; 1 = VIEW; 2 = INSERT; 3 = UPDATE; 4 = DELETE';
-
-/*==============================================================*/
-/* Index: MENU_ACCESS_PK                                        */
-/*==============================================================*/
-create unique index MENU_ACCESS_PK on MENU_ACCESS (
-USER_ID,
-MENU_ID
-);
+'0 = NO ACCESS
+1 = VIEW
+2 = INSERT
+3 = UPDATE
+4 = DELETE';
 
 /*==============================================================*/
 /* Index: REF_USER__MNU_ACS_FK                                  */
@@ -110,37 +275,10 @@ MENU_ID
 );
 
 /*==============================================================*/
-/* Table: M_ARSIP                                               */
-/*==============================================================*/
-create table M_ARSIP (
-   ARSIP_ID             SERIAL               not null,
-   DIR_ID               INT4                 null,
-   ARSIP_TIPE_ID        INT4                 null,
-   ARSIP_NAME           VARCHAR(255)         null,
-   ARSIP_AUTHOR         VARCHAR(255)         null,
-   ARSIP_DATE_CREATED   DATE                 not null default current_date,
-   ARSIP_STATUS         CHAR(1)              not null,
-   ARSIP_JRA            INT2                 null,
-   ARSIP_DEL_STATUS     BOOL                 null default false,
-   constraint PK_M_ARSIP primary key (ARSIP_ID)
-);
-
-comment on column M_ARSIP.ARSIP_STATUS is
-'1 = Ada - Aktif 
-2 = Ada - Inaktif, tapi arsip masih ada di unit/cabang.
-3 = Ada - Inaktif, arsip telah berada di unit arsip.
-4 = Ada - Dipinjam/keluar
-5 = Tidak ada - Musnah
-6 = Tidak ada - Hilang';
-
-comment on column M_ARSIP.ARSIP_JRA is
-'Masa JRA dalam tahun';
-
-/*==============================================================*/
 /* Index: M_ARSIP_PK                                            */
 /*==============================================================*/
 create unique index M_ARSIP_PK on M_ARSIP (
-ARSIP_ID
+ID
 );
 
 /*==============================================================*/
@@ -151,90 +289,6 @@ ARSIP_TIPE_ID
 );
 
 /*==============================================================*/
-/* Index: REF_DIREKTORI_ARSIP_FK                                */
-/*==============================================================*/
-create  index REF_DIREKTORI_ARSIP_FK on M_ARSIP (
-DIR_ID
-);
-
-/*==============================================================*/
-/* Table: M_BERITA_ACARA                                        */
-/*==============================================================*/
-create table M_BERITA_ACARA (
-   BERITA_ACARA_ID      SERIAL               not null,
-   SUBDIV_ID            INT4                 null,
-   BERITA_ACARA_SK      CHAR(255)            null,
-   constraint PK_M_BERITA_ACARA primary key (BERITA_ACARA_ID)
-);
-
-/*==============================================================*/
-/* Index: M_BERITA_ACARA_PK                                     */
-/*==============================================================*/
-create unique index M_BERITA_ACARA_PK on M_BERITA_ACARA (
-BERITA_ACARA_ID
-);
-
-/*==============================================================*/
-/* Index: REF_SUBDIV__ACARA_FK                                  */
-/*==============================================================*/
-create  index REF_SUBDIV__ACARA_FK on M_BERITA_ACARA (
-SUBDIV_ID
-);
-
-/*==============================================================*/
-/* Table: M_DIREKTORI                                           */
-/*==============================================================*/
-create table M_DIREKTORI (
-   DIR_ID               SERIAL               not null,
-   PARENT_DIR_ID        INT4                 null,
-   USER_ID              INT4                 null,
-   DIR_NAME             VARCHAR(255)         null,
-   DIR_DATE_CREATED     DATE                 null default current_date,
-   DIR_DEL_STATUS       BOOL                 null default false,
-   RAK_NO               INT4                 null default 0,
-   BOX_NO               INT4                 null default 0,
-   constraint PK_M_DIREKTORI primary key (DIR_ID)
-);
-
---
--- root direktori
---
-insert into m_direktori (dir_id, parent_dir_id, user_id, dir_name) values (0, 0, 1, '/');
-
-/*==============================================================*/
-/* Index: M_DIREKTORI_PK                                        */
-/*==============================================================*/
-create unique index M_DIREKTORI_PK on M_DIREKTORI (
-DIR_ID
-);
-
-/*==============================================================*/
-/* Index: REF_DIR__DIR_FK                                       */
-/*==============================================================*/
-create  index REF_DIR__DIR_FK on M_DIREKTORI (
-PARENT_DIR_ID
-);
-
-/*==============================================================*/
-/* Index: REF_USER__DIR_FK                                      */
-/*==============================================================*/
-create  index REF_USER__DIR_FK on M_DIREKTORI (
-CREATOR_USER_ID
-);
-
-/*==============================================================*/
-/* Table: M_DIVISI                                              */
-/*==============================================================*/
-create table M_DIVISI (
-   DIV_ID               SERIAL               not null,
-   DIV_KODE             VARCHAR(8)           not null,
-   DIV_NAME             VARCHAR(255)         null,
-   DIV_LEADER           VARCHAR(255)         null,
-   constraint PK_M_DIVISI primary key (DIV_ID),
-   constraint AK_KEY_2_M_DIVISI unique (DIV_KODE)
-);
-
-/*==============================================================*/
 /* Index: M_DIVISI_PK                                           */
 /*==============================================================*/
 create unique index M_DIVISI_PK on M_DIVISI (
@@ -242,59 +296,10 @@ DIV_ID
 );
 
 /*==============================================================*/
-/* Table: M_LOG                                                 */
-/*==============================================================*/
-create table M_LOG (
-   LOG_ID               DATE                 not null,
-   USER_ID              INT4                 null,
-   MENU_NAME            VARCHAR(255)         null,
-   ACCESS_LEVEL         CHAR(1)              null,
-   constraint PK_M_LOG primary key (LOG_ID)
-);
-
-/*==============================================================*/
-/* Index: M_LOG_PK                                              */
-/*==============================================================*/
-create unique index M_LOG_PK on M_LOG (
-LOG_ID
-);
-
-/*==============================================================*/
-/* Index: REF_USER__LOG_FK                                      */
-/*==============================================================*/
-create  index REF_USER__LOG_FK on M_LOG (
-USER_ID
-);
-
-/*==============================================================*/
-/* Table: M_MENU                                                */
-/*==============================================================*/
-create table M_MENU (
-   MENU_ID              SERIAL               not null,
-   MENU_PARENT_ID       INT                  null,
-   MENU_NAME            VARCHAR(255)         null,
-   MENU_INDEX           VARCHAR(64)          null,
-   constraint PK_M_MENU primary key (MENU_ID)
-);
-
-/*==============================================================*/
 /* Index: M_MENU_PK                                             */
 /*==============================================================*/
 create unique index M_MENU_PK on M_MENU (
 MENU_ID
-);
-
-/*==============================================================*/
-/* Table: M_SUBDIV                                              */
-/*==============================================================*/
-create table M_SUBDIV (
-   SUBDIV_ID            SERIAL               not null,
-   DIV_ID               INT4                 not null,
-   SUBDIV_CODE          VARCHAR(8)           not null,
-   SUBDIV_NAME          VARCHAR(255)         null,
-   SUBDIV_LEADER        VARCHAR(255)         null,
-   constraint PK_M_SUBDIV primary key (SUBDIV_ID),
-   constraint AK_KEY_2_M_SUBDIV unique (SUBDIV_CODE)
 );
 
 /*==============================================================*/
@@ -315,21 +320,11 @@ DIV_ID
 /* Table: M_SYSCONFIG                                           */
 /*==============================================================*/
 create table M_SYSCONFIG (
-   REPOSITORY_ROOT		VARCHAR(1024)        not null
+   REPOSITORY_ROOT      VARCHAR(512)         null default '/repository'
 );
 
-/*==============================================================*/
-/* Table: M_USER                                                */
-/*==============================================================*/
-create table M_USER (
-   USER_ID              SERIAL               not null,
-   SUBDIV_ID            INT4                 null,
-   USER_NIP             VARCHAR(255)         not null,
-   USER_NAME            VARCHAR(255)         not null,
-   USER_PSW             VARCHAR(255)         null,
-   constraint PK_M_USER primary key (USER_ID),
-   constraint AK_KEY_2_M_USER unique (USER_NIP)
-);
+comment on table M_SYSCONFIG is
+'Untuk menyimpan konfigurasi aplikasi';
 
 /*==============================================================*/
 /* Index: M_USER_PK                                             */
@@ -349,45 +344,46 @@ SUBDIV_ID
 /* Table: PEMINJAMAN_ARSIP                                      */
 /*==============================================================*/
 create table PEMINJAMAN_ARSIP (
+   ID                   SERIAL               not null,
    PEMINJAM_USER_ID     INT4                 not null,
    TGL_PINJAM           DATE                 null,
    TGL_KEMBALI          DATE                 null,
    TGL_HARUS_KEMBALI    DATE                 null,
    PETUGAS_UNIT_ARSIP   VARCHAR(255)         null,
    PIMPINAN_UNIT_ARSIP  VARCHAR(255)         null,
-   constraint PK_PEMINJAMAN_ARSIP primary key (PEMINJAM_USER_ID)
+   constraint PK_PEMINJAMAN_ARSIP primary key (ID),
+   constraint FK_PEMINJAM_REF_USER__M_USER foreign key (PEMINJAM_USER_ID)
+      references M_USER (USER_ID)
+      on delete restrict on update restrict
 );
 
 /*==============================================================*/
 /* Index: PEMINJAMAN_ARSIP_PK                                   */
 /*==============================================================*/
 create unique index PEMINJAMAN_ARSIP_PK on PEMINJAMAN_ARSIP (
-PEMINJAM_USER_ID
+ID
 );
 
 /*==============================================================*/
 /* Table: PEMINJAMAN_RINCI                                      */
 /*==============================================================*/
 create table PEMINJAMAN_RINCI (
-   PEMINJAM_USER_ID     INT4                 not null,
+   ID                   INT4                 not null,
    ARSIP_ID             INT4                 not null,
    KETERANGAN           VARCHAR(255)         null,
-   constraint PK_PEMINJAMAN_RINCI primary key (PEMINJAM_USER_ID, ARSIP_ID)
-);
-
-/*==============================================================*/
-/* Index: PEMINJAMAN_RINCI_PK                                   */
-/*==============================================================*/
-create unique index PEMINJAMAN_RINCI_PK on PEMINJAMAN_RINCI (
-PEMINJAM_USER_ID,
-ARSIP_ID
+   constraint FK_PEMINJAM_REF_PMJ_A_PEMINJAM foreign key (ID)
+      references PEMINJAMAN_ARSIP (ID)
+      on delete restrict on update restrict,
+   constraint FK_PEMINJAM_REF_ARSIP_M_ARSIP foreign key (ARSIP_ID)
+      references M_ARSIP (ID)
+      on delete restrict on update restrict
 );
 
 /*==============================================================*/
 /* Index: REF_PMJ_ARSIP__PMJ_RINCI_FK                           */
 /*==============================================================*/
 create  index REF_PMJ_ARSIP__PMJ_RINCI_FK on PEMINJAMAN_RINCI (
-PEMINJAM_USER_ID
+ID
 );
 
 /*==============================================================*/
@@ -398,20 +394,20 @@ ARSIP_ID
 );
 
 /*==============================================================*/
-/* Table: PENYUSUTAN                                            */
+/* Table: PENYUSUTAN_ARSIP                                      */
 /*==============================================================*/
-create table PENYUSUTAN (
-   PENYUSUTAN_ID        SERIAL               not null,
-   PENYUSUTAN_TGL       DATE                 null,
-   PENYUSUTAN_PJ        VARCHAR(255)         null,
-   constraint PK_PENYUSUTAN primary key (PENYUSUTAN_ID)
+create table PENYUSUTAN_ARSIP (
+   ID                   SERIAL               not null,
+   TGL                  DATE                 null default CURRENT_DATE,
+   PENANGGUNG_JAWAB     VARCHAR(255)         null,
+   constraint PK_PENYUSUTAN_ARSIP primary key (ID)
 );
 
 /*==============================================================*/
 /* Index: PENYUSUTAN_PK                                         */
 /*==============================================================*/
-create unique index PENYUSUTAN_PK on PENYUSUTAN (
-PENYUSUTAN_ID
+create unique index PENYUSUTAN_PK on PENYUSUTAN_ARSIP (
+ID
 );
 
 /*==============================================================*/
@@ -421,15 +417,12 @@ create table PENYUSUTAN_RINCI (
    ARSIP_ID             INT4                 not null,
    PENYUSUTAN_ID        INT4                 not null,
    KETERANGAN           VARCHAR(255)         null,
-   constraint PK_PENYUSUTAN_RINCI primary key (ARSIP_ID, PENYUSUTAN_ID)
-);
-
-/*==============================================================*/
-/* Index: PENYUSUTAN_RINCI_PK                                   */
-/*==============================================================*/
-create unique index PENYUSUTAN_RINCI_PK on PENYUSUTAN_RINCI (
-ARSIP_ID,
-PENYUSUTAN_ID
+   constraint FK_PENYUSUT_REF_ARSIP_M_ARSIP foreign key (ARSIP_ID)
+      references M_ARSIP (ID)
+      on delete restrict on update restrict,
+   constraint FK_PENYUSUT_REF_SUSUT_PENYUSUT foreign key (PENYUSUTAN_ID)
+      references PENYUSUTAN_ARSIP (ID)
+      on delete restrict on update restrict
 );
 
 /*==============================================================*/
@@ -447,113 +440,8 @@ PENYUSUTAN_ID
 );
 
 /*==============================================================*/
-/* Table: R_ARSIP_TIPE                                          */
-/*==============================================================*/
-create table R_ARSIP_TIPE (
-   ARSIP_TIPE_ID        SERIAL               not null,
-   ARSIP_TIPE_NAME      VARCHAR(255)         null,
-   ARSIP_TIPE_COM       VARCHAR(255)         null,
-   constraint PK_R_ARSIP_TIPE primary key (ARSIP_TIPE_ID)
-);
-
-/*==============================================================*/
 /* Index: R_ARSIP_TIPE_PK                                       */
 /*==============================================================*/
 create unique index R_ARSIP_TIPE_PK on R_ARSIP_TIPE (
-ARSIP_TIPE_ID
+ID
 );
-
-alter table ARSIP_ACCESS
-   add constraint FK_ARSIP_AC_REF_DIR___M_DIREKT foreign key (DIR_ID)
-      references M_DIREKTORI (DIR_ID)
-      on delete restrict on update restrict;
-
-alter table ARSIP_ACCESS
-   add constraint FK_ARSIP_AC_REF_USER__M_USER foreign key (USER_ID)
-      references M_USER (USER_ID)
-      on delete restrict on update restrict;
-
-alter table BERITA_ACARA_RINCIAN
-   add constraint FK_BERITA_A_REF_ARSIP_M_ARSIP foreign key (ARSIP_ID)
-      references M_ARSIP (ARSIP_ID)
-      on delete restrict on update restrict;
-
-alter table BERITA_ACARA_RINCIAN
-   add constraint FK_BERITA_A_REF_BRT_A_M_BERITA foreign key (BERITA_ACARA_ID)
-      references M_BERITA_ACARA (BERITA_ACARA_ID)
-      on delete restrict on update restrict;
-
-alter table MENU_ACCESS
-   add constraint FK_MENU_ACC_REF_MNU___M_MENU foreign key (MENU_ID)
-      references M_MENU (MENU_ID)
-      on delete restrict on update restrict;
-
-alter table MENU_ACCESS
-   add constraint FK_MENU_ACC_REF_USER__M_USER foreign key (USER_ID)
-      references M_USER (USER_ID)
-      on delete restrict on update restrict;
-
-alter table M_ARSIP
-   add constraint FK_M_ARSIP_REF_DIREK_M_DIREKT foreign key (DIR_ID)
-      references M_DIREKTORI (DIR_ID)
-      on delete restrict on update restrict;
-
-alter table M_ARSIP
-   add constraint FK_M_ARSIP_REF_TIPE__R_ARSIP_ foreign key (ARSIP_TIPE_ID)
-      references R_ARSIP_TIPE (ARSIP_TIPE_ID)
-      on delete restrict on update restrict;
-
-alter table M_BERITA_ACARA
-   add constraint FK_M_BERITA_REF_SUBDI_M_SUBDIV foreign key (SUBDIV_ID)
-      references M_SUBDIV (SUBDIV_ID)
-      on delete restrict on update restrict;
-
-alter table M_DIREKTORI
-   add constraint FK_M_DIREKT_REF_DIR___M_DIREKT foreign key (PARENT_DIR_ID)
-      references M_DIREKTORI (DIR_ID)
-      on delete restrict on update restrict;
-
-alter table M_DIREKTORI
-   add constraint FK_M_DIREKT_REF_USER__M_USER foreign key (CREATOR_USER_ID)
-      references M_USER (USER_ID)
-      on delete restrict on update restrict;
-
-alter table M_LOG
-   add constraint FK_M_LOG_REF_USER__M_USER foreign key (USER_ID)
-      references M_USER (USER_ID)
-      on delete restrict on update restrict;
-
-alter table M_SUBDIV
-   add constraint FK_M_SUBDIV_REF_DIV___M_DIVISI foreign key (DIV_ID)
-      references M_DIVISI (DIV_ID)
-      on delete restrict on update restrict;
-
-alter table M_USER
-   add constraint FK_M_USER_REF_SUBDI_M_SUBDIV foreign key (SUBDIV_ID)
-      references M_SUBDIV (SUBDIV_ID)
-      on delete restrict on update restrict;
-
-alter table PEMINJAMAN_ARSIP
-   add constraint FK_PEMINJAM_REF_USER__M_USER foreign key (PEMINJAM_USER_ID)
-      references M_USER (USER_ID)
-      on delete restrict on update restrict;
-
-alter table PEMINJAMAN_RINCI
-   add constraint FK_PEMINJAM_REF_ARSIP_M_ARSIP foreign key (ARSIP_ID)
-      references M_ARSIP (ARSIP_ID)
-      on delete restrict on update restrict;
-
-alter table PEMINJAMAN_RINCI
-   add constraint FK_PEMINJAM_REF_PMJ_A_PEMINJAM foreign key (PEMINJAM_USER_ID)
-      references PEMINJAMAN_ARSIP (PEMINJAM_USER_ID)
-      on delete restrict on update restrict;
-
-alter table PENYUSUTAN_RINCI
-   add constraint FK_PENYUSUT_REF_ARSIP_M_ARSIP foreign key (ARSIP_ID)
-      references M_ARSIP (ARSIP_ID)
-      on delete restrict on update restrict;
-
-alter table PENYUSUTAN_RINCI
-   add constraint FK_PENYUSUT_REF_SUSUT_PENYUSUT foreign key (PENYUSUTAN_ID)
-      references PENYUSUTAN (PENYUSUTAN_ID)
-      on delete restrict on update restrict;

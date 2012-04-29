@@ -17,7 +17,7 @@ Ext.define ('Earsip.view.SharedList', {
 	,	dataIndex	: 'date_created'
 	},{
 		text		: 'Status'
-	,	dataIndex	: 'state'
+	,	dataIndex	: 'status'
 	}]
 ,	initComponent	: function ()
 	{

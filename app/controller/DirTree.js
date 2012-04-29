@@ -16,6 +16,9 @@ Ext.define ('Earsip.controller.DirTree', {
 
 ,	dir_selected : function (tree, records, opts)
 	{
-		this.getDirlist ().do_load_list (records[0].get ('id'));
+		Earsip.dir_id		= records[0].get ('id');
+		Earsip.tree_path	= records[0].getPath ("text");
+
+		this.getDirlist ().do_load_list (Earsip.dir_id);
 	}
 });

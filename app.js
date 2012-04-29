@@ -3,6 +3,8 @@ Ext.Loader.setConfig ({ enabled: true });
 Ext.define ('Earsip', {
 	singleton		: true
 ,	acl				: 0
+,	dir_id			: 0
+,	tree_path		: ''
 });
 
 Ext.define ('Earsip.plugin.RowEditor', {
@@ -56,11 +58,13 @@ Ext.application ({
 ,	appFolder	: 'app'
 ,	models		: [
 		'DirList'
+	,	'SharedList'
 	,	'User'
 	,	'MenuAccess'
 	]
 ,	stores		: [
 		'DirList'
+	,	'SharedList'
 	,	'User'
 	,	'MenuAccess'
 	]
@@ -81,6 +85,7 @@ Ext.application ({
 	,	'MainToolbar'
 	,	'AdmHakAkses'
 	,	'DirTree'
+	,	'DirList'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});

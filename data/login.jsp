@@ -26,6 +26,7 @@ String				user_name			= "";
 String				user_nip			= "";
 String				user_psw			= "";
 String				user_dir			= "";
+String				dir_name			= "";
 String				c_path				= request.getContextPath ();
 int					c_max_age			= 60 * 60 * 24 * 30;
 try {
@@ -110,23 +111,26 @@ try {
 	repo_root = (String) session.getAttribute ("sys.repository_root");
 
 	if (repo_root != null) {
-		user_dir	= config.getServletContext().getRealPath("/") + repo_root +"/"+ user_nip;
+		dir_name	= user_name +" ("+ user_nip +")";
+		user_dir	= config.getServletContext().getRealPath("/") + repo_root
+					+"/"+ dir_name;
 		File d		= new File (user_dir);
 
 		d.mkdir ();
 
-		q	=" select	dir_id"
-			+" from		m_direktori"
-			+" where	dir_name		='"+ user_nip +"'"
-			+" and		parent_dir_id	= 0";
+		q	=" select	id"
+			+" from		m_arsip"
+			+" where	name		='"+ user_nip +"'"
+			+" and		pid			= 0"
+			+" and		node_type	= 0";
 
 		db_stmt = db_con.createStatement ();
 
 		rs = db_stmt.executeQuery (q);
 
 		if (! rs.next ()) {
-			q	=" insert into m_direktori (parent_dir_id, user_id, dir_name)"
-				+" values (0, "+ user_id +",'"+ user_nip +"')";
+			q	=" insert into m_arsip (pid, user_id, name)"
+				+" values (0, "+ user_id +",'"+ dir_name +"')";
 
 			db_stmt.executeUpdate (q);
 		}

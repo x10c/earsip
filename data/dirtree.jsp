@@ -25,28 +25,29 @@ try {
 	JSONArray	childs	= null;
 	JSONObject	node	= null;
 
-	q	=" select	dir_id"
-		+" ,		parent_dir_id"
-		+" ,		dir_name"
-		+" from		m_direktori"
-		+" where	parent_dir_id = "+ id;
+	q	=" select	id"
+		+" ,		pid"
+		+" ,		name"
+		+" from		m_arsip"
+		+" where	pid			= "+ id
+		+" and		node_type	= 0";
 
 	rs = db_stmt.executeQuery (q);
 
 	while (rs.next ()) {
 		node	= new JSONObject ();
-		name	= rs.getString ("dir_name");
-		id		= Integer.parseInt (rs.getString ("dir_id"));
+		name	= rs.getString ("name");
+		id		= Integer.parseInt (rs.getString ("id"));
 
 		node.put ("id", id);
-		node.put ("pid", rs.getString("parent_dir_id"));
+		node.put ("pid", rs.getString("pid"));
 		node.put ("text", name);
 		node.put ("iconCls", "dir16");
 
 		childs = get_list_dir (id, db_con);
 
 		if (childs.length () <= 0) {
-			node.put ("leaf", true);
+			node.put ("children", new JSONArray());
 		} else {
 			node.put ("children", childs);
 		}
@@ -80,10 +81,12 @@ try {
 	String		user_name	= (String) session.getAttribute ("user.name");
 	int			id			= 0;
 
-	q	=" select	dir_id"
-		+" from		m_direktori"
-		+" where	user_id			= "+ user_id
-		+" and		parent_dir_id	= 0";
+	q	=" select	id"
+		+" ,		name"
+		+" from		m_arsip"
+		+" where	user_id		= "+ user_id
+		+" and		pid			= 0"
+		+" and		node_type	= 0";
 
 	rs = db_stmt.executeQuery (q);
 
@@ -92,17 +95,17 @@ try {
 		return;
 	}
 
-	id = Integer.parseInt(rs.getString("dir_id"));
+	id = Integer.parseInt(rs.getString("id"));
 
 	node.put("id", id);
 	node.put("pid", 0);
-	node.put("text", user_name);
+	node.put("text", rs.getString ("name"));
 	node.put("iconCls", "dir16");
 
 	childs = get_list_dir (id, db_con);
 
 	if (childs.length () <= 0) {
-		node.put ("leaf", true);
+		node.put ("children", new JSONArray());
 	} else {
 		node.put ("children", childs);
 	}

@@ -83,6 +83,7 @@ if (user == null) {
 <head>
 	<title>e-Arsip</title>
 	<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
+	<link rel="stylesheet" type="text/css" href="app.css">
 	<script>
 		var is_login = <%= is_login %>;
 	</script>

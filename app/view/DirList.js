@@ -3,6 +3,7 @@ Ext.require ('Earsip.store.DirList');
 Ext.define ('Earsip.view.DirList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.dirlist'
+,	itemId		: 'itemId'
 ,	store		: 'DirList' 
 ,	title		: 'Berkas'
 ,	columns		: [{
@@ -11,21 +12,49 @@ Ext.define ('Earsip.view.DirList', {
 	,	sortable	: false
 	,	hideable	: false
 	,	dataIndex	: 'name'
+	,	renderer	: function (v, md, r)
+		{
+			if (r.get ('node_type') == 0) {
+				return "<span class='dir'>"+ v +"</span>";
+			} else {
+				return "<span class='doc'>"+ v +"</span>";
+			}
+		}
 	},{
 		text		: 'Tanggal Dibuat'
 	,	width		: 150
 	,	dataIndex	: 'date_created'
 	},{
 		text		: 'Status'
-	,	dataIndex	: 'state'
+	,	dataIndex	: 'status'
+	}]
+,	dockedItems	: [{
+		xtype		: 'toolbar'
+	,	dock		: 'top'
+	,	flex		: 1
+	,	items		: [{
+			text		: 'Direktori baru'
+		,	itemId		: 'mkdir'
+		,	action		: 'mkdir'
+		,	iconCls		: 'add'
+		},'-',{
+			text		: 'Upload'
+		,	itemId		: 'upload'
+		,	action		: 'upload'
+		,	iconCls		: 'upload'
+		}]
 	}]
 ,	initComponent	: function ()
 	{
 		this.callParent (arguments);
 	}
 
-,	do_load_list : function (dir_id)
+,	do_load_list : function (arsip_id)
 	{
-		console.log ('dir_id:'+ dir_id);
+		this.getStore ().load ({
+			params	: {
+				arsip_id : arsip_id
+			}
+		});
 	}
 });

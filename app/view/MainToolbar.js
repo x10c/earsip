@@ -29,8 +29,11 @@ Ext.define ('Earsip.view.MainToolbar', {
 
 					this.add ('->');
 					this.add ('-');
-					this.add ({ text	: 'Logout'
-							, action	: 'logout'});
+					this.add ({
+						text	: 'Logout'
+					,	action	: 'logout'
+					,	iconCls	: 'logout'
+					});
 
 					this.suspendLayout = false;
 					this.doLayout();

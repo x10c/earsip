@@ -65,7 +65,8 @@ try {
 		menu_index	= rs.getString ("menu_index");
 
 		menu	+="\n\t{ text:'"+ menu_name +"'\n"
-				+ "\t, itemId:'"+ menu_index +"'\n";
+				+ "\t, itemId:'"+ menu_index +"'\n"
+				+ "\t, iconCls:'system'\n";
 
 		mc_stmt = db_con.prepareStatement (q);
 		mc_stmt.setInt (1, user_id);
@@ -76,7 +77,6 @@ try {
 		if (mc_rs.next ()) {
 			menu	+="\t, menu:{\n"
 					+ "\t\t  xtype : 'menu'\n"
-					+ "\t\t, plain : true\n"
 					+ "\t\t, items : [\n";
 
 			do {
@@ -88,6 +88,7 @@ try {
 				menu	+="\t\t\t{ text:'"+ menu_name +"'\n"
 						+ "\t\t\t, itemId:'"+ menu_index +"'\n"
 						+ "\t\t\t, acl:'"+ menu_acl +"'\n"
+						+ "\t\t\t, iconCls:'module'\n"
 						+ "\t\t\t},\n";
 			} while (mc_rs.next ());
 
