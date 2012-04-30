@@ -7,6 +7,18 @@ Ext.define ('Earsip.view.DirTree', {
 ,	width		: 220
 ,	margins		: '5 0 0 5'
 ,	split		: true
+,	dockedItems	: [{
+		xtype		: 'toolbar'
+	,	dock		: 'top'
+	,	flex		: 1
+	,	items		: [{
+			itemId		: 'refresh'
+		,	action		: 'refresh'
+		,	iconCls		: 'refresh'
+		},'-'
+		]
+	}]
+
 ,	initComponent	: function()
 	{
 		this.callParent (arguments);

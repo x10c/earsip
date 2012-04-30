@@ -1,3 +1,5 @@
+Ext.require ('Earsip.view.WinUpload');
+
 Ext.define ('Earsip.controller.DirList', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
@@ -10,10 +12,35 @@ Ext.define ('Earsip.controller.DirList', {
 ,	init	: function ()
 	{
 		this.control ({
-			'dirlist button[action=mkdir]': {
+			'dirlist' : {
+				itemdblclick : this.row_clicked
+			}
+		,	'dirlist button[action=mkdir]': {
 				click : this.do_mkdir
 			}
+		,	'dirlist button[action=upload]': {
+				click : this.do_upload
+			}
+		,	'dirlist button[action=refresh]': {
+				click : this.do_refresh
+			}
 		});
+	}
+
+,	row_clicked : function (v, r, idx)
+	{
+		var t = r.get ("node_type");
+		if (t != 0) {
+			return;
+		}
+		Earsip.dir_id = r.get ("id");
+
+		var dirtree	= this.getDirtree ();
+		var node	= dirtree.getRootNode ().findChild ('id', Earsip.dir_id, true);
+
+		Earsip.repo_path = node.parentNode.getPath ("text");
+		dirtree.expandAll ();
+		dirtree.getSelectionModel ().select (node);
 	}
 
 ,	do_mkdir : function (button)
@@ -53,5 +80,21 @@ Ext.define ('Earsip.controller.DirList', {
 			});
 		}
 		, this);
+	}
+
+,	do_upload : function (button)
+	{
+		if (Earsip.dir_id <= 0) {
+			Ext.Msg.alert ('Kesalahan', 'Pilih direktori penyimpanan terlebih dahulu!');
+			return;
+		}
+
+		var winupload = Ext.create ('Earsip.view.WinUpload');
+		winupload.show ();
+	}
+
+,	do_refresh : function (button)
+	{
+		this.getDirlist ().do_load_list (Earsip.dir_id);
 	}
 });

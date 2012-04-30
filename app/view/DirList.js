@@ -42,6 +42,11 @@ Ext.define ('Earsip.view.DirList', {
 		,	itemId		: 'upload'
 		,	action		: 'upload'
 		,	iconCls		: 'upload'
+		},'-',{
+			text		: 'Refresh'
+		,	itemId		: 'refresh'
+		,	action		: 'refresh'
+		,	iconCls		: 'refresh'
 		}]
 	}]
 ,	initComponent	: function ()

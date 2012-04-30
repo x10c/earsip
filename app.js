@@ -73,6 +73,7 @@ Ext.application ({
 	,	'MainToolbar'
 	,	'DirTree'
 	,	'DirList'
+	,	'WinUpload'
 	,	'SharedList'
 	,	'AdmSistem'
 
@@ -86,6 +87,7 @@ Ext.application ({
 	,	'AdmHakAkses'
 	,	'DirTree'
 	,	'DirList'
+	,	'WinUpload'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
