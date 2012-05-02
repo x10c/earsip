@@ -1,8 +1,8 @@
 Ext.define ('Earsip.controller.AdmHakAkses', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
-		ref		: 'adm_hak_akses_user'
-	,	selector: 'adm_hak_akses_user'
+		ref		: 'grup'
+	,	selector: 'grup'
 	},{
 		ref		: 'adm_hak_akses_menu'
 	,	selector: 'adm_hak_akses_menu'
@@ -11,7 +11,7 @@ Ext.define ('Earsip.controller.AdmHakAkses', {
 ,	init	: function ()
 	{
 		this.control ({
-			'adm_hak_akses_user': {
+			'grup': {
 				selectionchange : this.user_select
 			}
 		});
@@ -23,7 +23,7 @@ Ext.define ('Earsip.controller.AdmHakAkses', {
 			var menus = this.getAdm_hak_akses_menu ();
 
 			menus.params = {
-				user_id : records[0].get('user_id')
+				grup_id : records[0].get('id')
 			}
 			menus.getStore ().load ({
 				params	: menus.params

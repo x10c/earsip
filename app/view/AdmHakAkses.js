@@ -1,5 +1,5 @@
 Ext.require ([
-	'Earsip.view.AdmHakAksesUser'
+	'Earsip.view.Grup'
 ,	'Earsip.view.AdmHakAksesMenu'
 ]);
 
@@ -16,7 +16,7 @@ Ext.define ('Earsip.view.AdmHakAkses', {
 	,	autoScroll		: true
 	}
 ,	items			: [{
-		xtype			: 'adm_hak_akses_user'
+		xtype			: 'grup'
 	,	region			: 'center'
 	,	flex			: 0.5
 	,	minWidth		: 450
@@ -29,8 +29,8 @@ Ext.define ('Earsip.view.AdmHakAkses', {
 ,	listeners		: {
 		activate		: function (comp)
 		{
-			var user = this.down ('#adm_hak_akses_user');
-			user.getStore ().load ();
+			var grup = this.down ('#grup');
+			grup.getStore ().load ();
 		}
 	,	removed			: function (comp)
 		{

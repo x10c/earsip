@@ -23,19 +23,19 @@ Ext.define ('Earsip.view.AdmHakAksesMenu', {
 	]
 ,	columns			: [{
 		text			: 'ID'
-	,	dataIndex		: 'menu_id'
+	,	dataIndex		: 'id'
 	,	width			: 50
 	},{
 		text			: 'Parent ID'
-	,	dataIndex		: 'menu_pid'
+	,	dataIndex		: 'pid'
 	,	width			: 80
 	},{
 		text			: 'Nama'
-	,	dataIndex		: 'menu_name'
+	,	dataIndex		: 'nama'
 	,	flex			: 1
 	},{
 		text			: 'Akses'
-	,	dataIndex		: 'hak_akses'
+	,	dataIndex		: 'hak_akses_id'
 	,	renderer		: store_renderer ('id', 'name', s_acl)
 	,	editor			: {
 			xtype			: 'combo'
@@ -57,8 +57,10 @@ Ext.define ('Earsip.view.AdmHakAksesMenu', {
 			{
 				var grid = button.up ('#adm_hak_akses_menu');
 
-				grid.getStore ().load ();
+				grid.getStore ().load ({
+					params	: grid.params
+				});
 			}
-		}]
+		},'-']
 	}]
 });

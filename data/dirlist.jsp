@@ -15,7 +15,7 @@ try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
 	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect (request.getContextPath());
 		return;
 	}
 

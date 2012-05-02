@@ -18,7 +18,6 @@
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
 				response.addCookie (cookies[i]);
-			} else if (c_name.equalsIgnoreCase ("earsip.user.unit_kerja_id")) {
 			} else if (c_name.equalsIgnoreCase ("earsip.user.grup_id")) {
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);

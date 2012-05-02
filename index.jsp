@@ -25,7 +25,8 @@ String		sid				= "";
 String		c_name			= "";
 String		repo_root		= "";
 String		user_id			= null;
-String		user_subdiv_id	= null;
+String		user_uk_id		= null;
+String		user_grup_id	= null;
 String		user_name		= null;
 String		user_nip		= null;
 int			is_login		= 0;
@@ -39,9 +40,11 @@ if (cookies != null) {
 			is_login		= 1;
 		} else if (c_name.equalsIgnoreCase ("earsip.user.id")) {
 			user_id			= cookies[i].getValue ();
-		} else if (c_name.equalsIgnoreCase ("earsip.user.subdiv_id")) {
-			user_subdiv_id	= cookies[i].getValue ();
-		} else if (c_name.equalsIgnoreCase ("earsip.user.name")) {
+		} else if (c_name.equalsIgnoreCase ("earsip.user.unit_kerja_id")) {
+			user_uk_id		= cookies[i].getValue ();
+		} else if (c_name.equalsIgnoreCase ("earsip.user.grup_id")) {
+			user_grup_id	= cookies[i].getValue ();
+		} else if (c_name.equalsIgnoreCase ("earsip.user.nama")) {
 			user_name		= cookies[i].getValue ();
 		} else if (c_name.equalsIgnoreCase ("earsip.user.nip")) {
 			user_nip		= cookies[i].getValue ();
@@ -67,11 +70,12 @@ session.setAttribute ("db.con", (Object) db_con);
 
 if (user == null) {
 	/* if user cookie exist then skip login window */
-	if (user_id != null && user_subdiv_id != null && user_name != null
-	&& user_nip != null) {
+	if (user_id != null && user_uk_id != null && user_grup_id != null
+	&& user_name != null && user_nip != null) {
 		session.setAttribute ("user.id", user_id);
-		session.setAttribute ("user.subdiv_id", user_subdiv_id);
-		session.setAttribute ("user.name", user_name);
+		session.setAttribute ("user.unit_kerja_id", user_uk_id);
+		session.setAttribute ("user.grup_id", user_grup_id);
+		session.setAttribute ("user.nama", user_name);
 		session.setAttribute ("user.nip", user_nip);
 		is_login = 1;
 	}

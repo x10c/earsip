@@ -12,13 +12,14 @@ String		db_url	= "";
 String		q		= "";
 String		data	= "";
 
-BufferedReader	reader			= null;
-StringBuilder	sb				= new StringBuilder();
-JSONObject		o				= null;
-String			line			= "";
-String			action			= "";
-String			menu_id			= "";
-String			access_level	= "";
+BufferedReader	reader		= null;
+StringBuilder	sb			= new StringBuilder();
+JSONObject		o			= null;
+String			line		= "";
+String			action		= "";
+String			menu_id		= "";
+String			grup_id		= "";
+String			hak_akses	= "";
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
@@ -45,20 +46,16 @@ try {
 	}
 	reader.close();
 
-	data			= sb.toString();
-	o				= (JSONObject) new JSONObject (data);
-	menu_id			= o.getString ("menu_id");
-	access_level	= o.getString ("hak_akses");
-	action			= (String) request.getParameter ("action");
+	data		= sb.toString();
+	o			= (JSONObject) new JSONObject (data);
+	menu_id		= o.getString ("id");
+	grup_id		= o.getString ("grup_id");
+	hak_akses	= o.getString ("hak_akses_id");
 
-	if (action.equalsIgnoreCase ("update")) {
-		q	=" update	menu_akses"
-			+" set		hak_akses_id	= "+ access_level
-			+" where	menu_id			= "+ menu_id;
-	}
+	q =" select update_menu_akses ("+ menu_id +","+ grup_id +","+ hak_akses +")";
 
 	db_stmt	= db_con.createStatement();
-	db_stmt.executeUpdate (q);
+	db_stmt.executeQuery (q);
 
 	out.print ("{success:true}");
 }

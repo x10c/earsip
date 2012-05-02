@@ -9,7 +9,6 @@ ResultSet	rs			= null;
 String		q			= "";
 String		db_url		= "";
 String		data		= "";
-String		grup_id		= "";
 int			i			= 0;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
@@ -19,22 +18,11 @@ try {
 		return;
 	}
 
-	grup_id = request.getParameter ("grup_id");
-	if (grup_id == null) {
-		out.print ("{success:false,info:'Grup ID tidak diketahui!'}");
-		return;
-	}
-
-	q	=" select	M.id"
-		+" ,		M.pid"
-		+" ,		M.nama"
-		+" ,		M.nama_ref"
-		+" ,		coalesce (MA.hak_akses_id, 0) hak_akses_id"
-		+" from			m_menu		M"
-		+" left join	menu_akses	MA"
-		+" on			M.id		= MA.menu_id"
-		+" and			MA.grup_id	= "+ grup_id
-		+" order by M.id";
+	q	=" select	id"
+		+" ,		nama"
+		+" ,		keterangan"
+		+" from		m_grup"
+		+" order by id, nama";
 
 	db_stmt = db_con.createStatement ();
 	rs = db_stmt.executeQuery (q);
@@ -45,12 +33,9 @@ try {
 		} else {
 			i++;
 		}
-		data	+="{ id				: "+ rs.getString ("id")
-				+ ", pid			: "+ rs.getString ("pid")
-				+ ", nama			:'"+ rs.getString ("nama") +"'"
-				+ ", nama_ref		:'"+ rs.getString ("nama_ref") +"'"
-				+ ", grup_id		: "+ grup_id
-				+ ", hak_akses_id	: "+ rs.getString ("hak_akses_id")
+		data	+="{ id	: "+ rs.getString ("id")
+				+ ", nama :'"+ rs.getString ("nama") +"'"
+				+ ", keterangan :'"+ rs.getString ("keterangan") +"'"
 				+ "}";
 	}
 

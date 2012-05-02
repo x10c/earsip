@@ -10,6 +10,7 @@ Ext.define ('Earsip', {
 Ext.define ('Earsip.plugin.RowEditor', {
 	extend				: 'Ext.grid.plugin.RowEditing'
 ,	action				: 'none'	/* none, add, edit */
+,	alias				: 'widget.roweditor'
 ,	pluginId			: 'roweditor'
 ,	saveText			: 'Simpan'
 ,	cancelText			: 'Batal'
@@ -23,19 +24,19 @@ Ext.define ('Earsip.plugin.RowEditor', {
 			}
 			return true;
 		}
-	,	edit				: function (grid)
+	,	edit				: function (editor, e)
 		{
-			grid.action = 'none';
-			grid.store.sync ();
-			grid.store.load ({
-				params	: grid.grid.params
+			editor.action = 'none';
+			editor.grid.store.sync ();
+			editor.grid.store.load ({
+				params	: editor.grid.params
 			});
 		}
-	,	canceledit			: function (grid)
+	,	canceledit			: function (editor)
 		{
-			if (grid.action == 'add') {
-				grid.store.removeAt (0);
-				grid.grid.getSelectionModel ().select (0);
+			if (editor.action == 'add') {
+				editor.grid.store.removeAt (0);
+				editor.grid.getSelectionModel ().select (0);
 			}
 		}
 	}
@@ -60,12 +61,14 @@ Ext.application ({
 		'DirList'
 	,	'SharedList'
 	,	'User'
+	,	'Grup'
 	,	'MenuAccess'
 	]
 ,	stores		: [
 		'DirList'
 	,	'SharedList'
 	,	'User'
+	,	'Grup'
 	,	'MenuAccess'
 	]
 ,	views		: [
@@ -78,7 +81,7 @@ Ext.application ({
 	,	'AdmSistem'
 
 	,	'AdmHakAksesMenu'
-	,	'AdmHakAksesUser'
+	,	'Grup'
 	,	'AdmHakAkses'
 	]
 ,	controllers	: [
@@ -88,6 +91,7 @@ Ext.application ({
 	,	'DirTree'
 	,	'DirList'
 	,	'WinUpload'
+	,	'Grup'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
