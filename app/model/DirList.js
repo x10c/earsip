@@ -1,6 +1,6 @@
 Ext.define ('Earsip.model.DirList', {
-	extend	: 'Ext.data.Model'
-,	fields	: [
+	extend		: 'Ext.data.Model'
+,	fields		: [
 		'id'
 	,	'pid'
 	,	'node_type'
@@ -9,7 +9,6 @@ Ext.define ('Earsip.model.DirList', {
 	,	'arsip_tipe_id'
 	,	'status'
 	,	'jra'
-	,	'kode_rak'
-	,	'kode_box'
 	]
+,	idProperty	: 'id'
 });

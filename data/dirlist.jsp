@@ -24,18 +24,16 @@ try {
 
 	q	=" select	id"
 		+" ,		pid"
-		+" ,		node_type"
-		+" ,		name"
-		+" ,		date_created"
-		+" ,		arsip_tipe_id"
+		+" ,		tipe_file"
+		+" ,		nama"
+		+" ,		tgl_unggah"
+		+" ,		berkas_tipe_id"
 		+" ,		status"
 		+" ,		jra"
-		+" ,		kode_rak"
-		+" ,		kode_box"
-		+" from		m_arsip"
-		+" where	user_id = "+ user_id
-		+" and		pid		= "+ arsip_id
-		+" order by	node_type, name";
+		+" from		m_berkas"
+		+" where	pegawai_id	= "+ user_id
+		+" and		pid			= "+ arsip_id
+		+" order by tipe_file, nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -48,14 +46,12 @@ try {
 		}
 		data	+="\n{ id            : "+ rs.getString ("id")
 				+ "\n, pid           : "+ rs.getString ("pid")
-				+ "\n, node_type     : "+ rs.getString ("node_type")
-				+ "\n, name          :'"+ rs.getString ("name") +"'"
-				+ "\n, date_created  :'"+ rs.getString ("date_created") +"'"
-				+ "\n, arsip_tipe_id : "+ rs.getString ("arsip_tipe_id")
+				+ "\n, node_type     : "+ rs.getString ("tipe_file")
+				+ "\n, name          :'"+ rs.getString ("nama") +"'"
+				+ "\n, date_created  :'"+ rs.getString ("tgl_unggah") +"'"
+				+ "\n, arsip_tipe_id : "+ rs.getString ("berkas_tipe_id")
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, jra           : "+ rs.getString ("jra")
-				+ "\n, kode_rak      :'"+ rs.getString ("kode_rak") +"'"
-				+ "\n, kode_box      :'"+ rs.getString ("kode_box") +"'"
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

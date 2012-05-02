@@ -80,11 +80,11 @@ try {
 	item_up.write (file);
 
 	/* save file attribute to database */
-	q	=" insert into m_arsip ("
+	q	=" insert into m_berkas ("
 		+"		pid"
-		+" ,	node_type"
-		+" ,	name"
-		+" ,	user_id"
+		+" ,	tipe_file"
+		+" ,	nama"
+		+" ,	pegawai_id"
 		+" ) values ( "
 		+		id
 		+" ,	1"

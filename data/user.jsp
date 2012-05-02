@@ -30,14 +30,13 @@ try {
 
 	db_stmt = db_con.createStatement ();
 
-	q	=" select	A.user_id"
-		+" ,		B.div_id"
-		+" ,		A.subdiv_id"
-		+" ,		A.user_nip"
-		+" ,		A.user_name"
-		+" from		m_user		A"
-		+" ,		m_subdiv	B"
-		+" where	A.subdiv_id = B.subdiv_id";
+	q	=" select	PEG.id"
+		+" ,		PEG.grup_id"
+		+" ,		PEG.nip"
+		+" ,		PEG.nama"
+		+" from		m_pegawai		PEG"
+		+" ,		m_grup			GRUP"
+		+" where	PEG.grup_id		= GRUP.id";
 
 	rs = db_stmt.executeQuery (q);
 
@@ -48,11 +47,10 @@ try {
 			i++;
 		}
 
-		data	+="{ user_id	: "+ rs.getString ("user_id")
-				+ ", div_id		: "+ rs.getString ("div_id")
-				+ ", subdiv_id	: "+ rs.getString ("subdiv_id")
-				+ ", user_nip	: "+ rs.getString ("user_nip")
-				+ ", user_name	:'"+ rs.getString ("user_name") +"'"
+		data	+="{ user_id	: "+ rs.getString ("id")
+				+ ", grup_id	: "+ rs.getString ("grup_id")
+				+ ", user_nip	:'"+ rs.getString ("nip") +"'"
+				+ ", user_name	:'"+ rs.getString ("nama") +"'"
 				+ "}";
 	}
 

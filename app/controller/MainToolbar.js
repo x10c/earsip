@@ -1,5 +1,7 @@
-Ext.require ('Earsip.view.AdmSistem');
-Ext.require ('Earsip.view.AdmHakAkses');
+Ext.require ([
+	'Earsip.view.AdmSistem'
+,	'Earsip.view.AdmHakAkses'
+]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
 	extend	: 'Ext.app.Controller'

@@ -14,16 +14,16 @@
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
 				response.addCookie (cookies[i]);
-			} else if (c_name.equalsIgnoreCase ("earsip.user.div_id")) {
+			} else if (c_name.equalsIgnoreCase ("earsip.user.unit_kerja_id")) {
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
 				response.addCookie (cookies[i]);
-			} else if (c_name.equalsIgnoreCase ("earsip.user.div_id")) {
-			} else if (c_name.equalsIgnoreCase ("earsip.user.subdiv_id")) {
+			} else if (c_name.equalsIgnoreCase ("earsip.user.unit_kerja_id")) {
+			} else if (c_name.equalsIgnoreCase ("earsip.user.grup_id")) {
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
 				response.addCookie (cookies[i]);
-			} else if (c_name.equalsIgnoreCase ("earsip.user.name")) {
+			} else if (c_name.equalsIgnoreCase ("earsip.user.nama")) {
 				cookies[i].setMaxAge (0);
 				cookies[i].setPath (c_path);
 				response.addCookie (cookies[i]);
@@ -36,9 +36,9 @@
 	}
 
 	session.removeAttribute ("user.id");
-	session.removeAttribute ("user.div_id");
-	session.removeAttribute ("user.subdiv_id");
-	session.removeAttribute ("user.name");
+	session.removeAttribute ("user.unit_kerja_id");
+	session.removeAttribute ("user.grup_id");
+	session.removeAttribute ("user.nama");
 	session.removeAttribute ("user.nip");
 
 	out.print ("{success:true}");

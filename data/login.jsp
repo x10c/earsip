@@ -11,8 +11,8 @@ Statement			db_stmt				= null;
 ResultSet			rs					= null;
 Cookie				c_sid				= null;
 Cookie				c_user_id			= null;
-Cookie				c_user_div_id		= null;
-Cookie				c_user_subdiv_id	= null;
+Cookie				c_user_uk_id		= null;
+Cookie				c_user_grup_id		= null;
 Cookie				c_user_nip			= null;
 Cookie				c_user_name			= null;
 String				db_url				= "";
@@ -20,8 +20,8 @@ String				q					= "";
 String				sid					= "";
 String				repo_root			= "";
 String				user_id				= "";
-String				user_div_id			= "";
-String				user_subdiv_id		= "";
+String				user_uk_id			= "";
+String				user_grup_id		= "";
 String				user_name			= "";
 String				user_nip			= "";
 String				user_psw			= "";
@@ -30,9 +30,7 @@ String				dir_name			= "";
 String				c_path				= request.getContextPath ();
 int					c_max_age			= 60 * 60 * 24 * 30;
 try {
-	user_nip	= request.getParameter ("user_nip");
-	user_psw	= request.getParameter ("user_psw");
-	db_con		= (Connection) session.getAttribute ("db.con");
+	db_con = (Connection) session.getAttribute ("db.con");
 
 	if (db_con == null || db_con.isClosed ()) {
 		db_url = (String) session.getAttribute ("db.url");
@@ -48,15 +46,21 @@ try {
 		session.setAttribute("db.con", (Object) db_con);
 	}
 
-	q	=" select	A.user_id"
-		+" ,		B.div_id"
-		+" ,		A.subdiv_id"
-		+" ,		A.user_name"
-		+" from		m_user		A"
-		+" ,		m_subdiv	B"
-		+" where	A.user_nip	= ?"
-		+" and		A.user_psw	= ?"
-		+" and		A.subdiv_id	= B.subdiv_id";
+	user_nip	= request.getParameter ("user_nip");
+	user_psw	= request.getParameter ("user_psw");
+
+	q	=" select	PEG.id"
+		+" ,		PEG.unit_kerja_id"
+		+" ,		PEG.grup_id"
+		+" ,		PEG.nama"
+		+" from		m_pegawai		PEG"
+		+" ,		m_unit_kerja	UK"
+		+" ,		m_grup			GRUP"
+		+" where	PEG.nip				= ?"
+		+" and		PEG.psw				= ?"
+		+" and		PEG.status			= 1"
+		+" and		PEG.unit_kerja_id	= UK.id"
+		+" and		PEG.grup_id			= GRUP.id";
 
 	db_pstmt = db_con.prepareStatement (q);
 	db_pstmt.setString (1, user_nip);
@@ -65,27 +69,27 @@ try {
 	rs = db_pstmt.executeQuery ();
 
 	if (! rs.next ()) {
-		out.print (	"{success:false,info:'Password anda salah!'}");
+		out.print (	"{success:false,info:'NIP atau Password anda salah/tidak ada!'}");
 		return;
 	}
 
-	user_id			= rs.getString ("user_id");
-	user_div_id		= rs.getString ("div_id");
-	user_subdiv_id	= rs.getString ("subdiv_id");
-	user_name		= rs.getString ("user_name");
+	user_id			= rs.getString ("id");
+	user_uk_id		= rs.getString ("unit_kerja_id");
+	user_grup_id	= rs.getString ("grup_id");
+	user_name		= rs.getString ("nama");
 
 	session.setAttribute ("user.id", user_id);
-	session.setAttribute ("user.div_id", user_id);
-	session.setAttribute ("user.subdiv_id", user_subdiv_id);
-	session.setAttribute ("user.name", user_name);
 	session.setAttribute ("user.nip", user_nip);
+	session.setAttribute ("user.unit_kerja_id", user_uk_id);
+	session.setAttribute ("user.grup_id", user_grup_id);
+	session.setAttribute ("user.nama", user_name);
 
 	c_sid				= new Cookie ("earsip.sid", session.getId ());
 	c_user_id			= new Cookie ("earsip.user.id", user_id);
 	c_user_nip			= new Cookie ("earsip.user.nip", user_nip);
-	c_user_div_id		= new Cookie ("earsip.user.div_id", user_div_id);
-	c_user_subdiv_id	= new Cookie ("earsip.user.subdiv_id", user_subdiv_id);
-	c_user_name			= new Cookie ("earsip.user.name", user_name);
+	c_user_uk_id		= new Cookie ("earsip.user.unit_kerja_id", user_uk_id);
+	c_user_grup_id		= new Cookie ("earsip.user.grup_id", user_grup_id);
+	c_user_name			= new Cookie ("earsip.user.nama", user_name);
 
 	c_sid.setMaxAge (c_max_age);
 	c_sid.setPath (c_path);
@@ -93,18 +97,18 @@ try {
 	c_user_id.setPath (c_path);
 	c_user_nip.setMaxAge (c_max_age);
 	c_user_nip.setPath (c_path);
-	c_user_div_id.setMaxAge (c_max_age);
-	c_user_div_id.setPath (c_path);
-	c_user_subdiv_id.setMaxAge (c_max_age);
-	c_user_subdiv_id.setPath (c_path);
+	c_user_uk_id.setMaxAge (c_max_age);
+	c_user_uk_id.setPath (c_path);
+	c_user_grup_id.setMaxAge (c_max_age);
+	c_user_grup_id.setPath (c_path);
 	c_user_name.setMaxAge (c_max_age);
 	c_user_name.setPath (c_path);
 
 	response.addCookie (c_sid);
 	response.addCookie (c_user_id);
 	response.addCookie (c_user_nip);
-	response.addCookie (c_user_div_id);
-	response.addCookie (c_user_subdiv_id);
+	response.addCookie (c_user_uk_id);
+	response.addCookie (c_user_grup_id);
 	response.addCookie (c_user_name);
 
 	/* create user repository if it doesn't exist yet */
@@ -119,17 +123,17 @@ try {
 		d.mkdir ();
 
 		q	=" select	id"
-			+" from		m_arsip"
-			+" where	name		='"+ user_nip +"'"
+			+" from		m_berkas"
+			+" where	nama		='"+ dir_name +"'"
 			+" and		pid			= 0"
-			+" and		node_type	= 0";
+			+" and		tipe_file	= 0";
 
 		db_stmt = db_con.createStatement ();
 
 		rs = db_stmt.executeQuery (q);
 
 		if (! rs.next ()) {
-			q	=" insert into m_arsip (pid, user_id, name)"
+			q	=" insert into m_berkas (pid, pegawai_id, nama)"
 				+" values (0, "+ user_id +",'"+ dir_name +"')";
 
 			db_stmt.executeUpdate (q);
@@ -140,6 +144,6 @@ try {
 	rs.close ();
 }
 catch (Exception e) {
-	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");
+	out.print("{success:false,info:'"+ e.toString().replace("'","''").replace("\"", "\\\"") +"'}");
 }
 %>

@@ -27,7 +27,7 @@ Ext.define ('Earsip.view.AdmHakAksesMenu', {
 	,	width			: 50
 	},{
 		text			: 'Parent ID'
-	,	dataIndex		: 'menu_parent_id'
+	,	dataIndex		: 'menu_pid'
 	,	width			: 80
 	},{
 		text			: 'Nama'
@@ -35,7 +35,7 @@ Ext.define ('Earsip.view.AdmHakAksesMenu', {
 	,	flex			: 1
 	},{
 		text			: 'Akses'
-	,	dataIndex		: 'access_level'
+	,	dataIndex		: 'hak_akses'
 	,	renderer		: store_renderer ('id', 'name', s_acl)
 	,	editor			: {
 			xtype			: 'combo'

@@ -40,16 +40,16 @@ try {
 	}
 	user_id	= Integer.parseInt (user_id_s);
 
-	q	=" select	A.menu_id"
-		+" ,		A.menu_parent_id"
-		+" ,		A.menu_name"
-		+" ,		A.menu_index"
-		+" ,		B.access_level"
-		+" from		m_menu		A"
-		+" ,		menu_access	B"
-		+" where	A.menu_id	= B.menu_id"
-		+" and		B.user_id	= ?"
-		+" order by A.menu_id, A.menu_parent_id";
+	q	=" select	MENU.id"
+		+" ,		MENU.pid"
+		+" ,		MENU.nama"
+		+" ,		MENU.nama_ref"
+		+" ,		MAKSES.hak_akses_id"
+		+" from		m_menu		MENU"
+		+" ,		menu_akses	MAKSES"
+		+" where	MENU.id			= MAKSES.menu_id"
+		+" and		MAKSES.grup_id	= ?"
+		+" order by MENU.id, MENU.pid";
 
 	db_stmt = db_con.prepareStatement (q);
 	db_stmt.setInt (1, user_id);
@@ -62,12 +62,12 @@ try {
 		} else {
 			i++;
 		}
-		data	+="{ menu_id		: "+ rs.getString ("menu_id")
-				+ ", menu_parent_id	: "+ rs.getString ("menu_parent_id")
-				+ ", menu_name		:'"+ rs.getString ("menu_name") +"'"
-				+ ", menu_index		:'"+ rs.getString ("menu_index") +"'"
-				+ ", user_id		: "+ user_id
-				+ ", access_level	: "+ rs.getString ("access_level")
+		data	+="{ menu_id	: "+ rs.getString ("id")
+				+ ", menu_pid	: "+ rs.getString ("pid")
+				+ ", menu_name	:'"+ rs.getString ("nama") +"'"
+				+ ", menu_ref	:'"+ rs.getString ("nama_ref") +"'"
+				+ ", user_id	: "+ user_id
+				+ ", hak_akses	: "+ rs.getString ("hak_akses_id")
 				+ "}";
 	}
 

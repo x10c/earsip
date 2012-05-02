@@ -10,7 +10,7 @@ ResultSet			rs			= null;
 ResultSet			mc_rs		= null;
 String				q			= "";
 String				db_url		= "";
-int					user_id		= 0;
+int					grup_id		= 0;
 String				menu		= "";
 int					menu_id		= 0;
 String				menu_name	= "";
@@ -34,42 +34,42 @@ try {
 		session.setAttribute ("db.con", (Object) db_con);
 	}
 
-	tmp	= (String) session.getAttribute ("user.id");
+	tmp	= (String) session.getAttribute ("user.grup_id");
 	if (tmp == null) {
 		out.print ("{success:false,info:'User ID tidak diketahui!'}");
 		return;
 	}
-	user_id	= Integer.parseInt (tmp);
+	grup_id	= Integer.parseInt (tmp);
 
-	q	=" select	A.menu_id"
-		+" ,		A.menu_name"
-		+" ,		A.menu_index"
-		+" ,		B.access_level"
-		+" from		m_menu		A"
-		+" ,		menu_access	B"
-		+" where	A.menu_id = B.menu_id"
-		+" and		B.user_id = ?"
-		+" and		B.access_level > 0"
-		+" and		A.menu_parent_id = ?";
+	q	=" select	MENU.id"
+		+" ,		MENU.nama"
+		+" ,		MENU.nama_ref"
+		+" ,		MAKSES.hak_akses_id"
+		+" from		m_menu		MENU"
+		+" ,		menu_akses	MAKSES"
+		+" where	MENU.id				= MAKSES.menu_id"
+		+" and		MAKSES.grup_id		= ?"
+		+" and		MAKSES.hak_akses_id > 0"
+		+" and		MENU.pid			= ?";
 
 	db_stmt = db_con.prepareStatement (q);
 
-	db_stmt.setInt (1, user_id);
+	db_stmt.setInt (1, grup_id);
 	db_stmt.setInt (2, 0);
 
 	rs = db_stmt.executeQuery ();
 
 	while (rs.next ()) {
-		menu_id		= rs.getInt ("menu_id");
-		menu_name	= rs.getString ("menu_name");
-		menu_index	= rs.getString ("menu_index");
+		menu_id		= rs.getInt ("id");
+		menu_name	= rs.getString ("nama");
+		menu_index	= rs.getString ("nama_ref");
 
 		menu	+="\n\t{ text:'"+ menu_name +"'\n"
 				+ "\t, itemId:'"+ menu_index +"'\n"
 				+ "\t, iconCls:'system'\n";
 
 		mc_stmt = db_con.prepareStatement (q);
-		mc_stmt.setInt (1, user_id);
+		mc_stmt.setInt (1, grup_id);
 		mc_stmt.setInt (2, menu_id);
 
 		mc_rs = mc_stmt.executeQuery ();
@@ -80,10 +80,10 @@ try {
 					+ "\t\t, items : [\n";
 
 			do {
-				menu_id		= mc_rs.getInt ("menu_id");
-				menu_name	= mc_rs.getString ("menu_name");
-				menu_index	= mc_rs.getString ("menu_index");
-				menu_acl	= mc_rs.getString ("access_level");
+				menu_id		= mc_rs.getInt ("id");
+				menu_name	= mc_rs.getString ("nama");
+				menu_index	= mc_rs.getString ("nama_ref");
+				menu_acl	= mc_rs.getString ("hak_akses_id");
 
 				menu	+="\t\t\t{ text:'"+ menu_name +"'\n"
 						+ "\t\t\t, itemId:'"+ menu_index +"'\n"

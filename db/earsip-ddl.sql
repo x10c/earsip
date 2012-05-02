@@ -130,18 +130,18 @@ create table M_BERKAS (
    UNIT_KERJA_ID        INT4                 null,
    BERKAS_TIPE_ID       INT4                 null,
    PID                  INT4                 null,
-   TIPE_FILE            INT2                 null,
+   TIPE_FILE            INT2                 null default 0,
    SHA                  VARCHAR(255)         null,
    NAMA                 VARCHAR(255)         null,
-   TGL_UNGGAH           DATE                 not null,
+   TGL_UNGGAH           DATE                 not null default current_date,
    TGL_DIBUAT           DATE                 null,
-   NOMOR                VARCHAR(64)          not null,
+   NOMOR                VARCHAR(64)          null,
    PEMBUAT              VARCHAR(255)         null,
    JUDUL                VARCHAR(255)         null,
    MASALAH              VARCHAR(255)         null,
    JRA                  INT2                 null,
-   STATUS               INT2                 null,
-   STATUS_HAPUS         INT2                 null,
+   STATUS               INT2                 null default 1,
+   STATUS_HAPUS         INT2                 null default 1,
    constraint PK_M_BERKAS primary key (ID)
 );
 

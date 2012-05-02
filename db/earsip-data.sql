@@ -1,4 +1,9 @@
 ﻿--
+-- m_sysconfig
+--
+insert into m_sysconfig (repository_root) values ('/repository');
+
+--
 -- r_jabatan
 --
 
@@ -10,7 +15,7 @@ INSERT INTO r_jabatan (id, nama, keterangan) VALUES (2, 'Teknisi','Teknisi');
 --
 
 INSERT INTO m_grup (id, nama, keterangan) VALUES (1, 'Administrator', 'Admin aplikasi');
-INSERT INTO m_grup (id, nama, keterangan) VALUES (2, 'Pusat Berkas', 'Mengataur seluruh arsip aktif');
+INSERT INTO m_grup (id, nama, keterangan) VALUES (2, 'Pusat Berkas', 'Mengatur seluruh arsip aktif');
 INSERT INTO m_grup (id, nama, keterangan) VALUES (3, 'Pusat Arsip', 'Mengatur seluruh arsip inaktif');
 
 
@@ -27,19 +32,20 @@ INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (10,
 INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (11, 'SDM', 'DIVISI SDM', '','');
 INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (12, 'MKHU', 'DIVISI MKHU', '','');
 INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (13, 'SKAI', 'SATUAN KERJA AUDIT INTERN', '','');
-INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (14, 'TSI', 'DIVISI TSI & AKUNTANSI U/ TSI', '','');
-INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (15, 'AKT', 'DIVISI TSI & AKUNTANSI U/ AKUNTANSI', '','');
+INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (14, 'TSI', 'DIVISI TSI & AKUNTANSI - TSI', '','');
+INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (15, 'AKT', 'DIVISI TSI & AKUNTANSI - AKUNTANSI', '','');
 INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (16, 'AMU', 'TIM AMU', '','');
-INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (17, 'DT', 'DIVISI DANA DAN TREASURY U/ TREASURY', '','');
+INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (17, 'DT', 'DIVISI DANA DAN TREASURY - TREASURY', '','');
+INSERT INTO m_unit_kerja (id, kode, nama, nama_pimpinan, keterangan) VALUES (18, 'TEK', 'TEKNISI IT', '','');
 
 
 --
 -- m_pegawai
 --
 
-INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (NULL, 1, 2, '1', 'administrator', 'admin', 1);
-INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (1, 2, 2, 'NIP.0001', 'pusat berkas', 'berkas', 1);
-INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (10, 3, 2, 'NIP.0002', 'pusat arsip', 'arsip', 1);
+INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (18, 1, 2, '1', 'Administrator', 'admin', 1);
+INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (1, 2, 2, 'NIP.0001', 'Pusat Berkas', 'berkas', 1);
+INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (10, 3, 2, 'NIP.0002', 'Pusat Arsip', 'arsip', 1);
 
 --
 -- m_berkas_klas
@@ -114,26 +120,26 @@ INSERT INTO r_berkas_klas (id, unit_kerja_id, kode, nama, keterangan) VALUES (63
 -- m_menu menu
 --
 
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (1, 0, 'Administrasi', 'adm');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (2, 1, 'Sistem', 'adm_sistem');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (3, 1, 'Hak Akses', 'adm_hak_akses');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (4, 0, 'Referensi', 'ref');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (5, 4, 'Tipe Arsip', 'ref_arsip_tipe');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (6, 4, 'Metoda Pemusnahan', 'ref_metoda_pemsnahan');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (7, 4, 'Klasifikasi Arsip', 'mas_klasifikasi_arsip');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (8, 4, 'Indeks Relatif', 'mas_indeks_relatif');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (9, 0, 'Master', 'mas');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (10, 9, 'Group & User', 'mas_user');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (11, 9, 'Unit Kerja', 'mas_unit_kerja');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (12, 9, 'Petugas', 'mas_petugas');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (13, 9, 'Arsip', 'mas_arsip');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (14, 0, 'Transaksi', 'trans');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (15, 14, 'Penyerahan', 'trans_penyerahan');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (16, 14, 'Peminjaman', 'trans_peminjaman');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (17, 14, 'Pengembalian', 'trans_pengembalian');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (18, 14, 'Pemusnahan', 'trans_pemusnahan');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (19, 0, 'Laporan', 'lap');
-INSERT INTO m_menu (id, pid, nama_ref, nama) VALUES (20, 19, 'Arsip JRA', 'lap_arsip_jra');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (1, 0, 'Administrasi', 'adm');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (2, 1, 'Sistem', 'adm_sistem');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (3, 1, 'Hak Akses', 'adm_hak_akses');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (4, 0, 'Referensi', 'ref');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (5, 4, 'Tipe Arsip', 'ref_arsip_tipe');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (6, 4, 'Metoda Pemusnahan', 'ref_metoda_pemsnahan');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (7, 4, 'Klasifikasi Arsip', 'mas_klasifikasi_arsip');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (8, 4, 'Indeks Relatif', 'mas_indeks_relatif');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (9, 0, 'Master', 'mas');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (10, 9, 'Group & User', 'mas_user');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (11, 9, 'Unit Kerja', 'mas_unit_kerja');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (12, 9, 'Petugas', 'mas_petugas');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (13, 9, 'Arsip', 'mas_arsip');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (14, 0, 'Transaksi', 'trans');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (15, 14, 'Penyerahan', 'trans_penyerahan');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (16, 14, 'Peminjaman', 'trans_peminjaman');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (17, 14, 'Pengembalian', 'trans_pengembalian');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (18, 14, 'Pemusnahan', 'trans_pemusnahan');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (19, 0, 'Laporan', 'lap');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (20, 19, 'Arsip JRA', 'lap_arsip_jra');
 
 --
 -- r_akses_menu
@@ -213,7 +219,7 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (20, 3, 0);
 -- r_berkas_tipe
 --
 
-INSERT INTO r_berkas_tipe(nama, keterangan) VALUES('formulir', 'Berkas berupa formulir');
+INSERT INTO r_berkas_tipe(nama, keterangan) VALUES('Formulir', 'Berkas berupa formulir');
 INSERT INTO r_berkas_tipe(nama, keterangan) VALUES('Berita Acara', 'Berkas berupa berita acara');
 INSERT INTO r_berkas_tipe(nama, keterangan) VALUES('Gambar', 'Berkas berupa gambar diam');
 INSERT INTO r_berkas_tipe(nama, keterangan) VALUES('Video', 'Berkas berupa gambar bergerak');
@@ -223,16 +229,16 @@ INSERT INTO r_berkas_tipe(nama, keterangan) VALUES('Suara', 'Berkas berupa suara
 -- r_akses_berbagi
 --
 
-INSERT INTO r_akses_berbagi(id, keterangan) VALUES(1, 'view (user tertentu)');
-INSERT INTO r_akses_berbagi(id, keterangan) VALUES(2, '2 : insert/update/delete (user_tertentu)');
-INSERT INTO r_akses_berbagi(id, keterangan) VALUES(3, 'view (global)');
-INSERT INTO r_akses_berbagi(id, keterangan) VALUES(4, 'insert/update/delete (global - ke semua user)');
+INSERT INTO r_akses_berbagi(id, keterangan) VALUES(1, 'Lihat (user tertentu)');
+INSERT INTO r_akses_berbagi(id, keterangan) VALUES(2, 'Merubah (user tertentu)');
+INSERT INTO r_akses_berbagi(id, keterangan) VALUES(3, 'Lihat (global)');
+INSERT INTO r_akses_berbagi(id, keterangan) VALUES(4, 'Merubah (global)');
 
 --
 -- r_arsip_status
 --
 
 INSERT INTO r_arsip_status(id, keterangan) VALUES(0, 'Ada');
-INSERT INTO r_arsip_status(id, keterangan) VALUES(1, 'Dipimjam');
+INSERT INTO r_arsip_status(id, keterangan) VALUES(1, 'Dipinjam');
 INSERT INTO r_arsip_status(id, keterangan) VALUES(2, 'Hilang');
 INSERT INTO r_arsip_status(id, keterangan) VALUES(3, 'Musnah');

@@ -32,7 +32,7 @@ try {
 						+ repo_root +"/"+ path +"/"+ name);
 	new_dir.mkdir ();
 
-	q	=" insert into m_arsip (pid, name, user_id)"
+	q	=" insert into m_berkas (pid, nama, pegawai_id)"
 		+" values (?, ?, ?)";
 
 	db_stmt = db_con.prepareStatement (q);

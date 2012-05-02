@@ -27,22 +27,22 @@ try {
 
 	q	=" select	id"
 		+" ,		pid"
-		+" ,		name"
-		+" from		m_arsip"
+		+" ,		nama"
+		+" from		m_berkas"
 		+" where	pid			= "+ id
-		+" and		node_type	= 0";
+		+" and		tipe_file	= 0"
+		+" and		status		= 1";
 
 	rs = db_stmt.executeQuery (q);
 
 	while (rs.next ()) {
 		node	= new JSONObject ();
-		name	= rs.getString ("name");
+		name	= rs.getString ("nama");
 		id		= Integer.parseInt (rs.getString ("id"));
 
 		node.put ("id", id);
 		node.put ("pid", rs.getString("pid"));
 		node.put ("text", name);
-		node.put ("iconCls", "dir16");
 
 		childs = get_list_dir (id, db_con);
 
@@ -78,15 +78,15 @@ try {
 	JSONArray	childs		= null;
 	JSONObject	node		= new JSONObject();
 	String		user_id		= (String) session.getAttribute ("user.id");
-	String		user_name	= (String) session.getAttribute ("user.name");
+	String		user_name	= (String) session.getAttribute ("user.nama");
 	int			id			= 0;
 
 	q	=" select	id"
-		+" ,		name"
-		+" from		m_arsip"
-		+" where	user_id		= "+ user_id
+		+" ,		nama"
+		+" from		m_berkas"
+		+" where	pegawai_id	= "+ user_id
 		+" and		pid			= 0"
-		+" and		node_type	= 0";
+		+" and		tipe_file	= 0";
 
 	rs = db_stmt.executeQuery (q);
 
@@ -99,8 +99,7 @@ try {
 
 	node.put("id", id);
 	node.put("pid", 0);
-	node.put("text", rs.getString ("name"));
-	node.put("iconCls", "dir16");
+	node.put("text", rs.getString ("nama"));
 
 	childs = get_list_dir (id, db_con);
 
