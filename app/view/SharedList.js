@@ -3,6 +3,7 @@ Ext.require ('Earsip.store.SharedList');
 Ext.define ('Earsip.view.SharedList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.sharedlist'
+,	itemId		: 'sharedlist'
 ,	store		: 'SharedList'
 ,	title		: 'Berkas Berbagi'
 ,	columns		: [{

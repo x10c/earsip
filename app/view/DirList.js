@@ -3,7 +3,7 @@ Ext.require ('Earsip.store.DirList');
 Ext.define ('Earsip.view.DirList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.dirlist'
-,	itemId		: 'itemId'
+,	itemId		: 'dirlist'
 ,	store		: 'DirList' 
 ,	title		: 'Berkas'
 ,	columns		: [{

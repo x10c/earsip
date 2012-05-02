@@ -5,7 +5,6 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="org.json.JSONObject" %>
-<%@ page import="org.json.JSONValue" %>
 <%
 Connection	db_con	= null;
 Statement	db_stmt	= null;
@@ -47,14 +46,14 @@ try {
 	reader.close();
 
 	data			= sb.toString();
-	o				= (JSONObject) JSONValue.parse (data);
-	menu_id			= String.valueOf (o.get ("menu_id"));
-	access_level	= String.valueOf (o.get ("access_level"));
+	o				= (JSONObject) new JSONObject (data);
+	menu_id			= o.getString ("menu_id");
+	access_level	= o.getString ("hak_akses");
 	action			= (String) request.getParameter ("action");
 
 	if (action.equalsIgnoreCase ("update")) {
-		q	=" update	menu_access"
-			+" set		access_level	= "+ access_level
+		q	=" update	menu_akses"
+			+" set		hak_akses_id	= "+ access_level
 			+" where	menu_id			= "+ menu_id;
 	}
 
