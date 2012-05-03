@@ -2,6 +2,7 @@ Ext.define ('Earsip.store.Grup', {
 	extend		: 'Ext.data.Store'
 ,	model		: 'Earsip.model.Grup'
 ,	autoSync	: false
+,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
 	,	api			: {

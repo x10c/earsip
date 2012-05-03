@@ -42,6 +42,17 @@ Ext.define ('Earsip.plugin.RowEditor', {
 	}
 });
 
+function combo_renderer (v, col)
+{
+	var combo = col.getEditor ();
+	var i = combo.store.find (combo.valueField, v);
+	if (i < 0) {
+		return v;
+	}
+	var rec = combo.store.getAt (i);
+	return rec ? rec.get(combo.displayField) : "";
+}
+
 function store_renderer (valueField, displayField, store)
 {
 	return function (v) {
@@ -63,6 +74,9 @@ Ext.application ({
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
+	,	'UnitKerja'
+	,	'Pegawai'
+	,	'Jabatan'
 	]
 ,	stores		: [
 		'DirList'
@@ -70,6 +84,9 @@ Ext.application ({
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
+	,	'UnitKerja'
+	,	'Pegawai'
+	,	'Jabatan'
 	]
 ,	views		: [
 		'Main'
@@ -83,6 +100,7 @@ Ext.application ({
 	,	'AdmHakAksesMenu'
 	,	'Grup'
 	,	'AdmHakAkses'
+	,	'Pegawai'
 	]
 ,	controllers	: [
 		'Login'
@@ -92,6 +110,7 @@ Ext.application ({
 	,	'DirList'
 	,	'WinUpload'
 	,	'Grup'
+	,	'Pegawai'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});

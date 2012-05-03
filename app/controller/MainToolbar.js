@@ -1,6 +1,7 @@
 Ext.require ([
 	'Earsip.view.AdmSistem'
 ,	'Earsip.view.AdmHakAkses'
+,	'Earsip.view.Pegawai'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
