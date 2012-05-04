@@ -125,7 +125,7 @@ INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (2, 1, 'Sistem', 'adm_sistem
 INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (3, 1, 'Hak Akses', 'adm_hak_akses');
 INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (4, 0, 'Referensi', 'ref');
 INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (5, 4, 'Tipe Arsip', 'ref_arsip_tipe');
-INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (6, 4, 'Metoda Pemusnahan', 'ref_metoda_pemsnahan');
+INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (6, 4, 'Metoda Pemusnahan', 'ref_metoda_pemusnahan');
 INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (7, 4, 'Klasifikasi Arsip', 'mas_klasifikasi_arsip');
 INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (8, 4, 'Indeks Relatif', 'mas_indeks_relatif');
 INSERT INTO m_menu (id, pid, nama, nama_ref) VALUES (9, 0, 'Master', 'mas');
