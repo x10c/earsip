@@ -77,6 +77,8 @@ Ext.application ({
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'Jabatan'
+	,	'TipeArsip'
+	,	'MetodaPemusnahan'
 	]
 ,	stores		: [
 		'DirList'
@@ -87,6 +89,8 @@ Ext.application ({
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'Jabatan'
+	,	'TipeArsip'
+	,	'MetodaPemusnahan'
 	]
 ,	views		: [
 		'Main'
@@ -101,6 +105,11 @@ Ext.application ({
 	,	'Grup'
 	,	'AdmHakAkses'
 	,	'Pegawai'
+
+	,	'TipeArsip'
+	,	'TipeArsipGridPanel'
+	,	'MetodaPemusnahan'
+	,	'MetodaPemusnahanGridPanel'
 	]
 ,	controllers	: [
 		'Login'
@@ -111,6 +120,8 @@ Ext.application ({
 	,	'WinUpload'
 	,	'Grup'
 	,	'Pegawai'
+	,	'TipeArsip'
+	,	'MetodaPemusnahan'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});

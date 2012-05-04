@@ -2,6 +2,8 @@ Ext.require ([
 	'Earsip.view.AdmSistem'
 ,	'Earsip.view.AdmHakAkses'
 ,	'Earsip.view.Pegawai'
+,	'Earsip.view.TipeArsip'
+,	'Earsip.view.MetodaPemusnahan'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
