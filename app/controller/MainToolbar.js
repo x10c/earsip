@@ -2,6 +2,7 @@ Ext.require ([
 	'Earsip.view.AdmSistem'
 ,	'Earsip.view.AdmHakAkses'
 ,	'Earsip.view.TipeArsip'
+,	'Earsip.view.MetodaPemusnahan'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
@@ -34,7 +35,6 @@ Ext.define ('Earsip.controller.MainToolbar', {
 
 ,	menuitem_on_click : function (button)
 	{
-		console.log(button.itemId);
 		var tabpanel = this.getContent ();
 			
 		Earsip.acl = button.acl;
