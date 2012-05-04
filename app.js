@@ -63,6 +63,7 @@ Ext.application ({
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
+	,	'TipeArsip'
 	]
 ,	stores		: [
 		'DirList'
@@ -70,6 +71,7 @@ Ext.application ({
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
+	,	'TipeArsip'
 	]
 ,	views		: [
 		'Main'
@@ -83,6 +85,9 @@ Ext.application ({
 	,	'AdmHakAksesMenu'
 	,	'Grup'
 	,	'AdmHakAkses'
+	,	'TipeArsip'
+	,	'TipeArsipGridPanel'
+	
 	]
 ,	controllers	: [
 		'Login'
@@ -92,6 +97,7 @@ Ext.application ({
 	,	'DirList'
 	,	'WinUpload'
 	,	'Grup'
+	,	'TipeArsip'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
