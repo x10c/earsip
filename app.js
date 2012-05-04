@@ -64,6 +64,7 @@ Ext.application ({
 	,	'Grup'
 	,	'MenuAccess'
 	,	'TipeArsip'
+	,	'MetodaPemusnahan'
 	]
 ,	stores		: [
 		'DirList'
@@ -72,6 +73,7 @@ Ext.application ({
 	,	'Grup'
 	,	'MenuAccess'
 	,	'TipeArsip'
+	,	'MetodaPemusnahan'
 	]
 ,	views		: [
 		'Main'
@@ -87,7 +89,8 @@ Ext.application ({
 	,	'AdmHakAkses'
 	,	'TipeArsip'
 	,	'TipeArsipGridPanel'
-	
+	,	'MetodaPemusnahan'
+	,	'MetodaPemusnahanGridPanel'
 	]
 ,	controllers	: [
 		'Login'
@@ -98,6 +101,7 @@ Ext.application ({
 	,	'WinUpload'
 	,	'Grup'
 	,	'TipeArsip'
+	,	'MetodaPemusnahan'
 	]
 ,	launch		: function () {
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
