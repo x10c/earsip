@@ -1,5 +1,6 @@
 Ext.define ('Earsip.store.User', {
 	extend		: 'Ext.data.Store'
+,	storeId		: 'User'
 ,	model		: 'Earsip.model.User'
 ,	autoSync	: false
 ,	proxy		: {

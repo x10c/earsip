@@ -1,5 +1,6 @@
 Ext.define ('Earsip.store.SharedList', {
 	extend		: 'Ext.data.Store'
+,	storeId		: 'SharedList'
 ,	model		: 'Earsip.model.SharedList'
 ,	autoSync	: false
 ,	autoLoad	: false

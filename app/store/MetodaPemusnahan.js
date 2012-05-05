@@ -1,5 +1,6 @@
 Ext.define ('Earsip.store.MetodaPemusnahan', {
 	extend		: 'Ext.data.Store'
+,	storeId		: 'MetodaPemusnahan'
 ,	model		: 'Earsip.model.MetodaPemusnahan'
 ,	autoSync	: false
 ,	proxy		: {

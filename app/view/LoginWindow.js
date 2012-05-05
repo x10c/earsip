@@ -42,7 +42,7 @@ Ext.define ('Earsip.view.LoginWindow', {
 	,	type			: 'submit'
 	,	action			: 'login'
 	,	formBind		: true
-    }]
+	}]
 
 ,	initComponent	: function ()
 	{

@@ -1,5 +1,6 @@
 Ext.define ('Earsip.store.MenuAccess', {
 	extend		: 'Ext.data.Store'
+,	storeId		: 'MenuAccess'
 ,	model		: 'Earsip.model.MenuAccess'
 ,	autoSync	: false
 ,	proxy		: {

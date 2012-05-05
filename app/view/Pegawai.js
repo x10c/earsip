@@ -1,6 +1,9 @@
-Ext.require ('Earsip.store.Pegawai');
-Ext.require ('Earsip.store.UnitKerja');
-Ext.require ('Earsip.store.Jabatan');
+Ext.require ([
+	'Earsip.store.Pegawai'
+,	'Earsip.store.UnitKerja'
+,	'Earsip.store.Jabatan'
+,	'Earsip.view.PegawaiWin'
+]);
 
 Ext.define ('Earsip.view.Pegawai', {
 	extend		: 'Ext.grid.Panel'
@@ -17,10 +20,18 @@ Ext.define ('Earsip.view.Pegawai', {
 		text		: 'Nama'
 	,	dataIndex	: 'nama'
 	,	flex		: 1
+	,	editor		: {
+			xtype		: 'textfield'
+		,	allowBlank	: false
+		}
 	},{
 		text		: 'NIP'
 	,	dataIndex	: 'nip'
 	,	width		: 120
+	,	editor		: {
+			xtype		: 'textfield'
+		,	allowBlank	: false
+		}
 	},{
 		text		: 'Unit Kerja'
 	,	dataIndex	: 'unit_kerja_id'
@@ -61,6 +72,23 @@ Ext.define ('Earsip.view.Pegawai', {
 		{
 			return combo_renderer (v, this.columns[colidx]);
 		}
+	},{
+		text		: 'Status'
+	,	dataIndex	: 'status'
+	,	width		: 80
+	,	editor		: {
+			xtype			: 'checkbox'
+		,	inputValue		: 1
+		,	uncheckedValue	: 0
+		}
+	,	renderer	: function (v)
+		{
+			if (v == 1) {
+				return 'Aktif';
+			} else {
+				return 'Non Aktif';
+			}
+		}
 	}]
 ,	dockedItems	: [{
 		xtype		: 'toolbar'
@@ -93,6 +121,11 @@ Ext.define ('Earsip.view.Pegawai', {
 		activate	: function (comp)
 		{
 			this.getStore ().load ();
+		}
+	,	afterrender : function (comp)
+		{
+			this.win = Ext.create ('Earsip.view.PegawaiWin', {});
+			this.win.hide ();
 		}
 	}
 });

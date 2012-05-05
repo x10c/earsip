@@ -16,7 +16,7 @@ Ext.define ('Earsip.view.Grup', {
 	,	width		: 100
 	,	editor		: {
 			xtype		: 'textfield'
-		,	allowBlank	: 'false'
+		,	allowBlank	: false
 		}
 	},{
 		text		: 'Keterangan'
@@ -24,7 +24,7 @@ Ext.define ('Earsip.view.Grup', {
 	,	flex		: 1
 	,	editor		: {
 			xtype		: 'textfield'
-		,	allowBlank	: 'false'
+		,	allowBlank	: false
 		}
 	}]
 ,	dockedItems	: [{

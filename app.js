@@ -27,8 +27,7 @@ Ext.define ('Earsip.plugin.RowEditor', {
 	,	edit				: function (editor, e)
 		{
 			editor.action = 'none';
-			editor.grid.store.sync ();
-			editor.grid.store.load ({
+			editor.grid.store.sync ({
 				params	: editor.grid.params
 			});
 		}
@@ -105,11 +104,10 @@ Ext.application ({
 	,	'Grup'
 	,	'AdmHakAkses'
 	,	'Pegawai'
+	,	'PegawaiWin'
 
 	,	'TipeArsip'
-	,	'TipeArsipGridPanel'
 	,	'MetodaPemusnahan'
-	,	'MetodaPemusnahanGridPanel'
 	]
 ,	controllers	: [
 		'Login'

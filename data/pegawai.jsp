@@ -43,6 +43,7 @@ try {
 				+ ", jabatan_id		: "+ rs.getString ("jabatan_id")
 				+ ", nip			:'"+ rs.getString ("nip") +"'"
 				+ ", nama			:'"+ rs.getString ("nama") +"'"
+				+ ", password		:''"
 				+ ", status			: "+ rs.getString ("status")
 				+ "}";
 	}

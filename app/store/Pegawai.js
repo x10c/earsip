@@ -1,5 +1,6 @@
 Ext.define ('Earsip.store.Pegawai', {
 	extend		: 'Ext.data.Store'
+,	storeId		: 'Pegawai'
 ,	model		: 'Earsip.model.Pegawai'
 ,	autoSync	: false
 ,	autoLoad	: false

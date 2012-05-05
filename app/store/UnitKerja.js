@@ -1,5 +1,6 @@
 Ext.define ('Earsip.store.UnitKerja', {
 	extend		: 'Ext.data.Store'
+,	storeId		: 'UnitKerja'
 ,	model		: 'Earsip.model.UnitKerja'
 ,	autoLoad	: false
 ,	autoSync	: false
