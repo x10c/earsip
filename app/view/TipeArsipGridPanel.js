@@ -1,10 +1,10 @@
-Ext.require ('Earsip.store.TipeArsip');
+Ext.require ('Earsip.store.BerkasTipe');
 
 Ext.define ('Earsip.view.TipeArsipGridPanel', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.tipe_arsip_grid'
 ,	itemId		: 'tipe_arsip_grid'
-,	store		: 'TipeArsip'
+,	store		: 'BerkasTipe'
 ,	loadmask	: true
 ,	plugins		:
 	[

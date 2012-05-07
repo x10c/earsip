@@ -4,6 +4,8 @@ Ext.require ([
 ,	'Earsip.view.Pegawai'
 ,	'Earsip.view.TipeArsip'
 ,	'Earsip.view.MetodaPemusnahan'
+,	'Earsip.view.RefBerkasKlasifikasi'
+,	'Earsip.view.RefIndeksRelatif'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {

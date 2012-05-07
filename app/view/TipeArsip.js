@@ -2,9 +2,9 @@ Ext.require ('Earsip.view.TipeArsipGridPanel');
 
 Ext.define ('Earsip.view.TipeArsip', {
 	extend		: 'Ext.panel.Panel'
-,	alias		: 'widget.ref_tipe_arsip'
-,	title		: 'Referensi Tipe Arsip'
-,	itemId		: 'ref_tipe_arsip'
+,	alias		: 'widget.ref_berkas_tipe'
+,	title		: 'Referensi Tipe Berkas'
+,	itemId		: 'ref_berkas_tipe'
 ,	closable		: true
 ,	plain			: true
 ,	layout			: 'border'

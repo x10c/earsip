@@ -29,6 +29,7 @@ Ext.define ('Earsip.view.AdmSistem', {
 	,	items			: [{
 			text			: 'Simpan'
 		,	itemId			: 'save'
+		,	iconCls			: 'save'
 		,	scope			: this
 		,	handler			: function (button, event)
 			{

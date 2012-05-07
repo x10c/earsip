@@ -19,12 +19,12 @@ Ext.define ('Earsip.view.AdmHakAkses', {
 		xtype			: 'grup'
 	,	region			: 'center'
 	,	flex			: 0.5
-	,	minWidth		: 450
+	,	minWidth		: 200
 	},{
 		xtype			: 'adm_hak_akses_menu'
 	,	region			: 'east'
 	,	flex			: 0.5
-	,	minWidth		: 450
+	,	minWidth		: 200
 	}]
 ,	listeners		: {
 		activate		: function (comp)

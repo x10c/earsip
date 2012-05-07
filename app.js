@@ -77,10 +77,10 @@ Ext.application ({
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'Jabatan'
-	,	'TipeArsip'
 	,	'MetodaPemusnahan'
 	,	'BerkasKlasifikasi'
 	,	'BerkasTipe'
+	,	'IndeksRelatif'
 	]
 ,	stores		: [
 		'Berkas'
@@ -91,10 +91,10 @@ Ext.application ({
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'Jabatan'
-	,	'TipeArsip'
 	,	'MetodaPemusnahan'
 	,	'BerkasKlasifikasi'
 	,	'BerkasTipe'
+	,	'IndeksRelatif'
 	]
 ,	views		: [
 		'Main'
@@ -112,6 +112,8 @@ Ext.application ({
 	,	'PegawaiWin'
 
 	,	'TipeArsip'
+	,	'RefBerkasKlasifikasi'
+	,	'RefIndeksRelatif'
 	,	'MetodaPemusnahan'
 	]
 ,	controllers	: [
