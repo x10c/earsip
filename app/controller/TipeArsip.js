@@ -1,22 +1,22 @@
 Ext.define ('Earsip.controller.TipeArsip', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
-		ref		: 'tipe_arsip_grid'
-	,	selector: 'tipe_arsip_grid'
+		ref		: 'ref_tipe_arsip'
+	,	selector: 'ref_tipe_arsip'
 	}]
 ,	init	: function ()
 	{
 		this.control ({
-			'tipe_arsip_grid': {
+			'ref_tipe_arsip': {
 				selectionchange : this.do_select
 			}
-		,	'tipe_arsip_grid button[action=add]': {
+		,	'ref_tipe_arsip button[action=add]': {
 				click : this.do_add
 			}
-		,	'tipe_arsip_grid button[action=refresh]': {
+		,	'ref_tipe_arsip button[action=refresh]': {
 				click : this.do_refresh
 			}
-		,	'tipe_arsip_grid button[action=del]': {
+		,	'ref_tipe_arsip button[action=del]': {
 				click : this.do_delete
 			}
 		});
@@ -25,18 +25,13 @@ Ext.define ('Earsip.controller.TipeArsip', {
 
 ,	do_select : function (sm, records)
 	{
-		var bdel = this.getTipe_arsip_grid().down('#del');
-		
-		if (records.length <= 0) {
-			bdel.setDisabled (true);
-		} else if (records.count <= 1)	{
-			bdel.setDisabled (true);
-		} else bdel.setDisabled (false);
+		var bdel = this.getRef_tipe_arsip().down('#del');
+		bdel.setDisabled (! records.length);
 	}
 
 ,	do_add : function (button)
 	{
-		var grid	= button.up ('#tipe_arsip_grid');
+		var grid	= button.up ('#ref_tipe_arsip');
 		var editor	= grid.getPlugin ('roweditor');
 
 		editor.cancelEdit ();
@@ -52,12 +47,12 @@ Ext.define ('Earsip.controller.TipeArsip', {
 
 ,	do_refresh : function (button)
 	{
-		button.up ('#tipe_arsip_grid').getStore ().load ();
+		button.up ('#ref_tipe_arsip').getStore ().load ();
 	}
 
 ,	do_delete : function (button)
 	{
-		var grid = button.up ('#tipe_arsip_grid');
+		var grid = button.up ('#ref_tipe_arsip');
 		var data = grid.getSelectionModel ().getSelection ();
 		console.log(data.length);
 		if (data.length <= 0) {

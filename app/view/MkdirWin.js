@@ -1,6 +1,6 @@
 Ext.require ([
-	'Earsip.store.BerkasKlasifikasi'
-,	'Earsip.store.BerkasTipe'
+	'Earsip.store.KlasArsip'
+,	'Earsip.store.TipeArsip'
 ]);
 
 Ext.define ('Earsip.view.MkdirWin', {
@@ -53,7 +53,7 @@ Ext.define ('Earsip.view.MkdirWin', {
 		,	fieldLabel		: 'Klasifikasi'
 		,	itemId			: 'berkas_klas_id'
 		,	name			: 'berkas_klas_id'
-		,	store			: 'BerkasKlasifikasi'
+		,	store			: 'KlasArsip'
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	editable		: false
@@ -62,7 +62,7 @@ Ext.define ('Earsip.view.MkdirWin', {
 		},{
 			xtype			: 'combo'
 		,	fieldLabel		: 'Tipe'
-		,	store			: 'BerkasTipe'
+		,	store			: 'TipeArsip'
 		,	itemId			: 'berkas_tipe_id'
 		,	name			: 'berkas_tipe_id'
 		,	displayField	: 'nama'

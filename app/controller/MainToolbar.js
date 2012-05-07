@@ -4,7 +4,7 @@ Ext.require ([
 ,	'Earsip.view.Pegawai'
 ,	'Earsip.view.TipeArsip'
 ,	'Earsip.view.MetodaPemusnahan'
-,	'Earsip.view.RefBerkasKlasifikasi'
+,	'Earsip.view.KlasArsip'
 ,	'Earsip.view.RefIndeksRelatif'
 ]);
 

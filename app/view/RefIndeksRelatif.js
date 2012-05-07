@@ -1,5 +1,5 @@
 Ext.require ([
-	'Earsip.store.BerkasKlasifikasi'
+	'Earsip.store.KlasArsip'
 ,	'Earsip.store.IndeksRelatif'
 ]);
 
@@ -20,7 +20,7 @@ Ext.define ('Earsip.view.RefIndeksRelatif', {
 	,	flex		: 0.3
 	,	editor		: {
 			xtype			: 'combo'
-		,	store			: 'BerkasKlasifikasi'
+		,	store			: 'KlasArsip'
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	mode			: 'local'

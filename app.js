@@ -78,8 +78,8 @@ Ext.application ({
 	,	'Pegawai'
 	,	'Jabatan'
 	,	'MetodaPemusnahan'
-	,	'BerkasKlasifikasi'
-	,	'BerkasTipe'
+	,	'KlasArsip'
+	,	'TipeArsip'
 	,	'IndeksRelatif'
 	]
 ,	stores		: [
@@ -92,8 +92,8 @@ Ext.application ({
 	,	'Pegawai'
 	,	'Jabatan'
 	,	'MetodaPemusnahan'
-	,	'BerkasKlasifikasi'
-	,	'BerkasTipe'
+	,	'KlasArsip'
+	,	'TipeArsip'
 	,	'IndeksRelatif'
 	]
 ,	views		: [
@@ -111,8 +111,8 @@ Ext.application ({
 	,	'Pegawai'
 	,	'PegawaiWin'
 
+	,	'KlasArsip'
 	,	'TipeArsip'
-	,	'RefBerkasKlasifikasi'
 	,	'RefIndeksRelatif'
 	,	'MetodaPemusnahan'
 	]
@@ -125,6 +125,7 @@ Ext.application ({
 	,	'WinUpload'
 	,	'Grup'
 	,	'Pegawai'
+	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'MetodaPemusnahan'
 	]

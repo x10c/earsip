@@ -1,33 +1,70 @@
-Ext.require ('Earsip.view.MetodaPemusnahanGridPanel');
+Ext.require ('Earsip.store.MetodaPemusnahan');
 
 Ext.define ('Earsip.view.MetodaPemusnahan', {
-	extend		: 'Ext.panel.Panel'
+	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.ref_metoda_pemusnahan'
-,	title		: 'Referensi Metoda Pemusnahan'
 ,	itemId		: 'ref_metoda_pemusnahan'
-,	closable		: true
-,	plain			: true
-,	layout			: 'border'
-,	defaults		: {
-		split			: true
-	,	autoScroll		: true
-	}
-,	items			: [{
-		xtype			: 'metoda_pemusnahan_grid'
-	,	region			: 'center'
-	,	flex			: 1
-	,	minWidth		: 450
+,	store		: 'MetodaPemusnahan'
+,	title		: 'Metoda Pemusnahan'
+,	closable	: true
+,	plugins		:
+	[
+		Ext.create ('Earsip.plugin.RowEditor')
+	]
+,	columns		: [{
+		text		: 'ID'
+	,	dataIndex	: 'id'
+	,	flex		: 0.2
+	,	editor		: {
+			xtype		: 'textfield'
+		,	disabled	: true
+		}
+	},{
+		text		: 'Nama'
+	,	dataIndex	: 'nama'
+	,	flex		: 1
+	,	editor		: {
+			xtype		: 'textfield'
+		,	allowBlank	: false
+		}
+	},{
+		text		: 'Keterangan'
+	,	dataIndex	: 'keterangan'
+	,	flex		: 2
+	,	editor		: {
+			xtype		: 'textfield'
+		}
 	}]
-,	listeners		: {
-		activate		: function (comp)
+,	dockedItems	: [{
+		xtype		: 'toolbar'
+	,	dock		: 'top'
+	,	flex		: 1
+	,	items		: [{
+			text		: 'Tambah'
+		,	itemId		: 'add'
+		,	action		: 'add'
+		,	iconCls		: 'add'
+		},'-',{
+			text		: 'Refresh'
+		,	itemId		: 'refresh'
+		,	action		: 'refresh'
+		,	iconCls		: 'refresh'
+		},'->',{
+			text		: 'Hapus'
+		,	itemId		: 'del'
+		,	action		: 'del'
+		,	iconCls		: 'del'
+		,	disabled	: true
+		}]
+	}]
+,	listeners	: {
+		activate	: function (comp)
 		{
-			var metodapemusnahan = this.down ('#metoda_pemusnahan_grid');
-			metodapemusnahan.getStore ().load ();
+			this.getStore ().load ();
 		}
 	,	removed			: function (comp)
 		{
 			this.destroy ();
 		}
 	}
-
 });

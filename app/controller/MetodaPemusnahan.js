@@ -1,22 +1,22 @@
 Ext.define ('Earsip.controller.MetodaPemusnahan', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
-		ref		: 'metoda_pemusnahan_grid'
-	,	selector: 'metoda_pemusnahan_grid'
+		ref		: 'ref_metoda_pemusnahan'
+	,	selector: 'ref_metoda_pemusnahan'
 	}]
 ,	init	: function ()
 	{
 		this.control ({
-			'metoda_pemusnahan_grid': {
+			'ref_metoda_pemusnahan': {
 				selectionchange : this.do_select
 			}
-		,	'metoda_pemusnahan_grid button[action=add]': {
+		,	'ref_metoda_pemusnahan button[action=add]': {
 				click : this.do_add
 			}
-		,	'metoda_pemusnahan_grid button[action=refresh]': {
+		,	'ref_metoda_pemusnahan button[action=refresh]': {
 				click : this.do_refresh
 			}
-		,	'metoda_pemusnahan_grid button[action=del]': {
+		,	'ref_metoda_pemusnahan button[action=del]': {
 				click : this.do_delete
 			}
 		});
@@ -25,18 +25,13 @@ Ext.define ('Earsip.controller.MetodaPemusnahan', {
 
 ,	do_select : function (sm, records)
 	{
-		var bdel = this.getMetoda_pemusnahan_grid().down('#del');
-		
-		if (records.length <= 0) {
-			bdel.setDisabled (true);
-		} else if (records.count <= 1)	{
-			bdel.setDisabled (true);
-		} else bdel.setDisabled (false);
+		var bdel = this.getRef_metoda_pemusnahan().down('#del');
+		bdel.setDisabled (!records.length);
 	}
 
 ,	do_add : function (button)
 	{
-		var grid	= button.up ('#metoda_pemusnahan_grid');
+		var grid	= button.up ('#ref_metoda_pemusnahan');
 		var editor	= grid.getPlugin ('roweditor');
 
 		editor.cancelEdit ();
@@ -52,14 +47,13 @@ Ext.define ('Earsip.controller.MetodaPemusnahan', {
 
 ,	do_refresh : function (button)
 	{
-		button.up ('#metoda_pemusnahan_grid').getStore ().load ();
+		button.up ('#ref_metoda_pemusnahan').getStore ().load ();
 	}
 
 ,	do_delete : function (button)
 	{
-		var grid = button.up ('#metoda_pemusnahan_grid');
+		var grid = button.up ('#ref_metoda_pemusnahan');
 		var data = grid.getSelectionModel ().getSelection ();
-		console.log(data.length);
 		if (data.length <= 0) {
 			return;
 		}
