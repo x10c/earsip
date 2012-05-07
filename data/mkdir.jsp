@@ -1,4 +1,6 @@
 <%@ page import="java.io.File" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.sql.Date" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
@@ -8,12 +10,6 @@ Connection			db_con		= null;
 PreparedStatement	db_stmt		= null;
 ResultSet			rs			= null;
 String				q			= "";
-String				user_id		= "";
-String				pid			= "";
-String				name		= "";
-String				repo_root	= "";
-String				path		= "";
-File				new_dir		= null;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
@@ -22,24 +18,55 @@ try {
 		return;
 	}
 
-	user_id		= (String) session.getAttribute ("user.id");
-	repo_root	= (String) session.getAttribute ("sys.repository_root");
-	pid			= request.getParameter ("pid");
-	name		= request.getParameter ("name");
-	path		= request.getParameter ("path");
+	String user_id		= (String) session.getAttribute ("user.id");
+	String uk_id		= (String) session.getAttribute ("user.unit_kerja_id");
+	String repo_root	= (String) session.getAttribute ("sys.repository_root");
+	String dir_id		= request.getParameter ("dir_id");
+	String nama			= request.getParameter ("nama");
+	String tgl_dibuat	= request.getParameter ("tgl_dibuat");
+	String klas_id		= request.getParameter ("berkas_klas_id");
+	String tipe_id		= request.getParameter ("berkas_tipe_id");
+	String nomor		= request.getParameter ("nomor");
+	String judul		= request.getParameter ("judul");
+	String pembuat		= request.getParameter ("pembuat");
+	String masalah		= request.getParameter ("masalah");
+	String jra			= request.getParameter ("jra");
+	String path			= request.getParameter ("path");
+	Date dt_dibuat		= Date.valueOf (tgl_dibuat);
 
-	new_dir = new File (config.getServletContext().getRealPath("/")
-						+ repo_root +"/"+ path +"/"+ name);
+	File new_dir = new File (config.getServletContext().getRealPath("/")
+						+ repo_root +"/"+ path +"/"+ nama);
 	new_dir.mkdir ();
 
-	q	=" insert into m_berkas (pid, nama, pegawai_id)"
-		+" values (?, ?, ?)";
+	q	=" insert into m_berkas ("
+		+"		pid"
+		+" ,	pegawai_id"
+		+" ,	unit_kerja_id"
+		+" ,	nama"
+		+" ,	tgl_dibuat"
+		+" ,	berkas_klas_id"
+		+" ,	berkas_tipe_id"
+		+" ,	nomor"
+		+" ,	judul"
+		+" ,	pembuat"
+		+" ,	masalah"
+		+" ,	jra)"
+		+" values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	db_stmt = db_con.prepareStatement (q);
 
-	db_stmt.setInt (1, Integer.parseInt (pid));
-	db_stmt.setString (2, name);
-	db_stmt.setInt (3, Integer.parseInt (user_id));
+	db_stmt.setInt (1, Integer.parseInt (dir_id));
+	db_stmt.setInt (2, Integer.parseInt (user_id));
+	db_stmt.setInt (3, Integer.parseInt (uk_id));
+	db_stmt.setString (4, nama);
+	db_stmt.setDate (5, dt_dibuat);
+	db_stmt.setInt (6, Integer.parseInt (klas_id));
+	db_stmt.setInt (7, Integer.parseInt (tipe_id));
+	db_stmt.setString (8, nomor);
+	db_stmt.setString (9, judul);
+	db_stmt.setString (10, pembuat);
+	db_stmt.setString (11, masalah);
+	db_stmt.setInt (12, Integer.parseInt (jra));
 
 	db_stmt.executeUpdate ();
 

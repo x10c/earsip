@@ -25,11 +25,20 @@ try {
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		tipe_file"
+		+" ,		sha"
+		+" ,		pegawai_id"
+		+" ,		unit_kerja_id"
+		+" ,		berkas_klas_id"
+		+" ,		berkas_tipe_id"
 		+" ,		nama"
 		+" ,		tgl_unggah"
-		+" ,		berkas_tipe_id"
-		+" ,		status"
+		+" ,		coalesce (tgl_dibuat, tgl_unggah) as tgl_dibuat"
+		+" ,		nomor"
+		+" ,		pembuat"
+		+" ,		judul"
+		+" ,		masalah"
 		+" ,		jra"
+		+" ,		status"
 		+" from		m_berkas"
 		+" where	pegawai_id	= "+ user_id
 		+" and		pid			= "+ arsip_id
@@ -46,12 +55,21 @@ try {
 		}
 		data	+="\n{ id            : "+ rs.getString ("id")
 				+ "\n, pid           : "+ rs.getString ("pid")
-				+ "\n, node_type     : "+ rs.getString ("tipe_file")
-				+ "\n, name          :'"+ rs.getString ("nama") +"'"
-				+ "\n, date_created  :'"+ rs.getString ("tgl_unggah") +"'"
-				+ "\n, arsip_tipe_id : "+ rs.getString ("berkas_tipe_id")
-				+ "\n, status        : "+ rs.getString ("status")
+				+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
+				+ "\n, sha           :'"+ rs.getString ("sha") +"'"
+				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
+				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
+				+ "\n, berkas_klas_id: "+ rs.getString ("berkas_klas_id")
+				+ "\n, berkas_tipe_id: "+ rs.getString ("berkas_tipe_id")
+				+ "\n, nama          :'"+ rs.getString ("nama") +"'"
+				+ "\n, tgl_unggah    :'"+ rs.getString ("tgl_unggah") +"'"
+				+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") +"'"
+				+ "\n, nomor         :'"+ rs.getString ("nomor") +"'"
+				+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
+				+ "\n, judul         :'"+ rs.getString ("judul") +"'"
+				+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
 				+ "\n, jra           : "+ rs.getString ("jra")
+				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

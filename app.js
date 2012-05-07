@@ -3,6 +3,7 @@ Ext.Loader.setConfig ({ enabled: true });
 Ext.define ('Earsip', {
 	singleton		: true
 ,	acl				: 0
+,	berkas_id		: 0
 ,	dir_id			: 0
 ,	tree_path		: ''
 });
@@ -68,7 +69,7 @@ Ext.application ({
 	name		: 'Earsip'
 ,	appFolder	: 'app'
 ,	models		: [
-		'DirList'
+		'Berkas'
 	,	'SharedList'
 	,	'User'
 	,	'Grup'
@@ -78,9 +79,11 @@ Ext.application ({
 	,	'Jabatan'
 	,	'TipeArsip'
 	,	'MetodaPemusnahan'
+	,	'BerkasKlasifikasi'
+	,	'BerkasTipe'
 	]
 ,	stores		: [
-		'DirList'
+		'Berkas'
 	,	'SharedList'
 	,	'User'
 	,	'Grup'
@@ -90,6 +93,8 @@ Ext.application ({
 	,	'Jabatan'
 	,	'TipeArsip'
 	,	'MetodaPemusnahan'
+	,	'BerkasKlasifikasi'
+	,	'BerkasTipe'
 	]
 ,	views		: [
 		'Main'

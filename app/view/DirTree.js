@@ -24,7 +24,7 @@ Ext.define ('Earsip.view.DirTree', {
 		this.callParent (arguments);
 	}
 
-,	do_load_tree : function (comp, opts)
+,	do_load_tree : function ()
 	{
 		Ext.Ajax.request ({
 			url		: 'data/dirtree.jsp'

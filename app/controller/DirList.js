@@ -8,12 +8,15 @@ Ext.define ('Earsip.controller.DirList', {
 	},{
 		ref		: 'dirlist'
 	,	selector: 'dirlist'
+	},{
+		ref		: 'mkdirwin'
+	,	selector: 'mkdirwin'
 	}]
 ,	init	: function ()
 	{
 		this.control ({
 			'dirlist' : {
-				itemdblclick : this.row_clicked
+				itemdblclick : this.row_dbl_clicked
 			}
 		,	'dirlist button[action=mkdir]': {
 				click : this.do_mkdir
@@ -24,12 +27,15 @@ Ext.define ('Earsip.controller.DirList', {
 		,	'dirlist button[action=refresh]': {
 				click : this.do_refresh
 			}
+		,	'mkdirwin button[action=submit]' : {
+				click : this.do_mkdir_submit
+			}
 		});
 	}
 
-,	row_clicked : function (v, r, idx)
+,	row_dbl_clicked : function (v, r, idx)
 	{
-		var t = r.get ("node_type");
+		var t = r.get ("tipe_file");
 		if (t != 0) {
 			return;
 		}
@@ -49,38 +55,12 @@ Ext.define ('Earsip.controller.DirList', {
 			Ext.Msg.alert ('Kesalahan', 'Pilih tempat untuk direktori baru terlebih dahulu!');
 			return;
 		}
-		Ext.Msg.prompt ('Buat direktori baru', 'Nama direktori:', function (btn, text) {
-			if (btn == 'cancel') {
-				return;
-			}
-			if (btn == 'ok' && text == '') {
-				return;
-			}
+		var dirlist		= this.getDirlist ();
+		var tgl_dibuat	= dirlist.win.down ('#tgl_dibuat');
 
-			Ext.Ajax.request ({
-				url		: 'data/mkdir.jsp'
-			,	scope	: this
-			,	params	: {
-					pid		: Earsip.dir_id
-				,	name	: text
-				,	path	: Earsip.tree_path
-				}
-			,	success	: function (response) {
-					var o = Ext.decode(response.responseText);
-					if (o.success == true) {
-						this.getDirtree ().do_load_tree ();
-						this.getDirtree ().expandAll ();
-						this.getDirlist ().do_load_list (Earsip.dir_id);
-					} else {
-						Ext.Msg.alert ('Kesalahan', o.info);
-					}
-				}
-			,	failure	: function (response) {
-					Ext.Msg.alert ('Kesalahan', 'Server error: data menu tidak dapat diambil!');
-				}
-			});
-		}
-		, this);
+		tgl_dibuat.setValue (new Date ());
+
+		dirlist.win.show ();
 	}
 
 ,	do_upload : function (button)
@@ -97,5 +77,39 @@ Ext.define ('Earsip.controller.DirList', {
 ,	do_refresh : function (button)
 	{
 		this.getDirlist ().do_load_list (Earsip.dir_id);
+	}
+
+,	do_mkdir_submit : function (button)
+	{
+		var win		= button.up ('#mkdirwin');
+		var form	= win.down ('form').getForm ();
+
+		if (! form.isValid ()) {
+			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			return;
+		}
+
+		form.submit ({
+			scope	: this
+		,	params	: {
+				dir_id	: Earsip.dir_id
+			,	path	: Earsip.tree_path
+			}
+		,	success	: function (form, action)
+			{
+				if (action.result.success == true) {
+					this.getDirlist ().do_load_list (Earsip.dir_id);
+					this.getDirtree ().do_load_tree ();
+					this.getDirtree ().expandAll ();
+					win.hide ();
+				} else {
+					Ext.Msg.alert ('Kesalahan', action.result.info);
+				}
+			}
+		,	failure	: function (form, action)
+			{
+				Ext.Msg.alert ('Kesalahan', action.result.info);
+			}
+		});
 	}
 });

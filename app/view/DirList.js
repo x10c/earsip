@@ -1,20 +1,23 @@
-Ext.require ('Earsip.store.DirList');
+Ext.require ([
+	'Earsip.store.Berkas'
+,	'Earsip.view.MkdirWin'
+]);
 
 Ext.define ('Earsip.view.DirList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.dirlist'
 ,	itemId		: 'dirlist'
-,	store		: 'DirList' 
+,	store		: 'Berkas'
 ,	title		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'
 	,	flex		: 1
 	,	sortable	: false
 	,	hideable	: false
-	,	dataIndex	: 'name'
+	,	dataIndex	: 'nama'
 	,	renderer	: function (v, md, r)
 		{
-			if (r.get ('node_type') == 0) {
+			if (r.get ('tipe_file') == 0) {
 				return "<span class='dir'>"+ v +"</span>";
 			} else {
 				return "<span class='doc'>"+ v +"</span>";
@@ -23,7 +26,7 @@ Ext.define ('Earsip.view.DirList', {
 	},{
 		text		: 'Tanggal Dibuat'
 	,	width		: 150
-	,	dataIndex	: 'date_created'
+	,	dataIndex	: 'tgl_dibuat'
 	},{
 		text		: 'Status'
 	,	dataIndex	: 'status'
@@ -33,7 +36,7 @@ Ext.define ('Earsip.view.DirList', {
 	,	dock		: 'top'
 	,	flex		: 1
 	,	items		: [{
-			text		: 'Direktori baru'
+			text		: 'Folder baru'
 		,	itemId		: 'mkdir'
 		,	action		: 'mkdir'
 		,	iconCls		: 'add'
@@ -51,6 +54,7 @@ Ext.define ('Earsip.view.DirList', {
 	}]
 ,	initComponent	: function ()
 	{
+		this.win = Ext.create ('Earsip.view.MkdirWin', {});
 		this.callParent (arguments);
 	}
 
