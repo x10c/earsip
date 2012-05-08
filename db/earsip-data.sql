@@ -174,15 +174,8 @@ INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Video', 'Berkas berupa gam
 INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Suara', 'Berkas berupa suara');
 
 
---
--- TOC entry 2130 (class 0 OID 23220)
--- Dependencies: 165 2142 2141 2134 2136
--- Data for Name: m_berkas; Type: TABLE DATA; Schema: public; Owner: earsip
---
 
-INSERT INTO m_berkas (pegawai_id, berkas_klas_id, unit_kerja_id, berkas_tipe_id, pid, tipe_file, sha, nama, tgl_unggah, tgl_dibuat, nomor, pembuat, judul, masalah, jra, status, status_hapus) VALUES (1, NULL, NULL, NULL, 0, 0, NULL, 'test', '2012-05-03', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1);
-INSERT INTO m_berkas (pegawai_id, berkas_klas_id, unit_kerja_id, berkas_tipe_id, pid, tipe_file, sha, nama, tgl_unggah, tgl_dibuat, nomor, pembuat, judul, masalah, jra, status, status_hapus) VALUES (1, NULL, NULL, NULL, 1, 0, NULL, 'test2', '2012-05-03', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1);
-INSERT INTO m_berkas (pegawai_id, berkas_klas_id, unit_kerja_id, berkas_tipe_id, pid, tipe_file, sha, nama, tgl_unggah, tgl_dibuat, nomor, pembuat, judul, masalah, jra, status, status_hapus) VALUES (1, NULL, NULL, NULL, 2, 0, NULL, 'coba', '2012-05-03', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1);
+
 
 
 --
