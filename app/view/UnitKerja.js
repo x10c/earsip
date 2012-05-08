@@ -1,11 +1,12 @@
 Ext.require ('Earsip.store.UnitKerja');
 
-Ext.define ('Earsip.view.RefUnitKerja', {
+Ext.define ('Earsip.view.UnitKerja', {
 	extend		: 'Ext.grid.Panel'
-,	alias		: 'widget.ref_unit_kerja'
-,	title		: 'Referensi Unit Kerja'
-,	itemId		: 'ref_unit_kerja'
+,	alias		: 'widget.mas_unit_kerja'
+,	title		: 'Data Unit Kerja'
+,	itemId		: 'mas_unit_kerja'
 ,	store		: 'UnitKerja'
+,	closable	: true
 ,	plugins		:
 	[
 		Ext.create ('Earsip.plugin.RowEditor')
@@ -13,7 +14,7 @@ Ext.define ('Earsip.view.RefUnitKerja', {
 ,	columns		: [{
 		text		: 'Kode'
 	,	dataIndex	: 'kode'
-	,	width		: 50
+	,	width		: 100
 	,	editor		: {
 			xtype		: 'textfield'
 		,	allowBlank	: false
@@ -27,9 +28,17 @@ Ext.define ('Earsip.view.RefUnitKerja', {
 		,	allowBlank	: false
 		}
 	},{
+		text		: 'Pimpinan'
+	,	dataIndex	: 'nama_pimpinan'
+	,	width		: 200
+	,	editor		: {
+			xtype		: 'textfield'
+		,	allowBlank	: false
+		}
+	},{
 		text		: 'Keterangan'
 	,	dataIndex	: 'keterangan'
-	,	width		: 350
+	,	width		: 300
 	,	editor		: {
 			xtype		: 'textfield'
 		}
@@ -41,18 +50,15 @@ Ext.define ('Earsip.view.RefUnitKerja', {
 	,	items		: [{
 			text		: 'Tambah'
 		,	itemId		: 'add'
-		,	action		: 'add'
 		,	iconCls		: 'add'
 		},'-',{
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
-		,	action		: 'refresh'
 		,	iconCls		: 'refresh'
 		},'->',{
 			text		: 'Hapus'
-		,	itemId		: 'delete'
-		,	action		: 'delete'
-		,	iconCls		: 'delete'
+		,	itemId		: 'del'
+		,	iconCls		: 'del'
 		}]
 	}]
 });

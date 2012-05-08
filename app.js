@@ -108,6 +108,7 @@ Ext.application ({
 	,	'AdmHakAksesMenu'
 	,	'Grup'
 	,	'AdmHakAkses'
+	,	'UnitKerja'
 	,	'Pegawai'
 	,	'PegawaiWin'
 
@@ -131,6 +132,7 @@ Ext.application ({
 	,	'DirList'
 	,	'WinUpload'
 	,	'Grup'
+	,	'UnitKerja'
 	,	'Pegawai'
 	,	'KlasArsip'
 	,	'TipeArsip'

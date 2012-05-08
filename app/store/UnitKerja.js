@@ -10,7 +10,7 @@ Ext.define ('Earsip.store.UnitKerja', {
 			read		: 'data/unitkerja.jsp'
 		,	create		: 'data/unitkerja_submit.jsp?action=create'
 		,	update		: 'data/unitkerja_submit.jsp?action=update'
-		,	destroy		: 'data/unitkerja_submit.jsp?action=destory'
+		,	destroy		: 'data/unitkerja_submit.jsp?action=destroy'
 		}
 	,	reader		: {
 			type		: 'json'

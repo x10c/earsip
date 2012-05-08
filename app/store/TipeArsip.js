@@ -3,7 +3,7 @@ Ext.define ('Earsip.store.TipeArsip', {
 ,	model	: 'Earsip.model.TipeArsip'
 ,	storeId	: 'TipeArsip'
 ,	autoSync: false
-,	autoLoad: false
+,	autoLoad: true
 ,	proxy	: {
 		type	: 'ajax'
 	,	api		: {
