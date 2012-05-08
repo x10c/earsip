@@ -100,7 +100,6 @@ Ext.define ('Earsip.controller.DirList', {
 				if (action.result.success == true) {
 					this.getDirlist ().do_load_list (Earsip.dir_id);
 					this.getDirtree ().do_load_tree ();
-					this.getDirtree ().expandAll ();
 					win.hide ();
 				} else {
 					Ext.Msg.alert ('Kesalahan', action.result.info);

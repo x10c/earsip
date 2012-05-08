@@ -33,11 +33,14 @@ Ext.define ('Earsip.view.DirTree', {
 				var o = Ext.decode(response.responseText);
 				if (o.success == true) {
 					this.suspendEvents (false);
-
 					this.setRootNode (o.data);
-
 					this.resumeEvents ();
 					this.doLayout();
+
+					var node = this.getRootNode ().findChild ('id', Earsip.dir_id, true);
+
+					this.expandAll ();
+					this.getSelectionModel ().select (node);
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);
 				}
