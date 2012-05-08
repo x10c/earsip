@@ -12,7 +12,7 @@ Ext.define ('Earsip.view.KlasArsip', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.ref_klasifikasi_arsip'
 ,	itemId		: 'ref_klasifikasi_arsip'
-,	title		: 'Klasifikasi Arsip'
+,	title		: 'Referensi Klasifikasi Berkas'
 ,	store		: 'KlasArsip'
 ,	closable	: true
 ,	features	: [groupingFeature]
@@ -106,15 +106,14 @@ Ext.define ('Earsip.view.KlasArsip', {
 		,	disabled	: true
 		}]
 	}]
-,	listeners	: {
-		activate	: function (comp)
+,	listeners		: {
+		activate		: function (comp)
 		{
 			this.getStore ().load ();
 		}
-	,	afterrender : function (comp)
+	,	removed			: function (comp)
 		{
-			this.win = Ext.create ('Earsip.view.KlasArsipWin', {});
-			this.win.hide ();
+			this.destroy ();
 		}
-	}
+	}	
 });

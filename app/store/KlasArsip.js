@@ -1,6 +1,7 @@
 Ext.define ('Earsip.store.KlasArsip', {
 	extend		: 'Ext.data.Store'
 ,	model		: 'Earsip.model.KlasArsip'
+,	storeId		: 'KlasArsip'
 ,	groupField	: 'unit_kerja_id'
 ,	sorters		: ['kode']
 ,	autoSync	: false

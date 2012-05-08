@@ -59,7 +59,7 @@ try {
 	}
 	
 	if (action.equalsIgnoreCase ("create")) {
-		q	=" insert into r_berkas_klas (unit_kerja_id,kode,nama, keterangan)"
+		q	=" insert into r_berkas_klas (unit_kerja_id, kode, nama, keterangan)"
 			+" values (?, ?, ?, ?)";
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setInt	  (1, Integer.parseInt(uk_id));
