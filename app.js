@@ -15,7 +15,7 @@ Ext.define ('Earsip.plugin.RowEditor', {
 ,	pluginId			: 'roweditor'
 ,	saveText			: 'Simpan'
 ,	cancelText			: 'Batal'
-,	clicksToEdit		: 2
+,	clicksToEdit		: 2 
 ,	clicksToMoveEditor	: 1
 ,	listeners			: {
 		beforeedit			: function (ed, e)
@@ -112,9 +112,16 @@ Ext.application ({
 	,	'PegawaiWin'
 
 	,	'KlasArsip'
+	,	'KlasArsipWin'
+
 	,	'TipeArsip'
+	,	'TipeARsipWin'
+
 	,	'RefIndeksRelatif'
+	,	'RefIndeksRelatifWin'
+
 	,	'MetodaPemusnahan'
+	,	'Jabatan'
 	]
 ,	controllers	: [
 		'Login'
@@ -127,9 +134,13 @@ Ext.application ({
 	,	'Pegawai'
 	,	'KlasArsip'
 	,	'TipeArsip'
+	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
+	,	'Jabatan'
 	]
+	
 ,	launch		: function () {
+
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
 		var mainview	= Ext.create ('Earsip.view.Main', {});
 		var viewport	= Ext.create ('Ext.container.Viewport', {
@@ -138,7 +149,7 @@ Ext.application ({
 		});
 
 		viewport.show ();
-
+		
 		if (is_login) {
 			win.hide ();
 			mainview.getLayout ().setActiveItem ('main');
