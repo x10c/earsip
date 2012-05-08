@@ -1,6 +1,7 @@
 Ext.require ([
 	'Earsip.store.KlasArsip'
 ,	'Earsip.store.IndeksRelatif'
+,	'Earsip.view.RefIndeksRelatifWin'
 ]);
 
 Ext.define ('Earsip.view.RefIndeksRelatif', {
@@ -15,12 +16,14 @@ Ext.define ('Earsip.view.RefIndeksRelatif', {
 		Ext.create ('Earsip.plugin.RowEditor')
 	]
 ,	columns		: [{
-		text		: 'Berkas Klasifikasi'
+		text		: 'Klasifikasi Berkas ID'
 	,	dataIndex	: 'berkas_klas_id'
-	,	flex		: 0.3
+	,	flex		: 1
 	,	editor		: {
 			xtype			: 'combo'
-		,	store			: 'KlasArsip'
+		,	store			: Ext.create ('Earsip.store.KlasArsip', {
+				autoLoad		: true
+			})
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	mode			: 'local'
@@ -35,7 +38,7 @@ Ext.define ('Earsip.view.RefIndeksRelatif', {
 	},{
 		text		: 'Keterangan'
 	,	dataIndex	: 'keterangan'
-	,	flex		: 1
+	,	flex		: 4
 	,	editor		: {
 			xtype		: 'textfield'
 		,	allowBlank	: false
@@ -68,10 +71,14 @@ Ext.define ('Earsip.view.RefIndeksRelatif', {
 		,	disabled	: true
 		}]
 	}]
-,	listeners	: {
-		activate	: function ()
+,	listeners		: {
+		activate		: function (comp)
 		{
 			this.getStore ().load ();
 		}
-	}
+	,	removed			: function (comp)
+		{
+			this.destroy ();
+		}
+	}	
 });

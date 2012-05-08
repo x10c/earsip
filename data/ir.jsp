@@ -3,13 +3,14 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%
-Connection	db_con		= null;
-Statement	db_stmt		= null;
-ResultSet	rs			= null;
-String		q			= "";
-String		db_url		= "";
-String		data		= "";
-int			i			= 0;
+Connection	db_con			= null;
+Statement	db_stmt			= null;
+ResultSet	rs				= null;
+String		q				= "";
+String		db_url			= "";
+String		data			= "";
+
+int			i				= 0;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
@@ -17,7 +18,8 @@ try {
 		response.sendRedirect (request.getContextPath ());
 		return;
 	}
-
+	
+	
 	q	=" select	id"
 		+" ,		berkas_klas_id"
 		+" ,		keterangan"
@@ -26,6 +28,7 @@ try {
 
 	db_stmt = db_con.createStatement ();
 	rs = db_stmt.executeQuery (q);
+	
 
 	while (rs.next ()) {
 		if (i > 0) {
@@ -33,10 +36,10 @@ try {
 		} else {
 			i++;
 		}
-		data	+="\n{ id				: "+ rs.getString ("id")
-				+ "\n, berkas_klas_id	: "+ rs.getString ("berkas_klas_id")
-				+ "\n, keterangan		:'"+ rs.getString ("keterangan") +"'"
-				+ "\n}";
+		data	+="{ id : "+ rs.getString ("id")
+				+ ", berkas_klas_id	: "+ rs.getString ("berkas_klas_id")
+				+ ", keterangan :'"+ rs.getString ("keterangan") +"'"
+				+ "}";
 	}
 
 	out.print ("{success:true,data:["+ data +"]}");
