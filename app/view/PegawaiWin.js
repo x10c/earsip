@@ -26,7 +26,6 @@ Ext.define ('Earsip.view.PegawaiWin', {
 	,	bodyPadding	: 5
 	,	defaults	: {
 			xtype			: 'textfield'
-		,	allowBlank		: false
 		,	anchor			: '100%'
 		,	selectOnFocus	: true
 		,	labelAlign		: 'right'
@@ -39,10 +38,12 @@ Ext.define ('Earsip.view.PegawaiWin', {
 			fieldLabel		: 'NIP'
 		,	itemId			: 'nip'
 		,	name			: 'nip'
+		,	allowBlank		: false
 		},{
 			fieldLabel		: 'Nama'
 		,	itemId			: 'nama'
 		,	name			: 'nama'
+		,	allowBlank		: false
 		},{
 			xtype			: 'combo'
 		,	fieldLabel		: 'Unit Kerja'
@@ -52,6 +53,7 @@ Ext.define ('Earsip.view.PegawaiWin', {
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	editable		: false
+		,	allowBlank		: false
 		},{
 			xtype			: 'combo'
 		,	fieldLabel		: 'Jabatan'
@@ -61,6 +63,7 @@ Ext.define ('Earsip.view.PegawaiWin', {
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	editable		: false
+		,	allowBlank		: false
 		},{
 			xtype			: 'combo'
 		,	fieldLabel		: 'Grup'
@@ -70,11 +73,13 @@ Ext.define ('Earsip.view.PegawaiWin', {
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	editable		: false
+		,	allowBlank		: false
 		},{
 			fieldLabel		: 'Password'
 		,	itemId			: 'password'
 		,	name			: 'password'
 		,	inputType		: 'password'
+		,	allowBlank		: false
 		},{
 			xtype			: 'checkbox'
 		,	fieldLabel		: 'Status'

@@ -57,7 +57,7 @@ try {
 		+" ,		m_unit_kerja	UK"
 		+" ,		m_grup			GRUP"
 		+" where	PEG.nip				= ?"
-		+" and		PEG.psw				= ?"
+		+" and		PEG.psw				= md5(?)"
 		+" and		PEG.status			= 1"
 		+" and		PEG.unit_kerja_id	= UK.id"
 		+" and		PEG.grup_id			= GRUP.id";

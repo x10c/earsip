@@ -73,7 +73,7 @@ try {
 
 	if (action.equalsIgnoreCase ("create")) {
 		q	=" insert into m_pegawai (nip, nama, unit_kerja_id, jabatan_id, grup_id, psw)"
-			+" values (?, ?, ?, ?, ?, ?)";
+			+" values (?, ?, ?, ?, ?, md5(?))";
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setString (1, nip);
 		db_stmt.setString (2, nama);
@@ -91,7 +91,7 @@ try {
 			+" ,		grup_id			= ?"
 			+" ,		status			= ?";
 		if (! password.isEmpty () || ! password.equals ("")) {
-			q	+=" ,	psw				= ?";
+			q	+=" ,	psw				= md5(?)";
 		}
 		q	+=" where	id				= ?";
 		
