@@ -1,6 +1,9 @@
-Ext.require ('Earsip.view.MainToolbar');
-Ext.require ('Earsip.view.DirTree');
-Ext.require ('Earsip.view.Content');
+Ext.require ([
+	'Earsip.view.MainToolbar'
+,	'Earsip.view.DirTree'
+,	'Earsip.view.Berkas'
+,	'Earsip.view.SharedList'
+]);
 
 Ext.define ('Earsip.view.Main', {
 	extend		: 'Ext.panel.Panel'
@@ -16,14 +19,20 @@ Ext.define ('Earsip.view.Main', {
 	},{
 		id		: 'main'
 	,	xtype	: 'panel'
-	,	tbar	: [
-			Ext.create('Earsip.view.MainToolbar')
-		]
+	,	tbar	: Ext.create('Earsip.view.MainToolbar')
 	,	layout	: 'border'
 	,	items	: [{
-			xtype	: 'dirtree'
+			xtype		: 'dirtree'
 		},{
-			xtype	: 'content'
+			xtype		: 'tabpanel'
+		,	itemId		: 'content_tab'
+		,	region		: 'center'
+		,	margins		: '5 5 0 0'
+		,	items		: [{
+				xtype	: 'berkas'
+			},{
+				xtype	: 'sharedlist'
+			}]
 		}]
 	}]
 ,	initComponent	: function ()

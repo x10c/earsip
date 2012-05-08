@@ -10,7 +10,6 @@ Ext.define ('Earsip.view.DirList', {
 ,	alias		: 'widget.dirlist'
 ,	itemId		: 'dirlist'
 ,	store		: 'Berkas'
-,	title		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'
 	,	flex		: 1

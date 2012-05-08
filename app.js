@@ -100,11 +100,14 @@ Ext.application ({
 		'Main'
 	,	'MainToolbar'
 	,	'DirTree'
+
+	,	'Berkas'
 	,	'DirList'
 	,	'WinUpload'
+	,	'BerkasForm'
+
 	,	'SharedList'
 	,	'AdmSistem'
-
 	,	'AdmHakAksesMenu'
 	,	'Grup'
 	,	'AdmHakAkses'
@@ -139,6 +142,7 @@ Ext.application ({
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
+	,	'Berkas'
 	]
 	
 ,	launch		: function () {

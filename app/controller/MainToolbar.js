@@ -21,9 +21,6 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	},{
 		ref		: 'maintoolbar'
 	,	selector: 'maintoolbar'
-	},{
-		ref		: 'content'
-	,	selector: 'content'
 	}]
 
 ,	init	: function ()
@@ -40,7 +37,7 @@ Ext.define ('Earsip.controller.MainToolbar', {
 
 ,	menuitem_on_click : function (button)
 	{
-		var tabpanel = this.getContent ();
+		var tabpanel = this.getMainview ().down ('#content_tab');
 
 		Earsip.acl = button.acl;
 
