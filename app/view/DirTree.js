@@ -14,8 +14,10 @@ Ext.define ('Earsip.view.DirTree', {
 	,	items		: [{
 			itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-'
-		]
+		},'-','->','-', {
+			itemId		: 'trash'
+		,	iconCls		: 'trash'
+		}]
 	}]
 
 ,	initComponent	: function()

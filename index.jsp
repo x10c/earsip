@@ -91,6 +91,7 @@ if (user == null) {
 	<script>
 		var is_login = <%= is_login %>;
 		var _g_username = '<%= user_name %>';
+		var _g_repo_path = '<%= request.getContextPath() + repo_root %>';
 	</script>
 	<script type="text/javascript" src="extjs/ext-all-debug.js"></script>
 	<script type="text/javascript" src="app.js"></script>

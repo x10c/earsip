@@ -18,6 +18,7 @@ Ext.define ('Earsip.model.Berkas', {
 	,	'masalah'
 	,	'jra'
 	,	'status'
+	,	'status_hapus'
 	]
 ,	idProperty	: 'id'
 });

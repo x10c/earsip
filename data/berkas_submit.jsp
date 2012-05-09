@@ -26,6 +26,7 @@ try {
 	String	judul		= request.getParameter ("judul");
 	String	masalah		= request.getParameter ("masalah");
 	String	jra			= request.getParameter ("jra");
+	String	stat_hapus	= request.getParameter ("status_hapus");
 
 	q	=" update	m_berkas"
 		+" set		nama			= ?"
@@ -37,6 +38,7 @@ try {
 		+" ,		judul			= ?"
 		+" ,		masalah			= ?"
 		+" ,		jra				= ?"
+		+" ,		status_hapus	= ?"
 		+" where	id				= ?";
 
 	db_stmt	= db_con.prepareStatement (q);
@@ -50,7 +52,8 @@ try {
 	db_stmt.setString	(7, judul);
 	db_stmt.setString	(8, masalah);
 	db_stmt.setInt		(9, Integer.parseInt (jra));
-	db_stmt.setInt		(10, Integer.parseInt (id));
+	db_stmt.setInt		(10, Integer.parseInt (stat_hapus));
+	db_stmt.setInt		(11, Integer.parseInt (id));
 
 	db_stmt.executeUpdate ();
 

@@ -35,6 +35,7 @@ try {
 	Statement			db_stmt	= db_con.createStatement ();
 	String				rpath	= config.getServletContext ().getRealPath ("/");
 	String				user_id	= (String) session.getAttribute ("user.id");
+	String				uk_id	= (String) session.getAttribute ("user.unit_kerja_id");
 	String				repo	= (String) session.getAttribute ("sys.repository_root");
 
 	FileItemFactory		factory	= new DiskFileItemFactory ();
@@ -47,7 +48,7 @@ try {
 	FileItem	item_up		= null;
 	String		k			= null;
 	String		v			= null;
-	String		id			= "";
+	String		pid			= "";
 	String		path		= "";
 	String		name		= "";
 	String		filename	= "";
@@ -61,7 +62,7 @@ try {
 			v = item.getString ();
 
 			if (k.equals("dir_id")) {
-				id = v;
+				pid = v;
 			} else if (k.equals ("path")) {
 				path = v;
 			} else if (k.equals ("name")) {
@@ -85,12 +86,32 @@ try {
 		+" ,	tipe_file"
 		+" ,	nama"
 		+" ,	pegawai_id"
-		+" ) values ( "
-		+		id
+		+" ,	unit_kerja_id"
+		+" ,	berkas_klas_id"
+		+" ,	berkas_tipe_id"
+		+" ,	tgl_dibuat"
+		+" ,	nomor"
+		+" ,	pembuat"
+		+" ,	judul"
+		+" ,	masalah"
+		+" ,	jra"
+		+" )"
+		+" select "
+		+		pid
 		+" ,	1"
-		+" ,'"+	name +"'"
-		+" , "+ user_id
-		+")";
+		+" ,	'"+	name +"'"
+		+" ,	"+ user_id
+		+" ,	"+ uk_id
+		+" ,	berkas_klas_id"
+		+" ,	berkas_tipe_id"
+		+" ,	tgl_dibuat"
+		+" ,	nomor"
+		+" ,	pembuat"
+		+" ,	judul"
+		+" ,	masalah"
+		+" ,	jra"
+		+" from		m_berkas "
+		+" where	id = "+ pid;
 
 	db_stmt.executeUpdate (q);
 

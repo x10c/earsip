@@ -2,14 +2,13 @@ Ext.require ([
 	'Earsip.store.Berkas'
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
-,	'Earsip.view.MkdirWin'
 ]);
 
-Ext.define ('Earsip.view.DirList', {
+Ext.define ('Earsip.view.TrashList', {
 	extend		: 'Ext.grid.Panel'
-,	alias		: 'widget.dirlist'
-,	itemId		: 'dirlist'
-,	store		: 'Berkas'
+,	alias		: 'widget.trashlist'
+,	itemId		: 'trashlist'
+,	store		: 'Trash'
 ,	columns		: [{
 		text		: 'Nama'
 	,	flex		: 1
@@ -21,8 +20,7 @@ Ext.define ('Earsip.view.DirList', {
 			if (r.get ('tipe_file') == 0) {
 				return "<span class='dir'>"+ v +"</span>";
 			} else {
-				return "<a class='doc' target='_blank' href='"+
-					Earsip.repo_path + Earsip.tree_path +"/"+ v +"'>"+ v +"</a>";
+				return "<span class='doc'>"+ v +"</span>";
 			}
 		}
 	},{
@@ -56,39 +54,32 @@ Ext.define ('Earsip.view.DirList', {
 	,	dock		: 'top'
 	,	flex		: 1
 	,	items		: [{
-			text		: 'Folder baru'
-		,	itemId		: 'mkdir'
-		,	action		: 'mkdir'
-		,	iconCls		: 'add'
-		},'-',{
-			text		: 'Upload'
-		,	itemId		: 'upload'
-		,	action		: 'upload'
-		,	iconCls		: 'upload'
-		},'-',{
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
-		,	action		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'->','-',{
-			text		: 'Hapus'
-		,	itemId		: 'del'
-		,	iconCls		: 'del'
+		,	handler		: function (b)
+			{
+				b.up ('#trashlist').getStore ().load ();
+			}
+		},'-',{
+			text		: 'Kembalikan'
+		,	itemId		: 'restore'
+		,	iconCls		: 'upload'
 		,	disabled	: true
 		}]
 	}]
 ,	initComponent	: function ()
 	{
-		this.win = Ext.create ('Earsip.view.MkdirWin', {});
 		this.callParent (arguments);
 	}
-
-,	do_load_list : function (arsip_id)
+,	listeners : {
+		activate : function (comp)
+		{
+			this.getStore ().load ();
+		}
+	}
+,	do_load_list : function ()
 	{
-		this.getStore ().load ({
-			params	: {
-				arsip_id : arsip_id
-			}
-		});
+		this.getStore ().load ();
 	}
 });

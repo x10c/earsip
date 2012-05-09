@@ -8,8 +8,6 @@ Ext.require ([
 ,	'Earsip.view.KlasArsip'
 ,	'Earsip.view.RefIndeksRelatif'
 ,	'Earsip.view.Jabatan'
-
-
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
@@ -43,9 +41,11 @@ Ext.define ('Earsip.controller.MainToolbar', {
 ,	menuitem_on_click : function (button)
 
 	{	
-		if (button.itemId == null) return;
-		var tabpanel = this.getMainview ().down ('#content_tab');
+		if (button.itemId == null) {
+			return;
+		}
 
+		var tabpanel = this.getMainview ().down ('#content_tab');
 
 		Earsip.acl = button.acl;
 

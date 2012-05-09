@@ -18,12 +18,15 @@ try {
 		return;
 	}
 
+	String uk_id = (String) session.getAttribute ("user.unit_kerja_id");
+
 	q	=" select	id"
 		+" , 		unit_kerja_id"
 		+" , 		kode"
 		+" , 		nama"
 		+" , 		keterangan"
 		+" from 	r_berkas_klas"
+		+" where	unit_kerja_id = "+ uk_id
 		+" order by unit_kerja_id ASC";
 
 	db_stmt = db_con.createStatement ();

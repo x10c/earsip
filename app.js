@@ -3,6 +3,7 @@ Ext.Loader.setConfig ({ enabled: true });
 Ext.define ('Earsip', {
 	singleton		: true
 ,	username		: ''
+,	repo_path		: ''
 ,	acl				: 0
 ,	berkas_id		: 0
 ,	dir_id			: 0
@@ -96,6 +97,7 @@ Ext.application ({
 	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'IndeksRelatif'
+	,	'Trash'
 	]
 ,	views		: [
 		'Main'
@@ -115,6 +117,9 @@ Ext.application ({
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'PegawaiWin'
+
+	,	'TrashList'
+	,	'Trash'
 
 	,	'KlasArsip'
 	,	'KlasArsipWin'
@@ -143,10 +148,9 @@ Ext.application ({
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
-
 	,	'GantiPassword'
-
 	,	'Berkas'
+	,	'Trash'
 	]
 	
 ,	launch		: function ()
@@ -159,6 +163,8 @@ Ext.application ({
 		});
 
 		viewport.show ();
+
+		Earsip.repo_path = _g_repo_path;
 		
 		if (is_login) {
 			win.hide ();

@@ -39,12 +39,9 @@ try {
 		+" ,		masalah"
 		+" ,		jra"
 		+" ,		status"
-		+" ,		status_hapus"
 		+" from		m_berkas"
 		+" where	pegawai_id		= "+ user_id
-		+" and		pid				= "+ arsip_id
-		+" and		status			= 1"
-		+" and		status_hapus	= 1"
+		+" and		status_hapus	= 0"
 		+" order by tipe_file, nama";
 
 	db_stmt = db_con.createStatement ();
@@ -73,7 +70,6 @@ try {
 				+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
 				+ "\n, jra           : "+ rs.getString ("jra")
 				+ "\n, status        : "+ rs.getString ("status")
-				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

@@ -24,7 +24,11 @@ Ext.define ('Earsip.controller.Berkas', {
 		form.submit ({
 			success	: function (form, action)
 			{
-				Ext.Msg.alert ('Error', action.result.info);
+				if (action.result.success == true) {
+					Ext.Msg.alert ('Informasi', action.result.info);
+				} else {
+					Ext.Msg.alert ('Error', action.result.info);
+				}
 			}
 		,	failure	: function (form, action)
 			{

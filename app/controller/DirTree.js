@@ -1,6 +1,13 @@
+Ext.require ([
+	'Earsip.view.Trash'
+]);
+
 Ext.define ('Earsip.controller.DirTree', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
+		ref		: 'mainview'
+	,	selector: 'mainview'
+	},{
 		ref		: 'dirtree'
 	,	selector: 'dirtree'
 	},{
@@ -16,6 +23,9 @@ Ext.define ('Earsip.controller.DirTree', {
 			}
 		,	'dirtree button[itemId=refresh]': {
 				click : this.do_refresh
+			}
+		,	'dirtree button[itemId=trash]': {
+				click : this.do_open_trash
 			}
 		});
 	}
@@ -33,5 +43,20 @@ Ext.define ('Earsip.controller.DirTree', {
 		this.getDirtree ().do_load_tree ();
 		Earsip.dir_id		= 0;
 		Earsip.path_tree	= '';
+	}
+
+,	do_open_trash : function (b)
+	{
+		var tabpanel = this.getMainview ().down ('#content_tab');
+
+		Earsip.acl = b.acl;
+
+		var c = tabpanel.getComponent (b.itemId);
+		if (c == undefined) {
+			tabpanel.add ({
+				xtype	: b.itemId
+			});
+		}
+		tabpanel.setActiveTab (b.itemId);
 	}
 });

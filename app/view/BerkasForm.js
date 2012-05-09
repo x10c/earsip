@@ -86,5 +86,10 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'jra'
 	,	name			: 'jra'
 	,	emptyText		: '0'
+	},{
+		xtype			: 'numberfield'
+	,	name			: 'status_hapus'
+	,	itemId			: 'status_hapus'
+	,	hidden			: true
 	}]
 });

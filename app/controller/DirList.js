@@ -31,6 +31,9 @@ Ext.define ('Earsip.controller.DirList', {
 		,	'dirlist button[action=refresh]': {
 				click : this.do_refresh
 			}
+		,	'dirlist button[itemId=del]': {
+				click : this.do_delete
+			}
 		,	'mkdirwin button[action=submit]' : {
 				click : this.do_mkdir_submit
 			}
@@ -48,16 +51,20 @@ Ext.define ('Earsip.controller.DirList', {
 		var dirtree	= this.getDirtree ();
 		var node	= dirtree.getRootNode ().findChild ('id', Earsip.dir_id, true);
 
-		Earsip.repo_path = node.parentNode.getPath ("text");
+		Earsip.tree_path = node.parentNode.getPath ("text");
+
 		dirtree.expandAll ();
 		dirtree.getSelectionModel ().select (node);
 	}
 
 ,	do_selectionchange : function (model, records)
 	{
+		var dirlist = this.getDirlist ();
+
 		if (records.length > 0) {
 			this.getMainview ().down ('#berkas_form').loadRecord (records[0]);
 		}
+		dirlist.down ('#del').setDisabled (! records.length);
 	}
 
 ,	do_mkdir : function (button)
@@ -88,6 +95,41 @@ Ext.define ('Earsip.controller.DirList', {
 ,	do_refresh : function (button)
 	{
 		this.getDirlist ().do_load_list (Earsip.dir_id);
+	}
+
+,	do_delete : function (b)
+	{
+		var form			= this.getMainview ().down ('#berkas_form');
+		var stat_hapus_f	= form.getComponent ('status_hapus');
+
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus berkas?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+
+			stat_hapus_f.setValue (0);
+
+			form.submit ({
+				scope	: this
+			,	success	: function (form, action)
+				{
+					if (action.result.success == true) {
+						this.getDirlist ().do_load_list (Earsip.dir_id);
+						Ext.Msg.alert ('Informasi', action.result.info);
+					} else {
+						Ext.Msg.alert ('Error', action.result.info);
+					}
+				}
+			,	failure	: function (form, action)
+				{
+					Ext.Msg.alert ('Error', action.result.info);
+				}
+			});
+		}
+		, this);
 	}
 
 ,	do_mkdir_submit : function (button)
