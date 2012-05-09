@@ -13,7 +13,6 @@ Ext.define ('Earsip.view.DirTree', {
 	,	flex		: 1
 	,	items		: [{
 			itemId		: 'refresh'
-		,	action		: 'refresh'
 		,	iconCls		: 'refresh'
 		},'-'
 		]
@@ -37,10 +36,12 @@ Ext.define ('Earsip.view.DirTree', {
 					this.resumeEvents ();
 					this.doLayout();
 
-					var node = this.getRootNode ().findChild ('id', Earsip.dir_id, true);
+					if (Earsip.dir_id != 0) {
+						var node = this.getRootNode ().findChild ('id', Earsip.dir_id, true);
 
-					this.expandAll ();
-					this.getSelectionModel ().select (node);
+						this.expandAll ();
+						this.getSelectionModel ().select (node);
+					}
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);
 				}

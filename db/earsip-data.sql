@@ -33,7 +33,6 @@ INSERT INTO m_menu (pid, nama_ref, nama) VALUES (0, 'lap', 'Laporan');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (19, 'lap_arsip_jra', 'Berkas JRA');
 
 
-
 --
 -- TOC entry 2136 (class 0 OID 23290)
 -- Dependencies: 176

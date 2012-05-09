@@ -14,7 +14,7 @@ Ext.define ('Earsip.controller.DirTree', {
 			'dirtree': {
 				selectionchange : this.dir_selected
 			}
-		,	'dirtree button[action=refresh]': {
+		,	'dirtree button[itemId=refresh]': {
 				click : this.do_refresh
 			}
 		});
