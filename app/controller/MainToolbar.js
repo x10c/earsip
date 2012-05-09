@@ -41,14 +41,11 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	}
 
 ,	menuitem_on_click : function (button)
-<<<<<<< HEAD
+
 	{	
 		if (button.itemId == null) return;
-		var tabpanel = this.getContent ();
-=======
-	{
 		var tabpanel = this.getMainview ().down ('#content_tab');
->>>>>>> 8c30cec779e021bb49bc8b56b6b0461baf715eab
+
 
 		Earsip.acl = button.acl;
 

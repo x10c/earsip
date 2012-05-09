@@ -142,11 +142,11 @@ Ext.application ({
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
-<<<<<<< HEAD
+
 	,	'GantiPassword'
-=======
+
 	,	'Berkas'
->>>>>>> 8c30cec779e021bb49bc8b56b6b0461baf715eab
+
 	]
 	
 ,	launch		: function () {
