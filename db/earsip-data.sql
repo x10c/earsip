@@ -14,24 +14,23 @@ INSERT INTO m_grup (nama, keterangan) VALUES ('Pusat Arsip', 'Mengatur seluruh a
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (0, 'adm', 'Administrasi');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (1, 'adm_sistem', 'Sistem');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (1, 'adm_hak_akses', 'Hak Akses');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (1, 'adm_rubah_password', 'Rubah Password');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (0, 'ref', 'Referensi');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (5, 'ref_tipe_arsip', 'Tipe Berkas');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (5, 'ref_metoda_pemusnahan', 'Metoda Pemusnahan');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (5, 'ref_klasifikasi_arsip', 'Klasifikasi Berkas');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (5, 'ref_indeks_relatif', 'Indeks Relatif');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (5, 'ref_jabatan', 'Jabatan');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (4, 'ref_tipe_arsip', 'Tipe Berkas');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (4, 'ref_metoda_pemusnahan', 'Metoda Pemusnahan');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (4, 'ref_klasifikasi_arsip', 'Klasifikasi Berkas');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (4, 'ref_indeks_relatif', 'Indeks Relatif');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (4, 'ref_jabatan', 'Jabatan');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (0, 'mas', 'Master');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (11, 'mas_unit_kerja', 'Unit Kerja');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (11, 'mas_pegawai', 'Pegawai');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (11, 'mas_arsip', 'Arsip');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (10, 'mas_unit_kerja', 'Unit Kerja');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (10, 'mas_pegawai', 'Pegawai');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (10, 'mas_arsip', 'Arsip');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (0, 'trans', 'Transaksi');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (15, 'trans_penyerahan', 'Penyerahan');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (15, 'trans_peminjaman', 'Peminjaman');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (15, 'trans_pengembalian', 'Pengembalian');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (15, 'trans_pemusnahan', 'Pemusnahan');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (14, 'trans_penyerahan', 'Penyerahan');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (14, 'trans_peminjaman', 'Peminjaman');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (14, 'trans_pengembalian', 'Pengembalian');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (14, 'trans_pemusnahan', 'Pemusnahan');
 INSERT INTO m_menu (pid, nama_ref, nama) VALUES (0, 'lap', 'Laporan');
-INSERT INTO m_menu (pid, nama_ref, nama) VALUES (20, 'lap_arsip_jra', 'Berkas JRA');
+INSERT INTO m_menu (pid, nama_ref, nama) VALUES (19, 'lap_arsip_jra', 'Berkas JRA');
 
 
 
@@ -266,7 +265,6 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (17, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (18, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (19, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (20, 1, 4);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (21, 1, 4);
 
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (1, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (2, 2, 0);
@@ -288,7 +286,7 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (17, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (18, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (19, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (20, 2, 0);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (21, 2, 0);
+
 
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (1, 3, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (2, 3, 0);
@@ -310,7 +308,7 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (17, 3, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (18, 3, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (19, 3, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (20, 3, 0);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (21, 3, 0);
+
 
 
 
