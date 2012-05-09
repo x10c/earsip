@@ -90,6 +90,7 @@ if (user == null) {
 	<link rel="stylesheet" type="text/css" href="app.css">
 	<script>
 		var is_login = <%= is_login %>;
+		var _g_username = '<%= user_name %>';
 	</script>
 	<script type="text/javascript" src="extjs/ext-all-debug.js"></script>
 	<script type="text/javascript" src="app.js"></script>

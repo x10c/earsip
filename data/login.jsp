@@ -140,7 +140,7 @@ try {
 		}
 	}
 
-	out.print ("{success:true, user_dir:'"+ user_dir +"'}");
+	out.print ("{success:true, user_dir:'"+ user_dir +"', user_name:'"+ user_name +"'}");
 	rs.close ();
 }
 catch (Exception e) {

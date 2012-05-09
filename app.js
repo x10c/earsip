@@ -2,6 +2,7 @@ Ext.Loader.setConfig ({ enabled: true });
 
 Ext.define ('Earsip', {
 	singleton		: true
+,	username		: ''
 ,	acl				: 0
 ,	berkas_id		: 0
 ,	dir_id			: 0
@@ -146,11 +147,10 @@ Ext.application ({
 	,	'GantiPassword'
 
 	,	'Berkas'
-
 	]
 	
-,	launch		: function () {
-
+,	launch		: function ()
+	{
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
 		var mainview	= Ext.create ('Earsip.view.Main', {});
 		var viewport	= Ext.create ('Ext.container.Viewport', {
@@ -162,6 +162,7 @@ Ext.application ({
 		
 		if (is_login) {
 			win.hide ();
+			Earsip.username = _g_username;
 			mainview.getLayout ().setActiveItem ('main');
 
 			var comp	= mainview.getLayout ().getActiveItem ();

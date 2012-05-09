@@ -30,6 +30,7 @@ Ext.define ('Earsip.view.MainToolbar', {
 					this.add ('-');
 					this.add ({
 						iconCls	: 'app'
+					,	text	: Earsip.username
 					,	menu	: {
 							xtype	: 'menu'
 						,	items	: [{

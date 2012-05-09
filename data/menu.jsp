@@ -43,6 +43,7 @@ try {
 
 	q	=" select	MENU.id"
 		+" ,		MENU.nama"
+		+" ,		MENU.icon"
 		+" ,		MENU.nama_ref"
 		+" ,		MAKSES.hak_akses_id"
 		+" from		m_menu		MENU"
@@ -66,7 +67,7 @@ try {
 
 		menu	+="\n\t{ text:'"+ menu_name +"'\n"
 				+ "\t, itemId:'"+ menu_index +"'\n"
-				+ "\t, iconCls:'system'\n";
+				+ "\t, iconCls:'"+ rs.getString ("icon") +"'\n";
 
 		mc_stmt = db_con.prepareStatement (q);
 		mc_stmt.setInt (1, grup_id);
@@ -88,7 +89,7 @@ try {
 				menu	+="\t\t\t{ text:'"+ menu_name +"'\n"
 						+ "\t\t\t, itemId:'"+ menu_index +"'\n"
 						+ "\t\t\t, acl:'"+ menu_acl +"'\n"
-						+ "\t\t\t, iconCls:'module'\n"
+						+ "\t\t\t, iconCls:'"+ mc_rs.getString ("icon") +"'\n"
 						+ "\t\t\t},\n";
 			} while (mc_rs.next ());
 

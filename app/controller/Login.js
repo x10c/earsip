@@ -35,6 +35,7 @@ Ext.define ('Earsip.controller.Login', {
 				{
 					if (action.result.success == true) {
 						win.hide ();
+						Earsip.username = action.result.user_name;
 						this.getMainview ().getLayout ().setActiveItem ('main');
 						this.getMaintoolbar ().do_load_menu ();
 						this.getDirtree ().do_load_tree ();

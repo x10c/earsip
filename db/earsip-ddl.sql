@@ -259,6 +259,7 @@ ID
 create table M_MENU (
    ID                   SERIAL               not null,
    PID                  INT8                 null,
+   ICON                 VARCHAR(16)          null,
    NAMA_REF             VARCHAR(128)         null,
    NAMA                 VARCHAR(128)         null,
    constraint PK_M_MENU primary key (ID)
