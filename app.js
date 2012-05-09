@@ -137,6 +137,7 @@ Ext.application ({
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
+	,	'GantiPassword'
 	]
 	
 ,	launch		: function () {

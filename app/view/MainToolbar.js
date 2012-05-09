@@ -26,14 +26,23 @@ Ext.define ('Earsip.view.MainToolbar', {
 						this.add (o.menu[i]);
 						this.add ('-');
 					}
-
 					this.add ('->');
 					this.add ('-');
 					this.add ({
-						text	: 'Logout'
-					,	action	: 'logout'
-					,	iconCls	: 'logout'
-					});
+						iconCls	: 'app'
+					,	menu	: {
+							xtype	: 'menu'
+						,	items	: [{
+								text	: 'Ubah Password'
+							,	action	: 'edit'
+							,	iconCls	: 'edit'
+							},{
+								text	: 'Logout'
+							,	action	: 'logout'
+							,	iconCls	: 'logout'
+							}]	
+						}
+					});	
 
 					this.suspendLayout = false;
 					this.doLayout();

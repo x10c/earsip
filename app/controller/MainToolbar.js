@@ -7,6 +7,8 @@ Ext.require ([
 ,	'Earsip.view.KlasArsip'
 ,	'Earsip.view.RefIndeksRelatif'
 ,	'Earsip.view.Jabatan'
+
+
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
@@ -31,14 +33,18 @@ Ext.define ('Earsip.controller.MainToolbar', {
 			'maintoolbar menu > menuitem': {
 				click: this.menuitem_on_click
 			}
-		,	'maintoolbar button[action=logout]': {
+		,	'maintoolbar menuitem[action=edit]': {
+				click: this.do_ganti_password
+			}
+		,	'maintoolbar menuitem[action=logout]': {
 				click: this.do_logout
 			}
 		});
 	}
 
 ,	menuitem_on_click : function (button)
-	{
+	{	
+		if (button.itemId == null) return;
 		var tabpanel = this.getContent ();
 
 		Earsip.acl = button.acl;
@@ -50,6 +56,12 @@ Ext.define ('Earsip.controller.MainToolbar', {
 			});
 		}
 		tabpanel.setActiveTab (button.itemId);
+	}
+
+,	do_ganti_password : function (button)
+	{
+		var win = Ext.create('Earsip.view.GantiPasswordWin', {});
+		win.show ();
 	}
 
 ,	do_logout : function (button)
