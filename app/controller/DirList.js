@@ -3,6 +3,9 @@ Ext.require ('Earsip.view.WinUpload');
 Ext.define ('Earsip.controller.DirList', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
+		ref		: 'mainview'
+	,	selector: 'mainview'
+	},{
 		ref		: 'dirtree'
 	,	selector: 'dirtree'
 	},{
@@ -17,6 +20,7 @@ Ext.define ('Earsip.controller.DirList', {
 		this.control ({
 			'dirlist' : {
 				itemdblclick : this.row_dbl_clicked
+			,	selectionchange : this.do_selectionchange
 			}
 		,	'dirlist button[action=mkdir]': {
 				click : this.do_mkdir
@@ -47,6 +51,13 @@ Ext.define ('Earsip.controller.DirList', {
 		Earsip.repo_path = node.parentNode.getPath ("text");
 		dirtree.expandAll ();
 		dirtree.getSelectionModel ().select (node);
+	}
+
+,	do_selectionchange : function (model, records)
+	{
+		if (records.length > 0) {
+			this.getMainview ().down ('#berkas_form').loadRecord (records[0]);
+		}
 	}
 
 ,	do_mkdir : function (button)
@@ -100,7 +111,6 @@ Ext.define ('Earsip.controller.DirList', {
 				if (action.result.success == true) {
 					this.getDirlist ().do_load_list (Earsip.dir_id);
 					this.getDirtree ().do_load_tree ();
-					this.getDirtree ().expandAll ();
 					win.hide ();
 				} else {
 					Ext.Msg.alert ('Kesalahan', action.result.info);

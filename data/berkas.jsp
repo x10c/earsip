@@ -42,6 +42,7 @@ try {
 		+" from		m_berkas"
 		+" where	pegawai_id	= "+ user_id
 		+" and		pid			= "+ arsip_id
+		+" and		status		= 1"
 		+" order by tipe_file, nama";
 
 	db_stmt = db_con.createStatement ();

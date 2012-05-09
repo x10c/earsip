@@ -100,14 +100,18 @@ Ext.application ({
 		'Main'
 	,	'MainToolbar'
 	,	'DirTree'
+
+	,	'Berkas'
 	,	'DirList'
 	,	'WinUpload'
+	,	'BerkasForm'
+
 	,	'SharedList'
 	,	'AdmSistem'
-
 	,	'AdmHakAksesMenu'
 	,	'Grup'
 	,	'AdmHakAkses'
+	,	'UnitKerja'
 	,	'Pegawai'
 	,	'PegawaiWin'
 
@@ -131,13 +135,18 @@ Ext.application ({
 	,	'DirList'
 	,	'WinUpload'
 	,	'Grup'
+	,	'UnitKerja'
 	,	'Pegawai'
 	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
+<<<<<<< HEAD
 	,	'GantiPassword'
+=======
+	,	'Berkas'
+>>>>>>> 8c30cec779e021bb49bc8b56b6b0461baf715eab
 	]
 	
 ,	launch		: function () {

@@ -1,6 +1,7 @@
 Ext.require ([
 	'Earsip.view.AdmSistem'
 ,	'Earsip.view.AdmHakAkses'
+,	'Earsip.view.UnitKerja'
 ,	'Earsip.view.Pegawai'
 ,	'Earsip.view.TipeArsip'
 ,	'Earsip.view.MetodaPemusnahan'
@@ -22,9 +23,6 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	},{
 		ref		: 'maintoolbar'
 	,	selector: 'maintoolbar'
-	},{
-		ref		: 'content'
-	,	selector: 'content'
 	}]
 
 ,	init	: function ()
@@ -43,9 +41,14 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	}
 
 ,	menuitem_on_click : function (button)
+<<<<<<< HEAD
 	{	
 		if (button.itemId == null) return;
 		var tabpanel = this.getContent ();
+=======
+	{
+		var tabpanel = this.getMainview ().down ('#content_tab');
+>>>>>>> 8c30cec779e021bb49bc8b56b6b0461baf715eab
 
 		Earsip.acl = button.acl;
 
