@@ -19,6 +19,7 @@ Ext.define ('Earsip.model.Berkas', {
 	,	'jra'
 	,	'status'
 	,	'status_hapus'
+	,	'akses_berbagi_id'
 	]
 ,	idProperty	: 'id'
 });

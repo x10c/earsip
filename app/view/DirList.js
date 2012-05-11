@@ -3,6 +3,7 @@ Ext.require ([
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
 ,	'Earsip.view.MkdirWin'
+,	'Earsip.view.ShareWin'
 ]);
 
 Ext.define ('Earsip.view.DirList', {
@@ -71,6 +72,11 @@ Ext.define ('Earsip.view.DirList', {
 		,	action		: 'refresh'
 		,	iconCls		: 'refresh'
 		},'->','-',{
+			text		: 'Bagi'
+		,	itemId		: 'share'
+		,	iconCls		: 'dir'
+		,	disabled	: true
+		},'-',{
 			text		: 'Hapus'
 		,	itemId		: 'del'
 		,	iconCls		: 'del'
@@ -79,7 +85,8 @@ Ext.define ('Earsip.view.DirList', {
 	}]
 ,	initComponent	: function ()
 	{
-		this.win = Ext.create ('Earsip.view.MkdirWin', {});
+		this.win		= Ext.create ('Earsip.view.MkdirWin', {});
+		this.win_share	= Ext.create ('Earsip.view.ShareWin', {});
 		this.callParent (arguments);
 	}
 

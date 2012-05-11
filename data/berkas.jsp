@@ -40,6 +40,7 @@ try {
 		+" ,		jra"
 		+" ,		status"
 		+" ,		status_hapus"
+		+" ,		akses_berbagi_id"
 		+" from		m_berkas"
 		+" where	pegawai_id		= "+ user_id
 		+" and		pid				= "+ arsip_id
@@ -74,6 +75,7 @@ try {
 				+ "\n, jra           : "+ rs.getString ("jra")
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
+				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

@@ -203,6 +203,7 @@ INSERT INTO r_arsip_status (id, keterangan) VALUES (3, 'Musnah');
 -- Data for Name: r_akses_berbagi; Type: TABLE DATA; Schema: public; Owner: earsip
 --
 
+INSERT INTO r_akses_berbagi (id, keterangan) VALUES (0, 'Tidak berbagi');
 INSERT INTO r_akses_berbagi (id, keterangan) VALUES (1, 'Lihat (user tertentu)');
 INSERT INTO r_akses_berbagi (id, keterangan) VALUES (2, 'Merubah (user tertentu)');
 INSERT INTO r_akses_berbagi (id, keterangan) VALUES (3, 'Lihat (global)');

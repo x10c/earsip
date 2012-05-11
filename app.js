@@ -5,9 +5,15 @@ Ext.define ('Earsip', {
 ,	username		: ''
 ,	repo_path		: ''
 ,	acl				: 0
-,	berkas_id		: 0
 ,	dir_id			: 0
 ,	tree_path		: ''
+,	berkas			: {
+		id				: 0
+	}
+,	share			: {
+		id				: 0
+	,	hak_akses_id	: 0
+	}
 });
 
 Ext.define ('Earsip.plugin.RowEditor', {
@@ -30,9 +36,11 @@ Ext.define ('Earsip.plugin.RowEditor', {
 	,	edit				: function (editor, e)
 		{
 			editor.action = 'none';
-			editor.grid.store.sync ({
-				params	: editor.grid.params
-			});
+			if (editor.grid.store.autoSync) {
+				editor.grid.store.sync ({
+					params	: editor.grid.params
+				});
+			}
 		}
 	,	canceledit			: function (editor)
 		{
@@ -72,6 +80,7 @@ Ext.application ({
 ,	appFolder	: 'app'
 ,	models		: [
 		'Berkas'
+	,	'BerkasBerbagi'
 	,	'SharedList'
 	,	'User'
 	,	'Grup'
@@ -86,6 +95,7 @@ Ext.application ({
 	]
 ,	stores		: [
 		'Berkas'
+	,	'BerkasBerbagi'
 	,	'SharedList'
 	,	'User'
 	,	'Grup'
@@ -108,6 +118,7 @@ Ext.application ({
 	,	'DirList'
 	,	'WinUpload'
 	,	'BerkasForm'
+	,	'ShareWin'
 
 	,	'SharedList'
 	,	'AdmSistem'
@@ -151,6 +162,7 @@ Ext.application ({
 	,	'GantiPassword'
 	,	'Berkas'
 	,	'Trash'
+	,	'ShareWin'
 	]
 	
 ,	launch		: function ()

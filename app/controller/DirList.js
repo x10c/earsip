@@ -31,6 +31,9 @@ Ext.define ('Earsip.controller.DirList', {
 		,	'dirlist button[action=refresh]': {
 				click : this.do_refresh
 			}
+		,	'dirlist button[itemId=share]': {
+				click : this.do_share
+			}
 		,	'dirlist button[itemId=del]': {
 				click : this.do_delete
 			}
@@ -63,11 +66,17 @@ Ext.define ('Earsip.controller.DirList', {
 
 		if (records.length > 0) {
 			this.getMainview ().down ('#berkas_form').loadRecord (records[0]);
+			dirlist.record		= records[0];
+			Earsip.berkas.id	= records[0].get ('id');
+		} else {
+			dirlist.record		= null;
+			Earsip.berkas.id	= 0;
 		}
 		dirlist.down ('#del').setDisabled (! records.length);
+		dirlist.down ('#share').setDisabled (! records.length);
 	}
 
-,	do_mkdir : function (button)
+,	do_mkdir : function (b)
 	{
 		if (Earsip.dir_id <= 0) {
 			Ext.Msg.alert ('Kesalahan', 'Pilih tempat untuk direktori baru terlebih dahulu!');
@@ -81,7 +90,7 @@ Ext.define ('Earsip.controller.DirList', {
 		dirlist.win.show ();
 	}
 
-,	do_upload : function (button)
+,	do_upload : function (b)
 	{
 		if (Earsip.dir_id <= 0) {
 			Ext.Msg.alert ('Kesalahan', 'Pilih direktori penyimpanan terlebih dahulu!');
@@ -92,9 +101,18 @@ Ext.define ('Earsip.controller.DirList', {
 		winupload.show ();
 	}
 
-,	do_refresh : function (button)
+,	do_refresh : function (b)
 	{
 		this.getDirlist ().do_load_list (Earsip.dir_id);
+	}
+
+,	do_share : function (b)
+	{
+		var dirlist = this.getDirlist ();
+
+		Earsip.acl = 4;
+		dirlist.win_share.load (dirlist.record);
+		dirlist.win_share.show ();
 	}
 
 ,	do_delete : function (b)

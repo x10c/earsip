@@ -125,11 +125,11 @@ ID
 /*==============================================================*/
 create table M_BERKAS (
    ID                   SERIAL               not null,
+   PID                  INT4                 null,
    PEGAWAI_ID           INT4                 null,
    BERKAS_KLAS_ID       INT4                 null,
    UNIT_KERJA_ID        INT4                 null,
    BERKAS_TIPE_ID       INT4                 null,
-   PID                  INT4                 null,
    TIPE_FILE            INT2                 null default 0,
    SHA                  VARCHAR(255)         null,
    NAMA                 VARCHAR(255)         null,
@@ -142,6 +142,7 @@ create table M_BERKAS (
    JRA                  INT2                 null,
    STATUS               INT2                 null default 1,
    STATUS_HAPUS         INT2                 null default 1,
+   AKSES_BERBAGI_ID     INT4                 null default 0,
    constraint PK_M_BERKAS primary key (ID)
 );
 
@@ -196,7 +197,6 @@ create table M_BERKAS_BERBAGI (
    BAGI_KE_PEG_ID       INT4                 not null,
    BERKAS_ID            INT4                 not null,
    ID                   SERIAL               not null,
-   HAK_AKSES_ID         INT2                 null,
    constraint PK_M_BERKAS_BERBAGI primary key (BAGI_KE_PEG_ID, BERKAS_ID, ID)
 );
 
@@ -224,13 +224,6 @@ BAGI_KE_PEG_ID
 /*==============================================================*/
 create  index REF__BERKAS__BERBAGI_FK on M_BERKAS_BERBAGI (
 BERKAS_ID
-);
-
-/*==============================================================*/
-/* Index: REF__AKSES_BAGI_FK                                    */
-/*==============================================================*/
-create  index REF__AKSES_BAGI_FK on M_BERKAS_BERBAGI (
-HAK_AKSES_ID
 );
 
 /*==============================================================*/
@@ -813,14 +806,14 @@ alter table M_BERKAS
       references M_UNIT_KERJA (ID)
       on delete restrict on update restrict;
 
-alter table M_BERKAS_BERBAGI
-   add constraint FK_M_BERKAS_REF_PEGAW_M_PEGAWA foreign key (BAGI_KE_PEG_ID)
-      references M_PEGAWAI (ID)
+alter table M_BERKAS
+   add constraint FK_M_BERKAS_BERBAGI_REF__R_AKSES_BERBAGI foreign key (AKSES_BERBAGI_ID)
+      references R_AKSES_BERBAGI (ID)
       on delete restrict on update restrict;
 
 alter table M_BERKAS_BERBAGI
-   add constraint FK_M_BERKAS_REF__AKSE_R_AKSES_ foreign key (HAK_AKSES_ID)
-      references R_AKSES_BERBAGI (ID)
+   add constraint FK_M_BERKAS_REF_PEGAW_M_PEGAWA foreign key (BAGI_KE_PEG_ID)
+      references M_PEGAWAI (ID)
       on delete restrict on update restrict;
 
 alter table M_BERKAS_BERBAGI
