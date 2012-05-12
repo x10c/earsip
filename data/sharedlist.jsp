@@ -17,10 +17,10 @@ try {
 		return;
 	}
 
-	String user_id		= (String) session.getAttribute ("user.id");
-	String berkas_id	= request.getParameter ("berkas_id");
+	String	user_id		= (String) session.getAttribute ("user.id");
+	String	berkas_id	= request.getParameter ("berkas_id");
 
-	q	=" select	id"
+	q	=" select	BERKAS.id"
 		+" ,		pid"
 		+" ,		tipe_file"
 		+" ,		sha"
@@ -39,12 +39,22 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
-		+" from		m_berkas"
-		+" where	pegawai_id		= "+ user_id
-		+" and		pid				= "+ berkas_id
-		+" and		status			= 1"
-		+" and		status_hapus	= 1"
-		+" order by tipe_file, nama";
+		+" from		m_berkas			BERKAS"
+		+" ,		m_berkas_berbagi	BAGI";
+	if (berkas_id != null) {
+		q	+= " where BERKAS.pid = "+ berkas_id;
+	} else {
+		q	+= " where ("
+			+"				(akses_berbagi_id = 3 or akses_berbagi_id = 4)"
+			+"			and	pegawai_id		!= "+ user_id
+			+" )"
+			+" or ("
+			+"				(akses_berbagi_id = 1 or akses_berbagi_id = 2)"
+			+"			and	berkas_id		= BERKAS.id"
+			+"			and	bagi_ke_peg_id	= "+ user_id
+			+" )"
+			+" order by tipe_file, nama";
+	}
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);

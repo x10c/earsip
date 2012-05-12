@@ -22,6 +22,9 @@ Ext.define ('Earsip.controller.ShareWin', {
 		,	'sharewin combo[itemId=akses_berbagi_id]' : {
 				select : this.do_akses_change
 			}
+		,	'sharewin > sharewin_grid > combo[itemId=pegawai]' : {
+				select : this.do_pegawai_selected
+			}
 		});
 	}
 
@@ -118,5 +121,10 @@ Ext.define ('Earsip.controller.ShareWin', {
 		} else {
 			form.down ('grid').setDisabled (true);
 		}
+	}
+
+,	do_pegawai_selected : function (cb, r)
+	{
+		/* filter data pegawai, minus selected data */
 	}
 });

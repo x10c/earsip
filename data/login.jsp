@@ -18,14 +18,12 @@ Cookie				c_user_name			= null;
 String				db_url				= "";
 String				q					= "";
 String				sid					= "";
-String				repo_root			= "";
 String				user_id				= "";
 String				user_uk_id			= "";
 String				user_grup_id		= "";
 String				user_name			= "";
 String				user_nip			= "";
 String				user_psw			= "";
-String				user_dir			= "";
 String				dir_name			= "";
 String				c_path				= request.getContextPath ();
 int					c_max_age			= 60 * 60 * 24 * 30;
@@ -111,36 +109,26 @@ try {
 	response.addCookie (c_user_grup_id);
 	response.addCookie (c_user_name);
 
-	/* create user repository if it doesn't exist yet */
-	repo_root = (String) session.getAttribute ("sys.repository_root");
+	dir_name = user_name +" ("+ user_nip +")";
 
-	if (repo_root != null) {
-		dir_name	= user_name +" ("+ user_nip +")";
-		user_dir	= config.getServletContext().getRealPath("/") + repo_root
-					+"/"+ dir_name;
-		File d		= new File (user_dir);
+	q	=" select	id"
+		+" from		m_berkas"
+		+" where	nama		='"+ dir_name +"'"
+		+" and		pid			= 0"
+		+" and		tipe_file	= 0";
 
-		d.mkdir ();
+	db_stmt = db_con.createStatement ();
 
-		q	=" select	id"
-			+" from		m_berkas"
-			+" where	nama		='"+ dir_name +"'"
-			+" and		pid			= 0"
-			+" and		tipe_file	= 0";
+	rs = db_stmt.executeQuery (q);
 
-		db_stmt = db_con.createStatement ();
+	if (! rs.next ()) {
+		q	=" insert into m_berkas (pid, pegawai_id, nama)"
+			+" values (0, "+ user_id +",'"+ dir_name +"')";
 
-		rs = db_stmt.executeQuery (q);
-
-		if (! rs.next ()) {
-			q	=" insert into m_berkas (pid, pegawai_id, nama)"
-				+" values (0, "+ user_id +",'"+ dir_name +"')";
-
-			db_stmt.executeUpdate (q);
-		}
+		db_stmt.executeUpdate (q);
 	}
 
-	out.print ("{success:true, user_dir:'"+ user_dir +"', user_name:'"+ user_name +"'}");
+	out.print ("{success:true, user_name:'"+ user_name +"'}");
 	rs.close ();
 }
 catch (Exception e) {

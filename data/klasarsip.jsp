@@ -18,16 +18,13 @@ try {
 		return;
 	}
 
-	String uk_id = (String) session.getAttribute ("user.unit_kerja_id");
-
 	q	=" select	id"
 		+" , 		unit_kerja_id"
 		+" , 		kode"
 		+" , 		nama"
 		+" , 		keterangan"
 		+" from 	r_berkas_klas"
-		+" where	unit_kerja_id = "+ uk_id
-		+" order by unit_kerja_id ASC";
+		+" order by nama";
 
 	db_stmt = db_con.createStatement ();
 	rs = db_stmt.executeQuery (q);
@@ -38,12 +35,12 @@ try {
 		} else {
 			i++;
 		}
-		data	+="{ id	: "+ rs.getString ("id")
-				+ ", unit_kerja_id	 : "+ rs.getString ("unit_kerja_id")
-				+ ", kode :'"+ rs.getString ("kode") +"'"
-				+ ", nama :'"+ rs.getString ("nama") +"'"
-				+ ", keterangan :'"+ rs.getString ("keterangan") +"'"
-				+ "}";
+		data	+="\n{ id			: "+ rs.getString ("id")
+				+ "\n, unit_kerja_id: "+ rs.getString ("unit_kerja_id")
+				+ "\n, kode			:'"+ rs.getString ("kode") +"'"
+				+ "\n, nama			:'"+ rs.getString ("nama") +"'"
+				+ "\n, keterangan	:'"+ rs.getString ("keterangan") +"'"
+				+ "\n}";
 	}
 
 	out.print ("{success:true,data:["+ data +"]}");

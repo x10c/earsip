@@ -20,7 +20,6 @@ try {
 
 	String user_id		= (String) session.getAttribute ("user.id");
 	String uk_id		= (String) session.getAttribute ("user.unit_kerja_id");
-	String repo_root	= (String) session.getAttribute ("sys.repository_root");
 	String dir_id		= request.getParameter ("dir_id");
 	String nama			= request.getParameter ("nama");
 	String tgl_dibuat	= request.getParameter ("tgl_dibuat");
@@ -31,12 +30,7 @@ try {
 	String pembuat		= request.getParameter ("pembuat");
 	String masalah		= request.getParameter ("masalah");
 	String jra			= request.getParameter ("jra");
-	String path			= request.getParameter ("path");
 	Date dt_dibuat		= Date.valueOf (tgl_dibuat);
-
-	File new_dir = new File (config.getServletContext().getRealPath("/")
-						+ repo_root +"/"+ path +"/"+ nama);
-	new_dir.mkdir ();
 
 	q	=" insert into m_berkas ("
 		+"		pid"

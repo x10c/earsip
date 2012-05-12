@@ -35,12 +35,12 @@ try {
 		} else {
 			i++;
 		}
-		data	+="{ id				: "+ rs.getString ("id")
-				+ ", kode			:'"+ rs.getString ("kode") +"'"
-				+ ", nama			:'"+ rs.getString ("nama") +"'"
-				+ ", nama_pimpinan	:'"+ rs.getString ("nama_pimpinan") +"'"
-				+ ", keterangan		:'"+ rs.getString ("keterangan") +"'"
-				+ "}";
+		data	+="\n{ id				: "+ rs.getString ("id")
+				+ "\n, kode				:'"+ rs.getString ("kode") +"'"
+				+ "\n, nama				:'"+ rs.getString ("nama") +"'"
+				+ "\n, nama_pimpinan	:'"+ rs.getString ("nama_pimpinan") +"'"
+				+ "\n, keterangan		:'"+ rs.getString ("keterangan") +"'"
+				+ "\n}";
 	}
 
 	out.print ("{success:true,data:["+ data +"]}");

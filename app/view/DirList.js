@@ -14,7 +14,6 @@ Ext.define ('Earsip.view.DirList', {
 ,	columns		: [{
 		text		: 'Nama'
 	,	flex		: 1
-	,	sortable	: false
 	,	hideable	: false
 	,	dataIndex	: 'nama'
 	,	renderer	: function (v, md, r)
@@ -22,8 +21,10 @@ Ext.define ('Earsip.view.DirList', {
 			if (r.get ('tipe_file') == 0) {
 				return "<span class='dir'>"+ v +"</span>";
 			} else {
-				return "<a class='doc' target='_blank' href='"+
-					Earsip.repo_path + Earsip.tree_path +"/"+ v +"'>"+ v +"</a>";
+				return "<a class='doc' target='_blank'"
+					+" href='data/download.jsp"
+					+"?berkas="+ r.get('sha') +"&nama="+ v +"'>"
+					+ v +"</a>";
 			}
 		}
 	},{
@@ -90,11 +91,11 @@ Ext.define ('Earsip.view.DirList', {
 		this.callParent (arguments);
 	}
 
-,	do_load_list : function (arsip_id)
+,	do_load_list : function (berkas_id)
 	{
 		this.getStore ().load ({
 			params	: {
-				arsip_id : arsip_id
+				berkas_id : berkas_id
 			}
 		});
 	}

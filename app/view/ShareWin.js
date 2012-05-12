@@ -110,19 +110,27 @@ Ext.define ('Earsip.view.ShareWin', {
 
 ,	load : function (record)
 	{
-		this.down ('#sharewin_form').loadRecord (record);
-
 		var grid = this.down ('#sharewin_grid');
 
-		grid.getStore ().load ({
-			params	: {
-				berkas_id : record.get ('id')
+		Ext.data.StoreManager.lookup ('Pegawai').load ({
+			scope	: this
+		,	callback: function (r, op, success)
+			{
+				if (success) {
+					this.down ('#sharewin_form').loadRecord (record);
+
+					grid.getStore ().load ({
+						params	: {
+							berkas_id : record.get ('id')
+						}
+					});
+
+					var hak_akses_id = record.get ('akses_berbagi_id');
+					if (hak_akses_id == 1 || hak_akses_id == 2) {
+						grid.setDisabled (false);
+					}
+				}
 			}
 		});
-
-		var hak_akses_id = record.get ('akses_berbagi_id');
-		if (hak_akses_id == 1 || hak_akses_id == 2) {
-			grid.setDisabled (false);
-		}
 	}
 });

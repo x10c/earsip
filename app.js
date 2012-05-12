@@ -163,6 +163,7 @@ Ext.application ({
 	,	'Berkas'
 	,	'Trash'
 	,	'ShareWin'
+	,	'SharedList'
 	]
 	
 ,	launch		: function ()

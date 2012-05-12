@@ -1,7 +1,7 @@
 Ext.define ('Earsip.store.SharedList', {
 	extend		: 'Ext.data.Store'
 ,	storeId		: 'SharedList'
-,	model		: 'Earsip.model.SharedList'
+,	model		: 'Earsip.model.Berkas'
 ,	autoSync	: false
 ,	autoLoad	: false
 ,	proxy		: {

@@ -11,6 +11,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.io.File" %>
+<%@ page import="java.security.MessageDigest" %>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
 <%@ page import="org.apache.commons.fileupload.FileItem" %>
@@ -74,8 +75,19 @@ try {
 		}
 	}
 
+	/* compute file SHA1 checksum */
+	MessageDigest	md		= MessageDigest.getInstance ("SHA1");
+	byte[]			result	= md.digest (item_up.get ());
+	StringBuffer	sb		= new StringBuffer ();
+
+	for (int i = 0; i < result.length; i++) {
+		sb.append (Integer.toString ((result[i] & 0xff) + 0x100, 16).substring(1));
+	}
+
+	String sha = sb.toString ();
+
 	/* save file stream to filesystem */
-	filename	= rpath + repo +"/"+ path +"/"+ name;
+	filename	= rpath + repo +"/"+ sha;
 	file		= new File (filename);
 
 	item_up.write (file);
@@ -84,6 +96,7 @@ try {
 	q	=" insert into m_berkas ("
 		+"		pid"
 		+" ,	tipe_file"
+		+" ,	sha"
 		+" ,	nama"
 		+" ,	pegawai_id"
 		+" ,	unit_kerja_id"
@@ -99,6 +112,7 @@ try {
 		+" select "
 		+		pid
 		+" ,	1"
+		+" ,	'"+ sha +"'"
 		+" ,	'"+	name +"'"
 		+" ,	"+ user_id
 		+" ,	"+ uk_id
