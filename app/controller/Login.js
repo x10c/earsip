@@ -7,8 +7,8 @@ Ext.define ('Earsip.controller.Login', {
 		ref		: 'maintoolbar'
 	,	selector: 'maintoolbar'
 	},{
-		ref		: 'dirtree'
-	,	selector: 'dirtree'
+		ref		: 'berkastree'
+	,	selector: 'berkastree'
 	}]
 
 ,	init	: function ()
@@ -38,7 +38,7 @@ Ext.define ('Earsip.controller.Login', {
 						Earsip.username = action.result.user_name;
 						this.getMainview ().getLayout ().setActiveItem ('main');
 						this.getMaintoolbar ().do_load_menu ();
-						this.getDirtree ().do_load_tree ();
+						this.getBerkastree ().do_load_tree ();
 					} else {
 						Ext.Msg.alert ('Kesalahan', action.result.info);
 					}

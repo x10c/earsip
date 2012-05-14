@@ -1,8 +1,8 @@
-Ext.define ('Earsip.view.DirTree', {
+Ext.define ('Earsip.view.BerkasTree', {
 	extend		: 'Ext.tree.Panel'
-,	alias		: 'widget.dirtree'
-,	id			: 'dirtree'
-,	title		: 'Direktori'
+,	alias		: 'widget.berkastree'
+,	id			: 'berkastree'
+,	title		: 'Folder'
 ,	region		: 'west'
 ,	width		: 220
 ,	margins		: '5 0 0 5'
@@ -28,7 +28,7 @@ Ext.define ('Earsip.view.DirTree', {
 ,	do_load_tree : function ()
 	{
 		Ext.Ajax.request ({
-			url		: 'data/dirtree.jsp'
+			url		: 'data/berkas_tree.jsp'
 		,	scope	: this
 		,	success	: function (response) {
 				var o = Ext.decode(response.responseText);

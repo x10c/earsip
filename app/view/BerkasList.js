@@ -6,10 +6,10 @@ Ext.require ([
 ,	'Earsip.view.ShareWin'
 ]);
 
-Ext.define ('Earsip.view.DirList', {
+Ext.define ('Earsip.view.BerkasList', {
 	extend		: 'Ext.grid.Panel'
-,	alias		: 'widget.dirlist'
-,	itemId		: 'dirlist'
+,	alias		: 'widget.berkaslist'
+,	itemId		: 'berkaslist'
 ,	store		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'

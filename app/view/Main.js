@@ -1,6 +1,6 @@
 Ext.require ([
 	'Earsip.view.MainToolbar'
-,	'Earsip.view.DirTree'
+,	'Earsip.view.BerkasTree'
 ,	'Earsip.view.Berkas'
 ,	'Earsip.view.SharedList'
 ]);
@@ -22,7 +22,7 @@ Ext.define ('Earsip.view.Main', {
 	,	tbar	: Ext.create('Earsip.view.MainToolbar')
 	,	layout	: 'border'
 	,	items	: [{
-			xtype		: 'dirtree'
+			xtype		: 'berkastree'
 		},{
 			xtype		: 'tabpanel'
 		,	itemId		: 'content_tab'

@@ -1,5 +1,5 @@
 Ext.require ([
-	'Earsip.view.DirList'
+	'Earsip.view.BerkasList'
 ,	'Earsip.view.BerkasForm'
 ]);
 
@@ -10,7 +10,7 @@ Ext.define ('Earsip.view.Berkas', {
 ,	title		: 'Berkas'
 ,	layout		: 'border'
 ,	items		: [{
-		xtype		: 'dirlist'
+		xtype		: 'berkaslist'
 	,	region		: 'center'
 	},{
 		xtype		: 'berkasform'

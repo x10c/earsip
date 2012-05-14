@@ -2,29 +2,29 @@ Ext.require ([
 	'Earsip.view.Trash'
 ]);
 
-Ext.define ('Earsip.controller.DirTree', {
+Ext.define ('Earsip.controller.BerkasTree', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
 		ref		: 'mainview'
 	,	selector: 'mainview'
 	},{
-		ref		: 'dirtree'
-	,	selector: 'dirtree'
+		ref		: 'berkastree'
+	,	selector: 'berkastree'
 	},{
-		ref		: 'dirlist'
-	,	selector: 'dirlist'
+		ref		: 'berkaslist'
+	,	selector: 'berkaslist'
 	}]
 
 ,	init	: function ()
 	{
 		this.control ({
-			'dirtree': {
+			'berkastree': {
 				selectionchange : this.dir_selected
 			}
-		,	'dirtree button[itemId=refresh]': {
+		,	'berkastree button[itemId=refresh]': {
 				click : this.do_refresh
 			}
-		,	'dirtree button[itemId=trash]': {
+		,	'berkastree button[itemId=trash]': {
 				click : this.do_open_trash
 			}
 		});
@@ -36,13 +36,13 @@ Ext.define ('Earsip.controller.DirTree', {
 			Earsip.dir_id		= records[0].get ('id');
 			Earsip.tree_path	= records[0].getPath ("text");
 
-			this.getDirlist ().do_load_list (Earsip.dir_id);
+			this.getBerkaslist ().do_load_list (Earsip.dir_id);
 		}
 	}
 
 ,	do_refresh : function ()
 	{
-		this.getDirtree ().do_load_tree ();
+		this.getBerkastree ().do_load_tree ();
 		Earsip.dir_id		= 0;
 		Earsip.path_tree	= '';
 	}

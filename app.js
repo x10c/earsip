@@ -112,12 +112,12 @@ Ext.application ({
 ,	views		: [
 		'Main'
 	,	'MainToolbar'
-	,	'DirTree'
 
 	,	'Berkas'
-	,	'DirList'
-	,	'WinUpload'
+	,	'BerkasTree'
+	,	'BerkasList'
 	,	'BerkasForm'
+	,	'WinUpload'
 	,	'ShareWin'
 
 	,	'SharedList'
@@ -148,8 +148,8 @@ Ext.application ({
 		'Login'
 	,	'MainToolbar'
 	,	'AdmHakAkses'
-	,	'DirTree'
-	,	'DirList'
+	,	'BerkasTree'
+	,	'BerkasList'
 	,	'WinUpload'
 	,	'Grup'
 	,	'UnitKerja'
@@ -186,7 +186,7 @@ Ext.application ({
 
 			var comp	= mainview.getLayout ().getActiveItem ();
 			var tb		= comp.down ('#maintoolbar');
-			var tree	= comp.down ('#dirtree');
+			var tree	= comp.down ('#berkastree');
 
 			tb.do_load_menu ();
 			tree.do_load_tree ();

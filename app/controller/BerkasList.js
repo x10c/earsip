@@ -1,16 +1,16 @@
 Ext.require ('Earsip.view.WinUpload');
 
-Ext.define ('Earsip.controller.DirList', {
+Ext.define ('Earsip.controller.BerkasList', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
 		ref		: 'mainview'
 	,	selector: 'mainview'
 	},{
-		ref		: 'dirtree'
-	,	selector: 'dirtree'
+		ref		: 'berkastree'
+	,	selector: 'berkastree'
 	},{
-		ref		: 'dirlist'
-	,	selector: 'dirlist'
+		ref		: 'berkaslist'
+	,	selector: 'berkaslist'
 	},{
 		ref		: 'mkdirwin'
 	,	selector: 'mkdirwin'
@@ -18,23 +18,23 @@ Ext.define ('Earsip.controller.DirList', {
 ,	init	: function ()
 	{
 		this.control ({
-			'dirlist' : {
+			'berkaslist' : {
 				itemdblclick : this.row_dbl_clicked
 			,	selectionchange : this.do_selectionchange
 			}
-		,	'dirlist button[action=mkdir]': {
+		,	'berkaslist button[action=mkdir]': {
 				click : this.do_mkdir
 			}
-		,	'dirlist button[action=upload]': {
+		,	'berkaslist button[action=upload]': {
 				click : this.do_upload
 			}
-		,	'dirlist button[action=refresh]': {
+		,	'berkaslist button[action=refresh]': {
 				click : this.do_refresh
 			}
-		,	'dirlist button[itemId=share]': {
+		,	'berkaslist button[itemId=share]': {
 				click : this.do_share
 			}
-		,	'dirlist button[itemId=del]': {
+		,	'berkaslist button[itemId=del]': {
 				click : this.do_delete
 			}
 		,	'mkdirwin button[action=submit]' : {
@@ -51,29 +51,29 @@ Ext.define ('Earsip.controller.DirList', {
 		}
 		Earsip.dir_id = r.get ("id");
 
-		var dirtree	= this.getDirtree ();
-		var node	= dirtree.getRootNode ().findChild ('id', Earsip.dir_id, true);
+		var berkastree	= this.getBerkastree ();
+		var node		= berkastree.getRootNode ().findChild ('id', Earsip.dir_id, true);
 
 		Earsip.tree_path = node.parentNode.getPath ("text");
 
-		dirtree.expandAll ();
-		dirtree.getSelectionModel ().select (node);
+		berkastree.expandAll ();
+		berkastree.getSelectionModel ().select (node);
 	}
 
 ,	do_selectionchange : function (model, records)
 	{
-		var dirlist = this.getDirlist ();
+		var berkaslist = this.getBerkaslist ();
 
 		if (records.length > 0) {
 			this.getMainview ().down ('#berkas_form').loadRecord (records[0]);
-			dirlist.record		= records[0];
+			berkaslist.record		= records[0];
 			Earsip.berkas.id	= records[0].get ('id');
 		} else {
-			dirlist.record		= null;
+			berkaslist.record		= null;
 			Earsip.berkas.id	= 0;
 		}
-		dirlist.down ('#del').setDisabled (! records.length);
-		dirlist.down ('#share').setDisabled (! records.length);
+		berkaslist.down ('#del').setDisabled (! records.length);
+		berkaslist.down ('#share').setDisabled (! records.length);
 	}
 
 ,	do_mkdir : function (b)
@@ -82,12 +82,12 @@ Ext.define ('Earsip.controller.DirList', {
 			Ext.Msg.alert ('Kesalahan', 'Pilih tempat untuk direktori baru terlebih dahulu!');
 			return;
 		}
-		var dirlist		= this.getDirlist ();
-		var tgl_dibuat	= dirlist.win.down ('#tgl_dibuat');
+		var berkaslist		= this.getBerkaslist ();
+		var tgl_dibuat	= berkaslist.win.down ('#tgl_dibuat');
 
 		tgl_dibuat.setValue (new Date ());
 
-		dirlist.win.show ();
+		berkaslist.win.show ();
 	}
 
 ,	do_upload : function (b)
@@ -103,16 +103,16 @@ Ext.define ('Earsip.controller.DirList', {
 
 ,	do_refresh : function (b)
 	{
-		this.getDirlist ().do_load_list (Earsip.dir_id);
+		this.getBerkaslist ().do_load_list (Earsip.dir_id);
 	}
 
 ,	do_share : function (b)
 	{
-		var dirlist = this.getDirlist ();
+		var berkaslist = this.getBerkaslist ();
 
 		Earsip.acl = 4;
-		dirlist.win_share.load (dirlist.record);
-		dirlist.win_share.show ();
+		berkaslist.win_share.load (berkaslist.record);
+		berkaslist.win_share.show ();
 	}
 
 ,	do_delete : function (b)
@@ -135,7 +135,7 @@ Ext.define ('Earsip.controller.DirList', {
 			,	success	: function (form, action)
 				{
 					if (action.result.success == true) {
-						this.getDirlist ().do_load_list (Earsip.dir_id);
+						this.getBerkaslist ().do_load_list (Earsip.dir_id);
 						Ext.Msg.alert ('Informasi', action.result.info);
 					} else {
 						Ext.Msg.alert ('Error', action.result.info);
@@ -169,8 +169,8 @@ Ext.define ('Earsip.controller.DirList', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					this.getDirlist ().do_load_list (Earsip.dir_id);
-					this.getDirtree ().do_load_tree ();
+					this.getBerkaslist ().do_load_list (Earsip.dir_id);
+					this.getBerkastree ().do_load_tree ();
 					win.hide ();
 				} else {
 					Ext.Msg.alert ('Kesalahan', action.result.info);

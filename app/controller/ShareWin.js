@@ -4,8 +4,8 @@ Ext.define ('Earsip.controller.ShareWin', {
 		ref			: 'sharewin'
 	,	selector	: 'sharewin'
 	},{
-		ref			: 'dirlist'
-	,	selector	: 'dirlist'
+		ref			: 'berkaslist'
+	,	selector	: 'berkaslist'
 	}]
 ,	init		: function ()
 	{
@@ -92,7 +92,7 @@ Ext.define ('Earsip.controller.ShareWin', {
 			{
 				var o = Ext.decode (resp.responseText);
 				if (o.success == true) {
-					this.getDirlist ().do_load_list (Earsip.dir_id);
+					this.getBerkaslist ().do_load_list (Earsip.dir_id);
 					win.hide ();
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);

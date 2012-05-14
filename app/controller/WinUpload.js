@@ -4,8 +4,8 @@ Ext.define ('Earsip.controller.WinUpload', {
 		ref		: 'winupload'
 	,	selector: 'winupload'
 	},{
-		ref		: 'dirlist'
-	,	selector: 'dirlist'
+		ref		: 'berkaslist'
+	,	selector: 'berkaslist'
 	}]
 ,	init	: function ()
 	{
@@ -44,7 +44,7 @@ Ext.define ('Earsip.controller.WinUpload', {
 			,	success	: function (fp, o)
 				{
 					Ext.Msg.alert ('Unggah', o.result.info);
-					this.getDirlist ().do_load_list (Earsip.dir_id);
+					this.getBerkaslist ().do_load_list (Earsip.dir_id);
 				}
 			});
 		}
