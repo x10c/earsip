@@ -6,6 +6,7 @@
 --%>
 <%@ page import="java.io.File" %>
 <%@ page import="java.io.FileInputStream" %>
+<%@ page import="java.io.DataInputStream" %>
 <%@ page import="javax.servlet.ServletOutputStream" %>
 <%
 try {
@@ -13,19 +14,25 @@ try {
 	String				repo	= (String) session.getAttribute ("sys.repository_root");
 	String				berkas	= request.getParameter ("berkas");
 	String				nama	= request.getParameter ("nama");
-	File				f		= new File (rpath + repo +"/"+ berkas);
-	FileInputStream		fis		= new FileInputStream (f);
+	String				fpath	= rpath + repo +"/"+ berkas;
+	File				f		= new File (fpath);
 	ServletOutputStream	ostream	= response.getOutputStream();
+	ServletContext      context	= getServletConfig().getServletContext();
+	String              mimetype= context.getMimeType (fpath);
 	byte[]				obyte	= new byte[4096];
+	int					length	= 0;
 
-	response.setContentType("application/octet-stream");
+	response.setContentType ((mimetype != null) ? mimetype : "application/octet-stream");
+	response.setContentLength ((int) f.length());
 	response.setHeader("Content-Disposition","attachment;filename="+ nama);
 
-	while (fis.read (obyte, 0, 4096) != -1) {
-		ostream.write (obyte, 0, 4096);
+	DataInputStream dis = new DataInputStream (new FileInputStream(f));
+
+	while ((dis != null) && ((length = dis.read (obyte)) != -1)) {
+		ostream.write (obyte, 0, length);
 	}
 
-	fis.close ();
+	dis.close ();
 	ostream.flush ();
 	ostream.close ();
 } catch (Exception e) {

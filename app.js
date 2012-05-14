@@ -5,13 +5,13 @@ Ext.define ('Earsip', {
 ,	username		: ''
 ,	repo_path		: ''
 ,	acl				: 0
-,	dir_id			: 0
-,	tree_path		: ''
 ,	berkas			: {
 		id				: 0
+	,	pid				: 0
 	}
 ,	share			: {
 		id				: 0
+	,	pid				: 0
 	,	hak_akses_id	: 0
 	}
 });

@@ -54,8 +54,11 @@ Ext.define ('Earsip.view.SharedList', {
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-'
-		]
+		},'-',{
+			text		: 'Kembali'
+		,	itemId		: 'dirup'
+		,	iconCls		: 'dirup'
+		}]
 	}]
 ,	listeners	: {
 		activate : function (comp)
@@ -75,7 +78,38 @@ Ext.define ('Earsip.view.SharedList', {
 			params	: {
 				berkas_id : berkas_id
 			}
+		,	callback : function (records, op, success)
+			{
+				if (success == false) {
+					Ext.Msg.alert ('Kesalahan', 'Koneksi ke server mengalami gangguan.');
+				} else {
+					Earsip.share.id = records[0].get ('id');
+					Earsip.share.pid = records[0].get ('pid');
+				}
+			}
 		});
 	}
 
+,	do_load_up_list : function (pid)
+	{
+		this.getStore ().load ({
+			params	: {
+				berkas_pid : pid
+			}
+		,	callback : function (records, op, success)
+			{
+				if (success == false) {
+					Ext.Msg.alert ('Kesalahan', 'Koneksi ke server mengalami gangguan.');
+				} else {
+					Earsip.share.id = records[0].get ('id');
+					Earsip.share.pid = records[0].get ('pid');
+
+					var akses = records[0].get ('akses_berbagi_id');
+					if (akses != 0) {
+						Earsip.share.pid = 0;
+					}
+				}
+			}
+		});
+	}
 });

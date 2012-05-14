@@ -19,6 +19,7 @@ try {
 
 	String	user_id		= (String) session.getAttribute ("user.id");
 	String	berkas_id	= request.getParameter ("berkas_id");
+	String	berkas_pid	= request.getParameter ("berkas_pid");
 
 	q	=" select	BERKAS.id"
 		+" ,		pid"
@@ -42,7 +43,9 @@ try {
 		+" from		m_berkas			BERKAS"
 		+" ,		m_berkas_berbagi	BAGI";
 	if (berkas_id != null) {
-		q	+= " where BERKAS.pid = "+ berkas_id;
+		q	+=" where BERKAS.pid = "+ berkas_id;
+	} else if (berkas_pid != null) {
+		q	+=" where BERKAS.pid = (select pid from m_berkas where id = "+ berkas_pid +")";
 	} else {
 		q	+= " where ("
 			+"				(akses_berbagi_id = 3 or akses_berbagi_id = 4)"
@@ -52,9 +55,9 @@ try {
 			+"				(akses_berbagi_id = 1 or akses_berbagi_id = 2)"
 			+"			and	berkas_id		= BERKAS.id"
 			+"			and	bagi_ke_peg_id	= "+ user_id
-			+" )"
-			+" order by tipe_file, nama";
+			+" )";
 	}
+	q += " order by tipe_file, nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);

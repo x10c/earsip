@@ -60,19 +60,20 @@ Ext.define ('Earsip.view.BerkasList', {
 	,	items		: [{
 			text		: 'Folder baru'
 		,	itemId		: 'mkdir'
-		,	action		: 'mkdir'
 		,	iconCls		: 'add'
 		},'-',{
-			text		: 'Upload'
+			text		: 'Unggah'
 		,	itemId		: 'upload'
-		,	action		: 'upload'
 		,	iconCls		: 'upload'
 		},'-',{
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
-		,	action		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'->','-',{
+		},'-',{
+			text		: 'Kembali'
+		,	itemId		: 'dirup'
+		,	iconCls		: 'dirup'
+		},'-','->','-',{
 			text		: 'Bagi'
 		,	itemId		: 'share'
 		,	iconCls		: 'dir'

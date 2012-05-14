@@ -33,18 +33,18 @@ Ext.define ('Earsip.controller.BerkasTree', {
 ,	dir_selected : function (tree, records, opts)
 	{
 		if (records.length > 0) {
-			Earsip.dir_id		= records[0].get ('id');
-			Earsip.tree_path	= records[0].getPath ("text");
+			Earsip.berkas.id	= records[0].get ('id');
+			Earsip.berkas.pid	= records[0].get ('parentId');
 
-			this.getBerkaslist ().do_load_list (Earsip.dir_id);
+			this.getBerkaslist ().do_load_list (Earsip.berkas.id);
 		}
 	}
 
 ,	do_refresh : function ()
 	{
 		this.getBerkastree ().do_load_tree ();
-		Earsip.dir_id		= 0;
-		Earsip.path_tree	= '';
+		Earsip.berkas.id	= 0;
+		Earsip.berkas.pid	= 0;
 	}
 
 ,	do_open_trash : function (b)

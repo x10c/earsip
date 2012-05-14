@@ -38,10 +38,10 @@ try {
 	while (rs.next ()) {
 		node	= new JSONObject ();
 		name	= rs.getString ("nama");
-		id		= Integer.parseInt (rs.getString ("id"));
+		id		= rs.getInt ("id");
 
 		node.put ("id", id);
-		node.put ("pid", rs.getString("pid"));
+		node.put ("pid", rs.getInt ("pid"));
 		node.put ("text", name);
 
 		childs = get_list_dir (id, db_con);
@@ -95,11 +95,11 @@ try {
 		return;
 	}
 
-	id = Integer.parseInt(rs.getString("id"));
+	id = rs.getInt ("id");
 
-	node.put("id", id);
-	node.put("pid", 0);
-	node.put("text", rs.getString ("nama"));
+	node.put ("id", id);
+	node.put ("pid", 0);
+	node.put ("text", rs.getString ("nama"));
 
 	childs = get_list_dir (id, db_con);
 

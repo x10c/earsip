@@ -38,11 +38,13 @@ Ext.define ('Earsip.view.BerkasTree', {
 					this.resumeEvents ();
 					this.doLayout();
 
-					if (Earsip.dir_id != 0) {
-						var node = this.getRootNode ().findChild ('id', Earsip.dir_id, true);
+					if (Earsip.berkas.id != 0) {
+						var node = this.getRootNode ().findChild ('id', Earsip.berkas.id, true);
 
-						this.expandAll ();
-						this.getSelectionModel ().select (node);
+						if (node != null) {
+							this.expandAll ();
+							this.getSelectionModel ().select (node);
+						}
 					}
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);

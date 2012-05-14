@@ -13,6 +13,9 @@ Ext.define ('Earsip.controller.SharedList', {
 		,	'sharedlist button[itemId=refresh]': {
 				click : this.do_refresh
 			}
+		,	'sharedlist button[itemId=dirup]': {
+				click : this.do_dirup
+			}
 		});
 	}
 
@@ -22,11 +25,22 @@ Ext.define ('Earsip.controller.SharedList', {
 		if (t != 0) {
 			return;
 		}
-		this.getSharedlist ().do_load_list (r.get ('id'));
+
+		Earsip.share.id = r.get ('id');
+		Earsip.share.pid = r.get ('pid');
+
+		this.getSharedlist ().do_load_list (Earsip.share.id);
 	}
 
 ,	do_refresh : function (b)
 	{
 		this.getSharedlist ().getStore ().load ();
+	}
+
+,	do_dirup : function (b)
+	{
+		if (Earsip.share.pid != 0) {
+			this.getSharedlist ().do_load_up_list (Earsip.share.pid);
+		}
 	}
 });
