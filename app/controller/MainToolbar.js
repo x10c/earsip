@@ -39,7 +39,6 @@ Ext.define ('Earsip.controller.MainToolbar', {
 	}
 
 ,	menuitem_on_click : function (button)
-
 	{	
 		if (button.itemId == null) {
 			return;

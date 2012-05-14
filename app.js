@@ -184,9 +184,9 @@ Ext.application ({
 			Earsip.username = _g_username;
 			mainview.getLayout ().setActiveItem ('main');
 
-			var comp	= mainview.getLayout ().getActiveItem ();
-			var tb		= comp.down ('#maintoolbar');
-			var tree	= comp.down ('#berkastree');
+			var main	= mainview.getLayout ().getActiveItem ();
+			var tb		= main.getDockedComponent ('maintoolbar');
+			var tree	= main.down ('#berkastree');
 
 			tb.do_load_menu ();
 			tree.do_load_tree ();
