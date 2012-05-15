@@ -18,10 +18,17 @@ try {
 	}
 
 	String	user_id		= (String) session.getAttribute ("user.id");
-	String	berkas_id	= request.getParameter ("berkas_id");
-	String	berkas_pid	= request.getParameter ("berkas_pid");
+	String	id			= request.getParameter ("id");
+	String	pid			= request.getParameter ("pid");
+	String	peg_id		= request.getParameter ("peg_id");
 
-	q	=" select	BERKAS.id"
+	if (id.equalsIgnoreCase ("0")) {
+		out.print ("{success:true,data:["+ data +"]}");
+		return;
+	}
+
+	q	=" select	distinct"
+		+" 			BERKAS.id"
 		+" ,		pid"
 		+" ,		tipe_file"
 		+" ,		sha"
@@ -42,21 +49,20 @@ try {
 		+" ,		akses_berbagi_id"
 		+" from		m_berkas			BERKAS"
 		+" ,		m_berkas_berbagi	BAGI";
-	if (berkas_id != null) {
-		q	+=" where BERKAS.pid = "+ berkas_id;
-	} else if (berkas_pid != null) {
-		q	+=" where BERKAS.pid = (select pid from m_berkas where id = "+ berkas_pid +")";
+
+	if (pid.equalsIgnoreCase ("0")) {
+		q	+=" where pegawai_id = "+ peg_id
+			+ " and ((akses_berbagi_id = 3 or akses_berbagi_id = 4)"
+			+ " or  ((akses_berbagi_id = 1 or akses_berbagi_id = 2)"
+			+ "			and	berkas_id		= BERKAS.id"
+			+ "			and	bagi_ke_peg_id	= "+ user_id
+			+ " ))";
+	} else if (id.equalsIgnoreCase ("0")) {
+		q	+=" where id = "+ pid;
 	} else {
-		q	+= " where ("
-			+"				(akses_berbagi_id = 3 or akses_berbagi_id = 4)"
-			+"			and	pegawai_id		!= "+ user_id
-			+" )"
-			+" or ("
-			+"				(akses_berbagi_id = 1 or akses_berbagi_id = 2)"
-			+"			and	berkas_id		= BERKAS.id"
-			+"			and	bagi_ke_peg_id	= "+ user_id
-			+" )";
+		q	+=" where pid = "+ id;
 	}
+
 	q += " order by tipe_file, nama";
 
 	db_stmt = db_con.createStatement ();

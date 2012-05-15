@@ -1,7 +1,7 @@
 Ext.require ([
 	'Earsip.view.MainToolbar'
 ,	'Earsip.view.Berkas'
-,	'Earsip.view.SharedList'
+,	'Earsip.view.BerkasBerbagi'
 ]);
 
 Ext.define ('Earsip.view.Main', {
@@ -26,7 +26,7 @@ Ext.define ('Earsip.view.Main', {
 		,	items	: [{
 				xtype	: 'berkas'
 			},{
-				xtype	: 'sharedlist'
+				xtype	: 'berkasberbagi'
 			}]
 		}]
 	}]

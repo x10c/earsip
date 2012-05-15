@@ -12,6 +12,7 @@ Ext.define ('Earsip', {
 ,	share			: {
 		id				: 0
 	,	pid				: 0
+	,	peg_id			: 0
 	,	hak_akses_id	: 0
 	}
 });
@@ -81,7 +82,6 @@ Ext.application ({
 ,	models		: [
 		'Berkas'
 	,	'BerkasBerbagi'
-	,	'SharedList'
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
@@ -96,7 +96,7 @@ Ext.application ({
 ,	stores		: [
 		'Berkas'
 	,	'BerkasBerbagi'
-	,	'SharedList'
+	,	'BerkasBerbagiList'
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
@@ -120,7 +120,10 @@ Ext.application ({
 	,	'WinUpload'
 	,	'ShareWin'
 
-	,	'SharedList'
+	,	'BerkasBerbagiTree'
+	,	'BerkasBerbagiList'
+	,	'BerkasBerbagi'
+
 	,	'AdmSistem'
 	,	'AdmHakAksesMenu'
 	,	'Grup'
@@ -163,7 +166,7 @@ Ext.application ({
 	,	'Berkas'
 	,	'Trash'
 	,	'ShareWin'
-	,	'SharedList'
+	,	'BerkasBerbagi'
 	]
 	
 ,	launch		: function ()
