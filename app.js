@@ -8,6 +8,10 @@ Ext.define ('Earsip', {
 ,	berkas			: {
 		id				: 0
 	,	pid				: 0
+	,	tree			: {
+			id				: 0
+		,	pid				: 0
+		}
 	}
 ,	share			: {
 		id				: 0
@@ -118,7 +122,7 @@ Ext.application ({
 	,	'BerkasList'
 	,	'BerkasForm'
 	,	'WinUpload'
-	,	'ShareWin'
+	,	'BerkasBerbagiWin'
 
 	,	'BerkasBerbagiTree'
 	,	'BerkasBerbagiList'
@@ -151,8 +155,6 @@ Ext.application ({
 		'Login'
 	,	'MainToolbar'
 	,	'AdmHakAkses'
-	,	'BerkasTree'
-	,	'BerkasList'
 	,	'WinUpload'
 	,	'Grup'
 	,	'UnitKerja'
@@ -165,8 +167,8 @@ Ext.application ({
 	,	'GantiPassword'
 	,	'Berkas'
 	,	'Trash'
-	,	'ShareWin'
 	,	'BerkasBerbagi'
+	,	'BerkasBerbagiWin'
 	]
 	
 ,	launch		: function ()

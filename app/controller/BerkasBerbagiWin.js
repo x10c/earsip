@@ -1,8 +1,8 @@
-Ext.define ('Earsip.controller.ShareWin', {
+Ext.define ('Earsip.controller.BerkasBerbagiWin', {
 	extend		: 'Ext.app.Controller'
 ,	refs		: [{
-		ref			: 'sharewin'
-	,	selector	: 'sharewin'
+		ref			: 'berkasberbagi_win'
+	,	selector	: 'berkasberbagi_win'
 	},{
 		ref			: 'berkaslist'
 	,	selector	: 'berkaslist'
@@ -10,19 +10,19 @@ Ext.define ('Earsip.controller.ShareWin', {
 ,	init		: function ()
 	{
 		this.control ({
-			'sharewin button[itemId=add]' : {
+			'berkasberbagi_win button[itemId=add]' : {
 				click : this.do_add_pegawai
 			}
-		,	'sharewin button[itemId=del]' : {
+		,	'berkasberbagi_win button[itemId=del]' : {
 				click : this.do_del_pegawai
 			}
-		,	'sharewin button[itemId=save]' : {
+		,	'berkasberbagi_win button[itemId=save]' : {
 				click : this.do_submit
 			}
-		,	'sharewin combo[itemId=akses_berbagi_id]' : {
+		,	'berkasberbagi_win combo[itemId=akses_berbagi_id]' : {
 				select : this.do_akses_change
 			}
-		,	'sharewin > sharewin_grid > combo[itemId=pegawai]' : {
+		,	'berkasberbagi_win > berkasberbagi_win_grid > combo[itemId=pegawai]' : {
 				select : this.do_pegawai_selected
 			}
 		});
@@ -30,7 +30,7 @@ Ext.define ('Earsip.controller.ShareWin', {
 
 ,	do_add_pegawai : function (b)
 	{
-		var grid	= b.up ('#sharewin_grid');
+		var grid	= b.up ('#berkasberbagi_win_grid');
 		var editor	= grid.getPlugin ('roweditor');
 
 		editor.cancelEdit ();
@@ -48,7 +48,7 @@ Ext.define ('Earsip.controller.ShareWin', {
 
 ,	do_del_pegawai : function (b)
 	{
-		var grid = b.up ('#sharewin_grid');
+		var grid = b.up ('#berkasberbagi_win_grid');
 		var data = grid.getSelectionModel ().getSelection ();
 
 		if (data.length <= 0) {
@@ -61,8 +61,8 @@ Ext.define ('Earsip.controller.ShareWin', {
 
 ,	do_submit : function (b)
 	{
-		var win		= b.up ('#sharewin');
-		var grid	= b.up ('form').down ('#sharewin_grid');
+		var win		= b.up ('#berkasberbagi_win');
+		var grid	= b.up ('form').down ('#berkasberbagi_win_grid');
 		var records	= grid.getStore ().getRange ();
 		var pegs	= [];
 
@@ -92,7 +92,7 @@ Ext.define ('Earsip.controller.ShareWin', {
 			{
 				var o = Ext.decode (resp.responseText);
 				if (o.success == true) {
-					this.getBerkaslist ().do_load_list (Earsip.berkas.id);
+					this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
 					win.hide ();
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);
@@ -111,13 +111,13 @@ Ext.define ('Earsip.controller.ShareWin', {
 			return;
 		}
 
-		var form	= cb.up ('#sharewin_form');
+		var form	= cb.up ('#berkasberbagi_win_form');
 		var id		= r[0].get ('id');
 
 		Earsip.share.hak_akses_id = id;
 
 		if (id == 1 || id == 2) {
-			form.down ('#sharewin_grid').setDisabled (false);
+			form.down ('#berkasberbagi_win_grid').setDisabled (false);
 		} else {
 			form.down ('grid').setDisabled (true);
 		}

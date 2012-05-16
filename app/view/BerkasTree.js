@@ -38,8 +38,8 @@ Ext.define ('Earsip.view.BerkasTree', {
 					this.resumeEvents ();
 					this.doLayout();
 
-					if (Earsip.berkas.id != 0) {
-						var node = this.getRootNode ().findChild ('id', Earsip.berkas.id, true);
+					if (Earsip.berkas.tree.pid != 0) {
+						var node = this.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
 
 						if (node != null) {
 							this.expandAll ();

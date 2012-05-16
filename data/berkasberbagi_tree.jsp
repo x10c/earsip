@@ -14,7 +14,56 @@
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.json.JSONObject" %>
 <%!
-public JSONArray get_list_dir (Connection db_con, String user_id, int peg_id, int berkas_id)
+public JSONArray get_list_dir (Connection db_con, int berkas_id)
+{
+	JSONArray	nodes	= new JSONArray ();
+try {
+	Statement	db_stmt = db_con.createStatement ();
+	ResultSet	rs		= null;
+	String		q		= "";
+	String		nama	= "";
+	JSONArray	childs	= null;
+	JSONObject	node	= null;
+
+	q	=" select	id"
+		+" ,		pid"
+		+" ,		nama"
+		+" from		m_berkas"
+		+" where	pid			= "+ berkas_id
+		+" and		tipe_file	= 0"
+		+" and		status		= 1";
+
+	rs = db_stmt.executeQuery (q);
+
+	while (rs.next ()) {
+		node		= new JSONObject ();
+		nama		= rs.getString ("nama");
+		berkas_id	= rs.getInt ("id");
+
+		node.put ("id", berkas_id);
+		node.put ("pid", rs.getInt ("pid"));
+		node.put ("text", nama);
+
+		childs = get_list_dir (db_con, berkas_id);
+
+		if (childs.length () <= 0) {
+			node.put ("children", new JSONArray());
+		} else {
+			node.put ("children", childs);
+		}
+
+		nodes.put (node);
+	}
+
+	rs.close();
+
+	return nodes;
+} catch (Exception e) {
+	log("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+	return nodes;
+}}
+
+public JSONArray get_top_list_dir (Connection db_con, String user_id, int peg_id, int berkas_id)
 {
 	JSONArray	nodes	= new JSONArray ();
 try {
@@ -56,7 +105,7 @@ try {
 		node.put ("text", name);
 		node.put ("pegawai_id", peg_id);
 
-		childs = get_list_dir (db_con, user_id, peg_id, berkas_id);
+		childs = get_list_dir (db_con, berkas_id);
 
 		if (childs.length () <= 0) {
 			node.put ("children", new JSONArray());
@@ -127,7 +176,7 @@ try {
 		node.put ("text", nama);
 		node.put ("pegawai_id", peg_id);
 
-		childs = get_list_dir (db_con, user_id, peg_id, 0);
+		childs = get_top_list_dir (db_con, user_id, peg_id, 0);
 
 		if (childs.length () <= 0) {
 			node.put ("children", new JSONArray());

@@ -35,7 +35,7 @@ Ext.define ('Earsip.controller.WinUpload', {
 			form.submit ({
 				url		: 'data/upload.jsp'
 			,	params	: {
-					id		: Earsip.berkas.id
+					id		: Earsip.berkas.tree.id
 				,	name	: name
 				}
 			,	scope	: this
@@ -43,7 +43,7 @@ Ext.define ('Earsip.controller.WinUpload', {
 			,	success	: function (fp, o)
 				{
 					Ext.Msg.alert ('Unggah', o.result.info);
-					this.getBerkaslist ().do_load_list (Earsip.berkas.id);
+					this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
 				}
 			});
 		}

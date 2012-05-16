@@ -6,7 +6,7 @@ Ext.define ('Earsip.store.BerkasBerbagiList', {
 ,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
-	,	url			: 'data/sharedlist.jsp'
+	,	url			: 'data/berkasberbagi_list.jsp'
 	,	reader		: {
 			type		: 'json'
 		,	root		: 'data'

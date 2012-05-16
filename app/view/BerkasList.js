@@ -3,7 +3,7 @@ Ext.require ([
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
 ,	'Earsip.view.MkdirWin'
-,	'Earsip.view.ShareWin'
+,	'Earsip.view.BerkasBerbagiWin'
 ]);
 
 Ext.define ('Earsip.view.BerkasList', {
@@ -88,7 +88,7 @@ Ext.define ('Earsip.view.BerkasList', {
 ,	initComponent	: function ()
 	{
 		this.win		= Ext.create ('Earsip.view.MkdirWin', {});
-		this.win_share	= Ext.create ('Earsip.view.ShareWin', {});
+		this.win_share	= Ext.create ('Earsip.view.BerkasBerbagiWin', {});
 		this.callParent (arguments);
 	}
 

@@ -1,6 +1,9 @@
 Ext.define ('Earsip.controller.BerkasBerbagi', {
 	extend		: 'Ext.app.Controller'
 ,	refs		: [{
+		ref			: 'berkasberbagi'
+	,	selector	: 'berkasberbagi'
+	},{
 		ref			: 'berkasberbagitree'
 	,	selector	: 'berkasberbagitree'
 	},{
@@ -11,13 +14,14 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 	{
 		this.control ({
 			'berkasberbagitree': {
-				selectionchange : this.dir_selected
+				selectionchange : this.tree_selectionchange
 			}
 		,	'berkasberbagitree button[itemId=refresh]': {
 				click : this.tree_do_refresh
 			}
 		,	'berkasberbagilist' : {
-				itemdblclick : this.row_dbl_clicked
+				itemdblclick : this.list_itemdblclick
+			,	selectionchange : this.list_selectionchange
 			}
 		,	'berkasberbagilist button[itemId=refresh]': {
 				click : this.list_do_refresh
@@ -28,7 +32,7 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 		});
 	}
 
-,	dir_selected : function (tree, records, opts)
+,	tree_selectionchange : function (tree, records, opts)
 	{
 		if (records.length > 0) {
 			Earsip.share.id		= records[0].get ('id');
@@ -52,19 +56,31 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 		Earsip.share.pid	= 0;
 	}
 
-,	row_dbl_clicked : function (v, r, idx)
+,	list_itemdblclick : function (v, r, idx)
 	{
 		var t = r.get ("tipe_file");
 		if (t != 0) {
 			return;
 		}
 
-		Earsip.share.id = r.get ('id');
-		Earsip.share.pid = r.get ('pid');
+		Earsip.share.id		= r.get ('id');
+		Earsip.share.pid	= r.get ('pid');
 
-		this.getBerkasberbagilist ().do_load_list (Earsip.share.id
-												, Earsip.share.pid
-												, Earsip.share.peg_id);
+		var tree	= this.getBerkasberbagitree ();
+		var node	= tree.getRootNode ().findChild ('id', Earsip.share.id, true);
+
+		tree.expandAll ();
+		tree.getSelectionModel ().select (node);
+	}
+
+,	list_selectionchange : function (model, records)
+	{
+		var list = this.getBerkasberbagilist ();
+
+		if (records.length > 0) {
+			this.getBerkasberbagi ().down ('#berkasberbagi_form').loadRecord (records[0]);
+			Earsip.share.id	= records[0].get ('id');
+		}
 	}
 
 ,	list_do_refresh : function (b)
