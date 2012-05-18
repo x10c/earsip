@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     05/02/2012 05:54:39                          */
+/* Created on:     05/13/2012 13:14:55                          */
 /*==============================================================*/
 
 
@@ -88,11 +88,11 @@ HAK_AKSES_ID
 /*==============================================================*/
 create table M_ARSIP (
    BERKAS_ID            INT4                 not null,
-   ID                   INT2                 not null,
+   STATUS_ID            INT2                 not null,
    KODE_FOLDER          VARCHAR(255)         null,
    KODE_RAK             VARCHAR(255)         null,
    KODE_BOX             VARCHAR(255)         null,
-   constraint PK_M_ARSIP primary key (BERKAS_ID, ID)
+   constraint PK_M_ARSIP primary key (BERKAS_ID, STATUS_ID)
 );
 
 comment on table M_ARSIP is
@@ -103,7 +103,7 @@ comment on table M_ARSIP is
 /*==============================================================*/
 create unique index M_ARSIP_PK on M_ARSIP (
 BERKAS_ID,
-ID
+STATUS_ID
 );
 
 /*==============================================================*/
@@ -117,7 +117,7 @@ BERKAS_ID
 /* Index: REF__STATUS_BERKAS_FK                                 */
 /*==============================================================*/
 create  index REF__STATUS_BERKAS_FK on M_ARSIP (
-ID
+STATUS_ID
 );
 
 /*==============================================================*/
@@ -133,7 +133,7 @@ create table M_BERKAS (
    TIPE_FILE            INT2                 null default 0,
    SHA                  VARCHAR(255)         null,
    NAMA                 VARCHAR(255)         null,
-   TGL_UNGGAH           DATE                 not null default current_date,
+   TGL_UNGGAH           DATE                 not null default CURRENT_DATE,
    TGL_DIBUAT           DATE                 null,
    NOMOR                VARCHAR(64)          null,
    PEMBUAT              VARCHAR(255)         null,
@@ -142,7 +142,7 @@ create table M_BERKAS (
    JRA                  INT2                 null,
    STATUS               INT2                 null default 1,
    STATUS_HAPUS         INT2                 null default 1,
-   AKSES_BERBAGI_ID     INT4                 null default 0,
+   AKSES_BERBAGI_ID     INT2                 null default 0,
    constraint PK_M_BERKAS primary key (ID)
 );
 
@@ -188,6 +188,13 @@ UNIT_KERJA_ID
 /*==============================================================*/
 create  index REF__PEGAWAI__BERKAS_FK on M_BERKAS (
 PEGAWAI_ID
+);
+
+/*==============================================================*/
+/* Index: REF__AKSES_BERKAS_FK                                  */
+/*==============================================================*/
+create  index REF__AKSES_BERKAS_FK on M_BERKAS (
+AKSES_BERBAGI_ID
 );
 
 /*==============================================================*/
@@ -251,8 +258,8 @@ ID
 /*==============================================================*/
 create table M_MENU (
    ID                   SERIAL               not null,
-   PID                  INT8                 null,
    ICON                 VARCHAR(16)          null,
+   PID                  INT8                 null,
    NAMA_REF             VARCHAR(128)         null,
    NAMA                 VARCHAR(128)         null,
    constraint PK_M_MENU primary key (ID)
@@ -355,9 +362,9 @@ ID
 /* Table: PEMINJAMAN_RINCI                                      */
 /*==============================================================*/
 create table PEMINJAMAN_RINCI (
-   ID                   INT4                 not null,
+   PEMINJAMAN_ID        INT4                 not null,
    BERKAS_ID            INT4                 null,
-   constraint PK_PEMINJAMAN_RINCI primary key (ID)
+   constraint PK_PEMINJAMAN_RINCI primary key (PEMINJAMAN_ID)
 );
 
 comment on table PEMINJAMAN_RINCI is
@@ -367,7 +374,7 @@ comment on table PEMINJAMAN_RINCI is
 /* Index: PEMINJAMAN_RINCI_PK                                   */
 /*==============================================================*/
 create unique index PEMINJAMAN_RINCI_PK on PEMINJAMAN_RINCI (
-ID
+PEMINJAMAN_ID
 );
 
 /*==============================================================*/
@@ -590,9 +597,9 @@ UNIT_KERJA_ID
 /* Table: T_PEMINDAHAN_RINCI                                    */
 /*==============================================================*/
 create table T_PEMINDAHAN_RINCI (
-   ID                   INT4                 not null,
+   PEMINDAHAN_ID        INT4                 not null,
    BERKAS_ID            INT4                 not null,
-   constraint PK_T_PEMINDAHAN_RINCI primary key (ID, BERKAS_ID)
+   constraint PK_T_PEMINDAHAN_RINCI primary key (PEMINDAHAN_ID, BERKAS_ID)
 );
 
 comment on table T_PEMINDAHAN_RINCI is
@@ -602,7 +609,7 @@ comment on table T_PEMINDAHAN_RINCI is
 /* Index: T_PEMINDAHAN_RINCI_PK                                 */
 /*==============================================================*/
 create unique index T_PEMINDAHAN_RINCI_PK on T_PEMINDAHAN_RINCI (
-ID,
+PEMINDAHAN_ID,
 BERKAS_ID
 );
 
@@ -610,7 +617,7 @@ BERKAS_ID
 /* Index: REF_PINDAH___RINCI_FK                                 */
 /*==============================================================*/
 create  index REF_PINDAH___RINCI_FK on T_PEMINDAHAN_RINCI (
-ID
+PEMINDAHAN_ID
 );
 
 /*==============================================================*/
@@ -625,7 +632,7 @@ BERKAS_ID
 /*==============================================================*/
 create table T_PEMINJAMAN (
    ID                   SERIAL               not null,
-   UNIT_KERJA_ID        INT4                 null,
+   UNIT_KERJA_PEMINJAM_ID INT4                 null,
    NAMA_PETUGAS         VARCHAR(128)         null,
    NAMA_PIMPINAN_PETUGAS VARCHAR(128)         null,
    NAMA_PEMINJAM        VARCHAR(128)         null,
@@ -651,7 +658,7 @@ ID
 /* Index: REF__UNIT__PINJAM_FK                                  */
 /*==============================================================*/
 create  index REF__UNIT__PINJAM_FK on T_PEMINJAMAN (
-UNIT_KERJA_ID
+UNIT_KERJA_PEMINJAM_ID
 );
 
 /*==============================================================*/
@@ -689,12 +696,12 @@ METODA_ID
 /*==============================================================*/
 create table T_PEMUSNAHAN_RINCI (
    PEMUSNAHAN_ID        INT4                 not null,
-   ID                   INT4                 not null,
+   BERKAS_ID            INT4                 not null,
    KETERANGAN           VARCHAR(255)         null,
    JML_LEMBAR           INT2                 null,
    JML_SET              INT2                 null,
    JML_BERKAS           INT2                 null,
-   constraint PK_T_PEMUSNAHAN_RINCI primary key (PEMUSNAHAN_ID, ID)
+   constraint PK_T_PEMUSNAHAN_RINCI primary key (PEMUSNAHAN_ID, BERKAS_ID)
 );
 
 comment on table T_PEMUSNAHAN_RINCI is
@@ -705,7 +712,7 @@ comment on table T_PEMUSNAHAN_RINCI is
 /*==============================================================*/
 create unique index T_PEMUSNAHAN_RINCI_PK on T_PEMUSNAHAN_RINCI (
 PEMUSNAHAN_ID,
-ID
+BERKAS_ID
 );
 
 /*==============================================================*/
@@ -719,7 +726,7 @@ PEMUSNAHAN_ID
 /* Index: REF__BERKAS_RINCI_FK                                  */
 /*==============================================================*/
 create  index REF__BERKAS_RINCI_FK on T_PEMUSNAHAN_RINCI (
-ID
+BERKAS_ID
 );
 
 /*==============================================================*/
@@ -782,13 +789,18 @@ alter table M_ARSIP
       on delete restrict on update restrict;
 
 alter table M_ARSIP
-   add constraint FK_M_ARSIP_REF__STAT_R_ARSIP_ foreign key (ID)
+   add constraint FK_M_ARSIP_REF__STAT_R_ARSIP_ foreign key (STATUS_ID)
       references R_ARSIP_STATUS (ID)
       on delete restrict on update restrict;
 
 alter table M_BERKAS
    add constraint FK_M_BERKAS_REF_TIPE__R_BERKAS foreign key (BERKAS_TIPE_ID)
       references R_BERKAS_TIPE (ID)
+      on delete restrict on update restrict;
+
+alter table M_BERKAS
+   add constraint FK_M_BERKAS_REF__AKSE_R_AKSES_ foreign key (AKSES_BERBAGI_ID)
+      references R_AKSES_BERBAGI (ID)
       on delete restrict on update restrict;
 
 alter table M_BERKAS
@@ -804,11 +816,6 @@ alter table M_BERKAS
 alter table M_BERKAS
    add constraint FK_M_BERKAS_REF__UNIT_M_UNIT_K foreign key (UNIT_KERJA_ID)
       references M_UNIT_KERJA (ID)
-      on delete restrict on update restrict;
-
-alter table M_BERKAS
-   add constraint FK_M_BERKAS_BERBAGI_REF__R_AKSES_BERBAGI foreign key (AKSES_BERBAGI_ID)
-      references R_AKSES_BERBAGI (ID)
       on delete restrict on update restrict;
 
 alter table M_BERKAS_BERBAGI
@@ -837,7 +844,7 @@ alter table M_PEGAWAI
       on delete restrict on update restrict;
 
 alter table PEMINJAMAN_RINCI
-   add constraint FK_PEMINJAM_REF_PMJ_A_T_PEMINJ foreign key (ID)
+   add constraint FK_PEMINJAM_REF_PMJ_A_T_PEMINJ foreign key (PEMINJAMAN_ID)
       references T_PEMINJAMAN (ID)
       on delete restrict on update restrict;
 
@@ -867,12 +874,12 @@ alter table T_PEMINDAHAN_RINCI
       on delete restrict on update restrict;
 
 alter table T_PEMINDAHAN_RINCI
-   add constraint FK_T_PEMIND_REF_PINDA_T_PEMIND foreign key (ID)
+   add constraint FK_T_PEMIND_REF_PINDA_T_PEMIND foreign key (PEMINDAHAN_ID)
       references T_PEMINDAHAN (ID)
       on delete restrict on update restrict;
 
 alter table T_PEMINJAMAN
-   add constraint FK_T_PEMINJ_REF__UNIT_M_UNIT_K foreign key (UNIT_KERJA_ID)
+   add constraint FK_T_PEMINJ_REF__UNIT_M_UNIT_K foreign key (UNIT_KERJA_PEMINJAM_ID)
       references M_UNIT_KERJA (ID)
       on delete restrict on update restrict;
 
@@ -887,7 +894,7 @@ alter table T_PEMUSNAHAN_RINCI
       on delete restrict on update restrict;
 
 alter table T_PEMUSNAHAN_RINCI
-   add constraint FK_T_PEMUSN_REF__BERK_M_BERKAS foreign key (ID)
+   add constraint FK_T_PEMUSN_REF__BERK_M_BERKAS foreign key (BERKAS_ID)
       references M_BERKAS (ID)
       on delete restrict on update restrict;
 
@@ -895,3 +902,4 @@ alter table T_TIM_PEMUSNAHAN
    add constraint FK_T_TIM_PE_REF__MUSN_T_PEMUSN foreign key (ID)
       references T_PEMUSNAHAN (ID)
       on delete restrict on update restrict;
+

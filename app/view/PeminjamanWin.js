@@ -1,4 +1,5 @@
 Ext.require ('Earsip.store.BerkasPinjam');
+
 Ext.define('Earsip.view.PeminjamanWin', {
 	extend		: 'Ext.Window'
 ,	alias		: 'widget.peminjaman_win'
@@ -19,6 +20,11 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	frame		: true
 	,	border		: 0
 	,	bodyPadding	: 5	
+	,	layout		: 'anchor'
+	,	defaults	: {
+			xtype	: 'textfield'
+		,	anchor	: '100%'
+	}
 	,	items		: [{
 			hidden			: true
 		,	itemId			: 'id'
@@ -27,10 +33,10 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			xtype		:'fieldset'
 		,	title		: 'Data Petugas'
         ,   collapsible	: true
-        ,   defaultType	: 'textfield'
         ,   layout		: 'anchor'
         ,   defaults	: {
-                anchor: '100%'
+				xtype	: 'textfield'
+			,	anchor	: '100%'
 			}
 		,	items	: [{
 				fieldLabel		: 'Nama'
@@ -51,7 +57,8 @@ Ext.define('Earsip.view.PeminjamanWin', {
         ,   defaultType	: 'textfield'
         ,   layout		: 'anchor'
         ,   defaults	: {
-                anchor: '100%'
+				xtype	: 'textfield'
+			,	anchor	: '100%'
 			}
 		,	items	: [{
 				xtype			: 'combo'
@@ -78,10 +85,10 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			xtype		:'fieldset'
 		,	title		: 'Data Pengembalian'
         ,   collapsible	: true
-        ,   defaultType	: 'textfield'
         ,   layout		: 'anchor'
         ,   defaults	: {
-                anchor: '100%'
+                xtype	: 'textfield'
+			,	anchor	: '100%'
 			}
 		,	items	: [{
 				xtype			: 'datefield'
@@ -90,7 +97,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			,	name			: 'tgl_pinjam'
 			,	format			: 'Y-m-d'
 			,	value			: new Date ()
-			,	disabled		: true
+			,	editable		: false
 			
 			},{
 				xtype			: 'datefield'
@@ -107,6 +114,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			,	itemId			: 'tgl_kembali'
 			,	name			: 'tgl_kembali'
 			,	format			: 'Y-m-d'
+			, 	value			: 'null'
 			,	hidden			: true
 			
 			}]
@@ -115,7 +123,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 		, 	fieldLabel		: 'Keterangan'
 		,	itemId			: 'keterangan'
 		,	name			: 'keterangan'
-		,	anchor			: '100%'
+		
 		},{
 			xtype			: 'grid'
 		,	itemId			: 'peminjaman_rinci'
@@ -171,6 +179,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				}]
 			}]
 		}]
+	
 		
 	}]
 ,	buttons			: [{
@@ -180,5 +189,25 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
+,	load : function (record)
+	{
+		var grid = this.down ('#peminjaman_rinci');
 
+		Ext.data.StoreManager.lookup ('BerkasPinjam').load ({
+			scope	: this
+		,	callback: function (r, op, success)
+			{
+				if (success) {
+					this.down ('form').getForm ().loadRecord (record);
+
+					grid.params = {
+						peminjaman_id  : record ().get ('id')
+					}
+					grid.getStore ().load ({
+						params	: grid.params
+					});
+				}
+			}
+		});
+	}
 });

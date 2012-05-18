@@ -1,17 +1,21 @@
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.sql.Date" %>
+<%@ page import="java.sql.Types" %>
 <%@ page import="java.lang.StringBuilder" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="org.json.JSONObject" %>
 <%
 Connection			db_con	= null;
-PreparedStatement	db_stmt	= null;
+PreparedStatement	db_pstmt	= null;
+Statement			db_stmt	= null;
 String				db_url	= "";
 String				q		= "";
 String				data	= "";
+ResultSet			rs		= null;
 
 BufferedReader	reader		= null;
 StringBuilder	sb			= new StringBuilder();
@@ -38,6 +42,7 @@ try {
 		response.sendRedirect (request.getContextPath());
 		return;
 	}
+	
 	action	= request.getParameter ("action");
 	id 		= request.getParameter ("id");
 	
@@ -87,16 +92,16 @@ try {
 			+" , tgl_kembali"        		
 			+" , keterangan)"      	
 			+" values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		db_stmt = db_con.prepareStatement (q);
-		db_stmt.setInt	  (1, Integer.parseInt(unit_kerja_peminjam_id));
-		db_stmt.setString (2, nm_ptgs);
-		db_stmt.setString (3, nm_pim_ptgs);
-		db_stmt.setString (4, nm_peminjam);      		
-        db_stmt.setString (5, nm_pim_peminjam);
-		db_stmt.setDate   (6, Date.valueOf(tgl_pinjam));  		
-		db_stmt.setDate   (7, Date.valueOf(tgl_batas));       		
-		db_stmt.setDate   (8, Date.valueOf(tgl_kembali));        		
-		db_stmt.setString (9, keterangan);
+		db_pstmt = db_con.prepareStatement (q);
+		db_pstmt.setInt	  (1, Integer.parseInt(unit_kerja_peminjam_id));
+		db_pstmt.setString (2, nm_ptgs);
+		db_pstmt.setString (3, nm_pim_ptgs);
+		db_pstmt.setString (4, nm_peminjam);      		
+        db_pstmt.setString (5, nm_pim_peminjam);
+		db_pstmt.setDate   (6, Date.valueOf(tgl_pinjam));  		
+		db_pstmt.setDate   (7, Date.valueOf(tgl_batas));       		
+		db_pstmt.setNull   (8, Types.DATE);        		
+		db_pstmt.setString (9, keterangan);
 		
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update	t_peminjaman"
@@ -111,26 +116,41 @@ try {
 		    +" ,        keterangan = ?"  
 			+" where	id = ?";
 		
-		db_stmt = db_con.prepareStatement (q);
-		db_stmt.setInt(1, Integer.parseInt(unit_kerja_peminjam_id));
-		db_stmt.setString(2, nm_ptgs);
-		db_stmt.setString(3, nm_pim_ptgs);
-		db_stmt.setString(4, nm_peminjam);
-		db_stmt.setString(5, nm_pim_peminjam);
-		db_stmt.setDate(6, Date.valueOf(tgl_pinjam));
-		db_stmt.setDate(7, Date.valueOf(tgl_batas));
-		db_stmt.setDate(8, Date.valueOf(tgl_kembali));
-		db_stmt.setString(9, keterangan);
-		db_stmt.setInt(10, Integer.parseInt(id));
+		db_pstmt = db_con.prepareStatement (q);
+		db_pstmt.setInt(1, Integer.parseInt(unit_kerja_peminjam_id));
+		db_pstmt.setString(2, nm_ptgs);
+		db_pstmt.setString(3, nm_pim_ptgs);
+		db_pstmt.setString(4, nm_peminjam);
+		db_pstmt.setString(5, nm_pim_peminjam);
+		db_pstmt.setDate(6, Date.valueOf(tgl_pinjam));
+		db_pstmt.setDate(7, Date.valueOf(tgl_batas));
+		db_pstmt.setNull(8, Types.DATE);
+		db_pstmt.setString(9, keterangan);
+		db_pstmt.setInt(10, Integer.parseInt(id));
 		
 	}else if (action.equalsIgnoreCase ("destroy")) {
 		q	=" delete from t_peminjaman where id = ?";
-		db_stmt = db_con.prepareStatement (q);
-		db_stmt.setInt (1, Integer.parseInt (id));
+		db_pstmt = db_con.prepareStatement (q);
+		db_pstmt.setInt (1, Integer.parseInt (id));
 	}
 
-	db_stmt.executeUpdate ();
-	out.print ("{success:true}");
+	db_pstmt.executeUpdate ();
+	
+	if (action.equalsIgnoreCase ("create")){
+		q =" select Max(id) as new_id from t_peminjaman";
+	
+		db_stmt = db_con.createStatement ();
+		rs = db_stmt.executeQuery (q);
+		String new_id = "";
+		if (rs.next ()){
+			new_id = rs.getString ("new_id");
+		}
+		
+		out.print ("{success:true,info:'Data Penyimpanan berhasil disimpan',data:"+new_id +"}");
+		rs. close ();
+	} else {
+		out.print ("{success:true,info:'Data Penyimpanan berhasil disimpan'}");
+	}
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");

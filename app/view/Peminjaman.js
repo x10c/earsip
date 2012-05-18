@@ -1,13 +1,26 @@
-Ext.require ('Earsip.view.PeminjamanWin');
+Ext.require ([
+	'Earsip.view.PeminjamanWin'
+,	'Earsip.store.Peminjaman'
+,	'Earsip.store.UnitKerja'
+]);
 
 Ext.define ('Earsip.view.Peminjaman', {
 	extend			: 'Ext.grid.Panel'
+,	id				: 'trans_peminjaman'
 ,	alias			: 'widget.trans_peminjaman'
 ,	itemId			: 'trans_peminjaman'
 ,	title			: 'Daftar Peminjaman'
 ,	store			: 'Peminjaman'
 ,	closable		: true
+,	plugins		: [
+		Ext.create ('Earsip.plugin.RowEditor')
+	]
 ,	columns			: [{
+		text		: 'ID'
+	,	dataIndex	: 'id'
+	, 	hidden		: true
+	, 	hideable	: false
+	},{
 		text		: 'Unit Kerja Peminjam'
 	,	dataIndex	: 'unit_kerja_peminjam_id'
 	,	flex		: 0.5
@@ -28,35 +41,35 @@ Ext.define ('Earsip.view.Peminjaman', {
 			return combo_renderer (v, this.columns[colidx]);
 		}
 	},{
-		
-		text			: 'Peminjam'
-	,	dataIndex		: 'nm_peminjam'
+		text			: 'Nama Peminjam'
+	,	dataIndex		: 'nama_peminjam'
 	,	flex			: 0.5
 	},{
 		text			: 'Pimpinan Peminjam'
-	,	dataIndex		: 'nm_pim_peminjam'
+	,	dataIndex		: 'nama_pimpinan_peminjam'
 	,	flex			: 0.5
 	},{
-		text			: 'Tanggal'
-	,	dataIndex		: 'tgl_pinjam'
-	,	flex			: 0.5
-	},{
-		text			: 'Petugas'
-	,	dataIndex		: 'nm_ptgs'
+		text			: 'Nama Petugas'
+	,	dataIndex		: 'nama_petugas'
 	,	flex			: 0.5
 	},{
 		text			: 'Pimpinan Petugas'
-	,	dataIndex		: 'nm_pim_ptgs'
+	,	dataIndex		: 'nama_pimpinan_petugas'
 	,	flex			: 0.5
 	},{
-		text			: 'Batas Kembali'
-	,	dataIndex		: 'tgl_batas'
+		text			: 'Tanggal Peminjaman'
+	,	dataIndex		: 'tgl_pinjam'
+	,	flex			: 0.5
+	},{
+		text			: 'Tanggal Batas Pengembalian'
+	,	dataIndex		: 'tgl_batas_kembali'
 	,	flex			: 0.5
 	},{
 		text			: 'Tanggal Kembali'
 	,	dataIndex		: 'tgl_kembali'
 	,	flex			: 0.5
 	,	hidden			: true
+	,	hideable		: false
 	},{
 		text			: 'Keterangan'
 	,	dataIndex		: 'keterangan'
@@ -95,10 +108,9 @@ Ext.define ('Earsip.view.Peminjaman', {
 		{
 			this.getStore ().load ();
 		}
-	,	afterrender : function (comp)
+	,	removed			: function (comp)
 		{
-			this.win = Ext.create ('Earsip.view.PeminjamanWin', {});
-			this.win.hide ();
+			this.destroy ();
 		}
 	}
 });

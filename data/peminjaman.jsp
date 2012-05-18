@@ -18,7 +18,7 @@ try {
 		return;
 	}
 	String user_id 	= (String) session.getAttribute ("user.id");
-	q	=" select		A.id"
+	q	=" select		Distinct(A.id)"
 		+" ,			A.unit_kerja_peminjam_id"
 		+" ,			A.nama_petugas"
 		+" ,			A.nama_pimpinan_petugas"
@@ -29,17 +29,16 @@ try {
 		+" ,			A.tgl_kembali"
 		+" ,			A.keterangan"
 		+" from			(t_peminjaman A"
-		+" left join	peminjaman_rinci B"
-		+" on			A.id = B.peminjaman_id)"
+		+" left join	peminjaman_rinci B "
+		+" on			A.id = B.peminjaman_id )"
 		+" left join	m_berkas C"
 		+" on 			C.id = B.berkas_id"
 		+" where		C.status = 1"
 		+" and 			C.pegawai_id = "+ user_id
-		+" and			A.tgl_kembali = null";
+		+" and			A.tgl_kembali is null";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
-
 	while (rs.next ()) {
 		if (i > 0) {
 			data += ",";
@@ -58,7 +57,6 @@ try {
 				+ "\n, keterangan				:'"+ rs.getString ("keterangan") +"'"
 				+ "\n}";
 	}
-
 	out.print ("{success:true,data:["+ data +"]}");
 	rs.close ();
 }
