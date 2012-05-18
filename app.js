@@ -5,13 +5,18 @@ Ext.define ('Earsip', {
 ,	username		: ''
 ,	repo_path		: ''
 ,	acl				: 0
-,	dir_id			: 0
-,	tree_path		: ''
 ,	berkas			: {
 		id				: 0
+	,	pid				: 0
+	,	tree			: {
+			id				: 0
+		,	pid				: 0
+		}
 	}
 ,	share			: {
 		id				: 0
+	,	pid				: 0
+	,	peg_id			: 0
 	,	hak_akses_id	: 0
 	}
 });
@@ -81,7 +86,6 @@ Ext.application ({
 ,	models		: [
 		'Berkas'
 	,	'BerkasBerbagi'
-	,	'SharedList'
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
@@ -92,14 +96,11 @@ Ext.application ({
 	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'IndeksRelatif'
-	,	'Peminjaman'
-	,	'PeminjamanRinci'
-	,	'BerkasPinjam'
 	]
 ,	stores		: [
 		'Berkas'
 	,	'BerkasBerbagi'
-	,	'SharedList'
+	,	'BerkasBerbagiList'
 	,	'User'
 	,	'Grup'
 	,	'MenuAccess'
@@ -111,22 +112,22 @@ Ext.application ({
 	,	'TipeArsip'
 	,	'IndeksRelatif'
 	,	'Trash'
-	,	'Peminjaman'
-	,	'PeminjamanRinci'
-	,	'BerkasPinjam'
 	]
 ,	views		: [
 		'Main'
 	,	'MainToolbar'
-	,	'DirTree'
 
 	,	'Berkas'
-	,	'DirList'
-	,	'WinUpload'
+	,	'BerkasTree'
+	,	'BerkasList'
 	,	'BerkasForm'
-	,	'ShareWin'
+	,	'WinUpload'
+	,	'BerkasBerbagiWin'
 
-	,	'SharedList'
+	,	'BerkasBerbagiTree'
+	,	'BerkasBerbagiList'
+	,	'BerkasBerbagi'
+
 	,	'AdmSistem'
 	,	'AdmHakAksesMenu'
 	,	'Grup'
@@ -149,14 +150,11 @@ Ext.application ({
 
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
-	,	'Peminjaman'
 	]
 ,	controllers	: [
 		'Login'
 	,	'MainToolbar'
 	,	'AdmHakAkses'
-	,	'DirTree'
-	,	'DirList'
 	,	'WinUpload'
 	,	'Grup'
 	,	'UnitKerja'
@@ -169,9 +167,8 @@ Ext.application ({
 	,	'GantiPassword'
 	,	'Berkas'
 	,	'Trash'
-	,	'ShareWin'
-	,	'SharedList'
-	,	'Peminjaman'
+	,	'BerkasBerbagi'
+	,	'BerkasBerbagiWin'
 	]
 	
 ,	launch		: function ()
@@ -192,9 +189,9 @@ Ext.application ({
 			Earsip.username = _g_username;
 			mainview.getLayout ().setActiveItem ('main');
 
-			var comp	= mainview.getLayout ().getActiveItem ();
-			var tb		= comp.down ('#maintoolbar');
-			var tree	= comp.down ('#dirtree');
+			var main	= mainview.getLayout ().getActiveItem ();
+			var tb		= main.getDockedComponent ('maintoolbar');
+			var tree	= main.down ('#berkastree');
 
 			tb.do_load_menu ();
 			tree.do_load_tree ();

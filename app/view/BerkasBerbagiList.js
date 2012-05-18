@@ -1,21 +1,20 @@
 Ext.require ([
-	'Earsip.store.Berkas'
+	'Earsip.store.BerkasBerbagiList'
+,	'Earsip.store.UnitKerja'
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
-,	'Earsip.view.MkdirWin'
-,	'Earsip.view.ShareWin'
 ]);
 
-Ext.define ('Earsip.view.DirList', {
+Ext.define ('Earsip.view.BerkasBerbagiList', {
 	extend		: 'Ext.grid.Panel'
-,	alias		: 'widget.dirlist'
-,	itemId		: 'dirlist'
-,	store		: 'Berkas'
+,	alias		: 'widget.berkasberbagilist'
+,	itemId		: 'berkasberbagilist'
+,	store		: 'BerkasBerbagiList'
 ,	columns		: [{
 		text		: 'Nama'
+	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	hideable	: false
-	,	dataIndex	: 'nama'
 	,	renderer	: function (v, md, r)
 		{
 			if (r.get ('tipe_file') == 0) {
@@ -28,6 +27,10 @@ Ext.define ('Earsip.view.DirList', {
 			}
 		}
 	},{
+		text		: 'Unit Kerja'
+	,	dataIndex	: 'unit_kerja_id'
+	,	renderer	: store_renderer ('id', 'nama', Ext.getStore ('UnitKerja'))
+	},{
 		text		: 'Klasifikasi'
 	,	width		: 150
 	,	dataIndex	: 'berkas_klas_id'
@@ -39,63 +42,48 @@ Ext.define ('Earsip.view.DirList', {
 	,	renderer	: store_renderer ('id', 'nama', Ext.getStore ('TipeArsip'))
 	},{
 		text		: 'Tanggal Dibuat'
-	,	width		: 150
 	,	dataIndex	: 'tgl_dibuat'
-	},{
-		text		: 'Status'
-	,	dataIndex	: 'status'
-	,	hidden		: true
-	,	renderer	: function (v, md, r)
-		{
-			if (v == 1) {
-				return 'Aktif';
-			}
-			return 'Non-Aktif';
-		}
+	,	width		: 150
 	}]
 ,	dockedItems	: [{
 		xtype		: 'toolbar'
 	,	dock		: 'top'
 	,	flex		: 1
 	,	items		: [{
-			text		: 'Folder baru'
-		,	itemId		: 'mkdir'
-		,	action		: 'mkdir'
-		,	iconCls		: 'add'
-		},'-',{
-			text		: 'Upload'
-		,	itemId		: 'upload'
-		,	action		: 'upload'
-		,	iconCls		: 'upload'
-		},'-',{
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
-		,	action		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'->','-',{
-			text		: 'Bagi'
-		,	itemId		: 'share'
-		,	iconCls		: 'dir'
-		,	disabled	: true
 		},'-',{
-			text		: 'Hapus'
-		,	itemId		: 'del'
-		,	iconCls		: 'del'
-		,	disabled	: true
+			text		: 'Kembali'
+		,	itemId		: 'dirup'
+		,	iconCls		: 'dirup'
 		}]
 	}]
+,	listeners	: {
+		activate : function (comp)
+		{
+			this.getStore ().load ();
+		}
+	}
+
 ,	initComponent	: function ()
 	{
-		this.win		= Ext.create ('Earsip.view.MkdirWin', {});
-		this.win_share	= Ext.create ('Earsip.view.ShareWin', {});
 		this.callParent (arguments);
 	}
 
-,	do_load_list : function (berkas_id)
+,	do_load_list : function (id, pid, peg_id)
 	{
 		this.getStore ().load ({
 			params	: {
-				berkas_id : berkas_id
+				id		: id
+			,	pid		: pid
+			,	peg_id	: peg_id
+			}
+		,	callback : function (records, op, success)
+			{
+				if (success == false) {
+					Ext.Msg.alert ('Kesalahan', 'Koneksi ke server mengalami gangguan.');
+				}
 			}
 		});
 	}

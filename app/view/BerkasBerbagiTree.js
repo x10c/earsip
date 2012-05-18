@@ -1,8 +1,7 @@
-Ext.define ('Earsip.view.DirTree', {
+Ext.define ('Earsip.view.BerkasBerbagiTree', {
 	extend		: 'Ext.tree.Panel'
-,	alias		: 'widget.dirtree'
-,	id			: 'dirtree'
-,	title		: 'Direktori'
+,	alias		: 'widget.berkasberbagitree'
+,	id			: 'berkasberbagitree'
 ,	region		: 'west'
 ,	width		: 220
 ,	margins		: '5 0 0 5'
@@ -14,9 +13,6 @@ Ext.define ('Earsip.view.DirTree', {
 	,	items		: [{
 			itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-','->','-', {
-			itemId		: 'trash'
-		,	iconCls		: 'trash'
 		}]
 	}]
 
@@ -28,7 +24,7 @@ Ext.define ('Earsip.view.DirTree', {
 ,	do_load_tree : function ()
 	{
 		Ext.Ajax.request ({
-			url		: 'data/dirtree.jsp'
+			url		: 'data/berkasberbagi_tree.jsp'
 		,	scope	: this
 		,	success	: function (response) {
 				var o = Ext.decode(response.responseText);
@@ -38,11 +34,13 @@ Ext.define ('Earsip.view.DirTree', {
 					this.resumeEvents ();
 					this.doLayout();
 
-					if (Earsip.dir_id != 0) {
-						var node = this.getRootNode ().findChild ('id', Earsip.dir_id, true);
+					if (Earsip.share.id != 0) {
+						var node = this.getRootNode ().findChild ('id', Earsip.share.id, true);
 
-						this.expandAll ();
-						this.getSelectionModel ().select (node);
+						if (node != null) {
+							this.expandAll ();
+							this.getSelectionModel ().select (node);
+						}
 					}
 				} else {
 					Ext.Msg.alert ('Kesalahan', o.info);

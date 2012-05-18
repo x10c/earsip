@@ -50,7 +50,6 @@ try {
 	String		k			= null;
 	String		v			= null;
 	String		pid			= "";
-	String		path		= "";
 	String		name		= "";
 	String		filename	= "";
 	long		filesize	= 0;
@@ -62,10 +61,8 @@ try {
 			k = item.getFieldName();
 			v = item.getString ();
 
-			if (k.equals("dir_id")) {
+			if (k.equals("id")) {
 				pid = v;
-			} else if (k.equals ("path")) {
-				path = v;
 			} else if (k.equals ("name")) {
 				name = v;
 			}

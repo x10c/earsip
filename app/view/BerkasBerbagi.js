@@ -1,38 +1,32 @@
 Ext.require ([
-	'Earsip.view.BerkasTree'
-,	'Earsip.view.BerkasList'
+	'Earsip.view.BerkasBerbagiTree'
+,	'Earsip.view.BerkasBerbagiList'
 ,	'Earsip.view.BerkasForm'
 ]);
 
-Ext.define ('Earsip.view.Berkas', {
+Ext.define ('Earsip.view.BerkasBerbagi', {
 	extend		: 'Ext.container.Container'
-,	alias		: 'widget.berkas'
-,	itemId		: 'berkas'
-,	title		: 'Berkas'
+,	alias		: 'widget.berkasberbagi'
+,	itemId		: 'berkasberbagi'
+,	title		: 'Berkas berbagi'
 ,	layout		: 'border'
 ,	items		: [{
-		xtype		: 'berkastree'
+		xtype		: 'berkasberbagitree'
 	,	region		: 'west'
 	},{
 		xtype		: 'container'
 	,	region		: 'center'
 	,	layout		: 'border'
 	,	items		: [{
-			xtype		: 'berkaslist'
+			xtype		: 'berkasberbagilist'
 		,	region		: 'center'
 		},{
 			xtype		: 'berkasform'
-		,	itemId		: 'berkas_form'
-		,	url			: 'data/berkas_submit.jsp'
+		,	itemId		: 'berkasberbagi_form'
 		,	region		: 'south'
 		,	split		: true
 		,	collapsible	: true
 		,	header		: false
-		,	buttons		: [{
-				text		: 'Simpan'
-			,	itemId		: 'save'
-			,	iconCls		: 'save'
-			}]
 		}]
 	}]
 });

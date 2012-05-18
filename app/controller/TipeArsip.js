@@ -54,7 +54,7 @@ Ext.define ('Earsip.controller.TipeArsip', {
 	{
 		var grid = button.up ('#ref_tipe_arsip');
 		var data = grid.getSelectionModel ().getSelection ();
-		console.log(data.length);
+
 		if (data.length <= 0) {
 			return;
 		}

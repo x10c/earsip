@@ -1,21 +1,21 @@
 Ext.require ([
-	'Earsip.store.SharedList'
-,	'Earsip.store.UnitKerja'
+	'Earsip.store.Berkas'
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
+,	'Earsip.view.MkdirWin'
+,	'Earsip.view.BerkasBerbagiWin'
 ]);
 
-Ext.define ('Earsip.view.SharedList', {
+Ext.define ('Earsip.view.BerkasList', {
 	extend		: 'Ext.grid.Panel'
-,	alias		: 'widget.sharedlist'
-,	itemId		: 'sharedlist'
-,	store		: 'SharedList'
-,	title		: 'Berkas Berbagi'
+,	alias		: 'widget.berkaslist'
+,	itemId		: 'berkaslist'
+,	store		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'
-	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	hideable	: false
+	,	dataIndex	: 'nama'
 	,	renderer	: function (v, md, r)
 		{
 			if (r.get ('tipe_file') == 0) {
@@ -28,10 +28,6 @@ Ext.define ('Earsip.view.SharedList', {
 			}
 		}
 	},{
-		text		: 'Unit Kerja'
-	,	dataIndex	: 'unit_kerja_id'
-	,	renderer	: store_renderer ('id', 'nama', Ext.getStore ('UnitKerja'))
-	},{
 		text		: 'Klasifikasi'
 	,	width		: 150
 	,	dataIndex	: 'berkas_klas_id'
@@ -43,29 +39,56 @@ Ext.define ('Earsip.view.SharedList', {
 	,	renderer	: store_renderer ('id', 'nama', Ext.getStore ('TipeArsip'))
 	},{
 		text		: 'Tanggal Dibuat'
-	,	dataIndex	: 'tgl_dibuat'
 	,	width		: 150
+	,	dataIndex	: 'tgl_dibuat'
+	},{
+		text		: 'Status'
+	,	dataIndex	: 'status'
+	,	hidden		: true
+	,	renderer	: function (v, md, r)
+		{
+			if (v == 1) {
+				return 'Aktif';
+			}
+			return 'Non-Aktif';
+		}
 	}]
 ,	dockedItems	: [{
 		xtype		: 'toolbar'
 	,	dock		: 'top'
 	,	flex		: 1
 	,	items		: [{
+			text		: 'Folder baru'
+		,	itemId		: 'mkdir'
+		,	iconCls		: 'add'
+		},'-',{
+			text		: 'Unggah'
+		,	itemId		: 'upload'
+		,	iconCls		: 'upload'
+		},'-',{
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-'
-		]
+		},'-',{
+			text		: 'Kembali'
+		,	itemId		: 'dirup'
+		,	iconCls		: 'dirup'
+		},'-','->','-',{
+			text		: 'Bagi'
+		,	itemId		: 'share'
+		,	iconCls		: 'dir'
+		,	disabled	: true
+		},'-',{
+			text		: 'Hapus'
+		,	itemId		: 'del'
+		,	iconCls		: 'del'
+		,	disabled	: true
+		}]
 	}]
-,	listeners	: {
-		activate : function (comp)
-		{
-			this.getStore ().load ();
-		}
-	}
-
 ,	initComponent	: function ()
 	{
+		this.win		= Ext.create ('Earsip.view.MkdirWin', {});
+		this.win_share	= Ext.create ('Earsip.view.BerkasBerbagiWin', {});
 		this.callParent (arguments);
 	}
 
@@ -77,5 +100,4 @@ Ext.define ('Earsip.view.SharedList', {
 			}
 		});
 	}
-
 });

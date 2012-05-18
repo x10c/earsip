@@ -12,10 +12,10 @@ var s_acl = Ext.create ('Ext.data.Store', {
 	]
 });
 
-Ext.define ('Earsip.view.ShareWin', {
+Ext.define ('Earsip.view.BerkasBerbagiWin', {
 	extend		: 'Ext.Window'
-,	alias		: 'widget.sharewin'
-,	itemId		: 'sharewin'
+,	alias		: 'widget.berkasberbagi_win'
+,	itemId		: 'berkasberbagi_win'
 ,	title		: 'Berbagi berkas'
 ,	width		: 400
 ,	closable	: true
@@ -25,7 +25,7 @@ Ext.define ('Earsip.view.ShareWin', {
 ,	border		: false
 ,	items		: [{
 		xtype		: 'form'
-	,	itemId		: 'sharewin_form'
+	,	itemId		: 'berkasberbagi_win_form'
 	,	plain		: true
 	,	frame		: true
 	,	autoScroll	: true
@@ -59,7 +59,7 @@ Ext.define ('Earsip.view.ShareWin', {
 		,	editable	: false
 		},{
 			xtype		: 'grid'
-		,	itemId		: 'sharewin_grid'
+		,	itemId		: 'berkasberbagi_win_grid'
 		,	name		: 'bagi_ke_peg_id'
 		,	title		: 'Bagi ke pegawai'
 		,	store		: 'BerkasBerbagi'
@@ -110,14 +110,14 @@ Ext.define ('Earsip.view.ShareWin', {
 
 ,	load : function (record)
 	{
-		var grid = this.down ('#sharewin_grid');
+		var grid = this.down ('#berkasberbagi_win_grid');
 
 		Ext.data.StoreManager.lookup ('Pegawai').load ({
 			scope	: this
 		,	callback: function (r, op, success)
 			{
 				if (success) {
-					this.down ('#sharewin_form').loadRecord (record);
+					this.down ('#berkasberbagi_win_form').loadRecord (record);
 
 					grid.getStore ().load ({
 						params	: {

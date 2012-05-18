@@ -20,7 +20,7 @@ try {
 
 	String user_id		= (String) session.getAttribute ("user.id");
 	String uk_id		= (String) session.getAttribute ("user.unit_kerja_id");
-	String dir_id		= request.getParameter ("dir_id");
+	String dir_id		= request.getParameter ("berkas_id");
 	String nama			= request.getParameter ("nama");
 	String tgl_dibuat	= request.getParameter ("tgl_dibuat");
 	String klas_id		= request.getParameter ("berkas_klas_id");
