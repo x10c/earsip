@@ -92,6 +92,9 @@ Ext.application ({
 	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'IndeksRelatif'
+	,	'Peminjaman'
+	,	'PeminjamanRinci'
+	,	'BerkasPinjam'
 	]
 ,	stores		: [
 		'Berkas'
@@ -108,6 +111,9 @@ Ext.application ({
 	,	'TipeArsip'
 	,	'IndeksRelatif'
 	,	'Trash'
+	,	'Peminjaman'
+	,	'PeminjamanRinci'
+	,	'BerkasPinjam'
 	]
 ,	views		: [
 		'Main'
@@ -143,6 +149,7 @@ Ext.application ({
 
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
+	,	'Peminjaman'
 	]
 ,	controllers	: [
 		'Login'
@@ -164,6 +171,7 @@ Ext.application ({
 	,	'Trash'
 	,	'ShareWin'
 	,	'SharedList'
+	,	'Peminjaman'
 	]
 	
 ,	launch		: function ()
