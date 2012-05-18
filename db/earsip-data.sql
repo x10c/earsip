@@ -25,7 +25,7 @@ INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (21, 20, 'module', 'ma
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (22, 20, 'module', 'mas_pegawai', 'Pegawai');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (23, 20, 'module', 'mas_arsip', 'Arsip');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (30,  0,  'trans', 'trans', 'Transaksi');
-INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (31, 30, 'module', 'trans_penyerahan', 'Penyerahan');
+INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (31, 30, 'module', 'trans_pemindahan', 'Pemindahan');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (32, 30, 'module', 'trans_peminjaman', 'Peminjaman');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (33, 30, 'module', 'trans_pengembalian', 'Pengembalian');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (34, 30, 'module', 'trans_pemusnahan', 'Pemusnahan');
