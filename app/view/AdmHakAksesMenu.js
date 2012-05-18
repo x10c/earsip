@@ -53,6 +53,7 @@ Ext.define ('Earsip.view.AdmHakAksesMenu', {
 	,	flex			: 1
 	,	items			: [{
 			text			: 'Refresh'
+		,	iconCls			: 'refresh'
 		,	handler			: function (button)
 			{
 				var grid = button.up ('#adm_hak_akses_menu');
