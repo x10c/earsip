@@ -8,6 +8,7 @@ Ext.require ([
 ,	'Earsip.view.KlasArsip'
 ,	'Earsip.view.RefIndeksRelatif'
 ,	'Earsip.view.Jabatan'
+,	'Earsip.view.Peminjaman'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
@@ -52,6 +53,7 @@ Ext.define ('Earsip.controller.MainToolbar', {
 		var c = tabpanel.getComponent (button.itemId);
 		if (c == undefined) {
 			tabpanel.add ({
+				
 				xtype	: button.itemId
 			});
 		}
