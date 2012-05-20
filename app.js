@@ -99,6 +99,9 @@ Ext.application ({
 	, 	'Peminjaman'
 	,	'BerkasPinjam'
 	,	'PeminjamanRinci'
+	,	'Pemindahan'
+	,	'PemindahanRinci'
+	,	'BerkasPindah'
 	]
 ,	stores		: [
 		'Berkas'
@@ -118,6 +121,9 @@ Ext.application ({
 	,	'Peminjaman'
 	,	'PeminjamanRinci'
 	,	'BerkasPinjam'
+	,	'Pemindahan'
+	,	'PemindahanRinci'
+	,	'BerkasPindah'
 	]
 ,	views		: [
 		'Main'
@@ -159,6 +165,9 @@ Ext.application ({
 	
 	,	'Peminjaman'
 	,	'PeminjamanWin'
+	,	'Pemindahan'
+	,	'PemindahanWin'
+	,	'PemindahanRinciWin'
 	]
 ,	controllers	: [
 		'Login'
@@ -179,6 +188,7 @@ Ext.application ({
 	,	'BerkasBerbagi'
 	,	'BerkasBerbagiWin'
 	,	'Peminjaman'
+	,	'Pemindahan'
 	]
 	
 ,	launch		: function ()

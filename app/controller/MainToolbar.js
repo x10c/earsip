@@ -9,6 +9,7 @@ Ext.require ([
 ,	'Earsip.view.RefIndeksRelatif'
 ,	'Earsip.view.Jabatan'
 ,	'Earsip.view.Peminjaman'
+, 	'Earsip.view.Pemindahan'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
