@@ -4,8 +4,6 @@
  % Author(s):
  % + PT. Awakami
  %   - m.shulhan (ms@kilabit.org)
- %
- % TODO: replace with a single query.
 --%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>

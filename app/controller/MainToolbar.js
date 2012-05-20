@@ -8,6 +8,7 @@ Ext.require ([
 ,	'Earsip.view.KlasArsip'
 ,	'Earsip.view.RefIndeksRelatif'
 ,	'Earsip.view.Jabatan'
+,	'Earsip.view.Arsip'
 ,	'Earsip.view.Peminjaman'
 , 	'Earsip.view.Pemindahan'
 ]);

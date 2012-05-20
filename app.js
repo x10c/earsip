@@ -19,6 +19,18 @@ Ext.define ('Earsip', {
 	,	peg_id			: 0
 	,	hak_akses_id	: 0
 	}
+,	arsip			: {
+		id				: 0
+	,	pid				: 0
+	,	tree			: {
+			id				: 0
+		,	pid				: 0
+		,	unit_kerja_id	: 0
+		,	kode_rak		: ''
+		,	kode_box		: ''
+		,	kode_folder		: ''
+		}
+	}
 });
 
 Ext.define ('Earsip.plugin.RowEditor', {
@@ -124,6 +136,7 @@ Ext.application ({
 	,	'Pemindahan'
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
+	,	'Arsip'
 	]
 ,	views		: [
 		'Main'

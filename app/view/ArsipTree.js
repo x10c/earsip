@@ -1,8 +1,7 @@
-Ext.define ('Earsip.view.BerkasTree', {
+Ext.define ('Earsip.view.ArsipTree', {
 	extend		: 'Ext.tree.Panel'
-,	alias		: 'widget.berkastree'
-,	id			: 'berkastree'
-,	title		: 'Folder Berkas'
+,	alias		: 'widget.arsiptree'
+,	itemId		: 'arsiptree'
 ,	region		: 'west'
 ,	width		: 220
 ,	margins		: '5 0 0 5'
@@ -14,10 +13,8 @@ Ext.define ('Earsip.view.BerkasTree', {
 	,	items		: [{
 			itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-','->','-', {
-			itemId		: 'trash'
-		,	iconCls		: 'trash'
-		}]
+		},'-'
+		]
 	}]
 
 ,	initComponent	: function()
@@ -28,9 +25,10 @@ Ext.define ('Earsip.view.BerkasTree', {
 ,	do_load_tree : function ()
 	{
 		Ext.Ajax.request ({
-			url		: 'data/berkas_tree.jsp'
+			url		: 'data/arsip_tree.jsp'
 		,	scope	: this
-		,	success	: function (response) {
+		,	success	: function (response)
+			{
 				var o = Ext.decode(response.responseText);
 				if (o.success == true) {
 					this.suspendEvents (false);
@@ -38,8 +36,8 @@ Ext.define ('Earsip.view.BerkasTree', {
 					this.resumeEvents ();
 					this.doLayout();
 
-					if (Earsip.berkas.tree.pid != 0) {
-						var node = this.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
+					if (Earsip.arsip.tree.pid != 0) {
+						var node = this.getRootNode ().findChild ('id', Earsip.arsip.tree.id, true);
 
 						if (node != null) {
 							this.expandAll ();
@@ -51,7 +49,7 @@ Ext.define ('Earsip.view.BerkasTree', {
 				}
 			}
 		,	failure	: function (response) {
-				Ext.Msg.alert ('Kesalahan', 'Server error: data berkas tidak dapat diambil!');
+				Ext.Msg.alert ('Kesalahan', 'Server error: data arsip tidak dapat diambil!');
 			}
 		});
 	}

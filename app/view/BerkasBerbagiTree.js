@@ -47,7 +47,7 @@ Ext.define ('Earsip.view.BerkasBerbagiTree', {
 				}
 			}
 		,	failure	: function (response) {
-				Ext.Msg.alert ('Kesalahan', 'Server error: data menu tidak dapat diambil!');
+				Ext.Msg.alert ('Kesalahan', 'Server error: data berkas berbagi tidak dapat diambil!');
 			}
 		});
 	}
