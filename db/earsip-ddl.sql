@@ -88,7 +88,7 @@ HAK_AKSES_ID
 /*==============================================================*/
 create table M_ARSIP (
    BERKAS_ID            INT4                 not null,
-   ID                   SERIAL               not null,
+   STATUS_ID            INT2                 not null,
    KODE_FOLDER          VARCHAR(255)         null,
    KODE_RAK             VARCHAR(255)         null,
    KODE_BOX             VARCHAR(255)         null,
