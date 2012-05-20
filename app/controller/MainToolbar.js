@@ -11,6 +11,7 @@ Ext.require ([
 ,	'Earsip.view.Arsip'
 ,	'Earsip.view.Peminjaman'
 , 	'Earsip.view.Pemindahan'
+,	'Earsip.view.Pemusnahan'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {

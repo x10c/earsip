@@ -112,6 +112,7 @@ Ext.application ({
 	,	'Pemindahan'
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
+	,	'Pemusnahan'
 	]
 ,	stores		: [
 		'Berkas'
@@ -135,6 +136,7 @@ Ext.application ({
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
 	,	'Arsip'
+	,	'Pemusnahan'
 	]
 ,	views		: [
 		'Main'
@@ -179,6 +181,7 @@ Ext.application ({
 	,	'Pemindahan'
 	,	'PemindahanWin'
 	,	'PemindahanRinciWin'
+	,	'Pemusnahan'
 	]
 ,	controllers	: [
 		'Login'
@@ -200,6 +203,7 @@ Ext.application ({
 	,	'BerkasBerbagiWin'
 	,	'Peminjaman'
 	,	'Pemindahan'
+	,	'Pemusnahan'
 	]
 	
 ,	launch		: function ()
