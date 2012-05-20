@@ -53,11 +53,9 @@ Ext.define ('Earsip.plugin.RowEditor', {
 	,	edit				: function (editor, e)
 		{
 			editor.action = 'none';
-			if (editor.grid.store.autoSync) {
-				editor.grid.store.sync ({
-					params	: editor.grid.params
-				});
-			}
+			editor.grid.store.sync ({
+				params	: editor.grid.params
+			});
 		}
 	,	canceledit			: function (editor)
 		{
