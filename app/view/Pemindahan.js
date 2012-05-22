@@ -4,7 +4,6 @@ Ext.require ([
 ,	'Earsip.store.Pemindahan'
 ,	'Earsip.store.PemindahanRinci'
 ,	'Earsip.store.BerkasPindah'
-,	'Earsip.store.UnitKerja'
 ]);
 
 Ext.define ('Earsip.view.Pemindahan', {
@@ -26,7 +25,6 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	itemId			: 'pemindahan_grid'
 	,	title			: 'Daftar Pemindahan'
 	,	store			: 'Pemindahan'
-	,	closable		: true
 	,	region			: 'center'
 	,	flex			: 1
 	,	plugins		: [
@@ -108,12 +106,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	itemId			: 'berkas_pindah_grid'
 	,	title			: 'Daftar Berkas'
 	,	store			: 'PemindahanRinci'
-	,	closable		: true
 	,	region			: 'south'
 	,	flex			: 1
-	,	plugins		: [
-			Ext.create ('Earsip.plugin.RowEditor')
-		]
 	,	columns			: [{
 			text		: 'ID'
 		,	dataIndex	: 'pemindahan_id'
@@ -121,24 +115,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 		, 	hideable	: false
 		},{
 			text		: 'Berkas'
-		,	dataIndex	: 'Berkas_id'
-		,	flex		: 0.5
-		,	editor		: {
-				xtype			: 'combo'
-			,	store			: Ext.create ('Earsip.store.BerkasPindah',{
-						autoLoad	: true
-				})
-			,	displayField	: 'nama'
-			,	valueField		: 'id'
-			,	triggerAction	: 'all'
-			,	lazyRender		: true
-			,	mode			: 'local'
-			,	autoSelect		: true
-			}
-	,		renderer	: function (v, md, r, rowidx, colidx)
-			{
-				return combo_renderer (v, this.columns[colidx]);
-			}
+		,	dataIndex	: 'berkas_nama'
+		,	flex		: 1
 		}]
 	,	dockedItems	: [{
 			xtype		: 'toolbar'
@@ -162,6 +140,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 		activate		: function (comp)
 		{
 			var grid = this.down ('#pemindahan_grid');
+			grid.getStore ().load ();
+			grid = this.down ('#berkas_pindah_grid');
 			grid.getStore ().load ();
 		}
 		,	removed			: function (comp)

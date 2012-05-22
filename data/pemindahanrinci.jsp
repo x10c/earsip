@@ -18,13 +18,14 @@ try {
 		return;
 	}
 	String pemindahan_id	= request.getParameter ("pemindahan_id");
-	String user_id = (String) session.getAttribute ("user.id");
 	
-		q	=" select	pemindahan_id"
-			+" ,		berkas_id"
-			+" from		t_pemindahan_rinci"
+		q	=" select	A.pemindahan_id"
+			+" ,		B.nama"
+			+" from		t_pemindahan_rinci A"
+			+" left join m_berkas B"
+			+" on 		A.berkas_id = B.id"
 			+" where	pemindahan_id = "+pemindahan_id
-			+" order by berkas_id";
+			+" order by B.nama";
 	
 
 	db_stmt	= db_con.createStatement ();
@@ -37,7 +38,7 @@ try {
 			i++;
 		}
 		data	+="{ pemindahan_id	: "+ rs.getString ("pemindahan_id")
-				+ ", berkas_id	: "+ rs.getString ("berkas_id")
+				+ ", berkas_nama	: '"+ rs.getString ("nama") + "'"
 				+ "}";
 	}
 

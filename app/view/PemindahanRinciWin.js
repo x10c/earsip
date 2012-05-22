@@ -33,7 +33,10 @@ Ext.define('Earsip.view.PemindahanRinciWin', {
 		,	fieldLabel		: 'Berkas'
 		,	itemId			: 'berkas_id'
 		,	name			: 'berkas_id'
-		,	store			: 'BerkasPindah'
+		,	store			: Ext.create ('Earsip.store.BerkasPindah',{
+				autoLoad	: true
+			,	autoSync	: true
+		})
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
 		,	editable		: false
@@ -48,4 +51,10 @@ Ext.define('Earsip.view.PemindahanRinciWin', {
 	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
+,	listeners	: {
+		activate	: function (comp)
+		{
+			this.down ('#berkas_id').getStore ().load ()
+		}
+	}
 });

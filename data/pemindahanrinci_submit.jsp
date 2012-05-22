@@ -51,7 +51,7 @@ try {
 	}
 
 	db_stmt.executeUpdate ();
-	out.print ("{success:true,info:'Data Berkas berhasil disimnpan'}");
+	out.print ("{success:true,info:'Data Berkas berhasil disimpan'}");
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");

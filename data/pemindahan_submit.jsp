@@ -63,11 +63,7 @@ try {
 		pj_unit_kerja	= o.getString ("pj_unit_kerja");
 		pj_unit_arsip	= o.getString ("pj_unit_arsip");
 		
-		if (status.equalsIgnoreCase ("true")) {
-			status = "1";
-		} else {
-			status = "0";
-		}
+		
 		
 	} else {
 		uk_id			= request.getParameter ("unit_kerja_id");
@@ -78,6 +74,12 @@ try {
 		pj_unit_kerja	= request.getParameter ("pj_unit_kerja");
 		pj_unit_arsip	= request.getParameter ("pj_unit_arsip");
 	}
+	
+	if ((status == null)||(status.equalsIgnoreCase ("true"))) {
+			status = "1";
+		} else {
+			status = "0";
+		}
 	
 	
 	if ((uk_id == null) || (nm_petugas == null))

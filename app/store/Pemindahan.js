@@ -19,4 +19,5 @@ Ext.define ('Earsip.store.Pemindahan', {
 			type		: 'json'
 		}
 	}
+
 });
