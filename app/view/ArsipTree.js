@@ -29,7 +29,7 @@ Ext.define ('Earsip.view.ArsipTree', {
 		,	scope	: this
 		,	success	: function (response)
 			{
-				var o = Ext.decode(response.responseText);
+				var o = Ext.decode (response.responseText);
 				if (o.success == true) {
 					this.suspendEvents (false);
 					this.setRootNode (o.data);

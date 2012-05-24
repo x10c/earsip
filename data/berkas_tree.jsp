@@ -1,9 +1,8 @@
 <%--
- % Copyright 2011 - PT. Perusahaan Gas Negara Tbk.
+ % Copyright 2012 - kilabit.org
  %
  % Author(s):
- % + PT. Awakami
- %   - m.shulhan (ms@kilabit.org)
+ %  - m.shulhan (ms@kilabit.org)
 --%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
