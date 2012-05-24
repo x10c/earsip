@@ -1,3 +1,5 @@
+Ext.require ('Earsip.view.NotifPemindahan');
+
 Ext.define ('Earsip.controller.Login', {
 	extend	: 'Ext.app.Controller'
 ,	refs	: [{
@@ -36,6 +38,17 @@ Ext.define ('Earsip.controller.Login', {
 					if (action.result.success == true) {
 						win.hide ();
 						Earsip.username = action.result.user_name;
+						var tabpanel = this.getMainview ().down ('#content_tab');
+						if (action.result.is_pusatarsip == true){
+							if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
+								tabpanel.add ({
+									xtype	: 'notif_pemindahan'
+								}); 
+								tabpanel.setActiveTab ('notif_pemindahan');
+							}
+						} else {
+							tabpanel.remove ('notif_pemindahan');
+						}
 						this.getMainview ().getLayout ().setActiveItem ('main');
 						this.getMaintoolbar ().do_load_menu ();
 						this.getBerkastree ().do_load_tree ();

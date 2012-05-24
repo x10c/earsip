@@ -127,8 +127,7 @@ try {
 
 		db_stmt.executeUpdate (q);
 	}
-
-	out.print ("{success:true, user_name:'"+ user_name +"'}");
+	out.print ("{success:true, user_name:'"+ user_name +"',is_pusatarsip:"+(user_grup_id.equals("3")?true:false)+"}");
 	rs.close ();
 }
 catch (Exception e) {

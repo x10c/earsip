@@ -182,6 +182,8 @@ Ext.application ({
 	,	'PemindahanWin'
 	,	'PemindahanRinciWin'
 	,	'Pemusnahan'
+	,	'NotifPemindahan'
+	,	'NotifPemindahanWin'
 	]
 ,	controllers	: [
 		'Login'
@@ -204,6 +206,7 @@ Ext.application ({
 	,	'Peminjaman'
 	,	'Pemindahan'
 	,	'Pemusnahan'
+	,	'NotifPemindahan'
 	]
 	
 ,	launch		: function ()
@@ -218,18 +221,28 @@ Ext.application ({
 		viewport.show ();
 
 		Earsip.repo_path = _g_repo_path;
-		
 		if (is_login) {
 			win.hide ();
 			Earsip.username = _g_username;
+			
 			mainview.getLayout ().setActiveItem ('main');
-
 			var main	= mainview.getLayout ().getActiveItem ();
 			var tb		= main.getDockedComponent ('maintoolbar');
 			var tree	= main.down ('#berkastree');
 
 			tb.do_load_menu ();
 			tree.do_load_tree ();
+			var tabpanel = mainview.down ('#content_tab');
+			if (is_pusatarsip == 1){
+				if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
+					tabpanel.add ({
+						xtype	: 'notif_pemindahan'
+					}); 
+					tabpanel.setActiveTab ('notif_pemindahan');
+				} 
+			}else {
+				tabpanel.remove ('notif_pemindahan');		
+			}
 		} else {
 			win.show ();
 		}

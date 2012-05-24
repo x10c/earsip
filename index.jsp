@@ -30,6 +30,7 @@ String		user_grup_id	= null;
 String		user_name		= null;
 String		user_nip		= null;
 int			is_login		= 0;
+int			is_pusatarsip	= 0;
 
 /* get user cookies data */
 if (cookies != null) {
@@ -78,10 +79,15 @@ if (user == null) {
 		session.setAttribute ("user.nama", user_name);
 		session.setAttribute ("user.nip", user_nip);
 		is_login = 1;
+		
 	}
 } else {
 	is_login = 1;
 }
+if (user_grup_id != null && user_grup_id.equals ("3")) {
+	is_pusatarsip = 1;
+}
+
 %>
 <html>
 <head>
@@ -90,6 +96,7 @@ if (user == null) {
 	<link rel="stylesheet" type="text/css" href="app.css">
 	<script>
 		var is_login = <%= is_login %>;
+		var is_pusatarsip = '<%= is_pusatarsip %>';
 		var _g_username = '<%= user_name %>';
 		var _g_repo_path = '<%= request.getContextPath() + repo_root %>';
 	</script>
