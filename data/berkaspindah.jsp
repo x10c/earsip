@@ -21,16 +21,17 @@ try {
 	
 	
 	
-	q	=" select	id"
+	q	=" SELECT	id"
 		+" ,		pegawai_id"
 		+" ,		unit_kerja_id"
 		+" ,		nama"
 		+" ,		status"
-		+" from		m_berkas"
-		+" where	pegawai_id		= "+ user_id
-		+" and		status			= 1"
-		+" and 		pid > 0"
-		+" order by nama";
+		+" FROM		m_berkas A"
+		+" WHERE	id NOT IN (SELECT berkas_id AS id FROM t_pemindahan_rinci)"
+		+" AND 		pegawai_id		= "+ user_id
+		+" AND		status_hapus	= 1"
+		+" AND 		unit_kerja_id	IS NOT null"
+		+" ORDER BY nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);

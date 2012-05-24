@@ -23,6 +23,12 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		,	'trans_pemindahan #pemindahan_grid button[action=edit]': {
 				click : this.do_edit_pemindahan
 			}
+		,	'trans_pemindahan #pemindahan_grid button[action=refresh]': {
+				click : this.do_refresh_pemindahan
+			}
+		,	'trans_pemindahan #pemindahan_grid button[action=del]': {
+				click : this.do_delete_pemindahan
+			}
 		,	'pemindahan_win button[action=submit]': {
 				click : this.do_pemindahan_submit
 			}
@@ -79,6 +85,17 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		
 	}
 
+,	do_refresh_pemindahan: function (button)
+	{
+		var panel = this.getTrans_pemindahan ();
+		var grid_rinci = panel.down ('#berkas_pindah_grid');
+		var grid = button.up ('#pemindahan_grid');
+		
+		grid.getStore ().load ();
+		grid_rinci.getStore ().load ();
+		
+	}
+	
 ,	do_edit_pemindahan: function (button)
 	{
 		var panel = this.getTrans_pemindahan ();
@@ -91,15 +108,29 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		panel.win.action = 'update';
 		
 	}
+	
+,	do_delete_pemindahan : function (button)
+	{
+		var grid = button.up ('#pemindahan_grid');
+		var data = grid.getSelectionModel ().getSelection ();
+		if (data.length <= 0) {
+			return;
+		}
 
+		var store = grid.getStore ();
+		store.remove (data);
+		store.sync ();
+	}
 ,	do_add_berkas_pindah: function (button)
 	{
 		var panel = this.getTrans_pemindahan ();
-
+		
 		if (panel.win2 == undefined) {
 			panel.win2 = Ext.create ('Earsip.view.PemindahanRinciWin', {});
 		}
 		
+		var form = panel.win2.down ('form').getForm ();
+		form.reset ();
 		panel.win2.down ('#pemindahan_id').setValue (idc);
 		panel.win2.show ();
 		panel.win2.action = 'create';
@@ -166,6 +197,14 @@ Ext.define ('Earsip.controller.Pemindahan', {
 			{
 				if (action.result.success == true) {
 					Ext.Msg.alert ('Informasi', action.result.info);
+					if (win.action=='update')
+					{	
+						win.hide ();
+					}
+					else
+					{
+						form.reset ();
+					}
 					grid.params = {
 						pemindahan_id : idc
 					}

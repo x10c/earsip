@@ -42,7 +42,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				fieldLabel		: 'Nama'
 			,	itemId			: 'nama_petugas'
 			,	name			: 'nama_petugas'
-			,	value			: new String (Earsip.username)
+			,	initialValue	: 'TEST'
 			//,	disabled 		: true
 			},{
 				fieldLabel		: 'Nama Pimpinan'
@@ -191,8 +191,8 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	}]
 ,	load : function (record)
 	{
+		alert (Earsip.username);
 		var grid = this.down ('#peminjaman_rinci');
-
 		Ext.data.StoreManager.lookup ('BerkasPinjam').load ({
 			scope	: this
 		,	callback: function (r, op, success)

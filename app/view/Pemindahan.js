@@ -4,7 +4,6 @@ Ext.require ([
 ,	'Earsip.store.Pemindahan'
 ,	'Earsip.store.PemindahanRinci'
 ,	'Earsip.store.BerkasPindah'
-,	'Earsip.store.UnitKerja'
 ]);
 
 Ext.define ('Earsip.view.Pemindahan', {
@@ -110,9 +109,6 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	region			: 'south'
 	,	autoScroll		: true
 	,	flex			: 1
-	,	plugins		: [
-			Ext.create ('Earsip.plugin.RowEditor')
-		]
 	,	columns			: [{
 			text		: 'ID'
 		,	dataIndex	: 'pemindahan_id'
@@ -161,6 +157,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 		activate		: function (comp)
 		{
 			var grid = this.down ('#pemindahan_grid');
+			grid.getStore ().load ();
+			grid = this.down ('#berkas_pindah_grid');
 			grid.getStore ().load ();
 		}
 		,	removed			: function (comp)

@@ -3,6 +3,7 @@ Ext.define ('Earsip.store.BerkasPindah', {
 ,	storeId		: 'BerkasPindah'
 ,	model		: 'Earsip.model.BerkasPindah'
 ,	autoSync	: false
+,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
 	,	api			: {
