@@ -89,7 +89,7 @@ try {
 			
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setString (1, nama);
-		db_stmt.setInt (2, Integer.parseInt(status));
+		db_stmt.setInt (2, Integer.parseInt("0")); // set berkas inaktif
 		db_stmt.setInt (3, Integer.parseInt(arsip_status_id));
 		db_stmt.setInt (4, Integer.parseInt (berkas_id));
 		
