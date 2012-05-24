@@ -50,27 +50,31 @@ Ext.define ('Earsip.view.Pemindahan', {
 		,	dataIndex		: 'tgl'
 		,	flex			: 0.5
 		},{
-			text			: 'status'
-		,	dataIndex		: 'status'
+			dataIndex		: 'nama_petugas'
 		,	flex			: 0.5
 		,	hidden			: true
-		,	hideable		: true
+		,	hideable		: false
 		},{
-			text			: 'Nama Petugas'
-		,	dataIndex		: 'nama_petugas'
-		,	flex			: 0.5
-		,	hidden			: true
-		,	hideable		: true
-		},{
-			text			: 'PJ. Pusat Berkas'
+			text			: 'PJ. Pusat Kerja'
 		,	dataIndex		: 'pj_unit_kerja'
 		,	flex			: 0.5
 		},{
-			text			: 'PJ. Pusat Arsip'
-		,	dataIndex		: 'pj_unit_arsip'
+			dataIndex		: 'pj_unit_arsip'
 		,	flex			: 0.5
 		,	hidden			: true
-		,	hideable		: true
+		,	hideable		: false
+		},{
+			text		: 'Status'
+		,	dataIndex	: 'status'
+		,	width		: 80
+		,	renderer	: function (v)
+			{
+				if (v == 1) {
+					return 'Lengkap';
+				} else {
+					return 'Tidak Lengkap';
+				}
+			}
 		}]
 	,	dockedItems	: [{
 			xtype		: 'toolbar'
@@ -109,13 +113,45 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	region			: 'south'
 	,	flex			: 1
 	,	columns			: [{
-			text		: 'ID'
+			text		: 'Pemindahan_id'
 		,	dataIndex	: 'pemindahan_id'
 		, 	hidden		: true
 		, 	hideable	: false
 		},{
-			text		: 'Berkas'
-		,	dataIndex	: 'berkas_nama'
+			text		: 'Berkas ID'
+		,	dataIndex	: 'berkas_id'
+		, 	hidden		: true
+		, 	hideable	: false
+		},{
+			text		: 'Nama Berkas'
+		,	dataIndex	: 'nama'
+		,	flex		: 1
+		},{
+			text		: 'Status'
+		,	dataIndex	: 'status'
+		, 	hidden		: true
+		, 	hideable	: false
+		},{
+			
+			dataIndex	: 'arsip_status_id'
+		, 	hidden		: true
+		, 	hideable	: false
+		},{
+			text		: 'Status'
+		,	dataIndex	: 'status'
+		, 	hidden		: true
+		, 	hideable	: false
+		},{
+			text		: 'Kode Folder'
+		,	dataIndex	: 'kode_folder'
+		,	flex		: 1
+		},{
+			text		: 'Kode Rak'
+		,	dataIndex	: 'kode_rak'
+		,	flex		: 1
+		},{
+			text		: 'Kode Box'
+		,	dataIndex	: 'kode_box'
 		,	flex		: 1
 		}]
 	,	dockedItems	: [{

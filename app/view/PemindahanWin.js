@@ -47,18 +47,24 @@ Ext.define('Earsip.view.PemindahanWin', {
 		,	editable		: false
 		,	value			: new Date ()
 		},{
-			fieldLabel		: 'Status'
-		,	itemId			: 'status'
-		,	name			: 'status'
+			fieldLabel		: 'Nama Petugas'
+		,	itemId			: 'nama_petugas'
+		,	name			: 'nama_petugas'
 		,	hidden			: true
 		},{
-			fieldLabel		: 'PJ Unit Berkas'
+			fieldLabel		: 'PJ Unit kerja'
 		,	itemId			: 'pj_unit_kerja'
 		,	name			: 'pj_unit_kerja'
 		,	allowBlank		: false
 		},{
-			itemId			: 'pj_unit_arsip'
+			fieldLabel		: 'PJ Unit Arsip'
+		,	itemId			: 'pj_unit_arsip'
 		,	name			: 'pj_unit_arsip'
+		, 	hidden			: true
+		},{
+			fieldLabel		: 'Status'
+		,	itemId			: 'status'
+		,	name			: 'status'
 		,	hidden			: true
 		}]
 		

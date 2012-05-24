@@ -19,15 +19,22 @@ try {
 	}
 	String pemindahan_id	= request.getParameter ("pemindahan_id");
 	
-		q	=" select	A.pemindahan_id"
+		q	=" SELECT	A.pemindahan_id"
+			+" ,		A.berkas_id"
 			+" ,		B.nama"
-			+" from		t_pemindahan_rinci A"
-			+" left join m_berkas B"
-			+" on 		A.berkas_id = B.id"
-			+" where	pemindahan_id = "+pemindahan_id
-			+" order by B.nama";
+			+" ,		B.status"
+			+" ,		B.arsip_status_id"
+			+" ,		C.kode_folder"
+			+" ,		C.kode_rak"
+			+" ,		C.kode_box"
+			+" FROM		t_pemindahan_rinci A"
+			+" LEFT JOIN	m_berkas B"
+			+" ON			A.berkas_id = B.id"
+			+" LEFT	JOIN	m_arsip C"
+			+" ON			B.id = C.berkas_id"
+			+" WHERE		A.pemindahan_id = "+ pemindahan_id
+			+" ORDER BY B.nama";
 	
-
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
 
@@ -37,9 +44,15 @@ try {
 		} else {
 			i++;
 		}
-		data	+="{ pemindahan_id	: "+ rs.getString ("pemindahan_id")
-				+ ", berkas_nama	: '"+ rs.getString ("nama") + "'"
-				+ "}";
+		data	+="\n{ pemindahan_id	: "+ rs.getString ("pemindahan_id")
+				+ "\n, berkas_id	: "+ rs.getString ("berkas_id")
+				+ "\n, nama	: '"+ rs.getString ("nama") + "'"
+				+ "\n, status	: "+ rs.getString ("status")
+				+ "\n, arsip_status_id	: "+ rs.getString ("arsip_status_id") 
+				+ "\n, kode_folder	: '"+ rs.getString ("kode_folder") + "'"
+				+ "\n, kode_rak	: '"+ rs.getString ("kode_rak") + "'"
+				+ "\n, kode_box	: '"+ rs.getString ("kode_box") + "'"
+				+ "\n}";
 	}
 
 	out.print ("{success:true,data:["+ data +"]}");

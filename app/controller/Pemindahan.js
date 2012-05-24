@@ -17,6 +17,9 @@ Ext.define ('Earsip.controller.Pemindahan', {
 			'trans_pemindahan #pemindahan_grid': {
 				selectionchange : this.user_select
 			}
+		,	'trans_pemindahan #berkas_pindah_grid': {
+				selectionchange : this.user_select_rinci
+			}
 		,	'trans_pemindahan #pemindahan_grid button[action=add]': {
 				click : this.do_add_pemindahan
 			}
@@ -26,6 +29,9 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		,	'trans_pemindahan #pemindahan_grid button[action=refresh]': {
 				click : this.do_refresh_pemindahan
 			}
+		,	'notif_pemindahan #berkas_pindah_grid button[action=refresh]': {
+				click : this.do_refresh_pemindahanrinci
+			}
 		,	'trans_pemindahan #pemindahan_grid button[action=del]': {
 				click : this.do_delete_pemindahan
 			}
@@ -34,6 +40,9 @@ Ext.define ('Earsip.controller.Pemindahan', {
 			}
 		,	'trans_pemindahan #berkas_pindah_grid button[action=add]': {
 				click : this.do_add_berkas_pindah
+			}
+		,	'trans_pemindahan #berkas_pindah_grid button[action=del]': {
+				click : this.do_delete_berkas_pindah
 			}
 		,	'pemindahanrinci_win button[action=submit]': {
 				click : this.do_pemindahanrinci_submit
@@ -50,13 +59,16 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		var grid_rinci = panel.down ('#berkas_pindah_grid');
 		var b_edit		= grid.down ('#edit');
 		var b_del		= grid.down ('#del');
-		var b_add_rinci	= grid_rinci.down ('#add');		
-		b_edit.setDisabled (! records.length);
-		b_del.setDisabled (! records.length);
-		b_add_rinci.setDisabled (! records.length);
-
+		var b_add_rinci	= grid_rinci.down ('#add');	
+		
+		
 		if (records.length > 0) {
+			b_edit.setDisabled ( records[0].get ('status'));
+			b_del.setDisabled ( records[0].get ('status'));
+			b_add_rinci.setDisabled ( records[0].get ('status'));
+			
 			idc = records[0].get ('id');
+	
 			if (panel.win == undefined) {
 				panel.win = Ext.create ('Earsip.view.PemindahanWin', {});
 			}
@@ -67,7 +79,20 @@ Ext.define ('Earsip.controller.Pemindahan', {
 			grid_rinci.getStore ().load ({
 				params	: grid_rinci.params
 			});
+			
+			
 		}
+	}
+	
+,	user_select_rinci : function (sm, records)
+	{
+		var panel = this.getTrans_pemindahan () 
+		var grid_pindah = panel.down ('#pemindahan_grid');
+		var grid = panel.down ('#berkas_pindah_grid');
+		var b_del = grid.down ('#del');
+		var record = grid_pindah.getSelectionModel (). getSelection();
+		var status = record[0]!=null?record[0].get('status'):0;
+		b_del.setDisabled (!(records.length && !status));
 	}
 
 ,	do_add_pemindahan: function (button)
@@ -136,7 +161,33 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		panel.win2.action = 'create';
 		
 	}
+	
+,	do_delete_berkas_pindah : function (button)
+	{
+		var grid = button.up ('#berkas_pindah_grid');
+		var data = grid.getSelectionModel ().getSelection ();
 
+		if (data.length <= 0) {
+			return;
+		}
+
+		var store = grid.getStore ();
+		store.remove (data);
+		store.sync ();
+	}
+	
+,	do_refresh_pemindahanrinci : function (button)
+	{	
+		if (idc < 1) return;
+		var grid = button.up ('#berkas_pindah_grid');
+		grid.params = {
+			pemindahan_id : idc
+		}
+		grid.getStore ().load ({
+			params	: grid.params
+		});
+	}
+	
 ,	do_pemindahan_submit: function (button)
 	{	
 		var grid	= this.getTrans_pemindahan ().down ('#pemindahan_grid');
@@ -204,6 +255,7 @@ Ext.define ('Earsip.controller.Pemindahan', {
 					else
 					{
 						form.reset ();
+						win.down ('#pemindahan_id').setValue (idc);
 					}
 					grid.params = {
 						pemindahan_id : idc

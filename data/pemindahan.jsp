@@ -19,6 +19,7 @@ try {
 	}
 	
 	String user_id = (String) session.getAttribute ("user.id");
+	String grup_id = (String) session.getAttribute ("user.grup_id");
 	
 		q	=" select	id"
 			+" ,		unit_kerja_id"
@@ -28,10 +29,20 @@ try {
 			+" ,		pj_unit_kerja"
 			+" ,		pj_unit_arsip"
 			+" ,		status"
-			+" from		t_pemindahan"
-			+" where	unit_kerja_id = (select A.unit_kerja_id as id"
-			+" from m_pegawai A where A.id = "+ user_id +")"
-			+" order by tgl";
+			+" from		t_pemindahan";
+			
+	if (!grup_id.equals ("3")) // if not Pusat Arsip
+	{
+		q	+=" where	unit_kerja_id = (select A.unit_kerja_id as id"
+			+"  from 	m_pegawai A where A.id = "+ user_id +")"
+			+"  order by tgl desc";
+	} else 
+	{
+		q	+=" right join t_pemindahan_rinci"
+			+" 	on	id = pemindahan_id"
+			+"  order by tgl desc";
+	}
+
 	
 
 	db_stmt	= db_con.createStatement ();

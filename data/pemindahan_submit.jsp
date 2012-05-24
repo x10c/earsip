@@ -11,8 +11,6 @@
 <%
 Connection			db_con	= null;
 PreparedStatement	db_pstmt= null;
-Statement			db_stmt	= null;
-ResultSet			rs		= null;
 String				db_url	= "";
 String				q		= "";
 String				data	= "";
@@ -75,42 +73,30 @@ try {
 		pj_unit_arsip	= request.getParameter ("pj_unit_arsip");
 	}
 	
-	if ((status == null)||(status.equalsIgnoreCase ("true"))) {
-			status = "1";
-		} else {
+	
+	if (status == null || status.equals ("")||(status.equals ("0"))) {
 			status = "0";
+		} else {
+			status = "1";
 		}
 	
-	
-	if ((uk_id == null) || (nm_petugas == null))
+	if (uk_id == null || uk_id.equals (""))
 	{
-		String	user_id = (String)session.getAttribute ("user.id");
-		q ="	select unit_kerja_id as uk_id, nama from m_pegawai where id = "+ user_id;
-		db_stmt = db_con.createStatement();
-		rs		= db_stmt.executeQuery (q);
-		if (rs.next ()){
-			uk_id = rs.getString ("uk_id");
-			nm_petugas	= rs.getString ("nama");
-		}
-		
+		uk_id = (String)session.getAttribute ("user.unit_kerja_id");
 	}
-	
+		
 	if (action.equalsIgnoreCase ("create")) {
 		q	=" 	insert into t_pemindahan ("
 			+" 	unit_kerja_id"
 			+",	kode"
 			+",	tgl"
-			+", nama_petugas"
-			+",	pj_unit_kerja"
-			+", pj_unit_arsip)"
-			+" 	values (?, ?, ?, ?, ?, ?)";
+			+",	pj_unit_kerja)"
+			+" 	values (?, ?, ?, ?)";
 		db_pstmt = db_con.prepareStatement (q);
 		db_pstmt.setInt (1, Integer.parseInt (uk_id));
 		db_pstmt.setString (2, kode);
 		db_pstmt.setDate (3, Date.valueOf (tgl));
-		db_pstmt.setString (4, nm_petugas);
-		db_pstmt.setString (5, pj_unit_kerja);
-		db_pstmt.setString (6, pj_unit_arsip);
+		db_pstmt.setString (4, pj_unit_kerja);
 		
 
 	} else if (action.equalsIgnoreCase ("update")) {
@@ -118,6 +104,7 @@ try {
 			+" 	set	unit_kerja_id = ?"
 			+",	kode = ?"
 			+",	tgl = ?"
+			+", status = ?"
 			+", nama_petugas = ?"
 			+",	pj_unit_kerja = ?"
 			+", pj_unit_arsip = ?"
@@ -126,10 +113,11 @@ try {
 		db_pstmt.setInt (1, Integer.parseInt (uk_id));
 		db_pstmt.setString (2, kode);
 		db_pstmt.setDate (3, Date.valueOf (tgl));
-		db_pstmt.setString (4, nm_petugas);
-		db_pstmt.setString (5, pj_unit_kerja);
-		db_pstmt.setString (6, pj_unit_arsip);
-		db_pstmt.setInt (7, Integer.parseInt (id));
+		db_pstmt.setInt (4, Integer.parseInt(status));
+		db_pstmt.setString (5, nm_petugas);
+		db_pstmt.setString (6, pj_unit_kerja);
+		db_pstmt.setString (7, pj_unit_arsip);
+		db_pstmt.setInt (8, Integer.parseInt (id));
 
 	} else if (action.equalsIgnoreCase ("destroy")) {
 		q	=" delete from t_pemindahan where id = ?";
@@ -138,8 +126,8 @@ try {
 	}
 
 	db_pstmt.executeUpdate ();
-	out.print ("{success:true,info:'Data Pemindahan telah tersimpan.Silahkan isi Daftar Berkas'}");
-	rs.close ();
+	out.print ("{success:true,info:'Data Pemindahan telah tersimpan'}");
+	
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");

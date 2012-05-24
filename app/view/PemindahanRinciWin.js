@@ -41,7 +41,26 @@ Ext.define('Earsip.view.PemindahanRinciWin', {
 		,	valueField		: 'id'
 		,	editable		: false
 		,	allowBlank		: false
-		
+		},{
+			itemId			: 'status'
+		,	name			: 'status'
+		, 	hidden			: true
+		},{
+			itemId			: 'arsip_status_id'
+		,	name			: 'arsip_status_id'
+		, 	hidden			: true
+		},{
+			itemId			: 'kode_folder'
+		,	name			: 'kode_folder'
+		, 	hidden			: true
+		},{
+			itemId			: 'kode_rak'
+		,	name			: 'kode_rak'
+		, 	hidden			: true
+		},{
+			itemId			: 'kode_box'
+		,	name			: 'kode_box'
+		, 	hidden			: true
 		}]
 	}]
 ,	buttons			: [{

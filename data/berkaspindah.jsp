@@ -21,16 +21,13 @@ try {
 	
 	
 	
-	q	=" SELECT	id"
-		+" ,		pegawai_id"
-		+" ,		unit_kerja_id"
-		+" ,		nama"
-		+" ,		status"
+	q	=" SELECT	A.id"
+		+" ,		A.nama"
 		+" FROM		m_berkas A"
-		+" WHERE	id NOT IN (SELECT berkas_id AS id FROM t_pemindahan_rinci)"
-		+" AND 		pegawai_id		= "+ user_id
+		+" WHERE	A.id NOT IN (SELECT berkas_id AS id FROM t_pemindahan_rinci)"
+		+" AND 	pegawai_id		= "+user_id
 		+" AND		status_hapus	= 1"
-		+" AND 		unit_kerja_id	IS NOT null"
+		+" AND 	unit_kerja_id	IS NOT null"
 		+" ORDER BY nama";
 
 	db_stmt = db_con.createStatement ();
@@ -42,11 +39,8 @@ try {
 		} else {
 			i++;
 		}
-		data	+="\n{ id            : "+ rs.getString ("id")
-				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
-				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
-				+ "\n, nama          :'"+ rs.getString ("nama") +"'"
-				+ "\n, status        : "+ rs.getString ("status")
+		data	+="\n{ id            	: "+ rs.getString ("id")
+				+ "\n, nama          	:'"+ rs.getString ("nama") +"'"
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");
