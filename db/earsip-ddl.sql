@@ -1,9 +1,160 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     05/13/2012 13:14:55                          */
+/* Created on:     05/24/2012 15:49:45                          */
 /*==============================================================*/
 
 
+drop index REF__MENU__LOG_FK;
+
+drop index REF_USER__LOG_FK;
+
+drop index LOG_PK;
+
+drop table LOG;
+
+drop index REF__AKSES_AKSES_FK;
+
+drop index REF__GROUP__MNU_ACS_FK;
+
+drop index REF_MNU__MNU_ACS_FK;
+
+drop index MENU_AKSES_PK;
+
+drop table MENU_AKSES;
+
+drop index M_ARSIP_PK;
+
+drop table M_ARSIP;
+
+drop index REF__ARSIP_STATUS_FK;
+
+drop index REF__AKSES_BERKAS_FK;
+
+drop index REF__PEGAWAI__BERKAS_FK;
+
+drop index REF__UNIT__BERKAS_FK;
+
+drop index REF__KLAS__ARSIP_FK;
+
+drop index REF_TIPE_ARSIP_FK;
+
+drop index M_BERKAS_PK;
+
+drop table M_BERKAS;
+
+drop index REF__BERKAS__BERBAGI_FK;
+
+drop index REF_PEGAWAI__BERBAGI_FK;
+
+drop index M_BERKAS_BERBAGI_PK;
+
+drop table M_BERKAS_BERBAGI;
+
+drop index M_GRUP_PK;
+
+drop table M_GRUP;
+
+drop index M_MENU_PK;
+
+drop table M_MENU;
+
+drop index REF__UNIT_PEG_FK;
+
+drop index REF__JAB__PEGAWAI_FK;
+
+drop index REF__GROUP__USER_FK;
+
+drop index M_PEGAWAI_PK;
+
+drop table M_PEGAWAI;
+
+drop table M_SYSCONFIG;
+
+drop index M_UNIT_KERJA_PK;
+
+drop table M_UNIT_KERJA;
+
+drop index REF__BERKAS__PIN_RIN_FK;
+
+drop index PEMINJAMAN_RINCI_PK;
+
+drop table PEMINJAMAN_RINCI;
+
+drop index R_AKSES_BERBAGI_PK;
+
+drop table R_AKSES_BERBAGI;
+
+drop index R_AKSES_MENU_PK;
+
+drop table R_AKSES_MENU;
+
+drop index R_ARSIP_STATUS_PK;
+
+drop table R_ARSIP_STATUS;
+
+drop index REF__UNIT__KLAS_FK;
+
+drop index R_BERKAS_KLAS_PK;
+
+drop table R_BERKAS_KLAS;
+
+drop index R_BERKAS_TIPE_PK;
+
+drop table R_BERKAS_TIPE;
+
+drop index REF__KLAS__IR_FK;
+
+drop index R_IR_PK;
+
+drop table R_IR;
+
+drop index R_JABATAN_PK;
+
+drop table R_JABATAN;
+
+drop index R_PEMUSNAHAN_METODA_PK;
+
+drop table R_PEMUSNAHAN_METODA;
+
+drop index REF__UNIT_PINDAH_FK;
+
+drop index T_PEMINDAHAN_PK;
+
+drop table T_PEMINDAHAN;
+
+drop index REF_BERKAS__PINDAH_FK;
+
+drop index REF_PINDAH___RINCI_FK;
+
+drop index T_PEMINDAHAN_RINCI_PK;
+
+drop table T_PEMINDAHAN_RINCI;
+
+drop index REF__UNIT__PINJAM_FK;
+
+drop index T_PEMINJAMAN_PK;
+
+drop table T_PEMINJAMAN;
+
+drop index REF__METODA___PEMUSNAHAN_FK;
+
+drop index T_PEMUSNAHAN_PK;
+
+drop table T_PEMUSNAHAN;
+
+drop index REF__BERKAS_RINCI_FK;
+
+drop index REF_MUSNAH__MUSNAH_RINCI_FK;
+
+drop index T_PEMUSNAHAN_RINCI_PK;
+
+drop table T_PEMUSNAHAN_RINCI;
+
+drop index REF__MUSNAH__TEAM_FK;
+
+drop index T_TIM_PEMUSNAHAN_PK;
+
+drop table T_TIM_PEMUSNAHAN;
 
 /*==============================================================*/
 /* Table: LOG                                                   */
@@ -88,11 +239,10 @@ HAK_AKSES_ID
 /*==============================================================*/
 create table M_ARSIP (
    BERKAS_ID            INT4                 not null,
-   STATUS_ID            INT2                 not null,
    KODE_FOLDER          VARCHAR(255)         null,
    KODE_RAK             VARCHAR(255)         null,
    KODE_BOX             VARCHAR(255)         null,
-   constraint PK_M_ARSIP primary key (BERKAS_ID, STATUS_ID)
+   constraint PK_M_ARSIP primary key (BERKAS_ID)
 );
 
 comment on table M_ARSIP is
@@ -102,22 +252,7 @@ comment on table M_ARSIP is
 /* Index: M_ARSIP_PK                                            */
 /*==============================================================*/
 create unique index M_ARSIP_PK on M_ARSIP (
-BERKAS_ID,
-STATUS_ID
-);
-
-/*==============================================================*/
-/* Index: REF__ARSIP__BERKAS_FK                                 */
-/*==============================================================*/
-create  index REF__ARSIP__BERKAS_FK on M_ARSIP (
 BERKAS_ID
-);
-
-/*==============================================================*/
-/* Index: REF__STATUS_BERKAS_FK                                 */
-/*==============================================================*/
-create  index REF__STATUS_BERKAS_FK on M_ARSIP (
-STATUS_ID
 );
 
 /*==============================================================*/
@@ -143,6 +278,7 @@ create table M_BERKAS (
    STATUS               INT2                 null default 1,
    STATUS_HAPUS         INT2                 null default 1,
    AKSES_BERBAGI_ID     INT2                 null default 0,
+   ARSIP_STATUS_ID      INT2                 null default 0,
    constraint PK_M_BERKAS primary key (ID)
 );
 
@@ -195,6 +331,13 @@ PEGAWAI_ID
 /*==============================================================*/
 create  index REF__AKSES_BERKAS_FK on M_BERKAS (
 AKSES_BERBAGI_ID
+);
+
+/*==============================================================*/
+/* Index: REF__ARSIP_STATUS_FK                                  */
+/*==============================================================*/
+create  index REF__ARSIP_STATUS_FK on M_BERKAS (
+ARSIP_STATUS_ID
 );
 
 /*==============================================================*/
@@ -788,11 +931,6 @@ alter table M_ARSIP
       references M_BERKAS (ID)
       on delete restrict on update restrict;
 
-alter table M_ARSIP
-   add constraint FK_M_ARSIP_REF__STAT_R_ARSIP_ foreign key (STATUS_ID)
-      references R_ARSIP_STATUS (ID)
-      on delete restrict on update restrict;
-
 alter table M_BERKAS
    add constraint FK_M_BERKAS_REF_TIPE__R_BERKAS foreign key (BERKAS_TIPE_ID)
       references R_BERKAS_TIPE (ID)
@@ -801,6 +939,11 @@ alter table M_BERKAS
 alter table M_BERKAS
    add constraint FK_M_BERKAS_REF__AKSE_R_AKSES_ foreign key (AKSES_BERBAGI_ID)
       references R_AKSES_BERBAGI (ID)
+      on delete restrict on update restrict;
+
+alter table M_BERKAS
+   add constraint FK_M_BERKAS_REF__ARSI_R_ARSIP_ foreign key (ARSIP_STATUS_ID)
+      references R_ARSIP_STATUS (ID)
       on delete restrict on update restrict;
 
 alter table M_BERKAS
