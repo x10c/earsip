@@ -29,6 +29,7 @@ Ext.define ('Earsip', {
 		,	kode_rak		: ''
 		,	kode_box		: ''
 		,	kode_folder		: ''
+		,	type			: ''
 		}
 	}
 });
@@ -204,6 +205,7 @@ Ext.application ({
 	,	'Peminjaman'
 	,	'Pemindahan'
 	,	'Pemusnahan'
+	,	'Arsip'
 	]
 	
 ,	launch		: function ()

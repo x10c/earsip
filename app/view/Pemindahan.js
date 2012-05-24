@@ -26,7 +26,6 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	itemId			: 'pemindahan_grid'
 	,	title			: 'Daftar Pemindahan'
 	,	store			: 'Pemindahan'
-	,	closable		: true
 	,	region			: 'center'
 	,	flex			: 1
 	,	plugins		: [
@@ -108,8 +107,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	itemId			: 'berkas_pindah_grid'
 	,	title			: 'Daftar Berkas'
 	,	store			: 'PemindahanRinci'
-	,	closable		: true
 	,	region			: 'south'
+	,	autoScroll		: true
 	,	flex			: 1
 	,	plugins		: [
 			Ext.create ('Earsip.plugin.RowEditor')
@@ -121,7 +120,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 		, 	hideable	: false
 		},{
 			text		: 'Berkas'
-		,	dataIndex	: 'Berkas_id'
+		,	dataIndex	: 'berkas_id'
 		,	flex		: 0.5
 		,	editor		: {
 				xtype			: 'combo'
@@ -135,7 +134,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 			,	mode			: 'local'
 			,	autoSelect		: true
 			}
-	,		renderer	: function (v, md, r, rowidx, colidx)
+		,	renderer	: function (v, md, r, rowidx, colidx)
 			{
 				return combo_renderer (v, this.columns[colidx]);
 			}

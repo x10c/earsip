@@ -67,7 +67,13 @@ Ext.define ('Earsip.view.ArsipList', {
 	{
 		this.getStore ().load ({
 			params	: {
-				berkas_id : berkas_id
+				type			: Earsip.arsip.tree.type
+			,	id				: Earsip.arsip.tree.id
+			,	pid				: Earsip.arsip.tree.pid
+			,	unit_kerja_id	: Earsip.arsip.tree.unit_kerja_id
+			,	kode_rak		: Earsip.arsip.tree.kode_rak
+			,	kode_box		: Earsip.arsip.tree.kode_box
+			,	kode_folder		: Earsip.arsip.tree.kode_folder
 			}
 		});
 	}

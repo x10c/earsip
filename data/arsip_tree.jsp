@@ -1,9 +1,8 @@
 <%--
- % Copyright 2011 - PT. Perusahaan Gas Negara Tbk.
+ % Copyright 2012 - kilabit.org
  %
  % Author(s):
- % + PT. Awakami
- %   - m.shulhan (ms@kilabit.org)
+ %  - m.shulhan (ms@kilabit.org)
 --%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
@@ -12,7 +11,123 @@
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.json.JSONObject" %>
 <%!
-public JSONArray get_list_folder (Connection db_con, int unit_kerja_id, String kode_rak, String kode_box)
+public JSONArray get_list_dir (Connection db_con, int unit_kerja_id
+								, String kode_rak, String kode_box
+								, String kode_folder, String pid)
+{
+	JSONArray	nodes	= new JSONArray ();
+	ResultSet	rs		= null;
+	String		q		= "";
+	JSONObject	node	= null;
+	JSONArray	childs	= null;
+	String		id		= "";
+	String		nama	= "";
+try {
+	Statement	db_stmt = db_con.createStatement ();
+
+	q	=" select	id"
+		+" ,		nama"
+		+" from		m_berkas"
+		+" where	pid			= "+ pid
+		+" and		tipe_file	= 0"
+		+" and		status		= 1";
+
+	rs = db_stmt.executeQuery (q);
+
+	while (rs.next ()) {
+		id		= rs.getString ("id");
+		nama	= rs.getString ("nama");
+		node	= new JSONObject ();
+
+		node.put ("id", id);
+		node.put ("pid", pid);
+		node.put ("text", nama);
+		node.put ("unit_kerja_id", unit_kerja_id);
+		node.put ("kode_rak", kode_rak);
+		node.put ("kode_box", kode_box);
+		node.put ("kode_folder", kode_folder);
+		node.put ("type", "arsip_folder");
+
+		childs = get_list_dir (db_con, unit_kerja_id, kode_rak, kode_box
+								, kode_folder, id);
+
+		if (childs.length () <= 0) {
+			node.put ("children", new JSONArray());
+		} else {
+			node.put ("children", childs);
+		}
+
+		nodes.put (node);
+	}
+
+	rs.close();
+
+	return nodes;
+} catch (Exception e) {
+	log("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+	return nodes;
+}}
+
+public JSONArray get_list_arsip_folder (Connection db_con, int unit_kerja_id
+										, String kode_rak, String kode_box
+										, String kode_folder)
+{
+	JSONArray	nodes		= new JSONArray ();
+	ResultSet	rs			= null;
+	String		q			= "";
+	String		arsip_id	= "";
+	JSONArray	childs		= null;
+	JSONObject	node		= null;
+try {
+	Statement	db_stmt = db_con.createStatement ();
+
+	q	=" select	m_berkas.id"
+		+" ,		nama"
+		+" from		m_arsip"
+		+" ,		m_berkas"
+		+" where	berkas_id		= m_berkas.id"
+		+" and		tipe_file		= 0"
+		+" and		unit_kerja_id	= "+ unit_kerja_id
+		+" and		kode_rak		= '"+ kode_rak +"'"
+		+" and		kode_box		= '"+ kode_box +"'"
+		+" and		kode_folder		= '"+ kode_folder +"'";
+
+	rs = db_stmt.executeQuery (q);
+
+	while (rs.next ()) {
+		node		= new JSONObject ();
+		arsip_id	= rs.getString ("id");
+
+		node.put ("id", arsip_id);
+		node.put ("pid", kode_folder);
+		node.put ("text", rs.getString ("nama"));
+		node.put ("unit_kerja_id", unit_kerja_id);
+		node.put ("kode_rak", kode_rak);
+		node.put ("kode_box", kode_box);
+		node.put ("kode_folder", kode_folder);
+		node.put ("type", "arsip_folder");
+
+		childs = get_list_dir (db_con, unit_kerja_id, kode_rak, kode_box, kode_folder, arsip_id);
+
+		if (childs.length () <= 0) {
+			node.put ("children", new JSONArray());
+		} else {
+			node.put ("children", childs);
+		}
+
+		nodes.put (node);
+	}
+
+	rs.close();
+
+	return nodes;
+} catch (Exception e) {
+	log ("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+	return nodes;
+}}
+
+public JSONArray get_list_folder (Connection db_con, int unit_kerja_id
+								, String kode_rak, String kode_box)
 {
 	JSONArray	nodes		= new JSONArray ();
 	ResultSet	rs			= null;
@@ -28,7 +143,7 @@ try {
 		+" from		m_arsip"
 		+" ,		m_berkas"
 		+" where	berkas_id		= m_berkas.id"
-		+" and		unit_kerja_id	= unit_kerja_id"
+		+" and		unit_kerja_id	= "+ unit_kerja_id
 		+" and		kode_rak		= '"+ kode_rak +"'"
 		+" and		kode_box		= '"+ kode_box +"'";
 
@@ -45,6 +160,15 @@ try {
 		node.put ("kode_rak", kode_rak);
 		node.put ("kode_box", kode_box);
 		node.put ("kode_folder", kode_folder);
+		node.put ("type", "folder");
+
+		childs = get_list_arsip_folder (db_con, unit_kerja_id, kode_rak, kode_box, kode_folder);
+
+		if (childs.length () <= 0) {
+			node.put ("children", new JSONArray());
+		} else {
+			node.put ("children", childs);
+		}
 
 		nodes.put (node);
 	}
@@ -73,7 +197,7 @@ try {
 		+" from		m_arsip"
 		+" ,		m_berkas"
 		+" where	berkas_id		= m_berkas.id"
-		+" and		unit_kerja_id	= unit_kerja_id"
+		+" and		unit_kerja_id	= "+ unit_kerja_id
 		+" and		kode_rak		= '"+ kode_rak +"'";
 
 	rs = db_stmt.executeQuery (q);
@@ -89,6 +213,7 @@ try {
 		node.put ("kode_rak", kode_rak);
 		node.put ("kode_box", kode_box);
 		node.put ("kode_folder", 0);
+		node.put ("type", "box");
 
 		childs = get_list_folder (db_con, unit_kerja_id, kode_rak, kode_box);
 
@@ -126,7 +251,7 @@ try {
 		+" from		m_arsip"
 		+" ,		m_berkas"
 		+" where	berkas_id		= m_berkas.id"
-		+" and		unit_kerja_id	= unit_kerja_id";
+		+" and		unit_kerja_id	= "+ unit_kerja_id;
 
 	rs = db_stmt.executeQuery (q);
 
@@ -141,6 +266,7 @@ try {
 		node.put ("kode_rak", kode_rak);
 		node.put ("kode_box", 0);
 		node.put ("kode_folder", 0);
+		node.put ("type", "rak");
 
 		childs = get_list_box (db_con, unit_kerja_id, kode_rak);
 
@@ -191,16 +317,18 @@ try {
 		rs = db_stmt.executeQuery (q);
 
 		while (rs.next ()) {
-			id = rs.getInt ("id");
+			id		= rs.getInt ("id");
+			nama	= rs.getString ("nama");
+			node	= new JSONObject ();
 
-			node = new JSONObject ();
-			node.put ("id", id);
+			node.put ("id", nama);
 			node.put ("pid", 0);
-			node.put ("text", rs.getString ("nama"));
+			node.put ("text", nama);
 			node.put ("unit_kerja_id", id);
 			node.put ("kode_rak", 0);
 			node.put ("kode_box", 0);
 			node.put ("kode_folder", 0);
+			node.put ("type", "unit_kerja");
 
 			childs = get_list_rak (db_con, id);
 
@@ -213,13 +341,14 @@ try {
 			unit_kerja.put (node);
 		}
 
-		root.put ("id", 1);
+		root.put ("id", 0);
 		root.put ("pid", 0);
 		root.put ("text", "Folder arsip");
 		root.put ("unit_kerja_id", 0);
 		root.put ("kode_rak", 0);
 		root.put ("kode_box", 0);
 		root.put ("kode_folder", 0);
+		root.put ("type", "root");
 
 		root.put ("children", unit_kerja);
 	/* otherwise he can only see files in their unit-kerja */
@@ -246,6 +375,7 @@ try {
 		root.put ("kode_rak", 0);
 		root.put ("kode_box", 0);
 		root.put ("kode_folder", 0);
+		root.put ("type", "unit_kerja");
 
 		childs = get_list_rak (db_con, id);
 
