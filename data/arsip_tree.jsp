@@ -371,7 +371,7 @@ try {
 		root.put ("id", nama);
 		root.put ("pid", 0);
 		root.put ("text", nama);
-		root.put ("unit_kerja_id", 0);
+		root.put ("unit_kerja_id", id);
 		root.put ("kode_rak", 0);
 		root.put ("kode_box", 0);
 		root.put ("kode_folder", 0);

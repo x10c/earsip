@@ -40,25 +40,19 @@ Ext.define ('Earsip.controller.Arsip', {
 			return;
 		}
 
-		Earsip.arsip.id				= records[0].get ('id');
-		Earsip.arsip.pid			= records[0].get ('parentId');
-		Earsip.arsip.tree.id		= records[0].get ('id');
-		Earsip.arsip.tree.pid		= records[0].get ('parentId');
+		Earsip.arsip.id					= records[0].get ('id');
+		Earsip.arsip.pid				= records[0].get ('parentId');
+		Earsip.arsip.tree.id			= records[0].get ('id');
+		Earsip.arsip.tree.pid			= records[0].get ('parentId');
+		Earsip.arsip.tree.type			= records[0].raw.type;
+		Earsip.arsip.tree.unit_kerja_id	= records[0].raw.unit_kerja_id;
+		Earsip.arsip.tree.kode_rak		= records[0].raw.kode_rak;
+		Earsip.arsip.tree.kode_box		= records[0].raw.kode_box;
+		Earsip.arsip.tree.kode_folder	= records[0].raw.kode_folder;
 
 		if (Earsip.arsip.pid == null) {
-			Earsip.arsip.pid				= 0;
-			Earsip.arsip.tree.pid			= 0;
-			Earsip.arsip.tree.type			= 'root';
-			Earsip.arsip.tree.unit_kerja_id	= 0;
-			Earsip.arsip.tree.kode_rak		= 0;
-			Earsip.arsip.tree.kode_box		= 0;
-			Earsip.arsip.tree.kode_folder	= 0;
-		} else {
-			Earsip.arsip.tree.type			= records[0].raw.type;
-			Earsip.arsip.tree.unit_kerja_id	= records[0].raw.unit_kerja_id;
-			Earsip.arsip.tree.kode_rak		= records[0].raw.kode_rak;
-			Earsip.arsip.tree.kode_box		= records[0].raw.kode_box;
-			Earsip.arsip.tree.kode_folder	= records[0].raw.kode_folder;
+			Earsip.arsip.pid			= 0;
+			Earsip.arsip.tree.pid		= 0;
 		}
 
 		this.getArsiplist ().do_load_list ();

@@ -33,6 +33,7 @@ Ext.define ('Earsip.view.ArsipTree', {
 				if (o.success == true) {
 					this.suspendEvents (false);
 					this.setRootNode (o.data);
+					this.getRootNode ().raw = o.data;
 					this.resumeEvents ();
 					this.doLayout();
 
