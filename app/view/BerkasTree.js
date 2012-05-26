@@ -14,7 +14,7 @@ Ext.define ('Earsip.view.BerkasTree', {
 	,	items		: [{
 			itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-','->','-', {
+		},'-','->','-',{
 			itemId		: 'trash'
 		,	iconCls		: 'trash'
 		}]

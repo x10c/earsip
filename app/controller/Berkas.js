@@ -20,6 +20,9 @@ Ext.define ('Earsip.controller.Berkas', {
 	},{
 		ref		: 'mkdirwin'
 	,	selector: 'mkdirwin'
+	},{
+		ref		: 'cariberkaswin'
+	,	selector: 'cariberkaswin'
 	}]
 ,	init	: function ()
 	{
@@ -52,6 +55,9 @@ Ext.define ('Earsip.controller.Berkas', {
 		,	'berkaslist button[itemId=dirup]' : {
 				click : this.do_dirup
 			}
+		,	'berkaslist button[itemId=search]' : {
+				click : this.open_search_win
+			}
 		,	'berkaslist button[itemId=share]': {
 				click : this.do_share
 			}
@@ -60,6 +66,9 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	'mkdirwin button[action=submit]' : {
 				click : this.do_mkdir_submit
+			}
+		,	'cariberkaswin button[itemId=cari]' : {
+				click : this.do_search
 			}
 		});
 	}
@@ -202,6 +211,11 @@ Ext.define ('Earsip.controller.Berkas', {
 		berkastree.getSelectionModel ().select (node);
 	}
 
+,	open_search_win : function (b)
+	{
+		this.getBerkaslist ().win_search.show ();
+	}
+
 ,	do_share : function (b)
 	{
 		var berkaslist = this.getBerkaslist ();
@@ -275,5 +289,22 @@ Ext.define ('Earsip.controller.Berkas', {
 				Ext.Msg.alert ('Kesalahan', action.result.info);
 			}
 		});
+	}
+
+,	do_search : function (b)
+	{
+		var cariform	= this.getCariberkaswin ().down ('form').getForm ();
+		var list		= this.getBerkaslist ();
+		var list_store	= list.getStore ();
+		var list_proxy	= list_store.getProxy ();
+		var org_url		= list_proxy.url;
+
+		list_proxy.url = 'data/cariberkas.jsp'
+
+		list_store.load ({
+			params	: cariform.getValues ()
+		});
+
+		list_proxy.url = org_url;
 	}
 });

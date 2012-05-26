@@ -149,6 +149,7 @@ Ext.application ({
 	,	'BerkasForm'
 	,	'WinUpload'
 	,	'BerkasBerbagiWin'
+	,	'CariBerkasWin'
 
 	,	'BerkasBerbagiTree'
 	,	'BerkasBerbagiList'

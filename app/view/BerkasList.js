@@ -4,6 +4,7 @@ Ext.require ([
 ,	'Earsip.store.TipeArsip'
 ,	'Earsip.view.MkdirWin'
 ,	'Earsip.view.BerkasBerbagiWin'
+,	'Earsip.view.CariBerkasWin'
 ]);
 
 Ext.define ('Earsip.view.BerkasList', {
@@ -74,6 +75,10 @@ Ext.define ('Earsip.view.BerkasList', {
 		,	itemId		: 'dirup'
 		,	iconCls		: 'dirup'
 		},'-','->','-',{
+			text		: 'Cari'
+		,	itemId		: 'search'
+		,	iconCls		: 'search'
+		},'-',{
 			text		: 'Bagi'
 		,	itemId		: 'share'
 		,	iconCls		: 'dir'
@@ -89,6 +94,7 @@ Ext.define ('Earsip.view.BerkasList', {
 	{
 		this.win		= Ext.create ('Earsip.view.MkdirWin', {});
 		this.win_share	= Ext.create ('Earsip.view.BerkasBerbagiWin', {});
+		this.win_search	= Ext.create ('Earsip.view.CariBerkasWin', {});
 		this.callParent (arguments);
 	}
 
