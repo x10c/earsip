@@ -1,7 +1,7 @@
 Ext.require ([
 	'Earsip.view.ArsipTree'
 ,	'Earsip.view.ArsipList'
-,	'Earsip.view.BerkasForm'
+,	'Earsip.view.ArsipForm'
 ]);
 
 Ext.define ('Earsip.view.Arsip', {
@@ -22,7 +22,7 @@ Ext.define ('Earsip.view.Arsip', {
 			xtype		: 'arsiplist'
 		,	region		: 'center'
 		},{
-			xtype		: 'berkasform'
+			xtype		: 'arsipform'
 		,	itemId		: 'arsip_form'
 		,	region		: 'south'
 		,	split		: true

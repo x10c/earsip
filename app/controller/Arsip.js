@@ -9,6 +9,9 @@ Ext.define ('Earsip.controller.Arsip', {
 	},{
 		ref		:'arsiplist'
 	,	selector:'arsiplist'
+	},{
+		ref		:'arsipcariwin'
+	,	selector:'arsipcariwin'
 	}]
 ,	init	: function ()
 	{
@@ -25,6 +28,12 @@ Ext.define ('Earsip.controller.Arsip', {
 			}
 		,	'arsiplist button[itemId=dirup]': {
 				click : this.list_dirup
+			}
+		,	'arsiplist button[itemId=search]': {
+				click : this.open_search_win
+			}
+		,	'arsipcariwin button[itemId=search]' : {
+				click : this.do_search
 			}
 		});
 	}
@@ -104,5 +113,27 @@ Ext.define ('Earsip.controller.Arsip', {
 
 		tree.expandAll ();
 		tree.getSelectionModel ().select (node);
+	}
+
+,	open_search_win : function (b)
+	{
+		this.getArsiplist ().win_search.show ();
+	}
+
+,	do_search : function (b)
+	{
+		var cariform	= this.getArsipcariwin ().down ('form').getForm ();
+		var list		= this.getArsiplist ();
+		var list_store	= list.getStore ();
+		var list_proxy	= list_store.getProxy ();
+		var org_url		= list_proxy.url;
+
+		list_proxy.url = 'data/arsip_cari.jsp'
+
+		list_store.load ({
+			params	: cariform.getValues ()
+		});
+
+		list_proxy.url = org_url;
 	}
 });
