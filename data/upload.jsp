@@ -129,6 +129,6 @@ try {
 	out.print ("{success:true,info:'File telah tersimpan.'}");
 } catch (Exception e) {
 	out.print ("{success:false,info:'"
-			+ e.toString ().replace ("'","\\'").replace ("\"","\\\"") +"'}");
+			+ e.toString ().replace ("'","\\'") +"'}");
 }
 %>

@@ -321,6 +321,7 @@ UNIT_KERJA_ID
 /*==============================================================*/
 create table M_SYSCONFIG (
    REPOSITORY_ROOT      VARCHAR(1024)        not null
+,  MAX_UPLOAD_SIZE		INTEGER				default 5000
 );
 
 comment on table M_SYSCONFIG is

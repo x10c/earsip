@@ -23,6 +23,9 @@ Ext.define ('Earsip.controller.Berkas', {
 	},{
 		ref		: 'cariberkaswin'
 	,	selector: 'cariberkaswin'
+	},{
+		ref		: 'winupload'
+	,	selector: 'winupload'
 	}]
 ,	init	: function ()
 	{
@@ -69,6 +72,9 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	'cariberkaswin button[itemId=cari]' : {
 				click : this.do_search
+			}
+		,	'winupload' : {
+				close : this.winupload_close
 			}
 		});
 	}
@@ -182,8 +188,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			return;
 		}
 
-		var winupload = Ext.create ('Earsip.view.WinUpload');
-		winupload.show ();
+		Ext.create ('Earsip.view.WinUpload').show ();
 	}
 
 ,	list_refresh : function (b)
@@ -306,5 +311,10 @@ Ext.define ('Earsip.controller.Berkas', {
 		});
 
 		list_proxy.url = org_url;
+	}
+
+,	winupload_close : function (win)
+	{
+		this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
 	}
 });

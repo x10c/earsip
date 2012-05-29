@@ -24,6 +24,7 @@ String		q				= "";
 String		sid				= "";
 String		c_name			= "";
 String		repo_root		= "";
+String		max_upload_size	= "";
 String		user_id			= null;
 String		user_uk_id		= null;
 String		user_grup_id	= null;
@@ -54,14 +55,20 @@ if (cookies != null) {
 }
 
 /* load system config */
-q	=" select repository_root from m_sysconfig";
+q	=" select	repository_root"
+	+" ,		max_upload_size"
+	+" from m_sysconfig";
 rs	= db_stmt.executeQuery (q);
 
 if (rs.next ()) {
-	repo_root = rs.getString ("repository_root");
+	repo_root		= rs.getString ("repository_root");
+	max_upload_size	= rs.getString ("max_upload_size");
 
 	if (repo_root != null || ! repo_root.isEmpty ()) {
 		session.setAttribute ("sys.repository_root", (Object) repo_root);
+	}
+	if (max_upload_size != null && ! max_upload_size.isEmpty ()) {
+		session.setAttribute ("sys.max_upload_size", (Object) max_upload_size);
 	}
 }
 
@@ -95,12 +102,15 @@ if (user_grup_id != null && user_grup_id.equals ("3")) {
 	<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
 	<link rel="stylesheet" type="text/css" href="app.css">
 	<script>
-		var is_login = <%= is_login %>;
-		var is_pusatarsip = '<%= is_pusatarsip %>';
-		var _g_username = '<%= user_name %>';
-		var _g_repo_path = '<%= request.getContextPath() + repo_root %>';
+		var is_login			= <%= is_login %>;
+		var is_pusatarsip		= '<%= is_pusatarsip %>';
+		var _g_username			= '<%= user_name %>';
+		var _g_repo_path		= '<%= request.getContextPath() + repo_root %>';
+		var _g_max_upload_size	= <%= max_upload_size %>;
 	</script>
+	<script type="text/javascript" src="app/plupload/plupload.full.js"></script>
 	<script type="text/javascript" src="extjs/ext-all-debug.js"></script>
+	<script type="text/javascript" src="extjs/Ext.ux.panel.UploadPanel.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </head>
 <body>

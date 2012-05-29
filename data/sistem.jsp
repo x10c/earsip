@@ -28,6 +28,7 @@ try {
 	}
 
 	q	=" select	repository_root"
+		+" ,		max_upload_size"
 		+" from		m_sysconfig";
 
 	db_stmt	= db_con.createStatement ();
@@ -38,7 +39,8 @@ try {
 		return;
 	}
 
-	data +=" repository_root : '"+ rs.getString ("repository_root") +"'";
+	data	+=" repository_root : '"+ rs.getString ("repository_root") +"'"
+			+ ",max_upload_size : "+ rs.getString ("max_upload_size");
 
 	out.print ("{success:true,data:{"+ data +"}}");
 	rs.close ();

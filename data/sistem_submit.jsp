@@ -15,22 +15,14 @@ int			i			= 0;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
-	if (db_con == null || db_con.isClosed ()) {
-		db_url = (String) session.getAttribute ("db.url");
-		if (db_url == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-
-		Class.forName ((String) session.getAttribute ("db.class"));
-
-		db_con = DriverManager.getConnection(db_url);
-
-		session.setAttribute("db.con", (Object) db_con);
+	if (db_con == null || (db_con != null && db_con.isClosed ())) {
+		response.sendRedirect (request.getContextPath());
+		return;
 	}
 
-	Enumeration<String>	params		= request.getParameterNames ();
-	String				repo_root	= request.getParameter ("repository_root");
+	Enumeration<String>	params			= request.getParameterNames ();
+	String				repo_root		= request.getParameter ("repository_root");
+	String				max_upload_size	= request.getParameter ("max_upload_size");
 
 	db_stmt = db_con.createStatement ();
 
@@ -42,9 +34,17 @@ try {
 
 		session.setAttribute ("sys.repository_root", repo_root);
 	}
+	if (max_upload_size != null) {
+		q += ", max_upload_size = "+ max_upload_size;
+
+		session.setAttribute ("sys.max_upload_size", max_upload_size);
+	}
 
 	db_stmt.executeUpdate (q);
-	out.print ("{success:true}");
+	out.print ("{success:true, data:{"
+				+" repository_root:'"+ repo_root +"'"
+				+",max_upload_size:"+ max_upload_size
+				+"}}");
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");

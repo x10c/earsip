@@ -191,7 +191,6 @@ Ext.application ({
 		'Login'
 	,	'MainToolbar'
 	,	'AdmHakAkses'
-	,	'WinUpload'
 	,	'Grup'
 	,	'UnitKerja'
 	,	'Pegawai'

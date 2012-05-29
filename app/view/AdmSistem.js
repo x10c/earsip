@@ -16,11 +16,16 @@ Ext.define ('Earsip.view.AdmSistem', {
 		anchor			: '100%'
 	,	allowBlank		: false
 	,	labelAlign		: 'right'
-	,	labelWidth		: 120
+	,	labelWidth		: 200
 	}
 ,	items			: [{
 		fieldLabel		: 'Root Repository'
 	,	name			: 'repository_root'
+	},{
+		fieldLabel		: 'Maksimum ukuran unggah (KB)'
+	,	name			: 'max_upload_size'
+	,	xtype			: 'numberfield'
+	,	minValue		: 0
 	}]
 ,	dockedItems		: [{
 		xtype			: 'toolbar'

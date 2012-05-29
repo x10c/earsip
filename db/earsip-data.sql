@@ -1,4 +1,4 @@
-INSERT INTO m_sysconfig (repository_root) values ('/repository');
+INSERT INTO m_sysconfig (repository_root,max_upload_size) values ('/repository', 5000);
 
 INSERT INTO m_grup (nama, keterangan) VALUES ('Administrator', 'Admin aplikasi');
 INSERT INTO m_grup (nama, keterangan) VALUES ('Pusat Berkas', 'Mengatur seluruh arsip aktif');
