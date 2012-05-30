@@ -12,6 +12,7 @@ Ext.require ([
 ,	'Earsip.view.Peminjaman'
 , 	'Earsip.view.Pemindahan'
 ,	'Earsip.view.Pemusnahan'
+,	'Earsip.view.BerkasJRA'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
@@ -55,7 +56,6 @@ Ext.define ('Earsip.controller.MainToolbar', {
 		var c = tabpanel.getComponent (button.itemId);
 		if (c == undefined) {
 			tabpanel.add ({
-				
 				xtype	: button.itemId
 			});
 		}

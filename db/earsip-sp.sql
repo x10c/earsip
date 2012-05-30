@@ -20,3 +20,24 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION public.get_berkas_path(_berkas_id integer)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare _id int;
+declare _nama varchar (255);
+begin
+	if _berkas_id = 0 then
+		return '';
+	end if;
+
+	select	pid
+	,	nama
+	into	_id, _nama
+	from	m_berkas
+	where	id = _berkas_id;
+
+	return get_berkas_path (_id) || '/' || _nama;
+end;
+$function$

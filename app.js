@@ -114,6 +114,7 @@ Ext.application ({
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
 	,	'Pemusnahan'
+	,	'BerkasJRA'
 	]
 ,	stores		: [
 		'Berkas'
@@ -138,6 +139,7 @@ Ext.application ({
 	,	'BerkasPindah'
 	,	'Arsip'
 	,	'Pemusnahan'
+	,	'BerkasJRA'
 	]
 ,	views		: [
 		'Main'
@@ -186,6 +188,9 @@ Ext.application ({
 	,	'Pemusnahan'
 	,	'NotifPemindahan'
 	,	'NotifPemindahanWin'
+
+	,	'BerkasJRA'
+	,	'BerkasJRAList'
 	]
 ,	controllers	: [
 		'Login'
@@ -209,6 +214,7 @@ Ext.application ({
 	,	'Pemusnahan'
 	,	'NotifPemindahan'
 	,	'Arsip'
+	,	'BerkasJRA'
 	]
 	
 ,	launch		: function ()

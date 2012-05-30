@@ -20,6 +20,7 @@
 Connection	db_con			= null;
 boolean		is_multipart	= false;
 String		q				= "";
+ResultSet	rs				= null;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 	if (db_con == null || (db_con != null && db_con.isClosed ())) {
@@ -87,6 +88,26 @@ try {
 	filename	= rpath + repo +"/"+ sha;
 	file		= new File (filename);
 
+	if (file.exists ()) {
+		q	=" select	nama"
+			+" from		m_berkas"
+			+" where	sha = '"+ sha +"'";
+
+		rs = db_stmt.executeQuery (q);
+
+		if (! rs.next ()) {
+			out.print ("{success:false"
+					+",message:'Gagal terhubung ke database.'}");
+			return;
+		}
+
+		name = rs.getString ("nama");
+
+		out.print ("{success:false"
+					+",message:'Berkas yang sama telah ada dengan nama \""+ name +"\".'}");
+		return;
+	}
+
 	item_up.write (file);
 
 	/* save file attribute to database */
@@ -115,7 +136,7 @@ try {
 		+" ,	"+ uk_id
 		+" ,	berkas_klas_id"
 		+" ,	berkas_tipe_id"
-		+" ,	tgl_dibuat"
+		+" ,	now() "
 		+" ,	nomor"
 		+" ,	pembuat"
 		+" ,	judul"
@@ -126,7 +147,7 @@ try {
 
 	db_stmt.executeUpdate (q);
 
-	out.print ("{success:true,info:'File telah tersimpan.'}");
+	out.print ("{success:true,message:'File telah tersimpan.'}");
 } catch (Exception e) {
 	out.print ("{success:false,info:'"
 			+ e.toString ().replace ("'","\\'") +"'}");
