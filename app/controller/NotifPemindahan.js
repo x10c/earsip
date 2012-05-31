@@ -42,7 +42,7 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 
 ,	do_check	: function (editor, o)
 	{
-		return;
+		editor.cancelEdit ();
 	}
 	
 
