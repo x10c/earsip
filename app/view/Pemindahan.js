@@ -27,9 +27,6 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	store			: 'Pemindahan'
 	,	region			: 'center'
 	,	flex			: 1
-	,	plugins		: [
-			Ext.create ('Earsip.plugin.RowEditor')
-		]
 	,	columns			: [{
 			text		: 'ID'
 		,	dataIndex	: 'id'
@@ -71,6 +68,21 @@ Ext.define ('Earsip.view.Pemindahan', {
 		,	flex			: 0.5
 		,	hidden			: true
 		,	hideable		: true
+		},{
+			text		: 'Status'
+		,	dataIndex	: 'status'
+		,	width		: 80
+		,	editor		: {
+				xtype		: 'textfield'
+			}
+		,	renderer	: function (v)
+			{
+				if (v == 1) {
+					return 'Lengkap';
+				} else {
+					return 'Tidak Lengkap';
+				}
+			}
 		}]
 	,	dockedItems	: [{
 			xtype		: 'toolbar'
@@ -115,7 +127,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 		, 	hideable	: false
 		},{
 			text		: 'Berkas'
-		,	dataIndex	: 'berkas_nama'
+		,	dataIndex	: 'nama'
 		,	flex		: 1
 		}]
 	,	dockedItems	: [{
