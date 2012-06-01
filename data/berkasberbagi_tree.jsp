@@ -71,19 +71,28 @@ try {
 	JSONArray	childs	= null;
 	JSONObject	node	= null;
 
-	q	=" select distinct"
-		+" 			BERKAS.id"
+	q	=" select	distinct"
+		+" 			id"
 		+" ,		pid"
 		+" ,		nama"
-		+" from		m_berkas			BERKAS"
-		+" ,		m_berkas_berbagi	BBAGI"
+		+" from		m_berkas"
 		+" where	tipe_file	= 0"
 		+" and		status		= 1"
 		+" and		pegawai_id	= "+ peg_id
-		+" and		(akses_berbagi_id = 3 or akses_berbagi_id = 4"
-		+" 	or		((akses_berbagi_id = 1 or akses_berbagi_id = 2)"
-		+" and		BERKAS.id		= berkas_id"
-		+" and		bagi_ke_peg_id	= "+ user_id +"))"
+		+" and		akses_berbagi_id in (3,4)"
+		+" union all"
+		+" select	distinct"
+		+" 			m_berkas.id"
+		+" ,		pid"
+		+" ,		nama"
+		+" from		m_berkas"
+		+" ,		m_berkas_berbagi"
+		+" where	tipe_file		= 0"
+		+" and		status			= 1"
+		+" and		pegawai_id		= "+ peg_id
+		+" and		m_berkas.id		= berkas_id"
+		+" and		bagi_ke_peg_id	= "+ user_id
+		+" and		akses_berbagi_id in (1,2)"
 		+" order by nama";
 
 	if (berkas_id != 0) {
@@ -143,16 +152,24 @@ try {
 	String		nama		= "";
 
 	q	=" select	distinct"
+		+" 			pegawai_id"
+		+" ,		m_pegawai.nama"
+		+" from		m_berkas"
+		+" ,		m_pegawai"
+		+" where	akses_berbagi_id in (3,4)"
+		+" and		pegawai_id	= m_pegawai.id"
+		+" and		pegawai_id	!= "+ user_id
+		+" union all"
+		+" select	distinct"
 		+"			pegawai_id"
-		+" ,		PEG.nama"
-		+" from		m_berkas			BERKAS"
-		+" ,		m_berkas_berbagi	BBAGI"
-		+" ,		m_pegawai			PEG"
-		+" where	(akses_berbagi_id = 3 or akses_berbagi_id = 4"
-		+" or		((akses_berbagi_id = 1 and akses_berbagi_id = 2)"
-		+" and		BERKAS.id		= berkas_id"
-		+" and		bagi_ke_peg_id	= "+ user_id +"))"
-		+" and		pegawai_id		= PEG.id"
+		+" ,		m_pegawai.nama"
+		+" from		m_berkas"
+		+" ,		m_berkas_berbagi"
+		+" ,		m_pegawai"
+		+" where	(akses_berbagi_id in (1,2)"
+		+" and		m_berkas.id		= berkas_id"
+		+" and		bagi_ke_peg_id	= "+ user_id +")"
+		+" and		pegawai_id		= m_pegawai.id"
 		+" and		pegawai_id		!= "+ user_id
 		+" order by pegawai_id";
 
