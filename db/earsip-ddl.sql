@@ -277,6 +277,7 @@ create table M_PEGAWAI (
    NIP                  VARCHAR(64)          null,
    NAMA                 VARCHAR(128)         null,
    PSW                  VARCHAR(255)         null,
+   PSW_EXPIRE			DATE				 default '2000-01-01',
    STATUS               INT2                 null default 1,
    constraint PK_M_PEGAWAI primary key (ID),
    constraint AK_KEY_2_M_PEGAWA unique (NIP)

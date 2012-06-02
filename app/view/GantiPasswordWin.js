@@ -23,6 +23,8 @@ Ext.define ('Earsip.view.GantiPasswordWin', {
 		,	allowBlank		: false
 		,	anchor			: '100%'
 		,	selectOnFocus	: true
+		,	labelWidth		: 200
+		,	labelAlign		: 'right'
 		}
 	,	items			: [{
         	fieldLabel		: 'Password Lama'

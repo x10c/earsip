@@ -39,7 +39,6 @@ Ext.define ('Earsip.controller.GantiPassword', {
 				Ext.Msg.alert ('Kesalahan', action.result.info);
 			}
 		});
-		
 	}
 
 ,	do_keyenter: function ()
