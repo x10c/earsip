@@ -1,8 +1,7 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     05/24/2012 15:49:45                          */
+/* Created on:     06/01/2012 14:14:49                          */
 /*==============================================================*/
-
 
 /*==============================================================*/
 /* Table: LOG                                                   */
@@ -320,8 +319,8 @@ UNIT_KERJA_ID
 /* Table: M_SYSCONFIG                                           */
 /*==============================================================*/
 create table M_SYSCONFIG (
-   REPOSITORY_ROOT      VARCHAR(1024)        not null
-,  MAX_UPLOAD_SIZE		INTEGER				default 5000
+   REPOSITORY_ROOT      VARCHAR(1024)        not null,
+   MAX_UPLOAD_SIZE      INT4                 null default 5000
 );
 
 comment on table M_SYSCONFIG is
@@ -355,8 +354,8 @@ ID
 /*==============================================================*/
 create table PEMINJAMAN_RINCI (
    PEMINJAMAN_ID        INT4                 not null,
-   BERKAS_ID            INT4                 null,
-   constraint PK_PEMINJAMAN_RINCI primary key (PEMINJAMAN_ID)
+   BERKAS_ID            INT4                 not null,
+   constraint PK_PEMINJAMAN_RINCI primary key (PEMINJAMAN_ID, BERKAS_ID)
 );
 
 comment on table PEMINJAMAN_RINCI is
@@ -366,7 +365,8 @@ comment on table PEMINJAMAN_RINCI is
 /* Index: PEMINJAMAN_RINCI_PK                                   */
 /*==============================================================*/
 create unique index PEMINJAMAN_RINCI_PK on PEMINJAMAN_RINCI (
-PEMINJAMAN_ID
+PEMINJAMAN_ID,
+BERKAS_ID
 );
 
 /*==============================================================*/
