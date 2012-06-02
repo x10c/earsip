@@ -25,23 +25,15 @@ String				user_name			= "";
 String				user_nip			= "";
 String				user_psw			= "";
 String				dir_name			= "";
+String				psw_is_expired		= "";
 String				c_path				= request.getContextPath ();
-int					c_max_age			= 60 * 60 * 24 * 30;
+int					c_max_age			= 60 * 60 * 24 * 30; // 30 days
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
-	if (db_con == null || db_con.isClosed ()) {
-		db_url = (String) session.getAttribute ("db.url");
-		if (db_url == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-
-		Class.forName ((String) session.getAttribute ("db.class"));
-
-		db_con = DriverManager.getConnection(db_url);
-
-		session.setAttribute("db.con", (Object) db_con);
+	if (db_con == null || (db_con != null && db_con.isClosed ())) {
+		response.sendRedirect (request.getContextPath());
+		return;
 	}
 
 	user_nip	= request.getParameter ("user_nip");
@@ -51,6 +43,7 @@ try {
 		+" ,		PEG.unit_kerja_id"
 		+" ,		PEG.grup_id"
 		+" ,		PEG.nama"
+		+" ,		PEG.psw_expire > current_date as psw_is_expired"
 		+" from		m_pegawai		PEG"
 		+" ,		m_unit_kerja	UK"
 		+" ,		m_grup			GRUP"
@@ -75,6 +68,7 @@ try {
 	user_uk_id		= rs.getString ("unit_kerja_id");
 	user_grup_id	= rs.getString ("grup_id");
 	user_name		= rs.getString ("nama");
+	psw_is_expired	= rs.getString ("psw_is_expired");
 
 	session.setAttribute ("user.id", user_id);
 	session.setAttribute ("user.nip", user_nip);
@@ -127,7 +121,17 @@ try {
 
 		db_stmt.executeUpdate (q);
 	}
-	out.print ("{success:true, user_name:'"+ user_name +"',is_pusatarsip:"+(user_grup_id.equals("3")?true:false)+"}");
+	if (psw_is_expired.equalsIgnoreCase ("f")) {
+		out.print ("{success:true"
+				+", psw_is_expired:1"
+				+", user_name:'"+ user_name +"'"
+				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? true : false) +"}");
+	} else {
+		out.print ("{success:true"
+				+", psw_is_expired:0"
+				+", user_name:'"+ user_name +"'"
+				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? true : false) +"}");
+	}
 	rs.close ();
 }
 catch (Exception e) {

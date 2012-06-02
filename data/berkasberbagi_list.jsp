@@ -27,8 +27,7 @@ try {
 		return;
 	}
 
-	q	=" select	distinct"
-		+" 			BERKAS.id"
+	q	=" select	m_berkas.id"
 		+" ,		pid"
 		+" ,		tipe_file"
 		+" ,		sha"
@@ -47,16 +46,37 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
-		+" from		m_berkas			BERKAS"
-		+" ,		m_berkas_berbagi	BAGI";
+		+" from		m_berkas";
 
 	if (pid.equalsIgnoreCase ("0")) {
-		q	+=" where pegawai_id = "+ peg_id
-			+ " and ((akses_berbagi_id = 3 or akses_berbagi_id = 4)"
-			+ " or  ((akses_berbagi_id = 1 or akses_berbagi_id = 2)"
-			+ "			and	berkas_id		= BERKAS.id"
-			+ "			and	bagi_ke_peg_id	= "+ user_id
-			+ " ))";
+		q += " where	akses_berbagi_id in (3,4)"
+			+" and		pegawai_id = "+ peg_id
+			+" union all"
+			+" select	m_berkas.id"
+			+" ,		pid"
+			+" ,		tipe_file"
+			+" ,		sha"
+			+" ,		pegawai_id"
+			+" ,		unit_kerja_id"
+			+" ,		berkas_klas_id"
+			+" ,		berkas_tipe_id"
+			+" ,		nama"
+			+" ,		tgl_unggah"
+			+" ,		coalesce (tgl_dibuat, tgl_unggah) as tgl_dibuat"
+			+" ,		nomor"
+			+" ,		pembuat"
+			+" ,		judul"
+			+" ,		masalah"
+			+" ,		jra"
+			+" ,		status"
+			+" ,		status_hapus"
+			+" ,		akses_berbagi_id"
+			+" from		m_berkas"
+			+" ,		m_berkas_berbagi"
+			+" where	akses_berbagi_id in (1,2)"
+			+"	and		berkas_id		= m_berkas.id"
+			+"	and		bagi_ke_peg_id	= "+ user_id
+			+" and		pegawai_id		= "+ peg_id;
 	} else if (id.equalsIgnoreCase ("0")) {
 		q	+=" where id = "+ pid;
 	} else {

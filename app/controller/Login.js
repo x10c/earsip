@@ -35,25 +35,21 @@ Ext.define ('Earsip.controller.Login', {
 				scope	: this
 			,	success	: function (form, action)
 				{
-					if (action.result.success == true) {
-						win.hide ();
-						Earsip.username = action.result.user_name;
-						var tabpanel = this.getMainview ().down ('#content_tab');
-						if (action.result.is_pusatarsip == true){
-							if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
-								tabpanel.add ({
-									xtype	: 'notif_pemindahan'
-								}); 
-								tabpanel.setActiveTab ('notif_pemindahan');
-							}
-						} else {
-							tabpanel.remove ('notif_pemindahan');
-						}
-						this.getMainview ().getLayout ().setActiveItem ('main');
-						this.getMaintoolbar ().do_load_menu ();
-						this.getBerkastree ().do_load_tree ();
-					} else {
+					if (action.result.success == false) {
 						Ext.Msg.alert ('Kesalahan', action.result.info);
+						return;
+					}
+
+					Earsip.username		= action.result.user_name;
+					this.is_pusatarsip	= action.result.is_pusatarsip;
+					win.hide ();
+
+					if (action.result.psw_is_expired == 1) {
+						var win_psw = Ext.create ('Earsip.view.GantiPasswordWin', {});
+						win_psw.on ("destroy", this.after_login_success, this);
+						win_psw.show ();
+					} else {
+						this.after_login_success ();
 					}
 				}
 			,	failure	: function (form, action)
@@ -66,5 +62,24 @@ Ext.define ('Earsip.controller.Login', {
 
 ,	do_keyenter: function ()
 	{
+	}
+
+,	after_login_success : function ()
+	{
+		var tabpanel = this.getMainview ().down ('#content_tab');
+
+		if (this.is_pusatarsip == true){
+			if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
+				tabpanel.add ({
+					xtype	: 'notif_pemindahan'
+				});
+				tabpanel.setActiveTab ('notif_pemindahan');
+			}
+		} else {
+			tabpanel.remove ('notif_pemindahan');
+		}
+		this.getMainview ().getLayout ().setActiveItem ('main');
+		this.getMaintoolbar ().do_load_menu ();
+		this.getBerkastree ().do_load_tree ();
 	}
 });

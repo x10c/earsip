@@ -95,17 +95,13 @@ try {
 
 		rs = db_stmt.executeQuery (q);
 
-		if (! rs.next ()) {
+		if (rs.next ()) {
+			name = rs.getString ("nama");
+
 			out.print ("{success:false"
-					+",message:'Gagal terhubung ke database.'}");
+					+",message:'Berkas yang sama telah ada dengan nama \""+ name +"\".'}");
 			return;
 		}
-
-		name = rs.getString ("nama");
-
-		out.print ("{success:false"
-					+",message:'Berkas yang sama telah ada dengan nama \""+ name +"\".'}");
-		return;
 	}
 
 	item_up.write (file);
