@@ -8,6 +8,7 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="org.json.JSONObject" %>
+<%@ page import="org.json.JSONArray" %>
 <%
 Connection			db_con	= null;
 PreparedStatement	db_pstmt	= null;
@@ -45,6 +46,7 @@ try {
 	
 	action	= request.getParameter ("action");
 	id 		= request.getParameter ("id");
+	
 	
 	if (id == null) {
 		reader	= request.getReader ();
@@ -91,7 +93,7 @@ try {
 			+" , tgl_batas_kembali"        		
 			+" , tgl_kembali"        		
 			+" , keterangan)"      	
-			+" values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+" values (?, ?, ?, ?, ?, ?, ?, ?, ?) returning id";
 		db_pstmt = db_con.prepareStatement (q);
 		db_pstmt.setInt	  (1, Integer.parseInt(unit_kerja_peminjam_id));
 		db_pstmt.setString (2, nm_ptgs);
@@ -102,6 +104,11 @@ try {
 		db_pstmt.setDate   (7, Date.valueOf(tgl_batas));       		
 		db_pstmt.setNull   (8, Types.DATE);        		
 		db_pstmt.setString (9, keterangan);
+		rs = db_pstmt.executeQuery ();
+		if (rs.next ())
+		{
+			id = rs.getString ("id");
+		}
 		
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update	t_peminjaman"
@@ -127,30 +134,49 @@ try {
 		db_pstmt.setNull(8, Types.DATE);
 		db_pstmt.setString(9, keterangan);
 		db_pstmt.setInt(10, Integer.parseInt(id));
+		db_pstmt.executeUpdate ();
 		
-	}else if (action.equalsIgnoreCase ("destroy")) {
-		q	=" delete from t_peminjaman where id = ?";
-		db_pstmt = db_con.prepareStatement (q);
-		db_pstmt.setInt (1, Integer.parseInt (id));
 	}
+		
+	
 
-	db_pstmt.executeUpdate ();
 	
-	if (action.equalsIgnoreCase ("create")){
-		q =" select Max(id) as new_id from t_peminjaman";
-	
-		db_stmt = db_con.createStatement ();
-		rs = db_stmt.executeQuery (q);
-		String new_id = "";
-		if (rs.next ()){
-			new_id = rs.getString ("new_id");
+	if (id!=null || !id.equals(""))
+		{
+			db_stmt = db_con.createStatement ();
+			q	=" update m_berkas  set arsip_status_id = 0"
+				+" where id in (select berkas_id as id from peminjaman_rinci where peminjaman_id = " + id + ")" ;
+			db_stmt.executeUpdate (q);
+			
+			q	=" delete from peminjaman_rinci"
+				+" where peminjaman_id = " + id;
+			db_stmt.executeUpdate (q);
+			
+			
+			if (!action.equalsIgnoreCase ("destroy"))
+			{
+				JSONArray	berkas = new JSONArray (request.getParameter ("berkas_id"));
+				int len	= berkas.length ();
+				if (len > 0)
+				{
+					q = "";
+					for (int i = 0; i < len; i++)
+					{
+						q +=" insert into peminjaman_rinci (peminjaman_id, berkas_id) values("+ id +","+ berkas.getString (i) +");";
+						q +=" update m_berkas set arsip_status_id = 1 where id = "+ berkas.getString (i) + ";";
+					}
+				}
+				db_stmt.executeUpdate (q);
+			} else 
+			{
+				q	=" delete from t_peminjaman where id = ?";
+				db_pstmt = db_con.prepareStatement (q);
+				db_pstmt.setInt (1, Integer.parseInt (id));
+				db_pstmt.executeUpdate ();
+			}
+			
 		}
-		
-		out.print ("{success:true,info:'Data Penyimpanan berhasil disimpan',data:"+new_id +"}");
-		rs. close ();
-	} else {
-		out.print ("{success:true,info:'Data Penyimpanan berhasil disimpan'}");
-	}
+	out.print ("{success:true,info:'Data Penyimpanan berhasil disimpan'}");
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");

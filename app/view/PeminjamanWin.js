@@ -1,16 +1,20 @@
-Ext.require ('Earsip.store.BerkasPinjam');
+Ext.require ([
+	'Earsip.store.BerkasPinjam'
+,	'Earsip.store.PeminjamanRinci'
+]);
 
 Ext.define('Earsip.view.PeminjamanWin', {
 	extend		: 'Ext.Window'
 ,	alias		: 'widget.peminjaman_win'
+,	id			: 'peminjaman_win'
 ,	title		: 'Peminjaman'
 ,	itemId		: 'peminjaman_win'
-,   width		: 500
+,   width		: 800
 ,	closable	: true
 ,	resizable	: false
 ,	draggable	: false
 ,	autoHeight	: true
-,	layout		: 'anchor'
+,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
 ,	items		: [{
@@ -18,117 +22,139 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	url			: 'data/peminjaman_submit.jsp'
 	,	plain		: true
 	,	frame		: true
+	,	autoScroll	: true
 	,	border		: 0
 	,	bodyPadding	: 5	
-	,	layout		: 'anchor'
 	,	defaults	: {
 			xtype	: 'textfield'
-		,	anchor	: '100%'
 	}
+	,	fieldDefaults: {
+            labelAlign: 'top',
+            msgTarget: 'side'
+    }
 	,	items		: [{
 			hidden			: true
 		,	itemId			: 'id'
 		,	name			: 'id'
 		},{
-			xtype		:'fieldset'
-		,	title		: 'Data Petugas'
-        ,   collapsible	: true
-        ,   layout		: 'anchor'
-        ,   defaults	: {
-				xtype	: 'textfield'
-			,	anchor	: '100%'
-			}
+			xtype			: 'container'
+		,	plain			: true
+		,	layout			: 'column'
+		,	anchor			: '100%'
 		,	items	: [{
-				fieldLabel		: 'Nama'
-			,	itemId			: 'nama_petugas'
-			,	name			: 'nama_petugas'
-			,	initialValue	: 'TEST'
-			//,	disabled 		: true
+				xtype		: 'container'
+			,	columnWidth	: .5
+			,	layout		: 'anchor'
+			,	items		: [{
+					xtype		: 'fieldset'
+				,	title		: 'Data Petugas'
+				,   collapsible	: true
+				,	layout		: 'anchor'
+				,	anchor		: '96%'
+				,   defaults	: {
+						xtype	: 'textfield'
+					,	anchor	: '100%'
+					}
+				,	items	: [{
+						fieldLabel		: 'Nama'
+					,	itemId			: 'nama_petugas'
+					,	name			: 'nama_petugas'
+					,	disabled 		: true
+					},{
+						fieldLabel		: 'Nama Pimpinan'
+					,	itemId			: 'nama_pimpinan_petugas'
+					,	name			: 'nama_pimpinan_petugas'
+					,	allowBlank		: false
+					}]
+				},{
+					xtype		:'fieldset'
+				,	title		: 'Data Pengembalian'
+				,   collapsible	: true
+				,   layout		: 'anchor'
+				,	anchor		: '96%'
+				,   defaults	: {
+						xtype	: 'textfield'
+					,	anchor	: '100%'
+					}
+				,	items	: [{
+						xtype			: 'datefield'
+					,	fieldLabel		: 'Tanggal Peminjaman'
+					,	itemId			: 'tgl_pinjam'
+					,	name			: 'tgl_pinjam'
+					,	format			: 'Y-m-d'
+					,	value			: new Date ()
+					,	editable		: false
+					
+					},{
+						xtype			: 'datefield'
+					,	fieldLabel		: 'Tanggal Batas Pengembalian'
+					,	itemId			: 'tgl_batas_kembali'
+					,	name			: 'tgl_batas_kembali'
+					,	format			: 'Y-m-d'
+					,	allowblank		: false
+					,	editable		: false
+					,	value			: new Date ()
+					
+					},{
+						xtype			: 'datefield'
+					,	itemId			: 'tgl_kembali'
+					,	name			: 'tgl_kembali'
+					,	format			: 'Y-m-d'
+					, 	value			: 'null'
+					,	hidden			: true
+					
+					}]
+				}]
 			},{
-				fieldLabel		: 'Nama Pimpinan'
-			,	itemId			: 'nama_pimpinan_petugas'
-			,	name			: 'nama_pimpinan_petugas'
-			,	allowBlank		: false
+				xtype		: 'container'
+			,	columnWidth	: .5
+			,	layout		: 'anchor'
+			,	items		: [{
+					xtype		:'fieldset'
+				,	title		: 'Data Peminjam'
+				,   collapsible	: true
+				,   defaultType	: 'textfield'
+				,	layout		: 'anchor'
+				,	anchor		: '96%'
+				,   defaults	: {
+						xtype	: 'textfield'
+					,	anchor	: '100%'
+					}
+				,	items	: [{
+						xtype			: 'combo'
+					,	fieldLabel		: 'Unit Kerja'
+					,	itemId			: 'unit_kerja_peminjam_id'
+					,	name			: 'unit_kerja_peminjam_id'
+					,	store			: 'UnitKerja'
+					,	displayField	: 'nama'
+					,	valueField		: 'id'
+					,	editable		: false
+					,	allowBlank		: false
+					},{
+						fieldLabel		: 'Nama Pimpinan'
+					,	itemId			: 'nama_pimpinan_peminjam'
+					,	name			: 'nama_pimpinan_peminjam'
+					,	allowBlank		: false
+					},{
+						fieldLabel		: 'Nama'
+					,	itemId			: 'nama_peminjam'
+					,	name			: 'nama_peminjam'
+					,	allowBlank		: false
+					}]
+				},{
+					xtype			: 'textarea'
+				,	anchor			: '96%'
+				, 	fieldLabel		: 'Keterangan'
+				,	itemId			: 'keterangan'
+				,	name			: 'keterangan'
+				}]
+				
 			}]
-		},{
-			xtype		:'fieldset'
-		,	title		: 'Data Peminjam'
-        ,   collapsible	: true
-        ,   defaultType	: 'textfield'
-        ,   layout		: 'anchor'
-        ,   defaults	: {
-				xtype	: 'textfield'
-			,	anchor	: '100%'
-			}
-		,	items	: [{
-				xtype			: 'combo'
-			,	fieldLabel		: 'Unit Kerja'
-			,	itemId			: 'unit_kerja_peminjam_id'
-			,	name			: 'unit_kerja_peminjam_id'
-			,	store			: 'UnitKerja'
-			,	displayField	: 'nama'
-			,	valueField		: 'id'
-			,	editable		: false
-			,	allowBlank		: false
-			},{
-				fieldLabel		: 'Nama Pimpinan'
-			,	itemId			: 'nama_pimpinan_peminjam'
-			,	name			: 'nama_pimpinan_peminjam'
-			,	allowBlank		: false
-			},{
-				fieldLabel		: 'Nama'
-			,	itemId			: 'nama_peminjam'
-			,	name			: 'nama_peminjam'
-			,	allowBlank		: false
-			}]
-		},{
-			xtype		:'fieldset'
-		,	title		: 'Data Pengembalian'
-        ,   collapsible	: true
-        ,   layout		: 'anchor'
-        ,   defaults	: {
-                xtype	: 'textfield'
-			,	anchor	: '100%'
-			}
-		,	items	: [{
-				xtype			: 'datefield'
-			,	fieldLabel		: 'Tanggal Peminjaman'
-			,	itemId			: 'tgl_pinjam'
-			,	name			: 'tgl_pinjam'
-			,	format			: 'Y-m-d'
-			,	value			: new Date ()
-			,	editable		: false
-			
-			},{
-				xtype			: 'datefield'
-			,	fieldLabel		: 'Tanggal Batas Pengembalian'
-			,	itemId			: 'tgl_batas_kembali'
-			,	name			: 'tgl_batas_kembali'
-			,	format			: 'Y-m-d'
-			,	allowblank		: false
-			,	editable		: false
-			,	value			: new Date ()
-			
-			},{
-				xtype			: 'datefield'
-			,	itemId			: 'tgl_kembali'
-			,	name			: 'tgl_kembali'
-			,	format			: 'Y-m-d'
-			, 	value			: 'null'
-			,	hidden			: true
-			
-			}]
-		},{
-			xtype			: 'textarea'
-		, 	fieldLabel		: 'Keterangan'
-		,	itemId			: 'keterangan'
-		,	name			: 'keterangan'
-		
 		},{
 			xtype			: 'grid'
 		,	itemId			: 'peminjaman_rinci'
 		,	title			: 'Rincian Peminjaman'
-		,	minHeight		: 200
+		,	height			: 200
 		,	store			: 'PeminjamanRinci'
 		,	disabled		: true
 		,	plugins			:
@@ -136,26 +162,17 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			Ext.create ('Earsip.plugin.RowEditor')
 		]
 		,	columns			: [{
-				text			: 'ID'
-			,	dataIndex		: 'peminjaman_id'
-			,	hidden			: true
-			,	hideable		: false
-			},{
 				text		: 'Berkas'
 			,	dataIndex	: 'berkas_id'
-			,	allowBlank	: false
-			,	flex		: 0.5
+			,	flex		: 1
 			,	editor		: {
-					xtype			: 'combo'
-				,	store			: Ext.create ('Earsip.store.BerkasPinjam', {
-						autoLoad		: true
-					})
-				,	displayField	: 'nama'
+					xtype			: 'combobox'
+				,	store			: 'BerkasPinjam'
 				,	valueField		: 'id'
-				,	mode			: 'local'
-				,	editable		: false
+				,	displayField	: 'nama'
+				,	allowBlank		: false
+				,	autoSelect		: true
 				,	triggerAction	: 'all'
-				,	lazyRender		: true
 				}
 			,	renderer	: function (v, md, r, rowidx, colidx)
 				{
@@ -175,7 +192,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				,	itemId		: 'del'
 				,	iconCls		: 'del'
 				,	action		: 'del'
-				,	disabled	: true
 				}]
 			}]
 		}]
@@ -189,25 +205,26 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
+	
 ,	load : function (record)
 	{
-		alert (Earsip.username);
 		var grid = this.down ('#peminjaman_rinci');
+		var form = this.down ('form');
+		
 		Ext.data.StoreManager.lookup ('BerkasPinjam').load ({
 			scope	: this
 		,	callback: function (r, op, success)
 			{
 				if (success) {
-					this.down ('form').getForm ().loadRecord (record);
-
-					grid.params = {
-						peminjaman_id  : record ().get ('id')
-					}
+					form.loadRecord (record);
 					grid.getStore ().load ({
-						params	: grid.params
+						params	: {
+							peminjaman_id  : form.getRecord ().get ('id')
+						}
 					});
 				}
 			}
 		});
+		Ext.data.StoreManager.lookup ('BerkasPinjam').clearFilter ();
 	}
 });

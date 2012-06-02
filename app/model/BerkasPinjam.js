@@ -2,16 +2,7 @@ Ext.define ('Earsip.model.BerkasPinjam', {
 	extend		: 'Ext.data.Model'
 ,	fields		: [
 		'id'
-	,	'pid'
-	,	'tipe_file'
-	,	'sha'
-	,	'pegawai_id'
-	,	'unit_kerja_id'
-	,	'berkas_klas_id'
-	,	'berkas_tipe_id'
 	,	'nama'
-	,	'tgl_unggah'
-	,	'tgl_dibuat'
 	,	'nomor'
 	,	'pembuat'
 	,	'judul'
@@ -19,7 +10,7 @@ Ext.define ('Earsip.model.BerkasPinjam', {
 	,	'jra'
 	,	'status'
 	,	'status_hapus'
-	,	'akses_berbagi_id'
+	,	'arsip_status_id'
 	]
 ,	idProperty	: 'id'
 });

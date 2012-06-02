@@ -20,20 +20,11 @@ try {
 	String user_id		= (String) session.getAttribute ("user.id");
 	String grup_id		= (String) session.getAttribute ("user.grup_id");
 	
-	String	status 		= (grup_id.equals ("3")) ? "0" : "1";
+	
 	
 	
 	q	=" select	id"
-		+" ,		pid"
-		+" ,		tipe_file"
-		+" ,		sha"
-		+" ,		pegawai_id"
-		+" ,		unit_kerja_id"
-		+" ,		berkas_klas_id"
-		+" ,		berkas_tipe_id"
 		+" ,		nama"
-		+" ,		tgl_unggah"
-		+" ,		coalesce (tgl_dibuat, tgl_unggah) as tgl_dibuat"
 		+" ,		nomor"
 		+" ,		pembuat"
 		+" ,		judul"
@@ -41,13 +32,15 @@ try {
 		+" ,		jra"
 		+" ,		status"
 		+" ,		status_hapus"
-		+" ,		akses_berbagi_id"
+		+" ,		arsip_status_id"
 		+" from		m_berkas"
-		+" where	pegawai_id		= "+ user_id
-		+" and		status			= "+ status
+		+" right join m_arsip"
+		+" on		m_berkas.id = m_arsip.berkas_id"
+		+" where	status			= 0"
 		+" and		status_hapus	= 1"
-		+" and		pid	> 0"
+		+" and		unit_kerja_id is not null"
 		+" order by nama";
+
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -58,17 +51,9 @@ try {
 		} else {
 			i++;
 		}
-		data	+="\n{ id            : "+ rs.getString ("id")
-				+ "\n, pid           : "+ rs.getString ("pid")
-				+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
-				+ "\n, sha           :'"+ rs.getString ("sha") +"'"
-				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
-				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
-				+ "\n, berkas_klas_id: "+ rs.getString ("berkas_klas_id")
-				+ "\n, berkas_tipe_id: "+ rs.getString ("berkas_tipe_id")
+		data	+="\n{"
+				+ "\nid            	 : "+ rs.getString ("id")
 				+ "\n, nama          :'"+ rs.getString ("nama") +"'"
-				+ "\n, tgl_unggah    :'"+ rs.getString ("tgl_unggah") +"'"
-				+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") +"'"
 				+ "\n, nomor         :'"+ rs.getString ("nomor") +"'"
 				+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
 				+ "\n, judul         :'"+ rs.getString ("judul") +"'"
@@ -76,7 +61,7 @@ try {
 				+ "\n, jra           : "+ rs.getString ("jra")
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
-				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
+				+" \n, arsip_status_id : "+ rs.getString ("arsip_status_id")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

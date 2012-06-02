@@ -3,7 +3,7 @@ Ext.define ('Earsip.store.PeminjamanRinci', {
 ,	storeId		: 'PeminjamanRinci'
 ,	model		: 'Earsip.model.PeminjamanRinci'
 ,	autoSync	: false
-,	autoSave	: false
+,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
 	,	api			: {

@@ -17,7 +17,7 @@ try {
 		response.sendRedirect (request.getContextPath ());
 		return;
 	}
-	String user_id 	= (String) session.getAttribute ("user.id");
+	
 	q	=" select		Distinct(A.id)"
 		+" ,			A.unit_kerja_peminjam_id"
 		+" ,			A.nama_petugas"
@@ -28,13 +28,14 @@ try {
 		+" ,			A.tgl_batas_kembali"
 		+" ,			A.tgl_kembali"
 		+" ,			A.keterangan"
-		+" from			(t_peminjaman A"
+		+" from			t_peminjaman A"
 		+" left join	peminjaman_rinci B "
-		+" on			A.id = B.peminjaman_id )"
+		+" on			A.id = B.peminjaman_id"
 		+" left join	m_berkas C"
 		+" on 			C.id = B.berkas_id"
-		+" where		C.status = 1"
-		+" and 			C.pegawai_id = "+ user_id
+		+" right join	m_arsip D"
+		+" on			D.berkas_id = C.id"
+		+" where		C.status = 0"
 		+" and			A.tgl_kembali is null";
 
 	db_stmt	= db_con.createStatement ();

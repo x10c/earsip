@@ -18,8 +18,8 @@ Ext.define ('Earsip.view.Peminjaman', {
 ,	columns			: [{
 		text		: 'ID'
 	,	dataIndex	: 'id'
-	, 	hidden		: true
-	, 	hideable	: false
+	,	hidden		: true
+	,	hideable	: false
 	},{
 		text		: 'Unit Kerja Peminjam'
 	,	dataIndex	: 'unit_kerja_peminjam_id'
@@ -107,10 +107,14 @@ Ext.define ('Earsip.view.Peminjaman', {
 		activate		: function (comp)
 		{
 			this.getStore ().load ();
+			
 		}
-	,	removed			: function (comp)
+
+	,	afterrender : function (comp)
 		{
-			this.destroy ();
+			if (Ext.getCmp ('peminjaman_win')!= undefined)
+				this.win = Ext.getCmp ('peminjaman_win');
 		}
-	}
+	}	
+	
 });
