@@ -82,16 +82,11 @@ try {
 		db_stmt.setInt (2, Integer.parseInt (berkas_id));
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update 	m_berkas"
-			+" set		nama = ?"
-			+" , 		status = ?"
-			+" , 		arsip_status_id = ?"
+			+" set 		status = 0"
 			+" where 	id = ?";
 			
 		db_stmt = db_con.prepareStatement (q);
-		db_stmt.setString (1, nama);
-		db_stmt.setInt (2, Integer.parseInt("0")); // set berkas inaktif
-		db_stmt.setInt (3, Integer.parseInt(arsip_status_id));
-		db_stmt.setInt (4, Integer.parseInt (berkas_id));
+		db_stmt.setInt (1, Integer.parseInt (berkas_id));
 		
 		db_stmt.executeUpdate ();
 		

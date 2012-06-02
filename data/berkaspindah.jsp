@@ -27,6 +27,7 @@ try {
 		+" WHERE	A.id NOT IN (SELECT berkas_id AS id FROM t_pemindahan_rinci)"
 		+" AND 	pegawai_id		= "+user_id
 		+" AND		status_hapus	= 1"
+		+" AND	arsip_status_id = 0"
 		+" AND 	unit_kerja_id	IS NOT null"
 		+" ORDER BY nama";
 

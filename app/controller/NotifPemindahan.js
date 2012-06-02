@@ -14,9 +14,8 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 ,	init	: function ()
 	{
 		this.control ({
-			'notif_pemindahan #pemindahan_grid': {
-				beforedit		: this.do_check
-			,	itemdblclick	: this.do_view_detail
+			'notif_pemindahan grid[itemId=pemindahan_grid]': {
+				itemdblclick	: this.do_view_detail
 			,	selectionchange : this.user_select
 			}
 		,	'notif_pemindahan #berkas_pindah_grid': {
@@ -40,17 +39,12 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		var form = this
 	}
 
-,	do_check	: function (editor, o)
-	{
-		editor.setVisible (false);
-	}
-	
-
-	
 ,	do_view_detail : function (v, record, item,index, e)
 	{
 		var panel = this.getNotif_pemindahan ();
-		
+		var editor	= v.up ('#pemindahan_grid').getPlugin ('roweditor');
+
+		editor.cancelEdit ();
 		if (panel.win3 == undefined) {
 			panel.win3 = Ext.create ('Earsip.view.NotifPemindahanWin', {});
 		}
@@ -65,7 +59,9 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 ,	do_edit_rinci : function (v, record, item,index, e)
 	{
 		var panel = this.getNotif_pemindahan ();
-		
+		var editor	= v.up ('#berkas_pindah_grid').getPlugin ('roweditor');
+
+		editor.cancelEdit ();
 		if (panel.win4 == undefined) {
 			panel.win4 = Ext.create ('Earsip.view.NotifPemindahanRinciWin', {});
 		}

@@ -40,7 +40,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 		},{
 			text		: 'Unit Kerja'
 		,	dataIndex	: 'unit_kerja_id'
-		,	width		: 150
+		,	flex		: 0.5
 		,	editor		: {
 				xtype			: 'combo'
 			,	store			: Ext.create ('Earsip.store.UnitKerja', {
@@ -234,6 +234,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			grid.getStore ().load ();
 			grid = this.down ('#berkas_pindah_grid');
 			grid.getStore ().load ();
+			
 		}
 		,	removed			: function (comp)
 		{
