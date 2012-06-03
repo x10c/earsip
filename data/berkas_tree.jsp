@@ -5,7 +5,6 @@
  %  - m.shulhan (ms@kilabit.org)
 --%>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="org.json.JSONArray" %>

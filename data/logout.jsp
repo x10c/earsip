@@ -1,3 +1,4 @@
+<%@ page import="java.sql.Connection" %>
 <%
 	Connection	db_con	= (Connection) session.getAttribute("db.con");
 	Cookie[]	cookies	= request.getCookies ();
