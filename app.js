@@ -34,6 +34,40 @@ Ext.define ('Earsip', {
 	}
 });
 
+Ext.msg = function ()
+{
+	var msgCt;
+
+	return {
+		display : function (title, format, cls, delay)
+		{
+			if (!msgCt) {
+				msgCt = Ext.DomHelper.insertFirst (document.body, {id:'msg-div'}, true);
+			}
+			var s = Ext.String.format.apply (String, Array.prototype.slice.call(arguments, 1));
+			var m = Ext.DomHelper.append(msgCt
+					, '<div class="'+ cls +'"><h3>' + title + '</h3><p>' + s + '</p></div>'
+					, true);
+			m.hide();
+			m.slideIn('t').ghost("t", { delay: delay, remove: true});
+		}
+
+	,	info : function (format)
+		{
+			this.display ('Informasi', format, 'msg-info', 2000);
+		}
+
+	,	error : function (format)
+		{
+			this.display ('Kesalahan', format, 'msg-error', 4000);
+		}
+
+	,	init : function ()
+		{
+		}
+    };
+}();
+
 Ext.define ('Earsip.plugin.RowEditor', {
 	extend				: 'Ext.grid.plugin.RowEditing'
 ,	action				: 'none'	/* none, add, edit */

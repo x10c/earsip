@@ -36,7 +36,7 @@ Ext.define ('Earsip.controller.Login', {
 			,	success	: function (form, action)
 				{
 					if (action.result.success == false) {
-						Ext.Msg.alert ('Kesalahan', action.result.info);
+						Ext.msg.error (action.result.info);
 						return;
 					}
 
@@ -54,7 +54,7 @@ Ext.define ('Earsip.controller.Login', {
 				}
 			,	failure	: function (form, action)
 				{
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			});
 		}

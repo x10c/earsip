@@ -104,7 +104,7 @@ Ext.define ('Earsip.controller.IndeksRelatif', {
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 
@@ -116,7 +116,7 @@ Ext.define ('Earsip.controller.IndeksRelatif', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					if (win.action == 'update'){
 						win.hide ();
 					} else {
@@ -125,12 +125,12 @@ Ext.define ('Earsip.controller.IndeksRelatif', {
 					grid.getStore ().load ();
 					
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}

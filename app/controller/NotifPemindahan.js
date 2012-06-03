@@ -33,9 +33,8 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		,	'notif_pemindahanrinci_win button[action=submit]': {
 				click : this.do_pemindahanrinci_submit
 			}
-		
 		});
-		
+
 		var form = this
 	}
 
@@ -48,7 +47,7 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		if (panel.win3 == undefined) {
 			panel.win3 = Ext.create ('Earsip.view.NotifPemindahanWin', {});
 		}
-		
+
 		var form = panel.win3.down ('form').getForm ();
 		form.loadRecord (record);
 		panel.win3.down ('#nama_petugas').setValue (Earsip.username);
@@ -65,16 +64,16 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		if (panel.win4 == undefined) {
 			panel.win4 = Ext.create ('Earsip.view.NotifPemindahanRinciWin', {});
 		}
-		
+
 		var form = panel.win4.down ('form').getForm ();
 		form.loadRecord (record);
 		panel.win4.show ();
 		panel.win4.action = 'update';
 	}
-	
+
 ,	user_select : function (sm, records)
 	{
-		var panel = this.getNotif_pemindahan () 
+		var panel = this.getNotif_pemindahan ()
 		var grid = panel.down ('#pemindahan_grid');
 		var grid_rinci = panel.down ('#berkas_pindah_grid');
 
@@ -99,12 +98,12 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		var panel = this.getNotif_pemindahan ();
 		var grid_rinci = panel.down ('#berkas_pindah_grid');
 		var grid = button.up ('#pemindahan_grid');
-		
+
 		grid.getStore ().load ();
 		grid_rinci.getStore ().load ();
-		
+
 	}
-	
+
 ,	do_refresh_pemindahanrinci : function (button)
 	{	
 		if (idc < 1) return;
@@ -116,7 +115,6 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 			params	: grid.params
 		});
 	}
-	
 
 ,	do_pemindahan_submit: function (button)
 	{	
@@ -125,10 +123,10 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
-		
+
 		win.down('form').items.each (this.unlock);
 
 		form.submit ({
@@ -140,7 +138,7 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 			{
 				win.down('form').items.each (this.lock);
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					if (win.action=='update')
 					{	
 						win.hide ();
@@ -151,26 +149,25 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 					}
 					grid.getStore ().load ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
-				
 			}
 		,	failure	: function (form, action)
 			{
 				win.down('form').items.each (this.lock);
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
 
 ,	do_pemindahanrinci_submit: function (button)
-	{	
+	{
 		var grid	= this.getNotif_pemindahan ().down ('#berkas_pindah_grid');
 		var win		= button.up ('#notif_pemindahanrinci_win');
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 		form.submit ({
@@ -181,8 +178,8 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
-					
+					Ext.msg.info (action.result.info);
+
 					grid.params = {
 						pemindahan_id : idc
 					}
@@ -191,28 +188,31 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 					});
 					win.hide ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
-	}	
-	
-	
-, unlock	: function (field)
-  {
-	if ((field.itemId == 'pj_unit_arsip' || field.itemId == 'status' || field.xtype == 'button'))
-		return;
-	field.setDisabled (false);	
-  }
-  
-, lock	: function (field)
-  {
-	if ((field.itemId == 'pj_unit_arsip' || field.itemId == 'status' || field.xtype == 'button'))
-		return;
-	field.setDisabled (true);	
-  }
+	}
+
+,	unlock	: function (field)
+	{
+		if ((field.itemId == 'pj_unit_arsip' || field.itemId == 'status'
+		|| field.xtype == 'button')) {
+			return;
+		}
+		field.setDisabled (false);
+	}
+
+,	lock	: function (field)
+	{
+		if ((field.itemId == 'pj_unit_arsip' || field.itemId == 'status'
+		|| field.xtype == 'button')) {
+			return;
+		}
+		field.setDisabled (true);
+	}
 });

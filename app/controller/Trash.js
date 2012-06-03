@@ -51,12 +51,12 @@ Ext.define ('Earsip.controller.Trash', {
 					if (action.result.success == true) {
 						this.getTrashlist ().do_load_list ();
 					} else {
-						Ext.Msg.alert ('Error', action.result.info);
+						Ext.msg.error (action.result.info);
 					}
 				}
 			,	failure	: function (form, action)
 				{
-					Ext.Msg.alert ('Error', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			});
 		}

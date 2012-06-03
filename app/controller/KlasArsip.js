@@ -6,6 +6,7 @@ Ext.define ('Earsip.controller.KlasArsip', {
 		ref		: 'ref_klasifikasi_arsip'
 	,	selector: 'ref_klasifikasi_arsip'
 	}]
+
 ,	init	: function ()
 	{
 		this.control ({
@@ -31,8 +32,6 @@ Ext.define ('Earsip.controller.KlasArsip', {
 				beforeclose : this.do_check
 		}
 		});
-		
-		var form = this
 	}
 	
 ,	do_check : function (panel)
@@ -79,6 +78,7 @@ Ext.define ('Earsip.controller.KlasArsip', {
 		panel.win.show ();
 		panel.win.action = 'update';
 	}
+
 ,	do_refresh : function (button)
 	{
 		button.up ('#ref_klasifikasi_arsip').getStore ().load ();
@@ -96,6 +96,7 @@ Ext.define ('Earsip.controller.KlasArsip', {
 		store.remove (data);
 		store.sync ();
 	}
+
 ,	do_submit : function (b)
 	{
 		var grid	= this.getRef_klasifikasi_arsip ();
@@ -103,7 +104,7 @@ Ext.define ('Earsip.controller.KlasArsip', {
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 
@@ -115,7 +116,7 @@ Ext.define ('Earsip.controller.KlasArsip', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					if (win.action == 'update'){
 						win.hide ();
 					} else {
@@ -124,12 +125,12 @@ Ext.define ('Earsip.controller.KlasArsip', {
 					grid.getStore ().load ();
 					
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
