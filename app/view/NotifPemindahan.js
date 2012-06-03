@@ -103,7 +103,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 		,	renderer	: function (v)
 			{
 				if (v == null || v == 'null') 
-					return 'Silahkan Isi Penanggung Jawab';
+					return String.format( '<span style="color: red">{0}</span>', 'Harap diisi');
 				else {
 					return v;
 				}
@@ -118,9 +118,9 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 		,	renderer	: function (v)
 			{
 				if (v == 1) {
-					return 'Lengkap';
+					return String.format( '<span style="color: green">{0}</span>', 'Lengkap');
 				} else {
-					return 'Tidak Lengkap';
+					return String.format( '<span style="color: red">{0}</span>', 'Tidak Lengkap');
 				}
 			}
 		}]

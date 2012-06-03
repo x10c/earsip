@@ -5,7 +5,12 @@ Ext.define ('Earsip.store.Peminjaman', {
 ,	autoSync	: false
 ,	proxy		: {
 		type		: 'ajax'
-	,	url			: 'data/peminjaman.jsp'
+	,	api			: {
+			read		: 'data/peminjaman.jsp'
+		,	create		: 'data/peminjaman_submit.jsp?action=create'
+		,	update		: 'data/peminjaman_submit.jsp?action=update'
+		,	destroy		: 'data/peminjaman_submit.jsp?action=destroy'
+		}
 	,	reader		: {
 			type		: 'json'
 		,	root		: 'data'

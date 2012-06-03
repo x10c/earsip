@@ -78,9 +78,9 @@ Ext.define ('Earsip.view.Pemindahan', {
 		,	renderer	: function (v)
 			{
 				if (v == 1) {
-					return 'Lengkap';
+					return String.format( '<span style="color: green">{0}</span>', 'Lengkap');
 				} else {
-					return 'Tidak Lengkap';
+					return String.format( '<span style="color: red">{0}</span>', 'Tidak Lengkap');
 				}
 			}
 		}]
