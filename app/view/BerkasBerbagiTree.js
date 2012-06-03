@@ -43,11 +43,11 @@ Ext.define ('Earsip.view.BerkasBerbagiTree', {
 						}
 					}
 				} else {
-					Ext.Msg.alert ('Kesalahan', o.info);
+					Ext.msg.error (o.info);
 				}
 			}
 		,	failure	: function (response) {
-				Ext.Msg.alert ('Kesalahan', 'Server error: data berkas berbagi tidak dapat diambil!');
+				Ext.msg.error ('Server error: data berkas berbagi tidak dapat diambil!');
 			}
 		});
 	}

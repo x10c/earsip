@@ -18,22 +18,21 @@ try {
 	}
 
 	String user_id		= (String) session.getAttribute ("user.id");
-	
-	
-	
+
 	q	=" SELECT	A.id"
 		+" ,		A.nama"
 		+" FROM		m_berkas A"
-		+" WHERE	A.id NOT IN (SELECT berkas_id AS id FROM t_pemindahan_rinci)"
-		+" AND 	pegawai_id		= "+user_id
+		+" WHERE	A.id NOT IN (SELECT berkas_id FROM t_pemindahan_rinci)"
+		+" AND		pegawai_id		= "+ user_id
 		+" AND		status_hapus	= 1"
-		+" AND	arsip_status_id = 0"
-		+" AND 	unit_kerja_id	IS NOT null"
+		+" AND		arsip_status_id = 0"
+		+" AND 		unit_kerja_id IS NOT null"
+		+" and		date_part('years', age (tgl_dibuat)) >= jra"
 		+" ORDER BY nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
-	
+
 	while (rs.next ()) {
 		if (i > 0) {
 			data += ",";

@@ -3,7 +3,7 @@ Ext.define('Earsip.view.PemindahanWin', {
 ,	alias		: 'widget.pemindahan_win'
 ,	title		: 'Pemindahan'
 ,	itemId		: 'pemindahan_win'
-,   width		: 500
+,	width		: 500
 ,	closable	: true
 ,	resizable	: false
 ,	draggable	: false
@@ -17,12 +17,13 @@ Ext.define('Earsip.view.PemindahanWin', {
 	,	plain		: true
 	,	frame		: true
 	,	border		: 0
-	,	bodyPadding	: 5	
+	,	bodyPadding	: 5
 	,	layout		: 'anchor'
 	,	defaults	: {
-			xtype	: 'textfield'
-		,	anchor	: '100%'
-	}
+			xtype		: 'textfield'
+		,	anchor		: '100%'
+		,	labelAlign	: 'right'
+		}
 	,	items		: [{
 			hidden			: true
 		,	itemId			: 'id'
@@ -36,7 +37,6 @@ Ext.define('Earsip.view.PemindahanWin', {
 		,	itemId			: 'kode'
 		,	name			: 'kode'
 		,	allowBlank		: false
-
 		},{
 			xtype			: 'datefield'
 		,	fieldLabel		: 'Tanggal'
@@ -67,8 +67,6 @@ Ext.define('Earsip.view.PemindahanWin', {
 		,	name			: 'status'
 		,	hidden			: true
 		}]
-		
-	
 	}]
 ,	buttons			: [{
 		text			: 'Simpan'

@@ -69,7 +69,7 @@ Ext.define ('Earsip.controller.BerkasBerbagiWin', {
 		if ((Earsip.share.hak_akses_id == 1
 		|| Earsip.share.hak_akses_id == 2)
 		&&  records.length <= 0) {
-			Ext.Msg.alert ('Kesalahan', 'Data pegawai kosong!');
+			Ext.msg.error ('Data pegawai kosong!');
 			return;
 		}
 
@@ -95,12 +95,12 @@ Ext.define ('Earsip.controller.BerkasBerbagiWin', {
 					this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
 					win.hide ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', o.info);
+					Ext.msg.error (o.info);
 				}
 			}
 		,	failure		: function (resp)
 			{
-				Ext.Msg.alert ('Kesalahan', 'Tidak dapat membagi berkas. Hubungan ke server bermasalah.');
+				Ext.msg.error ('Tidak dapat membagi berkas. Koneksi ke server bermasalah.');
 			}
 		});
 	}

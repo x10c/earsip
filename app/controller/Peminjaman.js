@@ -60,7 +60,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 				click	: this.do_cari
 			}
 		});
-		
+
 		var form = this
 	}
 
@@ -86,11 +86,11 @@ Ext.define ('Earsip.controller.Peminjaman', {
 ,	do_add : function (button)
 	{
 		var panel = this.getTrans_peminjaman ();
-		
+
 		if (panel.win == undefined) {
 			panel.win = Ext.create ('Earsip.view.PeminjamanWin', {});
 		}
-		
+
 		var grid_rinci = panel.win.down ('#peminjaman_rinci');
 		var form = panel.win.down ('form').getForm ();
 		panel.getSelectionModel (). deselectAll ();
@@ -99,16 +99,18 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		grid_rinci.getStore ().load();
 		panel.win.show ();
 		panel.win.action = 'create';
-		
 	}
+
 ,	do_refresh : function (button)
 	{
 		this.getTrans_peminjaman ().getStore ().load ();
 	}
+
 ,	do_select	: function (editor, o)
 	{
 		return false;
 	}
+
 ,	do_edit : function (b)
 	{
 		var panel = this.getTrans_peminjaman ();
@@ -117,13 +119,10 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		}
 		panel.win.show ();
 		panel.win.action = 'update';
-		
-		
-		
 	}
-	
-, 	do_delete_peminjaman	: function (button)
-	{	
+
+,	do_delete_peminjaman	: function (button)
+	{
 		var grid = button.up ('#trans_peminjaman');
 		var data = grid.getSelectionModel ().getSelection ();
 
@@ -135,7 +134,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		store.remove (data);
 		store.sync ();
 	}
-	
+
 ,	do_open_win_cari	: function (button)
 	{
 		var panel	= this.getTrans_peminjaman ();
@@ -144,10 +143,10 @@ Ext.define ('Earsip.controller.Peminjaman', {
 			panel.win_cari = Ext.create ('Earsip.view.CariPeminjamanWin', {});	
 		}
 		panel.win_cari.show ();
-		
 	}
+
 ,	do_activate_grid : function (textfield)
-	{	
+	{
 		var win	 = textfield.up ('#peminjaman_win');
 		var form = win.down ('form').getForm ();
 		var grid = win.down ('#peminjaman_rinci');
@@ -159,7 +158,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var editor	= v.up ('#peminjaman_rinci').getPlugin ('roweditor');
 		editor.cancelEdit ();
 	}
-	
+
 ,	do_pengembalian	: function (button){
 		var panel = this.getTrans_peminjaman ();
 		var records = panel.getSelectionModel().getSelection ();
@@ -168,12 +167,10 @@ Ext.define ('Earsip.controller.Peminjaman', {
 			}
 		panel.win_pengembalian.load (records[0]);
 		panel.win_pengembalian.show ();
-		
 	}
-	
-, 	do_add_berkas	: function (button)
-	{	
-		
+
+,	do_add_berkas	: function (button)
+	{
 		var grid	= button.up ('#peminjaman_rinci');
 		var editor	= grid.getPlugin ('roweditor');
 		editor.cancelEdit ();
@@ -182,11 +179,10 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		editor.action = 'add';
 		editor.startEdit (0, 0);
 		Ext.data.StoreManager.lookup ('BerkasPinjam').filter ('arsip_status_id',0);
-		
 	}
-	
-, 	do_delete_berkas	: function (button)
-	{	
+
+,	do_delete_berkas	: function (button)
+	{
 		var grid = button.up ('#peminjaman_rinci');
 		var data = grid.getSelectionModel ().getSelection ();
 
@@ -208,15 +204,15 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var berkas = [];
 
 		if ((! form.isValid ())) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
-		
+
 		if (records.length <= 0){
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi tabel rincian peminjaman');
+			Ext.msg.error ('Silahkan isi tabel rincian peminjaman');
 			return;
 		}
-		
+
 		for (var i = 0; i < records.length; i++) {
 				var berkas_id = records[i].get ('berkas_id')
 				if (berkas_id != null && berkas_id != '')
@@ -225,12 +221,12 @@ Ext.define ('Earsip.controller.Peminjaman', {
 				}
 			}
 		berkas.sort ();
-		
+
 		if (berkas.length <= 0){
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi tabel rincian peminjaman');
+			Ext.msg.error ('Silahkan isi tabel rincian peminjaman');
 			return;
 		}
-		
+
 		form.submit ({
 			scope	: this
 		,	params	: {
@@ -241,20 +237,20 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					win.close ();
 					grid.getStore ().load ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
-	
+
 ,	do_pengembalian_submit	: function (button)
 	{
 		var grid	= this.getTrans_peminjaman ();
@@ -263,40 +259,40 @@ Ext.define ('Earsip.controller.Peminjaman', {
 
 
 		if ((! form.isValid ())) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
-		
+
 		form.submit ({
 			scope	: this
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					win.close ();
 					grid.getStore ().load ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
-	
+
 ,	do_enable_tgl_range : function (combo)
 	{ 
 		var win	= combo.up ('#caripeminjamanwin');
 		var tgl_setelah	= win.down ('#tgl_setelah');
 		var tgl_sebelum	= win.down ('#tgl_sebelum');
-	
+
 		tgl_setelah.setDisabled (! (combo.getRawValue () != ''));
 		tgl_sebelum.setDisabled (! (combo.getRawValue () != ''));
 
 	}
-	
+
 ,	do_cari	: function (button)
 	{
 		var form 	= button.up ('#caripeminjamanwin').down ('form').getForm ();
@@ -304,13 +300,13 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var store	= grid.getStore ();
 		var proxy	= store.getProxy ();
 		var org_url = proxy.url;
-		
+
 		proxy.url	= 'data/caripeminjaman.jsp';
-		
+
 		store.load ({
 			params	:	form.getValues ()
 		});
-		
+
 		proxy.url	= org_url;
 	}
 });

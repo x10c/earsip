@@ -80,12 +80,12 @@ Ext.define ('Earsip.controller.MainToolbar', {
 					this.getMainview ().getLayout ().setActiveItem ('login');
 					this.getLoginwindow ().show ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', o.info);
+					Ext.msg.error (o.info);
 				}
 			}
 		,	failure	: function (response)
 			{
-				Ext.Msg.alert ('Kesalahan', 'Server error: tidak dapat keluar dari aplikasi!');
+				Ext.msg.error ('Server error: tidak dapat keluar dari aplikasi!');
 			}
 		});
 	}

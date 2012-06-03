@@ -91,14 +91,14 @@ Ext.define ('Earsip.controller.Berkas', {
 			success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 				} else {
-					Ext.Msg.alert ('Error', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Error', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
@@ -170,7 +170,7 @@ Ext.define ('Earsip.controller.Berkas', {
 ,	do_mkdir : function (b)
 	{
 		if (Earsip.berkas.tree.id <= 0) {
-			Ext.Msg.alert ('Kesalahan', 'Pilih tempat untuk direktori baru terlebih dahulu!');
+			Ext.msg.error ('Pilih tempat untuk direktori baru terlebih dahulu!');
 			return;
 		}
 		var berkaslist	= this.getBerkaslist ();
@@ -184,7 +184,7 @@ Ext.define ('Earsip.controller.Berkas', {
 ,	do_upload : function (b)
 	{
 		if (Earsip.berkas.tree.id <= 0) {
-			Ext.Msg.alert ('Kesalahan', 'Pilih direktori penyimpanan terlebih dahulu!');
+			Ext.msg.error ('Pilih direktori penyimpanan terlebih dahulu!');
 			return;
 		}
 
@@ -251,14 +251,14 @@ Ext.define ('Earsip.controller.Berkas', {
 				{
 					if (action.result.success == true) {
 						this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
-						Ext.Msg.alert ('Informasi', action.result.info);
+						Ext.msg.info (action.result.info);
 					} else {
-						Ext.Msg.alert ('Kesalahan', action.result.info);
+						Ext.msg.error (action.result.info);
 					}
 				}
 			,	failure	: function (form, action)
 				{
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			});
 		}
@@ -271,7 +271,7 @@ Ext.define ('Earsip.controller.Berkas', {
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 
@@ -286,12 +286,12 @@ Ext.define ('Earsip.controller.Berkas', {
 					this.getBerkastree ().do_load_tree ();
 					win.hide ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}

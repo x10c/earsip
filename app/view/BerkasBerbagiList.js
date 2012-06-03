@@ -82,7 +82,7 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 		,	callback : function (records, op, success)
 			{
 				if (success == false) {
-					Ext.Msg.alert ('Kesalahan', 'Koneksi ke server mengalami gangguan.');
+					Ext.msg.error ('Koneksi ke server mengalami gangguan.');
 				}
 			}
 		});

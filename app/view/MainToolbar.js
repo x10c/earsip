@@ -48,11 +48,11 @@ Ext.define ('Earsip.view.MainToolbar', {
 					this.suspendLayout = false;
 					this.doLayout();
 				} else {
-					Ext.Msg.alert ('Kesalahan', o.info);
+					Ext.msg.error (o.info);
 				}
 			}
 		,	failure	: function (response) {
-				Ext.Msg.alert ('Kesalahan', 'Server error: data menu tidak dapat diambil!');
+				Ext.msg.error ('Server error: data menu tidak dapat diambil!');
 			}
 		});
 	}

@@ -38,3 +38,50 @@
 	padding				:4px 0px 4px 20px;
 	margin				:0px
 }
+
+/* Ext.msg */
+.msg .x-box-mc {
+	font-size	:14px;
+}
+#msg-div {
+	position	:absolute;
+	left		:35%;
+	top			:10px;
+	width		:300px;
+	z-index		:20000;
+}
+#msg-div .msg-info {
+	border-radius		: 8px;
+	-moz-border-radius	: 8px;
+	border				: 2px solid #ccc;
+	background			: #F6F6F6;
+	margin-top			: 2px;
+	padding				: 10px 15px;
+	color				: #555;
+}
+#msg-div .msg-info h3 {
+	margin		: 0 0 8px;
+	font-weight	: bold;
+	font-size	: 15px;
+}
+#msg-div .msg-info p {
+	margin		: 0;
+}
+
+#msg-div .msg-error {
+	border-radius		: 8px;
+	-moz-border-radius	: 8px;
+	border				: 2px solid #FFC1C1;
+	background			: #FFE9E9;
+	margin-top			: 2px;
+	padding				: 10px 15px;
+	color				: #555;
+}
+#msg-div .msg-error h3 {
+	margin		: 0 0 8px;
+	font-weight	: bold;
+	font-size	: 15px;
+}
+#msg-div .msg-error p {
+	margin		: 0;
+}

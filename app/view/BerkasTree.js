@@ -47,11 +47,11 @@ Ext.define ('Earsip.view.BerkasTree', {
 						}
 					}
 				} else {
-					Ext.Msg.alert ('Kesalahan', o.info);
+					Ext.msg.error (o.info);
 				}
 			}
 		,	failure	: function (response) {
-				Ext.Msg.alert ('Kesalahan', 'Server error: data berkas tidak dapat diambil!');
+				Ext.msg.error ('Server error: data berkas tidak dapat diambil!');
 			}
 		});
 	}

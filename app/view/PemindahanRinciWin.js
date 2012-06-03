@@ -6,7 +6,7 @@ Ext.define('Earsip.view.PemindahanRinciWin', {
 ,   width		: 500
 ,	closable	: true
 ,	resizable	: false
-,	draggable	: false
+,	draggable	: true
 ,	autoHeight	: true
 ,	layout		: 'anchor'
 ,	border		: false

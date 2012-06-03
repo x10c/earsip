@@ -20,7 +20,7 @@ Ext.define ('Earsip.controller.GantiPassword', {
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 		form.submit ({
@@ -28,15 +28,15 @@ Ext.define ('Earsip.controller.GantiPassword', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					win.destroy();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
