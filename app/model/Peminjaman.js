@@ -10,6 +10,8 @@ Ext.define ('Earsip.model.Peminjaman', {
 	,	'tgl_pinjam'
 	,	'tgl_batas_kembali'
 	,	'tgl_kembali'
-	,	'keterangan']
+	,	'keterangan'
+	,	'status'
+]
 ,	idProperty	: 'id'
 });

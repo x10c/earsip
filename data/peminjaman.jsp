@@ -35,8 +35,7 @@ try {
 		+" on 			C.id = B.berkas_id"
 		+" right join	m_arsip D"
 		+" on			D.berkas_id = C.id"
-		+" where		C.status = 0"
-		+" and			A.tgl_kembali is null";
+		+" where		C.status = 0";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -56,6 +55,7 @@ try {
 				+ "\n, tgl_batas_kembali		:'"+ rs.getString ("tgl_batas_kembali") +"'"
 				+ "\n, tgl_kembali				:'"+ rs.getString ("tgl_kembali") +"'"
 				+ "\n, keterangan				:'"+ rs.getString ("keterangan") +"'"
+				+ "\n, status					: "+ (rs.getDate ("tgl_kembali") == null?0:1)
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

@@ -109,7 +109,7 @@ try {
 		{
 			id = rs.getString ("id");
 		}
-		
+		rs.close ();
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update	t_peminjaman"
 			+" set		unit_kerja_peminjam_id = ?"	

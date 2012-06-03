@@ -27,10 +27,10 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	bodyPadding	: 5	
 	,	defaults	: {
 			xtype	: 'textfield'
+		,	anchor	: '100%'
 	}
 	,	fieldDefaults: {
-            labelAlign: 'top',
-            msgTarget: 'side'
+            labelAlign: 'top'
     }
 	,	items		: [{
 			hidden			: true
@@ -40,18 +40,18 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			xtype			: 'container'
 		,	plain			: true
 		,	layout			: 'column'
-		,	anchor			: '100%'
 		,	items	: [{
 				xtype		: 'container'
 			,	columnWidth	: .5
 			,	layout		: 'anchor'
+			, 	defaults	: {
+						anchor		: '96%'
+				}
 			,	items		: [{
 					xtype		: 'fieldset'
 				,	title		: 'Data Petugas'
-				,   collapsible	: true
 				,	layout		: 'anchor'
-				,	anchor		: '96%'
-				,   defaults	: {
+				,	defaults	: {
 						xtype	: 'textfield'
 					,	anchor	: '100%'
 					}
@@ -69,11 +69,9 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				},{
 					xtype		:'fieldset'
 				,	title		: 'Data Pengembalian'
-				,   collapsible	: true
 				,   layout		: 'anchor'
-				,	anchor		: '96%'
 				,   defaults	: {
-						xtype	: 'textfield'
+						xtype	: 'datefield'
 					,	anchor	: '100%'
 					}
 				,	items	: [{
@@ -112,13 +110,11 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			,	items		: [{
 					xtype		:'fieldset'
 				,	title		: 'Data Peminjam'
-				,   collapsible	: true
 				,   defaultType	: 'textfield'
 				,	layout		: 'anchor'
-				,	anchor		: '96%'
+				,	anchor		: '100%'
 				,   defaults	: {
-						xtype	: 'textfield'
-					,	anchor	: '100%'
+						anchor	: '100%'
 					}
 				,	items	: [{
 						xtype			: 'combo'
@@ -143,7 +139,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					}]
 				},{
 					xtype			: 'textarea'
-				,	anchor			: '96%'
+				,	anchor			: '100%'
 				, 	fieldLabel		: 'Keterangan'
 				,	itemId			: 'keterangan'
 				,	name			: 'keterangan'

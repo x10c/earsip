@@ -26,10 +26,19 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	'trans_peminjaman  button[action=del]': {
 				click : this.do_delete_peminjaman
 			}
+		,	'trans_peminjaman button[itemId=search]': {
+				click : this.do_open_win_cari
+			}
+		,	'trans_peminjaman  button[itemId=pengembalian]': {
+				click : this.do_pengembalian
+			}
 		,	'peminjaman_win  textfield': {
 				change: this.do_activate_grid
 			}
 		,	'peminjaman_win #peminjaman_rinci': {
+				itemdblclick: this.do_deactivate_editor
+			}
+		,	'pengembalian_win #peminjaman_rinci': {
 				itemdblclick: this.do_deactivate_editor
 			}
 		,	'peminjaman_win grid button[action=add]': {
@@ -38,8 +47,17 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	'peminjaman_win button[action=submit]': {
 				click : this.do_submit
 			}
+		,	'pengembalian_win button[action=submit]': {
+				click : this.do_pengembalian_submit
+			}
 		,	'peminjaman_win grid button[action=del]': {
 				click : this.do_delete_berkas
+			}
+		,	'caripeminjamanwin combo[itemId=pilihan_tanggal]' : {
+				change	: this.do_enable_tgl_range
+			}
+		,	'caripeminjamanwin button[itemId=cari]' : {
+				click	: this.do_cari
 			}
 		});
 		
@@ -51,13 +69,15 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var peminjaman	= this.getTrans_peminjaman ();
 		var b_edit		= peminjaman.down ('#edit');
 		var b_del		= peminjaman.down ('#del');
+		var b_back		= peminjaman.down ('#pengembalian');
 		b_edit.setDisabled (! records.length);
 		b_del.setDisabled (! records.length);
+		b_back.setDisabled (! records.length);
 
 		if (records.length > 0) {
+			b_back.setDisabled (records[0].get ('status'));
 			if (peminjaman.win == undefined){
-				peminjaman.win		= Ext.create ('Earsip.view.PeminjamanWin', {});
-				
+				peminjaman.win		= Ext.create ('Earsip.view.PeminjamanWin', {});	
 			}
 			peminjaman.win.load (records[0]);
 		}
@@ -116,6 +136,16 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		store.sync ();
 	}
 	
+,	do_open_win_cari	: function (button)
+	{
+		var panel	= this.getTrans_peminjaman ();
+		if (Ext.getCmp ('caripeminjamanwin') == undefined)
+		{
+			panel.win_cari = Ext.create ('Earsip.view.CariPeminjamanWin', {});	
+		}
+		panel.win_cari.show ();
+		
+	}
 ,	do_activate_grid : function (textfield)
 	{	
 		var win	 = textfield.up ('#peminjaman_win');
@@ -128,6 +158,17 @@ Ext.define ('Earsip.controller.Peminjaman', {
 	{
 		var editor	= v.up ('#peminjaman_rinci').getPlugin ('roweditor');
 		editor.cancelEdit ();
+	}
+	
+,	do_pengembalian	: function (button){
+		var panel = this.getTrans_peminjaman ();
+		var records = panel.getSelectionModel().getSelection ();
+		if (Ext.getCmp ('pengembalian_win') == undefined){
+				panel.win_pengembalian = Ext.create ('Earsip.view.PengembalianWin', {});
+			}
+		panel.win_pengembalian.load (records[0]);
+		panel.win_pengembalian.show ();
+		
 	}
 	
 , 	do_add_berkas	: function (button)
@@ -212,5 +253,64 @@ Ext.define ('Earsip.controller.Peminjaman', {
 				Ext.Msg.alert ('Kesalahan', action.result.info);
 			}
 		});
+	}
+	
+,	do_pengembalian_submit	: function (button)
+	{
+		var grid	= this.getTrans_peminjaman ();
+		var win		= button.up ('#pengembalian_win');
+		var form	= win.down ('form').getForm ();
+
+
+		if ((! form.isValid ())) {
+			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			return;
+		}
+		
+		form.submit ({
+			scope	: this
+		,	success	: function (form, action)
+			{
+				if (action.result.success == true) {
+					Ext.Msg.alert ('Informasi', action.result.info);
+					win.close ();
+					grid.getStore ().load ();
+				} else {
+					Ext.Msg.alert ('Kesalahan', action.result.info);
+				}
+			}
+		,	failure	: function (form, action)
+			{
+				Ext.Msg.alert ('Kesalahan', action.result.info);
+			}
+		});
+	}
+	
+,	do_enable_tgl_range : function (combo)
+	{ 
+		var win	= combo.up ('#caripeminjamanwin');
+		var tgl_setelah	= win.down ('#tgl_setelah');
+		var tgl_sebelum	= win.down ('#tgl_sebelum');
+	
+		tgl_setelah.setDisabled (! (combo.getRawValue () != ''));
+		tgl_sebelum.setDisabled (! (combo.getRawValue () != ''));
+
+	}
+	
+,	do_cari	: function (button)
+	{
+		var form 	= button.up ('#caripeminjamanwin').down ('form').getForm ();
+		var grid 	= this.getTrans_peminjaman ();
+		var store	= grid.getStore ();
+		var proxy	= store.getProxy ();
+		var org_url = proxy.url;
+		
+		proxy.url	= 'data/caripeminjaman.jsp';
+		
+		store.load ({
+			params	:	form.getValues ()
+		});
+		
+		proxy.url	= org_url;
 	}
 });

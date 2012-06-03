@@ -1,16 +1,10 @@
-Ext.require ([
-	'Earsip.view.PeminjamanWin'
-,	'Earsip.store.Peminjaman'
-,	'Earsip.store.UnitKerja'
-]);
-
-Ext.define ('Earsip.view.Peminjaman', {
+Ext.define ('Earsip.view.Pengembalian', {
 	extend			: 'Ext.grid.Panel'
-,	id				: 'trans_peminjaman'
-,	alias			: 'widget.trans_peminjaman'
-,	itemId			: 'trans_peminjaman'
-,	title			: 'Daftar Peminjaman'
-,	store			: 'Peminjaman'
+,	id				: 'trans_pengembalian'
+,	alias			: 'widget.trans_pengembalian'
+,	itemId			: 'trans_pengembalian'
+,	title			: 'Daftar Pengembalian'
+,	store			: 'Pengembalian'
 ,	closable		: true
 ,	plugins		: [
 		Ext.create ('Earsip.plugin.RowEditor')
@@ -57,7 +51,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 	,	dataIndex		: 'nama_pimpinan_petugas'
 	,	flex			: 0.5
 	},{
-		text			: 'Tanggal Peminjaman'
+		text			: 'Tanggal Pengembalian'
 	,	dataIndex		: 'tgl_pinjam'
 	,	flex			: 0.5
 	},{
@@ -74,18 +68,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		text			: 'Keterangan'
 	,	dataIndex		: 'keterangan'
 	,	flex			: 1
-	},{
-		text			: 'Status'
-	,	dataIndex		: 'status'
-	,	flex			: 0.5
-	,	renderer		: function (v){
-			if (v == 0){
-				return String.format( '<span style="color: red">{0}</span>', 'Belum Kembali');
-			}
-			else {
-				return 'Sudah Kembali';
-			}
-		}
+	
 	}]
 ,	dockedItems	: [{
 		xtype		: 'toolbar'
@@ -106,17 +89,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	itemId		: 'refresh'
 		,	iconCls		: 'refresh'
 		,	action		: 'refresh'
-		},'-',{
-			text		: 'Pengembalian'
-		,	itemId		: 'pengembalian'
-		,	iconCls		: 'dirup'
-		,	disabled	: true
-
 		},'-','->','-',{
-			text		: 'Cari'
-		,	itemId		: 'search'
-		,	iconCls		: 'search'
-		},'-',{
 			text		: 'Hapus'
 		,	itemId		: 'del'
 		,	iconCls		: 'del'
@@ -133,8 +106,8 @@ Ext.define ('Earsip.view.Peminjaman', {
 
 	,	afterrender : function (comp)
 		{
-			if (Ext.getCmp ('peminjaman_win')!= undefined)
-				this.win = Ext.getCmp ('peminjaman_win');
+			if (Ext.getCmp ('pengembalian_win')!= undefined)
+				this.win = Ext.getCmp ('pengembalian_win');
 		}
 	}	
 	
