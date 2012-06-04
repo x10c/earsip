@@ -726,11 +726,11 @@ BERKAS_ID
 /* Table: T_TIM_PEMUSNAHAN                                      */
 /*==============================================================*/
 create table T_TIM_PEMUSNAHAN (
-   ID                   INT4                 not null,
+   PEMUSNAHAN_ID        INT4                 not null,
    NOMOR                INT2                 not null,
    NAMA                 VARCHAR(128)         null,
    JABATAN              VARCHAR(128)         null,
-   constraint PK_T_TIM_PEMUSNAHAN primary key (ID, NOMOR)
+   constraint PK_T_TIM_PEMUSNAHAN primary key (PEMUSNAHAN_ID, NOMOR)
 );
 
 comment on table T_TIM_PEMUSNAHAN is
@@ -740,7 +740,7 @@ comment on table T_TIM_PEMUSNAHAN is
 /* Index: T_TIM_PEMUSNAHAN_PK                                   */
 /*==============================================================*/
 create unique index T_TIM_PEMUSNAHAN_PK on T_TIM_PEMUSNAHAN (
-ID,
+PEMUSNAHAN_ID,
 NOMOR
 );
 
@@ -748,7 +748,7 @@ NOMOR
 /* Index: REF__MUSNAH__TEAM_FK                                  */
 /*==============================================================*/
 create  index REF__MUSNAH__TEAM_FK on T_TIM_PEMUSNAHAN (
-ID
+PEMUSNAHAN_ID
 );
 
 alter table LOG
@@ -892,7 +892,7 @@ alter table T_PEMUSNAHAN_RINCI
       on delete restrict on update restrict;
 
 alter table T_TIM_PEMUSNAHAN
-   add constraint FK_T_TIM_PE_REF__MUSN_T_PEMUSN foreign key (ID)
+   add constraint FK_T_TIM_PE_REF__MUSN_T_PEMUSN foreign key (PEMUSNAHAN_ID)
       references T_PEMUSNAHAN (ID)
       on delete restrict on update restrict;
 
