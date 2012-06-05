@@ -116,6 +116,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 ,	do_refresh : function (button)
 	{
 		this.getTrans_peminjaman ().down ('#peminjaman_grid').getStore ().load ();
+		this.getTrans_peminjaman ().down ('#berkas_pinjam_grid').getStore ().load ();
 	}
 ,	do_select	: function (editor, o)
 	{
