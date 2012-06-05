@@ -18,24 +18,18 @@ try {
 		return;
 	}
 	
-	q	=" select		Distinct(A.id)"
-		+" ,			A.unit_kerja_peminjam_id"
-		+" ,			A.nama_petugas"
-		+" ,			A.nama_pimpinan_petugas"
-		+" ,			A.nama_peminjam"
-		+" ,			A.nama_pimpinan_peminjam"
-		+" ,			A.tgl_pinjam"
-		+" ,			A.tgl_batas_kembali"
-		+" ,			A.tgl_kembali"
-		+" ,			A.keterangan"
-		+" from			t_peminjaman A"
-		+" left join	peminjaman_rinci B "
-		+" on			A.id = B.peminjaman_id"
-		+" left join	m_berkas C"
-		+" on 			C.id = B.berkas_id"
-		+" right join	m_arsip D"
-		+" on			D.berkas_id = C.id"
-		+" where		C.status = 0";
+	q	=" select		distinct(id)"
+		+" ,			unit_kerja_peminjam_id"
+		+" ,			nama_petugas"
+		+" ,			nama_pimpinan_petugas"
+		+" ,			nama_peminjam"
+		+" ,			nama_pimpinan_peminjam"
+		+" ,			tgl_pinjam"
+		+" ,			tgl_batas_kembali"
+		+" ,			tgl_kembali"
+		+" ,			keterangan"
+		+" from			t_peminjaman A, peminjaman_rinci B"
+		+" where		A.id = B.peminjaman_id";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
