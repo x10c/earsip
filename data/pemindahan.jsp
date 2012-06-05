@@ -21,7 +21,7 @@ try {
 	String user_id = (String) session.getAttribute ("user.id");
 	String grup_id = (String) session.getAttribute ("user.grup_id");
 	
-		q	=" select	id"
+		q	=" select	Distinct(id)"
 			+" ,		unit_kerja_id"
 			+" ,		kode"
 			+" ,		tgl"

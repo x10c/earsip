@@ -53,15 +53,15 @@ try {
 		+" and		status_hapus	= 1";
 
 	if (text != null && ! text.equals ("")) {
-		q	+=" and (nama like '%"+ text +"%'"
-			+ " or nomor like '%"+ text +"%'"
-			+ " or pembuat like '%"+ text +"%'"
-			+ " or judul like '%"+ text +"%'"
-			+ " or masalah like '%"+ text +"%'"
+		q	+=" and (nama ilike '%"+ text +"%'"
+			+ " or nomor ilike '%"+ text +"%'"
+			+ " or pembuat ilike '%"+ text +"%'"
+			+ " or judul ilike '%"+ text +"%'"
+			+ " or masalah ilike '%"+ text +"%'"
 			+ " )";
 	}
 	if (nama != null && ! nama.equals ("")) {
-		q += " and nama like '%"+ nama +"%'";
+		q += " and nama ilike '%"+ nama +"%'";
 	}
 	if (tgl_dibuat_setelah != null && ! tgl_dibuat_setelah.equals ("")) {
 		q += " and tgl_dibuat >= '"+ tgl_dibuat_setelah +"'";
@@ -76,13 +76,13 @@ try {
 		q += " and berkas_tipe_id = "+ berkas_tipe_id;
 	}
 	if (nomor != null && ! nomor.equals ("")) {
-		q += " and nomor like '%"+ nomor +"%'";
+		q += " and nomor ilike '%"+ nomor +"%'";
 	}
 	if (pembuat != null && ! pembuat.equals ("")) {
-		q += " and pembuat like '%"+ pembuat +"%'";
+		q += " and pembuat ilike '%"+ pembuat +"%'";
 	}
 	if (judul != null && ! judul.equals ("")) {
-		q += " and judul like '%"+ judul +"%'";
+		q += " and judul ilike '%"+ judul +"%'";
 	}
 
 	q += " order by tipe_file, nama";

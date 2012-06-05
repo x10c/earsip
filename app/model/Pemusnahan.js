@@ -6,6 +6,7 @@ Ext.define ('Earsip.model.Pemusnahan', {
 	, 	'nama_petugas'
 	, 	'tgl'
 	, 	'pj_unit_kerja'
-	, 	'pj_berkas_arsip']
-,	idProperty	: 'id'
+	, 	'pj_berkas_arsip'
+	]
+,	idProperty : 'id'	
 });

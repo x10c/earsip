@@ -5,6 +5,7 @@ Ext.define ('Earsip.store.Pemusnahan', {
 ,	autoSync	: false
 ,	proxy		: {
 		type		: 'ajax'
+	,	id			: 'pemusnahan'
 	,	api			: {
 			read		: 'data/pemusnahan.jsp'
 		,	create		: 'data/pemusnahan_submit.jsp?action=create'

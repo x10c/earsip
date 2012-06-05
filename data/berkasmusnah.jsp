@@ -16,6 +16,8 @@ try {
 		response.sendRedirect (request.getContextPath());
 		return;
 	}
+	String user_id		= (String) session.getAttribute ("user.id");
+	String grup_id		= (String) session.getAttribute ("user.grup_id");
 	
 	q	=" select	id"
 		+" ,		nama"
@@ -28,12 +30,21 @@ try {
 		+" ,		status_hapus"
 		+" ,		arsip_status_id"
 		+" from		m_berkas"
-		+" right join m_arsip"
-		+" on		m_berkas.id = m_arsip.berkas_id"
-		+" where	status			= 0"
-		+" and		status_hapus	= 1"
-		+" and		unit_kerja_id is not null"
-		+" order by nama";
+		+" where 	status_hapus	= 1"
+		+" and		unit_kerja_id is not null"; // non root directory
+		
+	if (Integer.parseInt(grup_id) == 3) //  pusat arsip group
+	{
+		q 	+=" and status = 0";
+	}
+	else
+	{
+		q 	+=" and 	status = 1"
+			 +" and 	pegawai_id = " + user_id;
+	}
+	
+	
+	q	+=" order by nama";
 
 
 	db_stmt = db_con.createStatement ();

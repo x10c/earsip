@@ -148,6 +148,9 @@ Ext.application ({
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
 	,	'Pemusnahan'
+	,	'PemusnahanRinci'
+	,	'TimPemusnahan'
+	,	'BerkasMusnah'
 	,	'BerkasJRA'
 	]
 ,	stores		: [
@@ -173,6 +176,9 @@ Ext.application ({
 	,	'BerkasPindah'
 	,	'Arsip'
 	,	'Pemusnahan'
+	,	'PemusnahanRinci'
+	,	'TimPemusnahan'
+	,	'BerkasMusnah'
 	,	'BerkasJRA'
 	]
 ,	views		: [
@@ -220,6 +226,7 @@ Ext.application ({
 	,	'PemindahanWin'
 	,	'PemindahanRinciWin'
 	,	'Pemusnahan'
+	,	'PemusnahanWin'
 	,	'NotifPemindahan'
 	,	'NotifPemindahanWin'
 

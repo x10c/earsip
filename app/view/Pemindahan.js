@@ -28,6 +28,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	region			: 'center'
 	,	flex			: 1
 	,	columns			: [{
+			xtype		: 'rownumberer'
+		},{
 			text		: 'ID'
 		,	dataIndex	: 'id'
 		, 	hidden		: true
@@ -121,6 +123,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 	,	region			: 'south'
 	,	flex			: 1
 	,	columns			: [{
+			xtype		: 'rownumberer'
+		},{
 			text		: 'ID'
 		,	dataIndex	: 'pemindahan_id'
 		, 	hidden		: true

@@ -45,27 +45,27 @@ try {
 		
 
 	if (text != null && ! text.equals ("")) {
-		q	+=" and (nama_petugas like '%"+ text +"%'"
-			+ " or nama_pimpinan_petugas like '%"+ text +"%'"
-			+ " or nama_peminjam like '%"+ text +"%'"
-			+ " or nama_pimpinan_peminjam like '%"+ text +"%'"
-			+ " or keterangan like '%"+ text +"%'"
+		q	+=" and (nama_petugas ilike '%"+ text +"%'"
+			+ " or nama_pimpinan_petugas ilike '%"+ text +"%'"
+			+ " or nama_peminjam ilike '%"+ text +"%'"
+			+ " or nama_pimpinan_peminjam ilike '%"+ text +"%'"
+			+ " or keterangan ilike '%"+ text +"%'"
 			+ " )";
 	}
 	if (uk_peminjam_id != null && ! uk_peminjam_id.equals ("")) {
 		q += " and unit_kerja_peminjam_id = "+ uk_peminjam_id;
 	}
 	if (nm_petugas != null && ! nm_petugas.equals ("")) {
-		q += " and nama_petugas like '%"+ nm_petugas +"%'";
+		q += " and nama_petugas ilike '%"+ nm_petugas +"%'";
 	}
 	if (nm_pim_petugas != null && ! nm_pim_petugas.equals ("")) {
-		q += " and nama_pimpinan_petugas like '%"+ nm_pim_petugas +"%'";
+		q += " and nama_pimpinan_petugas ilike '%"+ nm_pim_petugas +"%'";
 	}
 	if (nm_peminjam != null && ! nm_peminjam.equals ("")) {
-		q += " and nama_peminjam like '%"+ nm_peminjam +"%'";
+		q += " and nama_peminjam ilike '%"+ nm_peminjam +"%'";
 	}
 	if (nm_pim_peminjam != null && ! nm_pim_peminjam.equals ("")) {
-		q += " and nama_pimpinan_peminjam like '%"+ nm_pim_peminjam +"%'";
+		q += " and nama_pimpinan_peminjam ilike '%"+ nm_pim_peminjam +"%'";
 	}
 	if (pil_tgl_id != null && ! pil_tgl_id.equals ("")) {
 		String pil_tgl_s = "";
@@ -87,7 +87,7 @@ try {
 		}
 	}
 	if (ket != null && ! ket.equals ("")) {
-		q += " and keterangan like '%"+ ket +"%'";
+		q += " and keterangan ilike '%"+ ket +"%'";
 	}
 	if (status_id != null && !status_id.equals ("")) {
 		if (Integer.parseInt (status_id) == 0){

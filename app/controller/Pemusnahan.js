@@ -1,4 +1,8 @@
-Ext.require ('Earsip.view.PemusnahanWin');
+Ext.require ([
+	'Earsip.store.PemusnahanRinci'
+,	'Earsip.store.TimPemusnahan'
+,	'Earsip.store.BerkasMusnah'
+]);
 
 Ext.define ('Earsip.controller.Pemusnahan', {
 	extend	: 'Ext.app.Controller'
@@ -10,14 +14,50 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 ,	init	: function ()
 	{
 		this.control ({
-			'trans_pemusnahan': {
+			'trans_pemusnahan #pemusnahan_grid': {
 				selectionchange : this.user_select
 			}
-		,	'trans_pemusnahan button[action=add]': {
+		,	'trans_pemusnahan grid': {
+				beforeedit		: this.do_select
+			}
+		,	'trans_pemusnahan #pemusnahan_grid button[action=add]': {
 				click : this.do_add_pemusnahan
 			}
+		,	'trans_pemusnahan #pemusnahan_grid button[action=edit]': {
+				click : this.do_edit_pemusnahan
+			}
+		,	'trans_pemusnahan #pemusnahan_grid button[action=refresh]': {
+				click : this.do_refresh
+			}
+		,	'trans_pemusnahan #pemusnahan_grid button[action=del]': {
+				click : this.do_delete_pemusnahan
+			}
+		,	'trans_pemusnahan #pemusnahan_grid button[itemId=search]': {
+				click : this.do_open_win_cari
+			}
+		,	'pemusnahan_win  textfield': {
+				change: this.do_activate_grid
+			}
+		,	'pemusnahan_win grid': {
+				itemdblclick: this.do_deactivate_editor
+			}
+		,	'pemusnahan_win #berkas_musnah_grid button[action=add]': {
+				click : this.do_add_berkas
+			}
+		,	'pemusnahan_win #berkas_musnah_grid button[action=del]': {
+				click : this.do_delete_berkas
+			}
+		,	'pemusnahan_win #tim_pemusnah_grid button[action=add]': {
+				click : this.do_add_tim
+			}
+		,	'pemusnahan_win #tim_pemusnah_grid button[action=del]': {
+				click : this.do_delete_tim
+			}
 		,	'pemusnahan_win button[action=submit]': {
-				click : this.do_pemusnahanrinci_submit
+				click : this.do_pemusnahan_submit
+			}
+		,	'caripemusnahanwin button[itemId=cari]' : {
+				click	: this.do_cari
 			}
 		});
 
@@ -26,96 +66,199 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 
 ,	user_select : function (sm, records)
 	{
-		var panel = this.getTrans_pemusnahan ()
+		var panel = this.getTrans_pemusnahan ();
 		var grid = panel.down ('#pemusnahan_grid');
-		var grid_rinci = panel.down ('#berkas_pindah_grid');
 		var b_edit		= grid.down ('#edit');
 		var b_del		= grid.down ('#del');
-		var b_add_rinci	= grid_rinci.down ('#add');
 		b_edit.setDisabled (! records.length);
 		b_del.setDisabled (! records.length);
-		b_add_rinci.setDisabled (! records.length);
 
 		if (records.length > 0) {
-			idc = records[0].get ('id');
 			if (panel.win == undefined) {
 				panel.win = Ext.create ('Earsip.view.PemusnahanWin', {});
 			}
-			panel.win.down ('form').loadRecord (records[0]);
-			grid_rinci.params = {
-				pemusnahan_id : records[0].get ('id')
-			}
-			grid_rinci.getStore ().load ({
-				params	: grid_rinci.params
-			});
+			panel.win.load (records[0]);
 		}
+	}
+	
+,	do_select	: function (editor, o)
+	{
+		return false;
 	}
 
 ,	do_add_pemusnahan: function (button)
 	{
 		var panel = this.getTrans_pemusnahan ();
-
+		var grid  = panel.down ('#pemusnahan_grid');
 		if (panel.win == undefined) {
 			panel.win = Ext.create ('Earsip.view.PemusnahanWin', {});
 		}
 
+		var grid_berkas = panel.win.down ('#berkas_musnah_grid');
+		var grid_tim = panel.win.down ('#tim_pemusnah_grid');
 		var form = panel.win.down ('form').getForm ();
-		form. reset ();
+		grid.getSelectionModel (). deselectAll ();
+		form.reset ();
+		panel.win.down ('#nama_petugas').setValue (Earsip.username);
+		grid_berkas.getStore ().load();
+		grid_tim.getStore ().load();
 		panel.win.show ();
 		panel.win.action = 'create';
+		
 	}
 
+,	do_refresh : function (button)
+	{
+		this.getTrans_pemusnahan ().down ('#pemusnahan_grid').getStore ().load ();
+		this.getTrans_pemusnahan ().down ('#tim_pemusnah_grid').getStore ().load ();
+		this.getTrans_pemusnahan ().down ('#berkas_musnah_grid').getStore ().load ();
+		
+	}
+	
 ,	do_edit_pemusnahan: function (button)
 	{
 		var panel = this.getTrans_pemusnahan ();
-
 		if (panel.win == undefined) {
 			panel.win = Ext.create ('Earsip.view.PemusnahanWin', {});
 		}
-
 		panel.win.show ();
 		panel.win.action = 'update';
 	}
 
-,	do_add_berkas_pindah: function (button)
-	{
-		var panel = this.getTrans_pemusnahan ();
+, 	do_delete_pemusnahan	: function (button)
+	{	
+		var grid = button.up ('#pemusnahan_grid');
+		var data = grid.getSelectionModel ().getSelection ();
 
-		if (panel.win2 == undefined) {
-			panel.win2 = Ext.create ('Earsip.view.PemusnahanRinciWin', {});
+		if (data.length <= 0) {
+			return;
 		}
 
-		panel.win2.down ('#pemusnahan_id').setValue (idc);
-		panel.win2.show ();
-		panel.win2.action = 'create';
+		var store = grid.getStore ();
+		store.remove (data);
+		store.sync ();
 	}
 
-,	do_pemusnahan_submit: function (button)
+,	do_open_win_cari	: function (button)
+	{
+		var panel	= this.getTrans_pemusnahan ();
+		if (Ext.getCmp ('caripemusnahanwin') == undefined)
+		{
+			panel.win_cari = Ext.create ('Earsip.view.CariPemusnahanWin', {});	
+		}
+		panel.win_cari.show ();
+		
+	}
+
+,	do_activate_grid : function (textfield)
+	{	
+		var win	 = textfield.up ('#pemusnahan_win');
+		var form = win.down ('form').getForm ();
+		var grid_tim = win.down ('#tim_pemusnah_grid');
+		var grid_berkas = win.down ('#berkas_musnah_grid');
+		grid_tim.setDisabled (!form.isValid ()); 
+		grid_berkas.setDisabled (!form.isValid ()); 
+	}
+
+,	do_deactivate_editor : function (v, record, item,index, e)
+	{
+		var editor	= v.up ('grid').getPlugin ('roweditor');
+		editor.cancelEdit ();
+	}
+	
+, 	do_add_berkas	: function (button)
+	{	
+		
+		var grid	= button.up ('#berkas_musnah_grid');
+		var editor	= grid.getPlugin ('roweditor');
+		editor.cancelEdit ();
+		var r = Ext.create ('Earsip.model.PemusnahanRinci', {});
+		grid.getStore ().insert (0, r);
+		editor.action = 'add';
+		editor.startEdit (0, 0);
+		Ext.data.StoreManager.lookup ('BerkasMusnah').filter ('arsip_status_id',0);
+		
+	}
+
+, 	do_add_tim	: function (button)
+	{	
+		
+		var grid	= button.up ('#tim_pemusnah_grid');
+		var editor	= grid.getPlugin ('roweditor');
+		editor.cancelEdit ();
+		var r = Ext.create ('Earsip.model.TimPemusnahan', {});
+		grid.getStore ().insert (0, r);
+		editor.action = 'add';
+		editor.startEdit (0, 0);
+	}
+	
+
+, 	do_delete_berkas	: function (button)
+	{	
+		var grid = button.up ('#berkas_musnah_grid');
+		var data = grid.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		var store = grid.getStore ();
+		store.remove (data);
+	}
+
+, 	do_delete_tim	: function (button)
+	{	
+		var grid = button.up ('#tim_pemusnah_grid');
+		var data = grid.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		var store = grid.getStore ();
+		store.remove (data);
+	}
+
+
+,	do_pemusnahan_submit	: function (button)
 	{
 		var grid	= this.getTrans_pemusnahan ().down ('#pemusnahan_grid');
 		var win		= button.up ('#pemusnahan_win');
 		var form	= win.down ('form').getForm ();
+		var grid_berkas 	= win.down ('#berkas_musnah_grid');
+		var grid_tim	 	= win.down ('#tim_pemusnah_grid');
+		var records_berkas = grid_berkas.getStore ().getRange ();
+		var records_tim = grid_tim.getStore ().getRange ();
 
-		if (! form.isValid ()) {
-			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
+		if ((! form.isValid ())) {
+			Ext.msg.error('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
-
+		
+		if (records_tim.length <= 0){
+			Ext.msg.error('Silahkan isi tabel Tim Pemusnah');
+			return;
+		}
+		if (records_berkas.length <= 0){
+			Ext.msg.error ('Silahkan isi  tabel Berkas');
+			return;
+		}
+		
+		
 		form.submit ({
 			scope	: this
 		,	params	: {
-				action	: win.action
+				action		: win.action
+			,	nama_petugas: Earsip.username
+			,	berkas		: Ext.encode(Ext.pluck(records_berkas, 'data'))
+			,	tims		: Ext.encode(Ext.pluck(records_tim, 'data'))
 			}
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
-					if (win.action=='update') {
-						win.hide ();
-					} else {
-						form.reset ();
-					}
-					grid.getStore ().load ();
+					win.close ();
+					Ext.StoreManager.lookup ('BerkasMusnah').load ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
@@ -127,40 +270,20 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 		});
 	}
 
-,	do_pemusnahanrinci_submit: function (button)
+,	do_cari	: function (button)
 	{
-		var grid	= this.getTrans_pemusnahan ().down ('#berkas_pindah_grid');
-		var win		= button.up ('#pemusnahanrinci_win');
-		var form	= win.down ('form').getForm ();
-
-		if (! form.isValid ()) {
-			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
-			return;
-		}
-
-		form.submit ({
-			scope	: this
-		,	params	: {
-				action	: win.action
-			}
-		,	success	: function (form, action)
-			{
-				if (action.result.success == true) {
-					Ext.msg.info (action.result.info);
-					grid.params = {
-						pemusnahan_id : idc
-					}
-					grid.getStore ().load ({
-						params	: grid.params
-					});
-				} else {
-					Ext.msg.error (action.result.info);
-				}
-			}
-		,	failure	: function (form, action)
-			{
-				Ext.msg.error (action.result.info);
-			}
+		var form 	= button.up ('#caripemusnahanwin').down ('form').getForm ();
+		var grid 	= this.getTrans_pemusnahan ().down ('#pemusnahan_grid');
+		var store	= grid.getStore ();
+		var proxy	= store.getProxy ();
+		var org_url = proxy.api.read;
+		
+		proxy.api.read	= 'data/caripemusnahan.jsp';
+		
+		store.load ({
+			params	:	form.getValues ()
 		});
+		
+		proxy.api.read	= org_url;
 	}
 });
