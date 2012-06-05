@@ -6,6 +6,9 @@ Ext.define ('Earsip.controller.Login', {
 		ref		: 'mainview'
 	,	selector: 'mainview'
 	},{
+		ref		: 'loginwindow'
+	,	selector: 'loginwindow'
+	},{
 		ref		: 'maintoolbar'
 	,	selector: 'maintoolbar'
 	},{
@@ -19,7 +22,7 @@ Ext.define ('Earsip.controller.Login', {
 			'loginwindow button[action=login]': {
 				click		: this.do_login
 			}
-		,	'loginwindow textfield': {
+		,	'loginwindow textfield[name=user_psw]': {
 				specialkey	: this.do_keyenter
 			}
 		});
@@ -27,7 +30,7 @@ Ext.define ('Earsip.controller.Login', {
 
 ,	do_login: function (button)
 	{
-		var win		= button.up ('window');
+		var win		= this.getLoginwindow ();
 		var form	= win.down ('form').getForm ();
 
 		if (form.isValid ()) {
@@ -60,8 +63,11 @@ Ext.define ('Earsip.controller.Login', {
 		}
 	}
 
-,	do_keyenter: function ()
+,	do_keyenter: function (field, e)
 	{
+		if (e.getKey () == e.ENTER) {
+			this.do_login ();
+		}
 	}
 
 ,	after_login_success : function ()
@@ -78,7 +84,7 @@ Ext.define ('Earsip.controller.Login', {
 		} else {
 			tabpanel.remove ('notif_pemindahan');
 		}
-		this.getMainview ().getLayout ().setActiveItem ('main');
+		this.getMainview ().open_view_main ();
 		this.getMaintoolbar ().do_load_menu ();
 		this.getBerkastree ().do_load_tree ();
 	}

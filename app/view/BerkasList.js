@@ -14,9 +14,10 @@ Ext.define ('Earsip.view.BerkasList', {
 ,	store		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'
-	,	flex		: 1
+	,	width		: 300
 	,	hideable	: false
 	,	dataIndex	: 'nama'
+	,	locked		: true
 	,	renderer	: function (v, md, r)
 		{
 			if (r.get ('tipe_file') == 0) {

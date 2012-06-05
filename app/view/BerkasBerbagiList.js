@@ -13,8 +13,9 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 ,	columns		: [{
 		text		: 'Nama'
 	,	dataIndex	: 'nama'
-	,	flex		: 1
+	,	width		: 300
 	,	hideable	: false
+	,	locked		: true
 	,	renderer	: function (v, md, r)
 		{
 			if (r.get ('tipe_file') == 0) {

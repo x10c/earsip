@@ -3,7 +3,8 @@ Ext.require (['Earsip.view.Main']);
 Ext.define ('Earsip.view.LoginWindow', {
 	extend			: 'Ext.Window'
 ,	alias			: 'widget.loginwindow'
-,	title			: 'Login'
+,	title			: 'eArsip :: Login'
+,	titleAlign		: 'center'
 ,	width			: 400
 ,	autoHeight		: true
 ,	closable		: false
@@ -25,6 +26,7 @@ Ext.define ('Earsip.view.LoginWindow', {
 		,	allowBlank		: false
 		,	anchor			: '100%'
 		,	selectOnFocus	: true
+		,	labelAlign		: 'right'
 		}
 	,	items			: [{
 			fieldLabel		: 'NIP'

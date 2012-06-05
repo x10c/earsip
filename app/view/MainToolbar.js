@@ -3,7 +3,7 @@ Ext.define ('Earsip.view.MainToolbar', {
 ,	alias			: 'widget.maintoolbar'
 ,	id				: 'maintoolbar'
 ,	flex			: 1
-,	height			: 30
+,	height			: 26
 ,	initComponent	: function ()
 	{
 		this.callParent (arguments);

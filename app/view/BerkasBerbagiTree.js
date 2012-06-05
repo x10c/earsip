@@ -13,7 +13,7 @@ Ext.define ('Earsip.view.BerkasBerbagiTree', {
 	,	items		: [{
 			itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		}]
+		},'-']
 	}]
 
 ,	initComponent	: function()

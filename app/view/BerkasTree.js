@@ -2,7 +2,6 @@ Ext.define ('Earsip.view.BerkasTree', {
 	extend		: 'Ext.tree.Panel'
 ,	alias		: 'widget.berkastree'
 ,	id			: 'berkastree'
-,	title		: 'Folder Berkas'
 ,	region		: 'west'
 ,	width		: 220
 ,	margins		: '5 0 0 5'

@@ -1,6 +1,6 @@
 /*
- *  * list of all icons
- *   */
+ * list of all icons
+ */
 .add {background-image: url(images/add16.png) !important;}
 .app {background-image: url(images/app16.png) !important;}
 .back {background-image: url(images/back16.png) !important;}
@@ -37,6 +37,21 @@
 	background-repeat	:no-repeat;
 	padding				:4px 0px 4px 20px;
 	margin				:0px
+}
+
+.panel-bg {
+	background-image	: url(images/bg.jpg);
+	background-position	: 0;
+	background-repeat	: repeat;
+}
+
+.footer {
+	position	: fixed;
+	width		: 100%;
+	bottom		: 4px;
+	text-align	: center;
+	text-shadow	: black 0.1em 0.1em 0.2em;
+	font-weight	: bold;
 }
 
 /* Ext.msg */
