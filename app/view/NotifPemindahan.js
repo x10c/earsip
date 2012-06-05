@@ -26,10 +26,12 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 	,	region			: 'center'
 	,	flex			: 1
 	,	plugins		: [
-		Ext.create ('Earsip.plugin.RowEditor')
+			Ext.create ('Earsip.plugin.RowEditor')
 		]
 
-	,	columns			: [{
+	,	columns			: [
+			Ext.create ('Ext.grid.RowNumberer')
+		,{
 			text		: 'ID'
 		,	dataIndex	: 'id'
 		, 	hidden		: true
@@ -147,6 +149,8 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			Ext.create ('Earsip.plugin.RowEditor')
 		]
 	,	columns			: [{
+			xtype		: 'rownumberer'
+		},{
 			text		: 'Pemindahan_id'
 		,	dataIndex	: 'pemindahan_id'
 		, 	hidden		: true
