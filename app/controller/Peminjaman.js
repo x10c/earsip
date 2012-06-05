@@ -218,12 +218,12 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var berkas = [];
 
 		if ((! form.isValid ())) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 		
 		if (records.length <= 0){
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi tabel rincian peminjaman');
+			Ext.msg.error ('Silahkan isi tabel rincian peminjaman');
 			return;
 		}
 		
@@ -251,16 +251,16 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					win.close ();
 					grid.getStore ().load ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}
@@ -273,7 +273,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 
 
 		if ((! form.isValid ())) {
-			Ext.Msg.alert ('Kesalahan', 'Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
 		
@@ -282,16 +282,16 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
-					Ext.Msg.alert ('Informasi', action.result.info);
+					Ext.msg.info (action.result.info);
 					win.close ();
 					grid.getStore ().load ();
 				} else {
-					Ext.Msg.alert ('Kesalahan', action.result.info);
+					Ext.msg.error (action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.Msg.alert ('Kesalahan', action.result.info);
+				Ext.msg.error (action.result.info);
 			}
 		});
 	}

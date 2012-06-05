@@ -16,12 +16,6 @@ try {
 		response.sendRedirect (request.getContextPath());
 		return;
 	}
-
-	String user_id		= (String) session.getAttribute ("user.id");
-	String grup_id		= (String) session.getAttribute ("user.grup_id");
-	
-	
-	
 	
 	q	=" select	id"
 		+" ,		nama"

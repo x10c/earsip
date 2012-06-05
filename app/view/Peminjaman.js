@@ -24,11 +24,12 @@ Ext.define ('Earsip.view.Peminjaman', {
 	,	title			: 'Daftar Peminjaman'
 	,	region			: 'center'
 	,	store			: 'Peminjaman'
-	,	closable		: true
 	,	plugins		: [
 			Ext.create ('Earsip.plugin.RowEditor')
 		]
 	,	columns			: [{
+			xtype		: 'rownumberer'
+		},{
 			text		: 'ID'
 		,	dataIndex	: 'id'
 		,	hidden		: true
@@ -150,6 +151,8 @@ Ext.define ('Earsip.view.Peminjaman', {
 			Ext.create ('Earsip.plugin.RowEditor')
 		]
 	,	columns			: [{
+			xtype		: 'rownumberer'
+		},{
 			text		: 'ID'
 		,	dataIndex	: 'peminjaman_id'
 		, 	hidden		: true
