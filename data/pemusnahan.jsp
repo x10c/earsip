@@ -19,7 +19,7 @@ try {
 	}
 	String	user_id	= (String) session.getAttribute ("user.id");
 	String	grup_id	= (String) session.getAttribute ("user.grup_id");
-	q	=" select		A.id"
+	q	=" select		distinct (A.id)"
 		+" ,			A.metoda_id"
 		+" ,			A.nama_petugas"
 		+" ,			A.tgl"

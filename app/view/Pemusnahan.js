@@ -67,7 +67,7 @@ Ext.define ('Earsip.view.Pemusnahan', {
 		,	dataIndex		: 'pj_unit_kerja'
 		,	flex			: 0.5
 		},{
-			text			: 'PJ. pusat Berkas/Arsip'
+			text			: 'PJ. Pusat Berkas/Arsip'
 		,	dataIndex		: 'pj_berkas_arsip'
 		,	flex			: 0.5
 		}]
@@ -85,12 +85,11 @@ Ext.define ('Earsip.view.Pemusnahan', {
 			,	iconCls		: 'edit'
 			,	action		: 'edit'
 			,	disabled	: true
-			},'-',{
-				text		: 'Refresh'
-			,	itemId		: 'refresh'
-			,	iconCls		: 'refresh'
-			,	action		: 'refresh'
 			},'-','->','-',{
+				text		: 'Cari'
+			,	itemId		: 'search'
+			,	iconCls		: 'search'
+			},'-',{
 				text		: 'Hapus'
 			,	itemId		: 'del'
 			,	iconCls		: 'del'

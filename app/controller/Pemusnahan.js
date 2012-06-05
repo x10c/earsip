@@ -110,6 +110,9 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 ,	do_refresh : function (button)
 	{
 		this.getTrans_pemusnahan ().down ('#pemusnahan_grid').getStore ().load ();
+		this.getTrans_pemusnahan ().down ('#tim_pemusnah_grid').getStore ().load ();
+		this.getTrans_pemusnahan ().down ('#berkas_musnah_grid').getStore ().load ();
+		
 	}
 	
 ,	do_edit_pemusnahan: function (button)
@@ -255,7 +258,6 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
 					win.close ();
-					grid.getStore ().load ();
 					Ext.StoreManager.lookup ('BerkasMusnah').load ();
 				} else {
 					Ext.msg.error (action.result.info);

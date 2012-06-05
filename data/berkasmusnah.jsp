@@ -29,22 +29,22 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		arsip_status_id"
-		+" from		m_berkas";
+		+" from		m_berkas"
+		+" where 	status_hapus	= 1"
+		+" and		unit_kerja_id is not null"; // non root directory
 		
 	if (Integer.parseInt(grup_id) == 3) //  pusat arsip group
 	{
-		q 	+=" right join 	m_arsip"
-			 +" on			m_berkas.id = m_arsip.berkas_id"
-			 +" where 		status_hapus	= 1";
+		q 	+=" and status = 0";
 	}
 	else
 	{
-		q 	+=" where 	status_hapus	= 1"
-			 +" and 	petugas_id = " + user_id;
+		q 	+=" and 	status = 1"
+			 +" and 	pegawai_id = " + user_id;
 	}
 	
-	q	+=" and		unit_kerja_id is not null" // non root directory
-		 +" order by nama";
+	
+	q	+=" order by nama";
 
 
 	db_stmt = db_con.createStatement ();

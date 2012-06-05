@@ -141,7 +141,6 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					,	itemId		: 'del'
 					,	iconCls		: 'del'
 					,	action		: 'del'
-					,	disabled	: true
 					}]
 				}]
 			},{
