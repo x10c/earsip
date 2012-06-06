@@ -85,6 +85,11 @@ Ext.define ('Earsip.view.Pemusnahan', {
 			,	iconCls		: 'edit'
 			,	action		: 'edit'
 			,	disabled	: true
+			},'-',{
+				text		: 'Refresh'
+			,	itemId		: 'refresh'
+			,	iconCls		: 'refresh'
+			,	action		: 'refresh'
 			},'-','->','-',{
 				text		: 'Cari'
 			,	itemId		: 'search'
