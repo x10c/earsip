@@ -30,6 +30,11 @@
 	if (db_con != null && !db_con.isClosed()) {
 		db_con.close();
 	}
-
+	
+	session.removeAttribute ("db.class");
+	session.removeAttribute ("db.url");
+	session.removeAttribute ("db.con");
+	
 	out.print ("{success:true}");
+	
 %>

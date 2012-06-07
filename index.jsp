@@ -87,7 +87,8 @@ if (user == null) {
 		session.setAttribute ("user.nip", user_nip);
 		is_login = 1;
 		
-	}
+	} 
+	
 } else {
 	is_login = 1;
 }

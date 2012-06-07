@@ -71,6 +71,7 @@ Ext.define ('Earsip.view.Main', {
 				login_v.getEl ().slideIn ('l', {
 					callback: function ()
 					{
+						login_win.down ('form').getForm ().reset ();
 						login_win.show ();
 					}
 				});

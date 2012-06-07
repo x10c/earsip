@@ -4,6 +4,8 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.Properties" %>
+<%@ page import="java.io.FileInputStream" %>
 <%
 Connection			db_con				= null;
 PreparedStatement	db_pstmt			= null;
@@ -15,7 +17,6 @@ Cookie				c_user_uk_id		= null;
 Cookie				c_user_grup_id		= null;
 Cookie				c_user_nip			= null;
 Cookie				c_user_name			= null;
-String				db_url				= "";
 String				q					= "";
 String				sid					= "";
 String				user_id				= "";
@@ -32,8 +33,18 @@ try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
 	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath());
-		return;
+		Properties props = new Properties ();
+
+		props.load (new FileInputStream (application.getRealPath ("WEB-INF"+ File.separator +"web.conf")));
+
+		String		db_url		= props.getProperty ("db");
+		String		db_class	= props.getProperty ("db.class");
+
+		Class.forName (db_class);
+		db_con			= DriverManager.getConnection (db_url, props);
+		session.setAttribute ("db.class", (Object) db_class);
+		session.setAttribute ("db.url", (Object) db_url);
+		session.setAttribute ("db.con", (Object) db_con);
 	}
 
 	user_nip	= request.getParameter ("user_nip");
@@ -125,12 +136,12 @@ try {
 		out.print ("{success:true"
 				+", psw_is_expired:1"
 				+", user_name:'"+ user_name +"'"
-				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? true : false) +"}");
+				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? 1 : 0) +"}");
 	} else {
 		out.print ("{success:true"
 				+", psw_is_expired:0"
 				+", user_name:'"+ user_name +"'"
-				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? true : false) +"}");
+				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? 1 : 0) +"}");
 	}
 	rs.close ();
 }
