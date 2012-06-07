@@ -74,7 +74,7 @@ Ext.define ('Earsip.controller.Login', {
 	{
 		var tabpanel = this.getMainview ().down ('#content_tab');
 
-		if (this.is_pusatarsip == true){
+		if (this.is_pusatarsip == 1){
 			if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
 				tabpanel.add ({
 					xtype	: 'notif_pemindahan'

@@ -35,6 +35,7 @@ Ext.define ('Earsip.view.LoginWindow', {
 		},{
 			fieldLabel		: 'Password'
 		,	inputType		: 'password'
+		,	itemId			: 'user_psw'
 		,	name			: 'user_psw'
 		}]
 	}]
