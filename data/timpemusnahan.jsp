@@ -18,9 +18,8 @@ try {
 		return;
 	}
 	String pemusnahan_id	 = request.getParameter ("pemusnahan_id");
-	q	=" select	pemusnahan_id" 
-		+" ,		nomor"
-		+" ,		nama"
+	q	=" select	" 
+		+" 			nama"
 		+" ,		jabatan"
 		+" from		t_tim_pemusnahan"
 		+" where	pemusnahan_id = "+ pemusnahan_id;
@@ -34,9 +33,7 @@ try {
 		} else {
 			i++;
 		}
-		data	+="\n{ pemusnahan_id	: "+ pemusnahan_id
-				+ "\n, nomor			: "+ rs.getString ("nomor")
-				+ "\n, nama				:'"+ rs.getString ("nama") + "'"
+		data	+="\n{ nama				:'"+ rs.getString ("nama") + "'"
 				+ "\n, jabatan			:'"+ rs.getString ("jabatan") + "'"
 				+ "\n}";
 	}

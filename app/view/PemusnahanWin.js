@@ -236,7 +236,6 @@ Ext.define('Earsip.view.PemusnahanWin', {
 		var grid_berkas = this.down ('#berkas_musnah_grid');
 		var grid_tim = this.down ('#tim_pemusnah_grid');
 		var form = this.down ('form');
-		Ext.data.StoreManager.lookup ('Jabatan').load ();
 		Ext.data.StoreManager.lookup ('BerkasMusnah').load ({
 			scope	: this
 		,	callback: function (r, op, success)

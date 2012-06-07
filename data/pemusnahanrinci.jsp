@@ -18,8 +18,7 @@ try {
 		return;
 	}
 	String pemusnahan_id	 = request.getParameter ("pemusnahan_id");
-	q	=" select	pemusnahan_id"
-		+" ,		berkas_id"
+	q	=" select	berkas_id"
 		+" ,		keterangan"
 		+" ,		jml_lembar"
 		+" ,		jml_set"
@@ -36,8 +35,7 @@ try {
 		} else {
 			i++;
 		}
-		data	+="\n{ pemusnahan_id	: "+ rs.getString ("pemusnahan_id")
-				+ "\n, berkas_id		: "+ rs.getString ("berkas_id")
+		data	+="\n{ berkas_id		: "+ rs.getString ("berkas_id")
 				+ "\n, keterangan		:'"+ rs.getString ("keterangan") + "'"
 				+ "\n, jml_lembar		: "+ rs.getString ("jml_lembar")
 				+ "\n, jml_set			: "+ rs.getString ("jml_set")
