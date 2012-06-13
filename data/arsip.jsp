@@ -179,7 +179,8 @@ try {
 			+" ,		m_arsip"
 			+" where	m_berkas.id		= berkas_id"
 			+" and		status			= 0"
-			+" and		status_hapus	= 1";
+			+" and		status_hapus	= 1"
+			+" and		arsip_status_id in (0,1)";
 
 		if (unit_kerja_id != null && !unit_kerja_id.equalsIgnoreCase ("0")) {
 			q +=" and unit_kerja_id = "+ unit_kerja_id;

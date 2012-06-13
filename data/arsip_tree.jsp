@@ -90,7 +90,8 @@ try {
 		+" and		unit_kerja_id	= "+ unit_kerja_id
 		+" and		kode_rak		= '"+ kode_rak +"'"
 		+" and		kode_box		= '"+ kode_box +"'"
-		+" and		kode_folder		= '"+ kode_folder +"'";
+		+" and		kode_folder		= '"+ kode_folder +"'"
+		+" and		arsip_status_id	in (0,1)";
 
 	rs = db_stmt.executeQuery (q);
 

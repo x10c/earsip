@@ -73,7 +73,6 @@ try {
 	    kode_box        = request.getParameter ("kode_box");
 	}
 
-	
 	if (action.equalsIgnoreCase ("create")) {
 		q	=" insert into t_pemindahan_rinci (pemindahan_id, berkas_id)"
 			+" values (?, ?)";
@@ -83,10 +82,11 @@ try {
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update 	m_berkas"
 			+" set 		status = 0"
-			+" where 	id = ?";
+			+" where 	id = ? or pid = ?";
 			
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setInt (1, Integer.parseInt (berkas_id));
+		db_stmt.setInt (2, Integer.parseInt (berkas_id));
 		
 		db_stmt.executeUpdate ();
 		

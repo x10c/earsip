@@ -9,6 +9,7 @@ Ext.define ('Earsip.view.BerkasJRA', {
 ,	itemId		: 'lap_berkas_jra'
 ,	title		: 'Berkas JRA'
 ,	layout		: 'border'
+,	closable	: true
 ,	items		: [{
 		xtype		: 'berkas_jra_list'
 	,	region		: 'center'
