@@ -178,7 +178,7 @@ try {
 			+" from		m_berkas"
 			+" ,		m_arsip"
 			+" where	m_berkas.id		= berkas_id"
-			+" and		status			= 1"
+			+" and		status			= 0"
 			+" and		status_hapus	= 1";
 
 		if (unit_kerja_id != null && !unit_kerja_id.equalsIgnoreCase ("0")) {
@@ -253,7 +253,6 @@ try {
 			+" ,		akses_berbagi_id"
 			+" from		m_berkas"
 			+" where	pid				= "+ id
-			+" and		status			= 1"
 			+" and		status_hapus	= 1";
 
 		q += " order by tipe_file, nama";

@@ -42,9 +42,8 @@ try {
 		+" from		m_berkas"
 		+" where	pegawai_id		= "+ user_id
 		+" and		pid				= "+ berkas_id
-		+" and		status			= 1"
+		+" and		status			= 1" // 1: aktif, 0:inaktif
 		+" and		status_hapus	= 1"
-		+" and		arsip_status_id = 0" // status 'ada'
 		+" order by tipe_file, nama";
 
 	db_stmt = db_con.createStatement ();

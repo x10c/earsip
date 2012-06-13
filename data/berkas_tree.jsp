@@ -27,7 +27,7 @@ try {
 		+" from		m_berkas"
 		+" where	pid			= "+ id
 		+" and		tipe_file	= 0"
-		+" and		status		= 1";
+		+" and		status		= 1"; // 1:aktif, 0:inaktif
 
 	rs = db_stmt.executeQuery (q);
 
@@ -82,7 +82,8 @@ try {
 		+" from		m_berkas"
 		+" where	pegawai_id	= "+ user_id
 		+" and		pid			= 0"
-		+" and		tipe_file	= 0";
+		+" and		tipe_file	= 0"
+		+" and		status		= 1"; // 1:aktif, 0:inaktif
 
 	rs = db_stmt.executeQuery (q);
 
