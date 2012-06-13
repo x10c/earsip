@@ -20,7 +20,7 @@ Ext.define ('Earsip.view.LoginWindow', {
 	,	plain			: true
 	,	frame			: true
 	,	border			: 0
-	,	bodyPadding		: 5
+	,	bodyPadding		: 0
 	,	defaults		: {
 			xtype			: 'textfield'
 		,	allowBlank		: false
@@ -29,6 +29,11 @@ Ext.define ('Earsip.view.LoginWindow', {
 		,	labelAlign		: 'right'
 		}
 	,	items			: [{
+			xtype			: 'component'
+		,	html			: '<img src="images/image.png"/>'
+		,	height			: 210
+		,	padding			: '0 0 0 0'
+		},{
 			fieldLabel		: 'NIP'
 		,	itemId			: 'user_nip'
 		,	name			: 'user_nip'
