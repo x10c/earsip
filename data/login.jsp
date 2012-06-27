@@ -114,7 +114,7 @@ try {
 	response.addCookie (c_user_grup_id);
 	response.addCookie (c_user_name);
 
-	dir_name = user_name +" ("+ user_nip +")";
+	dir_name = user_name;
 
 	q	=" select	id"
 		+" from		m_berkas"

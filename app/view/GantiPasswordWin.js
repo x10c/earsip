@@ -45,12 +45,12 @@ Ext.define ('Earsip.view.GantiPasswordWin', {
 	}]
 ,	defaultFocus	: 'old_psw'
 ,	buttons			: [{
-			text	: 'Simpan'
-		,	type	: 'submit'
-		,	action	: 'submit'
-		,	iconCls	: 'save'
-		,	formBind: true
-		}]
+		text	: 'Simpan'
+	,	type	: 'submit'
+	,	action	: 'submit'
+	,	iconCls	: 'save'
+	,	formBind: true
+	}]
 
 ,	initComponent	: function ()
 	{

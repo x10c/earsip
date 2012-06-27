@@ -8,9 +8,6 @@ Ext.define ('Earsip.controller.GantiPassword', {
 			'gantipassword button[action=submit]': {
 				click		: this.do_submit
 			}
-		,	'gantipassword textfield': {
-				specialkey	: this.do_keyenter
-			}
 		});
 	}
 
@@ -20,7 +17,7 @@ Ext.define ('Earsip.controller.GantiPassword', {
 		var form	= win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
-			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu.');
 			return;
 		}
 		form.submit ({
@@ -39,9 +36,5 @@ Ext.define ('Earsip.controller.GantiPassword', {
 				Ext.msg.error (action.result.info);
 			}
 		});
-	}
-
-,	do_keyenter: function ()
-	{
 	}
 });

@@ -13,6 +13,7 @@ Ext.require ([
 , 	'Earsip.view.Pemindahan'
 ,	'Earsip.view.Pemusnahan'
 ,	'Earsip.view.BerkasJRA'
+,	'Earsip.view.TransferBerkas'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {
@@ -40,11 +41,14 @@ Ext.define ('Earsip.controller.MainToolbar', {
 		,	'maintoolbar menuitem[action=logout]': {
 				click: this.do_logout
 			}
+		,	'maintoolbar menuitem[itemId=trans_transfer_berkas]': {
+				click: this.do_transfer_berkas
+			}
 		});
 	}
 
 ,	menuitem_on_click : function (button)
-	{	
+	{
 		if (button.itemId == null) {
 			return;
 		}
@@ -95,5 +99,11 @@ Ext.define ('Earsip.controller.MainToolbar', {
 				Ext.msg.error ('Server error: tidak dapat keluar dari aplikasi!');
 			}
 		});
+	}
+
+,	do_transfer_berkas : function (button)
+	{
+		var win = Ext.create('Earsip.view.TransferBerkas', {});
+		win.show ();
 	}
 });

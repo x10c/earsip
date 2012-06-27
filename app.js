@@ -232,6 +232,8 @@ Ext.application ({
 
 	,	'BerkasJRA'
 	,	'BerkasJRAList'
+
+	,	'TransferBerkas'
 	]
 ,	controllers	: [
 		'Login'
@@ -256,6 +258,7 @@ Ext.application ({
 	,	'NotifPemindahan'
 	,	'Arsip'
 	,	'BerkasJRA'
+	,	'TransferBerkas'
 	]
 	
 ,	launch		: function ()

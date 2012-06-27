@@ -8,6 +8,7 @@
 <%
 Connection			db_con	= null;
 PreparedStatement	db_stmt	= null;
+ResultSet			rs		= null;
 String				db_url	= "";
 String				q		= "";
 
@@ -112,6 +113,32 @@ try {
 	}
 
 	db_stmt.executeUpdate ();
+
+	/* create pegawai berkas */
+	if (action.equalsIgnoreCase ("create")) {
+		q	=" select	id"
+			+" from		m_pegawai"
+			+" where	nip = ?";
+
+		db_stmt = db_con.prepareStatement (q);
+		db_stmt.setString (1, nip);
+
+		rs = db_stmt.executeQuery ();
+
+		if (rs.next ()) {
+			q	=" insert into m_berkas (pid, pegawai_id, nama)"
+				+" values (0, ?, ?)";
+
+			id = rs.getString ("id");
+
+			db_stmt = db_con.prepareStatement (q);
+			db_stmt.setInt (1, Integer.parseInt (id));
+			db_stmt.setString (2, nama);
+
+			db_stmt.executeUpdate ();
+		}
+	}
+
 	out.print ("{success:true,info:'Data pegawai \""+ nama +"\" telah tersimpan.'}");
 }
 catch (Exception e) {
