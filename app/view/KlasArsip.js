@@ -70,6 +70,24 @@ Ext.define ('Earsip.view.KlasArsip', {
 		}
 	, 	groupable	: false
 	},{
+		text		: 'JRA Aktif'
+	,	dataIndex	: 'jra_aktif'
+	,	flex		: 1
+	,	editor		: {
+			xtype		: 'numberfield'
+		,	allowBlank	: false
+		,	minValue	: 1
+		}
+	},{
+		text		: 'JRA Inaktif'
+	,	dataIndex	: 'jra_inaktif'
+	,	flex		: 1
+	,	editor		: {
+			xtype		: 'numberfield'
+		,	allowBlank	: false
+		,	minValue	: 1
+		}
+	},{
 		text		: 'Keterangan'
 	,	dataIndex	: 'keterangan'
 	,	flex		: 2

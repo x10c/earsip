@@ -49,6 +49,20 @@ Ext.define('Earsip.view.KlasArsipWin', {
 		,	name			: 'nama'
 		,	allowBlank		: false
 		},{
+			xtype			: 'numberfield'
+		,	fieldLabel		: 'JRA Aktif'
+		,	itemId			: 'jra_aktif'
+		,	name			: 'jra_aktif'
+		,	minValue		: 1
+		,	allowBlank		: false
+		},{
+			xtype			: 'numberfield'
+		,	fieldLabel		: 'JRA Inaktif'
+		,	itemId			: 'jra_inaktif'
+		,	name			: 'jra_inaktif'
+		,	minValue		: 1
+		,	allowBlank		:false
+		},{
 			xtype			: 'textarea'
 		,	fieldLabel		: 'Keterangan'
 		,	itemId			: 'keterangan'

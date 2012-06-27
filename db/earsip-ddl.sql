@@ -444,6 +444,8 @@ create table R_BERKAS_KLAS (
    KODE                 VARCHAR(6)           not null,
    NAMA                 VARCHAR(64)          not null,
    KETERANGAN           VARCHAR(255)         not null,
+   JRA_AKTIF			INT4				 not null default 1,
+   JRA_INAKTIF			INT4				 not null default 1,
    constraint PK_R_BERKAS_KLAS primary key (ID)
 );
 

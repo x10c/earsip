@@ -23,6 +23,8 @@ String			uk_id		= "";
 String			kode		= "";
 String			nama		= "";
 String			ket			= "";
+int				jra_aktif	= 0;
+int				jra_inaktif	= 0;
 
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
@@ -50,22 +52,27 @@ try {
 		kode			= o.getString ("kode");
 		nama			= o.getString ("nama");
 		ket				= o.getString ("keterangan");
-
+		jra_aktif		= o.getInt ("jra_aktif");
+		jra_inaktif		= o.getInt ("jra_inaktif");
 	} else {
 		uk_id			= request.getParameter ("unit_kerja_id");
 		kode			= request.getParameter ("kode");
 		nama			= request.getParameter ("nama");
 		ket				= request.getParameter ("keterangan");
+		jra_aktif		= Integer.parseInt (request.getParameter ("jra_aktif"));
+		jra_inaktif		= Integer.parseInt (request.getParameter ("jra_inaktif"));
 	}
 	
 	if (action.equalsIgnoreCase ("create")) {
-		q	=" insert into r_berkas_klas (unit_kerja_id, kode, nama, keterangan)"
-			+" values (?, ?, ?, ?)";
+		q	=" insert into r_berkas_klas (unit_kerja_id, kode, nama, keterangan, jra_aktif, jra_inaktf)"
+			+" values (?, ?, ?, ?, ?, ?)";
 		db_stmt = db_con.prepareStatement (q);
-		db_stmt.setInt	  (1, Integer.parseInt(uk_id));
+		db_stmt.setInt (1, Integer.parseInt(uk_id));
 		db_stmt.setString (2, kode);
 		db_stmt.setString (3, nama);
 		db_stmt.setString (4, ket);
+		db_stmt.setInt (5, jra_aktif);
+		db_stmt.setInt (6, jra_inaktif);
 
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update	r_berkas_klas "
@@ -73,6 +80,8 @@ try {
 			+" , 		kode		 	= ?"			
 			+" , 		nama		 	= ?"
 			+" ,		keterangan		= ?"
+			+" ,		jra_aktif		= ?"
+			+" ,		jra_inaktif		= ?"
 			+" where	id				= ?";
 		
 		db_stmt = db_con.prepareStatement (q);
@@ -80,7 +89,9 @@ try {
 		db_stmt.setString (2, kode);
 		db_stmt.setString (3, nama);
 		db_stmt.setString (4, ket);
-		db_stmt.setInt (5, Integer.parseInt (id));
+		db_stmt.setInt (5, jra_aktif);
+		db_stmt.setInt (6, jra_inaktif);
+		db_stmt.setInt (7, Integer.parseInt (id));
 
 	}else if (action.equalsIgnoreCase ("destroy")) {
 		q	=" delete from r_berkas_klas where id = ?";

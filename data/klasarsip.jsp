@@ -23,6 +23,8 @@ try {
 		+" , 		kode"
 		+" , 		nama"
 		+" , 		keterangan"
+		+" ,		jra_aktif"
+		+" ,		jra_inaktif"
 		+" from 	r_berkas_klas"
 		+" order by nama";
 
@@ -40,6 +42,8 @@ try {
 				+ "\n, kode			:'"+ rs.getString ("kode") +"'"
 				+ "\n, nama			:'"+ rs.getString ("nama") +"'"
 				+ "\n, keterangan	:'"+ rs.getString ("keterangan") +"'"
+				+ "\n, jra_aktif	: "+ rs.getString ("jra_aktif")
+				+ "\n, jra_inaktif  : "+ rs.getString ("jra_inaktif")
 				+ "\n}";
 	}
 
