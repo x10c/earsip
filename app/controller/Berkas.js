@@ -18,6 +18,9 @@ Ext.define ('Earsip.controller.Berkas', {
 		ref		: 'berkaslist'
 	,	selector: 'berkaslist'
 	},{
+		ref		: 'berkasform'
+	,	selector: 'berkasform'
+	},{
 		ref		: 'cariberkaswin'
 	,	selector: 'cariberkaswin'
 	},{
@@ -64,6 +67,11 @@ Ext.define ('Earsip.controller.Berkas', {
 		,	'berkaslist button[itemId=del]': {
 				click : this.do_delete
 			}
+
+		,	'berkasform combo[itemId=berkas_klas_id]': {
+				select : this.on_select_berkas_klas
+			}
+
 		,	'cariberkaswin button[itemId=cari]' : {
 				click : this.do_search
 			}
@@ -303,5 +311,13 @@ Ext.define ('Earsip.controller.Berkas', {
 ,	winupload_close : function (win)
 	{
 		this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
+	}
+
+,	on_select_berkas_klas : function (cb, records)
+	{
+		var berkasform = this.getBerkasform ();
+
+		berkasform.down ('#jra_aktif').setValue (records[0].get ('jra_aktif'));
+		berkasform.down ('#jra_inaktif').setValue (records[0].get ('jra_inaktif'));
 	}
 });
