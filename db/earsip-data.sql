@@ -1,4 +1,4 @@
-INSERT INTO m_sysconfig (repository_root,max_upload_size) values ('/repository', 5000);
+INSERT INTO m_sysconfig (repository_root, max_upload_size) values ('/repository', 5000);
 
 INSERT INTO m_grup (nama, keterangan) VALUES ('Administrator', 'Admin aplikasi');
 INSERT INTO m_grup (nama, keterangan) VALUES ('Pusat Berkas', 'Mengatur seluruh arsip aktif');
@@ -55,7 +55,8 @@ INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('TSI', 
 INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('AKT', 'Divisi TSI & Akuntansi - Akuntansi', '', '');
 INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('AMU', 'Tim AMU', '', '');
 INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DT', 'Divisi Dana dan Treasury - Treasury', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('IT', 'Divisi IT', '', '');
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('TIK', 'Divisi TIK', '', '');
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('FREUD', 'Divisi Freud', '', '');
 
 
 --
@@ -172,10 +173,6 @@ INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Video', 'Berkas berupa gam
 INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Suara', 'Berkas berupa suara');
 
 
-
-
-
-
 --
 -- TOC entry 2140 (class 0 OID 23321)
 -- Dependencies: 180
@@ -189,14 +186,6 @@ INSERT INTO r_arsip_status (id, keterangan) VALUES (3, 'Musnah');
 
 
 --
--- TOC entry 2129 (class 0 OID 23207)
--- Dependencies: 163 2130 2140
--- Data for Name: m_arsip; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
 -- TOC entry 2138 (class 0 OID 23309)
 -- Dependencies: 178
 -- Data for Name: r_akses_berbagi; Type: TABLE DATA; Schema: public; Owner: earsip
@@ -207,22 +196,6 @@ INSERT INTO r_akses_berbagi (id, keterangan) VALUES (1, 'Lihat (user tertentu)')
 INSERT INTO r_akses_berbagi (id, keterangan) VALUES (2, 'Merubah (user tertentu)');
 INSERT INTO r_akses_berbagi (id, keterangan) VALUES (3, 'Lihat (global)');
 INSERT INTO r_akses_berbagi (id, keterangan) VALUES (4, 'Merubah (global)');
-
-
---
--- TOC entry 2131 (class 0 OID 23240)
--- Dependencies: 167 2134 2138 2130
--- Data for Name: m_berkas_berbagi; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2135 (class 0 OID 23282)
--- Dependencies: 174
--- Data for Name: m_sysconfig; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
 
 
 --
@@ -306,32 +279,6 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (40, 3, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 3, 0);
 
 
-
-
---
--- TOC entry 2148 (class 0 OID 23397)
--- Dependencies: 195 2136
--- Data for Name: t_peminjaman; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2137 (class 0 OID 23302)
--- Dependencies: 177 2148 2130
--- Data for Name: peminjaman_rinci; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2143 (class 0 OID 23348)
--- Dependencies: 186 2141
--- Data for Name: r_ir; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
 --
 -- TOC entry 2145 (class 0 OID 23367)
 -- Dependencies: 190
@@ -340,51 +287,4 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 3, 0);
 
 INSERT INTO r_pemusnahan_metoda (nama, keterangan) VALUES ('Pembakaran', 'Pemusanahan arsip dengan cara dibakar');
 INSERT INTO r_pemusnahan_metoda (nama, keterangan) VALUES ('Pencacahan', 'Pemusnahan arsip dengan cara dicacah');
-
-
---
--- TOC entry 2146 (class 0 OID 23376)
--- Dependencies: 192 2136
--- Data for Name: t_pemindahan; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2147 (class 0 OID 23387)
--- Dependencies: 193 2130 2146
--- Data for Name: t_pemindahan_rinci; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2149 (class 0 OID 23410)
--- Dependencies: 197 2145
--- Data for Name: t_pemusnahan; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2150 (class 0 OID 23418)
--- Dependencies: 198 2149 2130
--- Data for Name: t_pemusnahan_rinci; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
---
--- TOC entry 2151 (class 0 OID 23426)
--- Dependencies: 199 2149
--- Data for Name: t_tim_pemusnahan; Type: TABLE DATA; Schema: public; Owner: earsip
---
-
-
-
--- Completed on 2012-05-07 03:59:11
-
---
--- PostgreSQL database dump complete
---
-
+INSERT INTO r_pemusnahan_metoda (nama, keterangan) VALUES ('Peleburan', 'Pemusnahan arsip dengan cara dilebur');
