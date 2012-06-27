@@ -29,6 +29,10 @@ Ext.define ('Earsip.view.Berkas', {
 		,	collapsible	: true
 		,	header		: false
 		,	buttons		: [{
+				text		: 'Folder Baru'
+			,	itemId		: 'mkdir'
+			,	iconCls		: 'add'
+			},'->',{
 				text		: 'Simpan'
 			,	itemId		: 'save'
 			,	iconCls		: 'save'

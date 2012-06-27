@@ -43,7 +43,8 @@ try {
 		+" ,		pembuat"
 		+" ,		judul"
 		+" ,		masalah"
-		+" ,		jra"
+		+" ,		jra_aktif"
+		+" ,		jra_inaktif"
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
@@ -111,7 +112,8 @@ try {
 				+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
 				+ "\n, judul         :'"+ rs.getString ("judul") +"'"
 				+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
-				+ "\n, jra           : "+ rs.getString ("jra")
+				+ "\n, jra_aktif     : "+ rs.getString ("jra_aktif")
+				+ "\n, jra_inaktif   : "+ rs.getString ("jra_inaktif")
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")

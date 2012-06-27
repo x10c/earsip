@@ -18,14 +18,15 @@ try {
 	}
 	String user_id		= (String) session.getAttribute ("user.id");
 	String grup_id		= (String) session.getAttribute ("user.grup_id");
-	
+
 	q	=" select	id"
 		+" ,		nama"
 		+" ,		nomor"
 		+" ,		pembuat"
 		+" ,		judul"
 		+" ,		masalah"
-		+" ,		jra"
+		+" ,		jra_aktif"
+		+" ,		jra_inaktif"
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		arsip_status_id"
@@ -33,24 +34,20 @@ try {
 		+" where 	status_hapus	= 1"
 		+" and		unit_kerja_id is not null" // non root directory
 		+" and		tipe_file = 0";
-		
+
 	if (Integer.parseInt(grup_id) == 3) //  pusat arsip group
 	{
-		q 	+=" and status = 0";
+		q	+=" and status = 0";
+	} else {
+		q	+=" and 	status = 1"
+			+" and 	pegawai_id = " + user_id;
 	}
-	else
-	{
-		q 	+=" and 	status = 1"
-			 +" and 	pegawai_id = " + user_id;
-	}
-	
-	
-	q	+=" order by nama";
 
+	q	+=" order by nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
-	
+
 	while (rs.next ()) {
 		if (i > 0) {
 			data += ",";
@@ -64,7 +61,8 @@ try {
 				+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
 				+ "\n, judul         :'"+ rs.getString ("judul") +"'"
 				+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
-				+ "\n, jra           : "+ rs.getString ("jra")
+				+ "\n, jra_aktif     : "+ rs.getString ("jra_aktif")
+				+ "\n, jra_inaktif   : "+ rs.getString ("jra_inaktif")
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 				+" \n, arsip_status_id : "+ rs.getString ("arsip_status_id")

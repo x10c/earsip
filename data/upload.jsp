@@ -121,7 +121,8 @@ try {
 		+" ,	pembuat"
 		+" ,	judul"
 		+" ,	masalah"
-		+" ,	jra"
+		+" ,	jra_aktif"
+		+" ,	jra_inaktif"
 		+" )"
 		+" select "
 		+		pid
@@ -137,7 +138,8 @@ try {
 		+" ,	pembuat"
 		+" ,	judul"
 		+" ,	masalah"
-		+" ,	jra"
+		+" ,	jra_aktif"
+		+" ,	jra_inaktif"
 		+" from		m_berkas "
 		+" where	id = "+ pid;
 

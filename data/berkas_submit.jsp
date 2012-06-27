@@ -16,17 +16,18 @@ try {
 		return;
 	}
 
-	String	id			= request.getParameter ("id");
+	int		id			= Integer.parseInt (request.getParameter ("id"));
 	String	nama		= request.getParameter ("nama");
 	String	tgl_dibuat	= request.getParameter ("tgl_dibuat");
-	String	klas_id		= request.getParameter ("berkas_klas_id");
-	String	tipe_id		= request.getParameter ("berkas_tipe_id");
+	int		klas_id		= Integer.parseInt (request.getParameter ("berkas_klas_id"));
+	int		tipe_id		= Integer.parseInt (request.getParameter ("berkas_tipe_id"));
 	String	nomor		= request.getParameter ("nomor");
 	String	pembuat		= request.getParameter ("pembuat");
 	String	judul		= request.getParameter ("judul");
 	String	masalah		= request.getParameter ("masalah");
-	String	jra			= request.getParameter ("jra");
-	String	stat_hapus	= request.getParameter ("status_hapus");
+	int		jra_aktif	= Integer.parseInt (request.getParameter ("jra_aktif"));
+	int		jra_inaktif	= Integer.parseInt (request.getParameter ("jra_inaktif"));
+	int		stat_hapus	= Integer.parseInt (request.getParameter ("status_hapus"));
 
 	q	=" update	m_berkas"
 		+" set		nama			= ?"
@@ -37,7 +38,8 @@ try {
 		+" ,		pembuat			= ?"
 		+" ,		judul			= ?"
 		+" ,		masalah			= ?"
-		+" ,		jra				= ?"
+		+" ,		jra_aktif		= ?"
+		+" ,		jra_inaktif		= ?"
 		+" ,		status_hapus	= ?"
 		+" where	id				= ?";
 
@@ -45,15 +47,16 @@ try {
 
 	db_stmt.setString	(1, nama);
 	db_stmt.setDate		(2, Date.valueOf (tgl_dibuat));
-	db_stmt.setInt		(3, Integer.parseInt (klas_id));
-	db_stmt.setInt		(4, Integer.parseInt (tipe_id));
+	db_stmt.setInt		(3, klas_id);
+	db_stmt.setInt		(4, tipe_id);
 	db_stmt.setString	(5, nomor);
 	db_stmt.setString	(6, pembuat);
 	db_stmt.setString	(7, judul);
 	db_stmt.setString	(8, masalah);
-	db_stmt.setInt		(9, Integer.parseInt (jra));
-	db_stmt.setInt		(10, Integer.parseInt (stat_hapus));
-	db_stmt.setInt		(11, Integer.parseInt (id));
+	db_stmt.setInt		(9, jra_aktif);
+	db_stmt.setInt		(10, jra_inaktif);
+	db_stmt.setInt		(11, stat_hapus);
+	db_stmt.setInt		(12, id);
 
 	db_stmt.executeUpdate ();
 

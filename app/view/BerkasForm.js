@@ -82,10 +82,18 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	emptyText		: '-'
 	},{
 		xtype			: 'numberfield'
-	,	fieldLabel		: 'JRA (tahun)'
-	,	itemId			: 'jra'
-	,	name			: 'jra'
-	,	emptyText		: '0'
+	,	fieldLabel		: 'JRA Aktif'
+	,	itemId			: 'jra_aktif'
+	,	name			: 'jra_aktif'
+	,	minValue		: 1
+	,	allowBlank		: false
+	},{
+		xtype			: 'numberfield'
+	,	fieldLabel		: 'JRA Inaktif'
+	,	itemId			: 'jra_inaktif'
+	,	name			: 'jra_inaktif'
+	,	minValue		: 1
+	,	allowBlank		:false
 	},{
 		xtype			: 'numberfield'
 	,	name			: 'status_hapus'

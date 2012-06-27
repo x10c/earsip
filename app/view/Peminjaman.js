@@ -249,7 +249,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 				xtype			: 'combobox'
 			,	store			: 'BerkasPinjam'
 			,	valueField		: 'id'
-			,	displayField	: 'jra'
+			,	displayField	: 'jra_inaktif'
 			,	allowBlank		: false
 			,	autoSelect		: true
 			,	triggerAction	: 'all'

@@ -18,9 +18,6 @@ Ext.define ('Earsip.controller.Berkas', {
 		ref		: 'berkaslist'
 	,	selector: 'berkaslist'
 	},{
-		ref		: 'mkdirwin'
-	,	selector: 'mkdirwin'
-	},{
 		ref		: 'cariberkaswin'
 	,	selector: 'cariberkaswin'
 	},{
@@ -46,8 +43,8 @@ Ext.define ('Earsip.controller.Berkas', {
 				itemdblclick : this.list_itemdblclick
 			,	selectionchange : this.list_selectionchange
 			}
-		,	'berkaslist button[itemId=mkdir]': {
-				click : this.do_mkdir
+		,	'berkas button[itemId=mkdir]': {
+				click : this.do_mkdir_submit
 			}
 		,	'berkaslist button[itemId=upload]': {
 				click : this.do_upload
@@ -67,9 +64,6 @@ Ext.define ('Earsip.controller.Berkas', {
 		,	'berkaslist button[itemId=del]': {
 				click : this.do_delete
 			}
-		,	'mkdirwin button[action=submit]' : {
-				click : this.do_mkdir_submit
-			}
 		,	'cariberkaswin button[itemId=cari]' : {
 				click : this.do_search
 			}
@@ -88,10 +82,12 @@ Ext.define ('Earsip.controller.Berkas', {
 		}
 
 		form.submit ({
-			success	: function (form, action)
+			scope	: this
+		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
+					this.getBerkaslist ().do_load_list (Earsip.berkas.pid);
 				} else {
 					Ext.msg.error (action.result.info);
 				}
@@ -165,20 +161,6 @@ Ext.define ('Earsip.controller.Berkas', {
 
 		berkaslist.down ('#del').setDisabled (! records.length);
 		berkaslist.down ('#share').setDisabled (! records.length);
-	}
-
-,	do_mkdir : function (b)
-	{
-		if (Earsip.berkas.tree.id <= 0) {
-			Ext.msg.error ('Pilih tempat untuk direktori baru terlebih dahulu!');
-			return;
-		}
-		var berkaslist	= this.getBerkaslist ();
-		var tgl_dibuat	= berkaslist.win.down ('#tgl_dibuat');
-
-		tgl_dibuat.setValue (new Date ());
-
-		berkaslist.win.show ();
 	}
 
 ,	do_upload : function (b)
@@ -267,24 +249,29 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	do_mkdir_submit : function (button)
 	{
-		var win		= button.up ('#mkdirwin');
-		var form	= win.down ('form').getForm ();
+		var form = this.getBerkas ().down ('#berkas_form').getForm ();
 
 		if (! form.isValid ()) {
 			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
 			return;
 		}
+		if (Earsip.berkas.tree.id <= 0) {
+			Ext.msg.error ('Pilih tempat untuk direktori baru terlebih dahulu!');
+			return;
+		}
 
 		form.submit ({
 			scope	: this
+		,	url		: 'data/mkdir.jsp'
 		,	params	: {
 				berkas_id	: Earsip.berkas.tree.id
 			}
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
+					Ext.msg.info ('Berkas baru telah dibuat!');
 					this.getBerkastree ().do_load_tree ();
-					win.hide ();
+					this.getBerkaslist ().do_load_list (Earsip.berkas.pid);
 				} else {
 					Ext.msg.error (action.result.info);
 				}

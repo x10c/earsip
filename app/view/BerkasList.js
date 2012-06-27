@@ -2,7 +2,6 @@ Ext.require ([
 	'Earsip.store.Berkas'
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
-,	'Earsip.view.MkdirWin'
 ,	'Earsip.view.BerkasBerbagiWin'
 ,	'Earsip.view.CariBerkasWin'
 ]);
@@ -60,10 +59,6 @@ Ext.define ('Earsip.view.BerkasList', {
 	,	dock		: 'top'
 	,	flex		: 1
 	,	items		: [{
-			text		: 'Folder baru'
-		,	itemId		: 'mkdir'
-		,	iconCls		: 'add'
-		},'-',{
 			text		: 'Unggah'
 		,	itemId		: 'upload'
 		,	iconCls		: 'upload'
@@ -93,7 +88,6 @@ Ext.define ('Earsip.view.BerkasList', {
 	}]
 ,	initComponent	: function ()
 	{
-		this.win		= Ext.create ('Earsip.view.MkdirWin', {});
 		this.win_share	= Ext.create ('Earsip.view.BerkasBerbagiWin', {});
 		this.win_search	= Ext.create ('Earsip.view.CariBerkasWin', {});
 		this.callParent (arguments);

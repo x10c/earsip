@@ -27,7 +27,7 @@ try {
 		+" AND		status_hapus	= 1"
 		+" AND		arsip_status_id = 0"
 		+" AND 		unit_kerja_id IS NOT null"
-		+" and		date_part('years', age (tgl_dibuat)) >= jra"
+		+" and		date_part('years', age (tgl_dibuat)) >= jra_aktif"
 		+" ORDER BY nama";
 
 	db_stmt = db_con.createStatement ();

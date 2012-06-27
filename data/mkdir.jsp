@@ -18,18 +18,19 @@ try {
 		return;
 	}
 
-	String user_id		= (String) session.getAttribute ("user.id");
-	String uk_id		= (String) session.getAttribute ("user.unit_kerja_id");
-	String dir_id		= request.getParameter ("berkas_id");
+	int		user_id		= Integer.parseInt ((String) session.getAttribute ("user.id"));
+	int		uk_id		= Integer.parseInt ((String) session.getAttribute ("user.unit_kerja_id"));
+	int		dir_id		= Integer.parseInt (request.getParameter ("berkas_id"));
 	String nama			= request.getParameter ("nama");
 	String tgl_dibuat	= request.getParameter ("tgl_dibuat");
-	String klas_id		= request.getParameter ("berkas_klas_id");
-	String tipe_id		= request.getParameter ("berkas_tipe_id");
+	int		klas_id		= Integer.parseInt (request.getParameter ("berkas_klas_id"));
+	int		tipe_id		= Integer.parseInt (request.getParameter ("berkas_tipe_id"));
 	String nomor		= request.getParameter ("nomor");
 	String judul		= request.getParameter ("judul");
 	String pembuat		= request.getParameter ("pembuat");
 	String masalah		= request.getParameter ("masalah");
-	String jra			= request.getParameter ("jra");
+	int		jra_aktif	= Integer.parseInt (request.getParameter ("jra_aktif"));
+	int		jra_inaktif	= Integer.parseInt (request.getParameter ("jra_inaktif"));
 	Date dt_dibuat		= Date.valueOf (tgl_dibuat);
 
 	q	=" insert into m_berkas ("
@@ -44,23 +45,25 @@ try {
 		+" ,	judul"
 		+" ,	pembuat"
 		+" ,	masalah"
-		+" ,	jra)"
-		+" values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		+" ,	jra_aktif"
+		+" ,	jra_inaktif)"
+		+" values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	db_stmt = db_con.prepareStatement (q);
 
-	db_stmt.setInt (1, Integer.parseInt (dir_id));
-	db_stmt.setInt (2, Integer.parseInt (user_id));
-	db_stmt.setInt (3, Integer.parseInt (uk_id));
+	db_stmt.setInt (1, dir_id);
+	db_stmt.setInt (2, user_id);
+	db_stmt.setInt (3, uk_id);
 	db_stmt.setString (4, nama);
 	db_stmt.setDate (5, dt_dibuat);
-	db_stmt.setInt (6, Integer.parseInt (klas_id));
-	db_stmt.setInt (7, Integer.parseInt (tipe_id));
+	db_stmt.setInt (6, klas_id);
+	db_stmt.setInt (7, tipe_id);
 	db_stmt.setString (8, nomor);
 	db_stmt.setString (9, judul);
 	db_stmt.setString (10, pembuat);
 	db_stmt.setString (11, masalah);
-	db_stmt.setInt (12, Integer.parseInt (jra));
+	db_stmt.setInt (12, jra_aktif);
+	db_stmt.setInt (13, jra_inaktif);
 
 	db_stmt.executeUpdate ();
 
