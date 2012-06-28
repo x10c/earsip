@@ -4,6 +4,7 @@ Ext.require ([
 ,	'Earsip.store.TipeArsip'
 ,	'Earsip.view.BerkasBerbagiWin'
 ,	'Earsip.view.CariBerkasWin'
+,	'Earsip.view.DocViewer'
 ]);
 
 Ext.define ('Earsip.view.BerkasList', {
@@ -22,10 +23,7 @@ Ext.define ('Earsip.view.BerkasList', {
 			if (r.get ('tipe_file') == 0) {
 				return "<span class='dir'>"+ v +"</span>";
 			} else {
-				return "<a class='doc' target='_blank'"
-					+" href='data/download.jsp"
-					+"?berkas="+ r.get('sha') +"&nama="+ v +"'>"
-					+ v +"</a>";
+				return "<span class='doc'>"+ v +"</span>";
 			}
 		}
 	},{
@@ -90,6 +88,7 @@ Ext.define ('Earsip.view.BerkasList', {
 	{
 		this.win_share	= Ext.create ('Earsip.view.BerkasBerbagiWin', {});
 		this.win_search	= Ext.create ('Earsip.view.CariBerkasWin', {});
+		this.win_viewer	= Ext.create ('Earsip.view.DocViewer', {});
 		this.callParent (arguments);
 	}
 

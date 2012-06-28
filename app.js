@@ -259,6 +259,7 @@ Ext.application ({
 	,	'Arsip'
 	,	'BerkasJRA'
 	,	'TransferBerkas'
+	,	'DocViewer'
 	]
 	
 ,	launch		: function ()
