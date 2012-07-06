@@ -4,6 +4,7 @@ Ext.define ('Earsip.model.Berkas', {
 		'id'
 	,	'pid'
 	,	'tipe_file'
+	,	'mime'
 	,	'sha'
 	,	'pegawai_id'
 	,	'unit_kerja_id'

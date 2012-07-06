@@ -113,6 +113,7 @@ create table M_BERKAS (
    UNIT_KERJA_ID        INT4                 null,
    BERKAS_TIPE_ID       INT4                 null,
    TIPE_FILE            INT2                 null default 0,
+   MIME                 VARCHAR(255)         null,
    SHA                  VARCHAR(255)         null,
    NAMA                 VARCHAR(255)         null,
    TGL_UNGGAH           DATE                 not null default CURRENT_DATE,

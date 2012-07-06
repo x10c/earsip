@@ -23,6 +23,7 @@ try {
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		tipe_file"
+		+" ,		mime"
 		+" ,		sha"
 		+" ,		pegawai_id"
 		+" ,		unit_kerja_id"
@@ -59,6 +60,7 @@ try {
 		data	+="\n{ id            : "+ rs.getString ("id")
 				+ "\n, pid           : "+ rs.getString ("pid")
 				+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
+				+ "\n, mime          :'"+ rs.getString ("mime") +"'"
 				+ "\n, sha           :'"+ rs.getString ("sha") +"'"
 				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
 				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
