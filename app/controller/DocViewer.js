@@ -18,6 +18,12 @@ Ext.define ('Earsip.controller.DocViewer', {
 		,	'docviewer button[itemId=zoomout]': {
 				click		: this.do_zoomout
 			}
+		,	'docviewer button[itemId=prev]': {
+				click		: this.do_view_prev
+			}
+		,	'docviewer button[itemId=next]': {
+				click		: this.do_view_next
+			}
 		});
 	}
 
@@ -66,5 +72,49 @@ Ext.define ('Earsip.controller.DocViewer', {
 		if (w > 0 && h > 0) {
 			c.setSize (w, h);
 		}
+	}
+
+,	do_view_prev : function (b)
+	{
+		var dv	= this.getDocviewer ();
+		var c	= dv.down ('#content');
+
+		if (dv.mime == 'application/pdf') {
+			if (dv.seq != 0) {
+				dv.seq		= dv.seq - 1;
+				dv.target	= dv.src +'_'+ dv.seq +'.png'
+
+				console.log (dv.target);
+
+				c.removeAll ();
+				c.add ({
+					xtype	: 'image'
+				,	mode	: 'image'
+				,	itemId	: 'content-img'
+				,	src		: dv.target
+				});
+			}
+		}
+	}
+
+,	do_view_next : function (b)
+	{
+		var dv	= this.getDocviewer ();
+		var c	= dv.down ('#content');
+
+		if (dv.mime == 'application/pdf') {
+			dv.seq		= dv.seq + 1;
+			dv.target	= dv.src +'_'+ dv.seq +'.png'
+		}
+
+		console.log (dv.target);
+
+		c.removeAll ();
+		c.add ({
+			xtype	: 'image'
+		,	mode	: 'image'
+		,	itemId	: 'content-img'
+		,	src		: dv.target
+		});
 	}
 });

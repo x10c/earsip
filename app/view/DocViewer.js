@@ -17,6 +17,16 @@ Ext.define ('Earsip.view.DocViewer', {
 	},'-','->','-',
 	{
 		xtype		: 'button'
+	,	text		: '<'
+	,	itemId		: 'prev'
+	,	iconCls		: 'prev'
+	},'-',{
+		xtype		: 'button'
+	,	text		: '>'
+	,	itemId		: 'next'
+	,	iconCls		: 'next'
+	},'-',{
+		xtype		: 'button'
 	,	text		: 'Perkecil'
 	,	itemId		: 'zoomout'
 	,	iconCls		: 'zoomout'
@@ -31,8 +41,12 @@ Ext.define ('Earsip.view.DocViewer', {
 	,	autoScroll	: true
 	,	itemId		: 'content'
 	}]
+
 ,	target	: ''
 ,	berkas	: {}
+,	src		: ''
+,	mime	: ''
+,	seq		: 0
 
 ,	do_open : function (berkas)
 	{
@@ -40,7 +54,14 @@ Ext.define ('Earsip.view.DocViewer', {
 		var c = this.down ('#content');
 
 		this.berkas		= berkas;
-		this.target		= 'repository/'+ berkas.get ('sha');
+		this.src		= 'repository/'+ berkas.get ('pegawai_id') +'/'+ berkas.get ('sha');
+		this.target		= 'repository/'+ berkas.get ('pegawai_id') +'/'+ berkas.get ('sha');
+		this.mime		= berkas.get ('mime');
+		this.seq		= 0;
+
+		if (this.mime == 'application/pdf') {
+			this.target += '_'+ this.seq +'.png';
+		}
 
 		c.removeAll ();
 

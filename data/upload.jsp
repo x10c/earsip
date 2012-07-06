@@ -11,11 +11,36 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.io.File" %>
+<%@ page import="java.io.InputStream" %>
+<%@ page import="java.io.InputStreamReader" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.lang.Runtime" %>
+<%@ page import="java.lang.Process" %>
 <%@ page import="java.security.MessageDigest" %>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
 <%@ page import="org.apache.commons.fileupload.FileItem" %>
 <%@ page import="org.apache.commons.fileupload.FileItemFactory" %>
+<%!
+public int pdf2image (String filename, String errmsg)
+{ try {
+	String[]			cmds	= { "convert", filename, filename +"_%d.png" };
+	Runtime				rt		= Runtime.getRuntime ();
+	Process				proc	= rt.exec (cmds);
+	InputStream			stderr	= proc.getErrorStream();
+	InputStreamReader	isr		= new InputStreamReader(stderr);
+	BufferedReader		br		= new BufferedReader(isr);
+	String				line	= "";
+
+	while ((line = br.readLine ()) != null) {
+		errmsg += line;
+	}
+
+	return proc.waitFor ();
+} catch (Exception e) {
+	return 1;
+}}
+%>
 <%
 Connection	db_con			= null;
 boolean		is_multipart	= false;
@@ -53,6 +78,9 @@ try {
 	String		pid			= "";
 	String		name		= "";
 	String		filename	= "";
+	String		mime		= "";
+	String		errmsg		= "";
+	int			exec_stat	= 0;
 	long		filesize	= 0;
 
 	/* parse request */
@@ -70,6 +98,7 @@ try {
 		} else {
 			item_up		= item;
 			filesize	= item.getSize ();
+			mime		= item.getContentType ();
 		}
 	}
 
@@ -84,8 +113,16 @@ try {
 
 	String sha = sb.toString ();
 
+	/* check user directory */
+	String	user_dir	= rpath + repo +"/"+ user_id;
+	File	f_user_dir	= new File (user_dir);
+
+	if (! f_user_dir.exists ()) {
+		f_user_dir.mkdir ();
+	}
+
 	/* save file stream to filesystem */
-	filename	= rpath + repo +"/"+ sha;
+	filename	= user_dir +"/"+ sha;
 	file		= new File (filename);
 
 	if (file.exists ()) {
@@ -106,6 +143,14 @@ try {
 
 	item_up.write (file);
 
+	if (mime.equalsIgnoreCase ("application/pdf")) {
+		exec_stat = pdf2image (filename, errmsg);
+		if (exec_stat != 0) {
+			out.print ("{success:false,message:'"+ exec_stat +":"+ errmsg +"'}");
+			return;
+		}
+	}
+
 	/* save file attribute to database */
 	q	=" insert into m_berkas ("
 		+"		pid"
@@ -123,6 +168,7 @@ try {
 		+" ,	masalah"
 		+" ,	jra_aktif"
 		+" ,	jra_inaktif"
+		+" ,	mime"
 		+" )"
 		+" select "
 		+		pid
@@ -140,6 +186,7 @@ try {
 		+" ,	masalah"
 		+" ,	jra_aktif"
 		+" ,	jra_inaktif"
+		+" ,	'"+ mime +"'"
 		+" from		m_berkas "
 		+" where	id = "+ pid;
 
