@@ -22,6 +22,7 @@ Ext.define ('Earsip.model.Berkas', {
 	,	'status'
 	,	'status_hapus'
 	,	'akses_berbagi_id'
+	,	'n_output_images'
 	]
 ,	idProperty	: 'id'
 });

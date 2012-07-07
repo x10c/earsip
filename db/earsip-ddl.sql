@@ -128,6 +128,7 @@ create table M_BERKAS (
    STATUS_HAPUS         INT2                 null default 1,
    AKSES_BERBAGI_ID     INT2                 null default 0,
    ARSIP_STATUS_ID      INT2                 null default 0,
+   N_OUTPUT_IMAGES      INT                  not null default 0,
    constraint PK_M_BERKAS primary key (ID)
 );
 

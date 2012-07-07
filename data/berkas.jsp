@@ -41,6 +41,7 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
+		+" ,		n_output_images"
 		+" from		m_berkas"
 		+" where	pegawai_id		= "+ user_id
 		+" and		pid				= "+ berkas_id
@@ -78,6 +79,7 @@ try {
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
+				+" \n, n_output_images	: "+ rs.getString ("n_output_images")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

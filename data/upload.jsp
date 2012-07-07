@@ -11,6 +11,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.io.File" %>
+<%@ page import="java.io.FileFilter" %>
 <%@ page import="java.io.InputStream" %>
 <%@ page import="java.io.InputStreamReader" %>
 <%@ page import="java.io.BufferedReader" %>
@@ -21,6 +22,7 @@
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
 <%@ page import="org.apache.commons.fileupload.FileItem" %>
 <%@ page import="org.apache.commons.fileupload.FileItemFactory" %>
+<%@ page import="org.apache.commons.io.filefilter.WildcardFileFilter" %>
 <%!
 public int pdf2image (String filename, String errmsg)
 { try {
@@ -151,6 +153,8 @@ try {
 		}
 	}
 
+	File[] outs = f_user_dir.listFiles ((FileFilter) new WildcardFileFilter (sha +"_*.png"));
+
 	/* save file attribute to database */
 	q	=" insert into m_berkas ("
 		+"		pid"
@@ -169,6 +173,7 @@ try {
 		+" ,	jra_aktif"
 		+" ,	jra_inaktif"
 		+" ,	mime"
+		+" ,	n_output_images"
 		+" )"
 		+" select "
 		+		pid
@@ -187,6 +192,7 @@ try {
 		+" ,	jra_aktif"
 		+" ,	jra_inaktif"
 		+" ,	'"+ mime +"'"
+		+" ,	"+ outs.length
 		+" from		m_berkas "
 		+" where	id = "+ pid;
 

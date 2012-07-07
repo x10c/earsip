@@ -7,6 +7,7 @@ Ext.define ('Earsip.view.DocViewer', {
 ,	height		: 500
 ,	resizable	: true
 ,	closeable	: true
+,	maximizable	: true
 ,	closeAction	: 'hide'
 ,	layout		: 'fit'
 ,	tbar		: [{
@@ -17,12 +18,16 @@ Ext.define ('Earsip.view.DocViewer', {
 	},'-','->','-',
 	{
 		xtype		: 'button'
-	,	text		: '<'
+	,	text		: ''
 	,	itemId		: 'prev'
 	,	iconCls		: 'prev'
 	},'-',{
+		xtype		: 'text'
+	,	text		: 'Hal. 0 dari 0'
+	,	itemId		: 'pages'
+	},'-',{
 		xtype		: 'button'
-	,	text		: '>'
+	,	text		: ''
 	,	itemId		: 'next'
 	,	iconCls		: 'next'
 	},'-',{
@@ -58,9 +63,14 @@ Ext.define ('Earsip.view.DocViewer', {
 		this.target		= 'repository/'+ berkas.get ('pegawai_id') +'/'+ berkas.get ('sha');
 		this.mime		= berkas.get ('mime');
 		this.seq		= 0;
+		this.n_image	= berkas.get ('n_output_images');
 
 		if (this.mime == 'application/pdf') {
 			this.target += '_'+ this.seq +'.png';
+			this.set_page_number (this.seq + 1);
+		} else {
+			this.n_image = 1;
+			this.set_page_number (1);
 		}
 
 		c.removeAll ();
@@ -74,5 +84,12 @@ Ext.define ('Earsip.view.DocViewer', {
 
 		this.setTitle ('Berkas :: '+ berkas.get ('nama'));
 		this.show ();
+	}
+
+,	set_page_number : function (n)
+	{
+		var p = this.down ('#pages');
+
+		p.setText ('Hal. '+ n +' dari '+ this.n_image);
 	}
 });

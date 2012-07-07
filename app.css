@@ -22,6 +22,10 @@
 .ref {background-image: url(images/ref16.png) !important;}
 .trans {background-image: url(images/trans16.png) !important;}
 .search {background-image: url(images/search16.png) !important;}
+.zoomin {background-image: url(images/zoomin16.png) !important;}
+.zoomout {background-image: url(images/zoomout16.png) !important;}
+.next {background-image: url(images/next16.png) !important;}
+.prev {background-image: url(images/prev16.png) !important;}
 
 .dir {
 	background-image	:url(images/dir16.png);
