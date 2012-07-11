@@ -1,6 +1,6 @@
 Ext.define ('Earsip.store.Arsip', {
 	extend		: 'Ext.data.Store'
-,	model		: 'Earsip.model.Berkas'
+,	model		: 'Earsip.model.Arsip'
 ,	storeId		: 'Arsip'
 ,	autoSync	: false
 ,	autoLoad	: false

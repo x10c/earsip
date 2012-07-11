@@ -34,7 +34,9 @@ Ext.define ('Earsip.controller.TipeArsip', {
 		var grid	= button.up ('#ref_tipe_arsip');
 		var editor	= grid.getPlugin ('roweditor');
 
+		editor.action = 'add';
 		editor.cancelEdit ();
+
 		var r = Ext.create ('Earsip.model.TipeArsip', {
 				id			: 0
 			,	nama		: ''

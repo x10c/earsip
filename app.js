@@ -129,7 +129,8 @@ Ext.application ({
 	name		: 'Earsip'
 ,	appFolder	: 'app'
 ,	models		: [
-		'Berkas'
+		'Arsip'
+	,	'Berkas'
 	,	'BerkasBerbagi'
 	,	'User'
 	,	'Grup'

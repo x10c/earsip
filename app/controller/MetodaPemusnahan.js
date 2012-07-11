@@ -34,6 +34,7 @@ Ext.define ('Earsip.controller.MetodaPemusnahan', {
 		var grid	= button.up ('#ref_metoda_pemusnahan');
 		var editor	= grid.getPlugin ('roweditor');
 
+		editor.action = 'add';
 		editor.cancelEdit ();
 		var r = Ext.create ('Earsip.model.MetodaPemusnahan', {
 				id			: 0
