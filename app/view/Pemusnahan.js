@@ -95,6 +95,11 @@ Ext.define ('Earsip.view.Pemusnahan', {
 			,	itemId		: 'search'
 			,	iconCls		: 'search'
 			},'-',{
+				text		: 'Print'
+			,	itemId		: 'print'
+			,	iconCls		: 'print'
+			,	action		: 'print'
+			},'-',{
 				text		: 'Hapus'
 			,	itemId		: 'del'
 			,	iconCls		: 'del'

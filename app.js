@@ -152,6 +152,9 @@ Ext.application ({
 	,	'TimPemusnahan'
 	,	'BerkasMusnah'
 	,	'BerkasJRA'
+	,	'LapBerkasJRA'
+	,	'LapBerkasMusnah'
+	
 	]
 ,	stores		: [
 		'Berkas'
@@ -180,6 +183,8 @@ Ext.application ({
 	,	'TimPemusnahan'
 	,	'BerkasMusnah'
 	,	'BerkasJRA'
+	,	'LapBerkasJRA'
+	,	'LapBerkasMusnah'
 	]
 ,	views		: [
 		'Main'
@@ -234,6 +239,8 @@ Ext.application ({
 	,	'BerkasJRAList'
 
 	,	'TransferBerkas'
+	,	'LapBerkasJRA'
+	,	'LapBerkasMusnah'
 	]
 ,	controllers	: [
 		'Login'
@@ -260,6 +267,8 @@ Ext.application ({
 	,	'BerkasJRA'
 	,	'TransferBerkas'
 	,	'DocViewer'
+	,	'LapBerkasJRA'
+	,	'LapBerkasMusnah'
 	]
 	
 ,	launch		: function ()

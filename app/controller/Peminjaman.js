@@ -32,6 +32,9 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	'trans_peminjaman #peminjaman_grid button[itemId=search]': {
 				click : this.do_open_win_cari
 			}
+		,	'trans_peminjaman #peminjaman_grid button[itemId=print]': {
+				click : this.do_print_peminjaman
+			}
 		,	'trans_peminjaman #peminjaman_grid button[itemId=pengembalian]': {
 				click : this.do_pengembalian
 			}
@@ -323,5 +326,32 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		});
 		
 		proxy.api.read	= org_url;
+	}
+	
+,	do_print_peminjaman: function (button)
+	{
+		var grid = button.up ('#peminjaman_grid');
+		var data = grid.getSelectionModel ().getSelection ();
+		if (data.length <= 0) {
+			return;
+		}
+		
+		new Ext.Window({
+			title	: 'Report Pemindahan'
+		,	height 	: 600
+		, 	width	: 700 
+		,	movable	: true
+		,	modal	: true,
+			items: [{
+				xtype : 'component'
+			,	autoEl : {
+					tag		: 'iframe'
+				,	src		: 'data/bapeminjamanreport_submit.jsp?peminjaman_id=' + data[0].get ('id')
+				,	height 	: '100%'
+				,	width	: '100%'
+				, 	style: 'border: 0 none'
+				}
+			}]
+		}).show();
 	}
 });

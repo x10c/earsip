@@ -5,8 +5,8 @@ Ext.require ([
 
 Ext.define ('Earsip.view.BerkasJRA', {
 	extend		: 'Ext.container.Container'
-,	alias		: 'widget.lap_berkas_jra'
-,	itemId		: 'lap_berkas_jra'
+,	alias		: 'widget.lap_berkas_jra1'
+,	itemId		: 'lap_berkas_jra1'
 ,	title		: 'Berkas JRA'
 ,	layout		: 'border'
 ,	closable	: true

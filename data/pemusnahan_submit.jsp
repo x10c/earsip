@@ -139,16 +139,17 @@ try {
 						JSONObject	obj			= berkas.getJSONObject (i);
 						String		berkas_id	= obj.getString ("berkas_id");
 
-						q +=" insert into t_pemusnahan_rinci (pemusnahan_id, berkas_id, keterangan, jml_lembar, jml_set, jml_berkas)"
+						q +=" Insert into t_pemusnahan_rinci (pemusnahan_id, berkas_id, keterangan, jml_lembar, jml_set, jml_berkas)"
 						   +" values("+ id 
 						   +" ,"+ berkas_id
 						   +" ,'" + obj.getString ("keterangan") + "'"
 						   +" ," + obj.getString ("jml_lembar")
 						   +" ," + obj.getString ("jml_set")
 						   +" ," + obj.getString ("jml_berkas") + ");";
-						q +=" update m_berkas set arsip_status_id = 2 where id = "+ berkas_id +" or pid = "+ berkas_id;
+						q +=" update m_berkas set arsip_status_id = 3 where id = "+ berkas_id +" or pid = "+ berkas_id + ";";
 					}
 				}
+				
 				db_stmt.executeUpdate (q);
 				
 				JSONArray tims     = new JSONArray (request.getParameter ("tims"));

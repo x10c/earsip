@@ -14,6 +14,8 @@ Ext.require ([
 ,	'Earsip.view.Pemusnahan'
 ,	'Earsip.view.BerkasJRA'
 ,	'Earsip.view.TransferBerkas'
+,	'Earsip.view.LapBerkasJRA'
+,	'Earsip.view.LapBerkasMusnah'
 ]);
 
 Ext.define ('Earsip.controller.MainToolbar', {

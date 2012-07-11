@@ -22,8 +22,9 @@ try {
 		q	=" SELECT	A.pemindahan_id"
 			+" ,		A.berkas_id"
 			+" ,		B.nama"
-			+" ,		B.status"
 			+" ,		B.arsip_status_id"
+			+" ,		B.jra_aktif"
+			+" ,		B.jra_inaktif"
 			+" ,		C.kode_folder"
 			+" ,		C.kode_rak"
 			+" ,		C.kode_box"
@@ -47,7 +48,8 @@ try {
 		data	+="\n{ pemindahan_id	: "+ rs.getString ("pemindahan_id")
 				+ "\n, berkas_id	: "+ rs.getString ("berkas_id")
 				+ "\n, nama	: '"+ rs.getString ("nama") + "'"
-				+ "\n, status	: "+ rs.getString ("status")
+				+ "\n, jra_aktif	:" + rs.getString ("jra_aktif")
+				+ "\n, jra_inaktif	:" + rs.getString ("jra_inaktif")
 				+ "\n, arsip_status_id	: "+ rs.getString ("arsip_status_id") 
 				+ "\n, kode_folder	: '"+ rs.getString ("kode_folder") + "'"
 				+ "\n, kode_rak	: '"+ rs.getString ("kode_rak") + "'"

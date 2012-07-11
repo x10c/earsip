@@ -29,6 +29,9 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 		,	'trans_pemusnahan #pemusnahan_grid button[action=refresh]': {
 				click : this.do_refresh
 			}
+		,	'trans_pemusnahan #pemusnahan_grid button[action=print]': {
+				click : this.do_print_pemusnahan
+			}
 		,	'trans_pemusnahan #pemusnahan_grid button[action=del]': {
 				click : this.do_delete_pemusnahan
 			}
@@ -125,6 +128,34 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 		panel.win.action = 'update';
 	}
 
+,	do_print_pemusnahan: function (button)
+	{
+		var grid = button.up ('#pemusnahan_grid');
+		var data = grid.getSelectionModel ().getSelection ();
+		if (data.length <= 0) {
+			return;
+		}
+		
+		new Ext.Window({
+			title	: 'Report Pemusnahan'
+		,	height 	: 600
+		, 	width	: 700 
+		,	movable	: true
+		,	modal	: true,
+			items: [{
+				xtype : 'component'
+			,	autoEl : {
+					tag		: 'iframe'
+				,	src		: 'data/bapemusnahanreport_submit.jsp?pemusnahan_id=' + data[0].get ('id')
+				,	height 	: '100%'
+				,	width	: '100%'
+				, 	style: 'border: 0 none'
+				}
+			}]
+		}).show();
+	}
+	
+	
 , 	do_delete_pemusnahan	: function (button)
 	{	
 		var grid = button.up ('#pemusnahan_grid');

@@ -130,6 +130,11 @@ Ext.define ('Earsip.view.Peminjaman', {
 				text		: 'Cari'
 			,	itemId		: 'search'
 			,	iconCls		: 'search'
+			},{
+				text		: 'Print'
+			,	itemId		: 'print'
+			,	iconCls		: 'print'
+			,	action		: 'print'
 			},'-',{
 				text		: 'Hapus'
 			,	itemId		: 'del'

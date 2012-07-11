@@ -134,6 +134,11 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			,	itemId		: 'refresh'
 			,	iconCls		: 'refresh'
 			,	action		: 'refresh'
+			},{
+				text		: 'Print'
+			,	itemId		: 'print'
+			,	iconCls		: 'print'
+			,	action		: 'print'
 			}]
 		}]
 	},{

@@ -30,8 +30,8 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		,	'trans_pemindahan #pemindahan_grid button[action=refresh]': {
 				click : this.do_refresh_pemindahan
 			}
-		,	'notif_pemindahan #berkas_pindah_grid button[action=refresh]': {
-				click : this.do_refresh_pemindahanrinci
+		,	'trans_pemindahan #berkas_pindah_grid button[action=print]': {
+				click : this.do_print_berkas_pindah
 			}
 		,	'trans_pemindahan #pemindahan_grid button[action=del]': {
 				click : this.do_delete_pemindahan
@@ -173,18 +173,39 @@ Ext.define ('Earsip.controller.Pemindahan', {
 		store.sync ();
 	}
 
-,	do_refresh_pemindahanrinci : function (button)
+,	do_print_berkas_pindah: function (button)
 	{
-		if (idc < 1) return;
+		var grid_pemindahan = this.getTrans_pemindahan ().down ('#pemindahan_grid');
 		var grid = button.up ('#berkas_pindah_grid');
-		grid.params = {
-			pemindahan_id : idc
+		var data = grid_pemindahan.getSelectionModel ().getSelection ();
+		if (data.length <= 0) {
+			return;
 		}
-		grid.getStore ().load ({
-			params	: grid.params
-		});
+		
+		if (grid.getStore ().getRange ().length <=0) {
+			return;
+		}
+		
+		
+		
+		new Ext.Window({
+			title	: 'Report Pemindahan'
+		,	height 	: 600
+		, 	width	: 700 
+		,	movable	: true
+		,	modal	: true,
+			items: [{
+				xtype : 'component'
+			,	autoEl : {
+					tag		: 'iframe'
+				,	src		: 'data/listberkaspindahreport_submit.jsp?pemindahan_id=' + data[0].get ('id')
+				,	height 	: '100%'
+				,	width	: '100%'
+				, 	style	: 'border: 0 none'
+				}
+			}]
+		}).show();
 	}
-
 ,	do_pemindahan_submit: function (button)
 	{
 		var grid	= this.getTrans_pemindahan ().down ('#pemindahan_grid');

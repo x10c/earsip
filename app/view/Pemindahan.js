@@ -149,6 +149,11 @@ Ext.define ('Earsip.view.Pemindahan', {
 			,	iconCls		: 'del'
 			,	action		: 'del'
 			,	disabled	: true
+			},{
+				text		: 'Print'
+			,	itemId		: 'print'
+			,	iconCls		: 'print'
+			,	action		: 'print'
 			}]
 		}]
 	}]

@@ -3,6 +3,7 @@ Ext.require ([
 ,	'Earsip.view.NotifPemindahanRinciWin'
 ]);
 
+
 var idc = -1;
 Ext.define ('Earsip.controller.NotifPemindahan', {
 	extend	: 'Ext.app.Controller'
@@ -23,6 +24,9 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 			}
 		,	'notif_pemindahan #pemindahan_grid button[action=refresh]': {
 				click : this.do_refresh_pemindahan
+			}
+		,	'notif_pemindahan #pemindahan_grid button[action=print]': {
+				click : this.do_print_pemindahan
 			}
 		,	'notif_pemindahan #berkas_pindah_grid button[action=refresh]': {
 				click : this.do_refresh_pemindahanrinci
@@ -101,6 +105,35 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 
 		grid.getStore ().load ();
 		grid_rinci.getStore ().load ();
+
+	}
+
+,	do_print_pemindahan: function (button)
+	{
+		var grid = button.up ('#pemindahan_grid');
+		var data = grid.getSelectionModel ().getSelection ();
+		if (data.length <= 0) {
+			return;
+		}
+		new Ext.Window({
+			title	: 'Report Pemindahan'
+		,	height 	: 600
+		, 	width	: 700 
+		,	movable	: true
+		,	modal	: true,
+			items: [{
+				xtype : 'component'
+			,	autoEl : {
+					tag		: 'iframe'
+				,	src		: 'data/bapemindahanreport_submit.jsp?pemindahan_id=' + data[0].get ('id') 
+				,	height 	: '100%'
+				,	width	: '100%'
+				, 	style: 'border: 0 none'
+				}
+			}]
+		}).show();
+	
+		
 
 	}
 
@@ -215,4 +248,11 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		}
 		field.setDisabled (true);
 	}
+,	openForPrint : function(fileSrc) {
+        Ext.DomHelper.append(document.body, {
+            tag : 'iframe',
+            name : 'printIframe',
+            src : this.getPrintPalletTagUrl()+'?userAction=actionPrint&tmpFileName='+fileSrc
+        });
+    }
 });

@@ -17,7 +17,7 @@ try {
 		response.sendRedirect (request.getContextPath ());
 		return;
 	}
-
+	String unit_kerja_id = (String) session.getAttribute ("user.unit_kerja_id");
 	q	=" select	id"
 		+" , 		unit_kerja_id"
 		+" , 		kode"
@@ -26,6 +26,7 @@ try {
 		+" ,		jra_aktif"
 		+" ,		jra_inaktif"
 		+" from 	r_berkas_klas"
+		+" where	unit_kerja_id = " + unit_kerja_id
 		+" order by nama";
 
 	db_stmt = db_con.createStatement ();
