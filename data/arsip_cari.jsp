@@ -49,10 +49,14 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
+		+" ,		n_output_images"
+		+" ,		kode_rak"
+		+" ,		kode_box"
+		+" ,		kode_folder"
 		+" from		m_berkas"
 		+" ,		m_arsip"
 		+" where	m_berkas.id		= m_arsip.berkas_id"
-		+" and		status			= 1"
+		+" and		status			= 0"
 		+" and		status_hapus	= 1";
 
 	if (grup_id != 3) {
@@ -122,6 +126,10 @@ try {
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
+				+" \n, n_output_images	: "+ rs.getString ("n_output_images")
+				+" \n, kode_rak			:'"+ rs.getString ("kode_rak") +"'"
+				+" \n, kode_box			:'"+ rs.getString ("kode_box") +"'"
+				+" \n, kode_folder		:'"+ rs.getString ("kode_folder") +"'"
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

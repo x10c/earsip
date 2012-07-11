@@ -34,6 +34,7 @@ Ext.define ('Earsip.controller.Jabatan', {
 		var grid	= button.up ('#ref_jabatan');
 		var editor	= grid.getPlugin ('roweditor');
 
+		editor.action = 'add';
 		editor.cancelEdit ();
 		var r = Ext.create ('Earsip.model.Jabatan', {
 				id			: 0

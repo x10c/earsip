@@ -255,6 +255,7 @@ try {
 			+" ,		status"
 			+" ,		status_hapus"
 			+" ,		akses_berbagi_id"
+			+" ,		n_output_images"
 			+" from		m_berkas"
 			+" where	pid				= "+ id
 			+" and		status_hapus	= 1";
@@ -289,6 +290,7 @@ try {
 					+ "\n, status        : "+ rs.getString ("status")
 					+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 					+ "\n, akses_berbagi_id	: "+ rs.getString ("akses_berbagi_id")
+					+ "\n, n_output_images	: "+ rs.getString ("n_output_images")
 					+ "\n, kode_rak			: '"+ kode_rak +"'"
 					+ "\n, kode_box			: '"+ kode_box +"'"
 					+ "\n, kode_folder		: '"+ kode_folder +"'"

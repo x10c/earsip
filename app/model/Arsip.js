@@ -1,4 +1,4 @@
-Ext.define ('Earsip.model.Berkas', {
+Ext.define ('Earsip.model.Arsip', {
 	extend		: 'Ext.data.Model'
 ,	idProperty	: 'id'
 ,	fields		: [
@@ -24,5 +24,8 @@ Ext.define ('Earsip.model.Berkas', {
 	,	'status_hapus'
 	,	'akses_berbagi_id'
 	,	'n_output_images'
+	,	'kode_box'
+	,	'kode_rak'
+	,	'kode_folder'
 	]
 });

@@ -25,7 +25,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	anchor			: '100%'
 			,	selectOnFocus	: true
 			,	labelAlign		: 'right'
-			,	editable		: false
+			,	readOnly		: true
 			}
 		,	items			: [{
 				itemId			: 'id'
@@ -53,7 +53,6 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	store			: Ext.getStore ('KlasArsip')
 			,	displayField	: 'nama'
 			,	valueField		: 'id'
-			,	editable		: false
 			,	triggerAction	: 'all'
 			},{
 				xtype			: 'combo'
@@ -70,16 +69,19 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	itemId			: 'kode_rak'
 			,	name			: 'kode_rak'
 			,	editable		: true
+			,	readOnly		: false
 			},{
 				fieldLabel		: 'Kode Box'
 			,	itemId			: 'kode_box'
 			,	name			: 'kode_box'
 			,	editable		: true
+			,	readOnly		: false
 			},{
 				fieldLabel		: 'Kode Folder'
 			,	itemId			: 'kode_folder'
 			,	name			: 'kode_folder'
 			,	editable		: true
+			,	readOnly		: false
 			}]
 		},{
 			xtype		: 'container'
@@ -91,6 +93,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	selectOnFocus	: true
 			,	labelAlign		: 'right'
 			,	editable		: false
+			,	readOnly		: true
 			}
 		,	items		: [{
 				fieldLabel		: 'Nomor'
