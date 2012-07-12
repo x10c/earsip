@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="peminjaman" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="66"/>
 	<parameter name="peminjaman_id" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT 		B.nama as unit_kerja_peminjam_nama
@@ -210,7 +210,7 @@ WHERE		A.id = $P{peminjaman_id}::integer]]>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="233" y="0" width="128" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
@@ -221,7 +221,7 @@ WHERE		A.id = $P{peminjaman_id}::integer]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{judul}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="57" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
@@ -232,7 +232,7 @@ WHERE		A.id = $P{peminjaman_id}::integer]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="57" y="0" width="176" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
@@ -243,7 +243,7 @@ WHERE		A.id = $P{peminjaman_id}::integer]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{berkas_nama}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="361" y="0" width="211" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>

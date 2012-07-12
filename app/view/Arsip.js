@@ -33,8 +33,11 @@ Ext.define ('Earsip.view.Arsip', {
 ,	listeners	: {
 		activate	: function (comp)
 		{
+			
+				
 			var tree = this.down ('arsiptree');
 			tree.do_load_tree ();
+			tree.do_config_label ();
 		}
 	}
 });

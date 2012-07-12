@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="label" printOrder="Horizontal" pageWidth="432" pageHeight="576" whenNoDataType="AllSectionsNoDetail" columnWidth="392" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="div_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer (0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cabang" class="java.lang.String">
+		<defaultValueExpression><![CDATA["BANK JATENG KANTOR PUSAT"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\earsip\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="kode_rak" class="java.lang.String">
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="extra_query" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(!$P{kode_rak}.toString().equals ("0") ? "AND kode_rak='" +$P{kode_rak}+"'" : "")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="kode_box" class="java.lang.String">
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="extra_query2" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(!$P{kode_rak}.toString().equals ("0") && !$P{kode_box}.toString().equals ("0") ?
+"AND kode_box='" +$P{kode_box}+"'" : "")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 	DISTINCT
+       C.kode_rak
+,      C.kode_box
+,      B.nama
+FROM	m_berkas A
+LEFT 	JOIN m_unit_kerja B ON A.unit_kerja_id = B.id
+RIGHT 	JOIN m_arsip C ON A.id = C.berkas_id
+WHERE  A.unit_kerja_id = $P!{div_id}
+$P!{extra_query}
+$P!{extra_query2}]]>
+	</queryString>
+	<field name="kode_rak" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kode_box" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="init_query" class="java.lang.String">
+		<initialValueExpression><![CDATA["SELECT 	DISTINCT " +
+"       C.kode_rak " +
+",      C.kode_box " +
+",      B.nama " +
+"FROM	m_berkas A " +
+"LEFT 	JOIN m_unit_kerja B ON A.unit_kerja_id = B.id " +
+"RIGHT 	JOIN m_arsip C ON A.id = C.berkas_id " +
+"WHERE  A.unit_kerja_id = $P!{div_id} "]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="405" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="359" width="392" height="45"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cabang}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="104" height="31"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KODE RAK]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="31" width="104" height="40"/>
+				<box>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="28" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_rak}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="0" width="184" height="71"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="0" y="71" width="392" height="288"/>
+				<box>
+					<leftPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<subreport>
+					<reportElement x="0" y="2" width="392" height="286"/>
+					<subreportParameter name="div_id">
+						<subreportParameterExpression><![CDATA[$P{div_id}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="kode_rak">
+						<subreportParameterExpression><![CDATA[$F{kode_rak}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="kode_box">
+						<subreportParameterExpression><![CDATA[$F{kode_box}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "label_subreport1.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+			<textField>
+				<reportElement x="288" y="31" width="104" height="40"/>
+				<box>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="28" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_box}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="288" y="0" width="104" height="31"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KODE BOX]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -3,6 +3,7 @@ Ext.Loader.setConfig ({ enabled: true });
 Ext.define ('Earsip', {
 	singleton		: true
 ,	username		: ''
+,	is_p_arsip		: false
 ,	repo_path		: ''
 ,	acl				: 0
 ,	berkas			: {
@@ -297,6 +298,7 @@ Ext.application ({
 			tree.do_load_tree ();
 			var tabpanel = mainview.down ('#content_tab');
 			if (is_pusatarsip == 1){
+				Earsip.is_p_arsip = true;
 				if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
 					tabpanel.add ({
 						xtype	: 'notif_pemindahan'
@@ -305,6 +307,7 @@ Ext.application ({
 				} 
 			}else {
 				tabpanel.remove ('notif_pemindahan');		
+
 			}
 		} else {
 			win.show ();

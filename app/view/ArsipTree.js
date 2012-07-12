@@ -13,8 +13,12 @@ Ext.define ('Earsip.view.ArsipTree', {
 	,	items		: [{
 			itemId		: 'refresh'
 		,	iconCls		: 'refresh'
-		},'-'
-		]
+		},'-','->',{
+			xtype	: 'button'
+		,	text	: 'Cetak Label'
+		,	itemId	: 'label'
+		,	iconCls	: 'print'
+		}]
 	}]
 
 ,	initComponent	: function()
@@ -53,5 +57,11 @@ Ext.define ('Earsip.view.ArsipTree', {
 				Ext.msg.error ('Server error: data arsip tidak dapat diambil!');
 			}
 		});
+	}
+,	do_config_label : function ()
+	{	
+		var tb = this.down ('toolbar');
+		tb.down ('#label').setDisabled (true);
+		
 	}
 });

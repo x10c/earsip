@@ -32,7 +32,7 @@ GROUP BY	D.nama]]>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="66" y="0" width="141" height="20"/>
+				<reportElement x="66" y="0" width="506" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>

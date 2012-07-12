@@ -22,6 +22,9 @@ Ext.define ('Earsip.controller.Arsip', {
 		,	'arsiptree button[itemId=refresh]': {
 				click : this.tree_do_refresh
 			}
+		,	'arsiptree button[itemId=label]': {
+				click : this.do_print_label
+			}
 		,	'arsiplist': {
 				itemdblclick : this.list_itemdblclick
 			,	selectionchange : this.list_selectionchange
@@ -43,8 +46,34 @@ Ext.define ('Earsip.controller.Arsip', {
 		this.getArsiptree ().do_load_tree ();
 	}
 
+,	do_print_label : function (button)
+	{
+		
+		new Ext.Window({
+			title	: 'Cetak Label'
+		,	height 	: 600
+		, 	width	: 700 
+		,	movable	: true
+		,	modal	: true,
+			items: [{
+				xtype : 'component'
+			,	autoEl : {
+					tag		: 'iframe'
+				,	src		: 'data/lapcetaklabel_submit.jsp?' +
+							  'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
+							  'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
+							  'kode_box=' + Earsip.arsip.tree.kode_box
+				,	height 	: '100%'
+				,	width	: '100%'
+				, 	style: 'border: 0 none'
+				}
+			}]
+		}).show();
+	}
+	
 ,	tree_selectionchange : function (tree, records)
 	{
+		var tb = this.getArsiptree ().down ('toolbar');
 		if (records.length <= 0) {
 			return;
 		}
@@ -63,7 +92,14 @@ Ext.define ('Earsip.controller.Arsip', {
 			Earsip.arsip.pid			= 0;
 			Earsip.arsip.tree.pid		= 0;
 		}
-
+		
+		tb.down ('#label').setDisabled(
+			!(Earsip.is_p_arsip 
+			&& 
+			(Earsip.arsip.tree.type != 'root'
+			&&
+			Earsip.arsip.tree.type != 'folder'))
+		)
 		this.getArsiplist ().do_load_list ();
 	}
 

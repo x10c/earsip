@@ -142,7 +142,7 @@ AND C.tgl <= '$P!{sebelum_tgl}']]>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="126" height="20"/>
 				<box leftPadding="15"/>
 				<textElement>
@@ -150,7 +150,7 @@ AND C.tgl <= '$P!{sebelum_tgl}']]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="126" y="0" width="85" height="20"/>
 				<box leftPadding="0"/>
 				<textElement textAlignment="Center">
@@ -158,7 +158,7 @@ AND C.tgl <= '$P!{sebelum_tgl}']]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_unit} + " " + $F{kode_klas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="211" y="0" width="123" height="20"/>
 				<box leftPadding="15"/>
 				<textElement>
@@ -166,7 +166,7 @@ AND C.tgl <= '$P!{sebelum_tgl}']]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{judul}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd MMMMM yyyy">
+			<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy">
 				<reportElement x="334" y="0" width="89" height="20"/>
 				<box leftPadding="15"/>
 				<textElement>
@@ -174,7 +174,7 @@ AND C.tgl <= '$P!{sebelum_tgl}']]>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{tgl}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="423" y="0" width="149" height="20"/>
 				<box leftPadding="15"/>
 				<textElement>
