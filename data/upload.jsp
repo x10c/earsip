@@ -73,6 +73,7 @@ try {
 	Iterator			itr		= items.iterator ();
 
 	File		file		= null;
+	File[]		outs		= {};
 	FileItem	item		= null;
 	FileItem	item_up		= null;
 	String		k			= null;
@@ -151,9 +152,8 @@ try {
 			out.print ("{success:false,message:'"+ exec_stat +":"+ errmsg +"'}");
 			return;
 		}
+		outs = f_user_dir.listFiles ((FileFilter) new WildcardFileFilter (sha +"_*.png"));
 	}
-
-	File[] outs = f_user_dir.listFiles ((FileFilter) new WildcardFileFilter (sha +"_*.png"));
 
 	/* save file attribute to database */
 	q	=" insert into m_berkas ("

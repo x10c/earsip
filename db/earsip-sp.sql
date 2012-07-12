@@ -33,7 +33,7 @@ begin
 	end if;
 
 	select	pid
-	,	nama
+	,		nama
 	into	_id, _nama
 	from	m_berkas
 	where	id = _berkas_id;

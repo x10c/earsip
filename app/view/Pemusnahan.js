@@ -132,7 +132,7 @@ Ext.define ('Earsip.view.Pemusnahan', {
 			xtype	: 'grid'
 		,	itemId	: 'berkas_musnah_grid'
 		,	alias	: 'widget.berkas_musnah_grid'
-		,	title	: 'List Berkas'
+		,	title	: 'Daftar Berkas'
 		,	store	: 'PemusnahanRinci'
 		,	plugins	: [
 				Ext.create ('Earsip.plugin.RowEditor')

@@ -3,14 +3,14 @@ Ext.require ([
 ]);
 
 Ext.define ('Earsip.view.LapBerkasJRA', {
-	extend 	: 'Ext.grid.Panel'
-,	alias	: 'widget.lap_berkas_jra'
-,	itemId	: 'lap_berkas_jra'
-,	title	: 'Laporan Berkas JRA'
-,	closable: true
-,	title			: 'Daftar Berkas JRA'
-,	store			: 'LapBerkasJRA'
-,	columns			: [{
+	extend 		: 'Ext.grid.Panel'
+,	alias		: 'widget.lap_berkas_jra'
+,	itemId		: 'lap_berkas_jra'
+,	title		: 'Laporan Berkas JRA'
+,	closable	: true
+,	title		: 'Daftar Berkas JRA'
+,	store		: 'LapBerkasJRA'
+,	columns		: [{
 		xtype		: 'rownumberer'
 	},{
 		text		: 'Nama Berkas'
@@ -48,6 +48,10 @@ Ext.define ('Earsip.view.LapBerkasJRA', {
 		,	itemId		: 'print'
 		,	iconCls		: 'print'
 		,	action		: 'print'
+		},{
+			text		: 'Refresh'
+		,	itemId		: 'refresh'
+		,	iconCls		: 'refresh'
 		}]
 	}]
 	

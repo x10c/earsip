@@ -20,19 +20,19 @@ try {
 	String user_id = (String) session.getAttribute ("user.id");
 
 	q   =" 	SELECT 	id"
-		+"	,	coalesce (tgl_dibuat,tgl_unggah) as tgl_dibuat"
-	    +"	,	nama"
-	    +"	, 	date_part('year',age (tgl_dibuat)) AS tahun"
-	    +"	, 	date_part('month',age (tgl_dibuat)) AS bulan"
-	    +"	, 	date_part('day',age (tgl_dibuat)) AS hari"
-	    +"	,	jra_aktif"
-	    +"	, 	get_berkas_path (pid) as lokasi"
-	    +"	FROM 	m_berkas"
-	    +"	WHERE 	date_part ('years',age (tgl_dibuat)) >= jra_aktif"
-	    +"	AND 	status = 1"
-	    +"	AND 	status_hapus  = 1"
-	    +"	AND 	pegawai_id   = " + user_id
-	    +"	ORDER BY tgl_dibuat ASC";
+		+"	,		coalesce (tgl_dibuat,tgl_unggah)	AS tgl_dibuat"
+		+"	,		nama"
+		+"	,	 	date_part('year',age (tgl_dibuat))	AS tahun"
+		+"	,		date_part('month',age (tgl_dibuat))	AS bulan"
+		+"	,		date_part('day',age (tgl_dibuat))	AS hari"
+		+"	,		jra_aktif"
+		+"	,		get_berkas_path (id) as lokasi"
+		+"	FROM 	m_berkas"
+		+"	WHERE 	date_part ('years',age (tgl_dibuat)) >= jra_aktif"
+		+"	AND 	status = 1"
+		+"	AND 	status_hapus  = 1"
+		+"	AND 	pegawai_id   = " + user_id
+		+"	ORDER BY tgl_dibuat ASC";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -44,8 +44,8 @@ try {
 			i++;
 		}
 		data	+="\n{ id			 : "+ rs.getString ("id")
-				+ "\n, tgl_dibuat    : '"+ rs.getString ("tgl_dibuat") + "'"
-				+ "\n, nama          : '"+ rs.getString ("nama") + "'"
+				+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") + "'"
+				+ "\n, nama          :'"+ rs.getString ("nama") + "'"
 				+ "\n, tahun	     : "+ rs.getString ("tahun")
 				+ "\n, bulan         : "+ rs.getString ("bulan")
 				+ "\n, hari    		 : "+ rs.getString ("hari")

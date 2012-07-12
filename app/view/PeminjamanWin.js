@@ -204,15 +204,16 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	
 ,	load : function (record)
 	{
-		var grid = this.down ('#peminjaman_rinci');
-		var form = this.down ('form');
+		var grid	= this.down ('#peminjaman_rinci');
+		var form	= this.down ('form');
+		var store	= Ext.data.StoreManager.lookup ('BerkasPinjam');
 		
-		Ext.data.StoreManager.lookup ('BerkasPinjam').load ({
+		store.load ({
 			scope	: this
 		,	callback: function (r, op, success)
 			{
 				if (success) {
-					form.loadRecord (record);
+					form.loadRecord (r);
 					grid.getStore ().load ({
 						params	: {
 							peminjaman_id  : form.getRecord ().get ('id')
@@ -221,6 +222,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				}
 			}
 		});
-		Ext.data.StoreManager.lookup ('BerkasPinjam').clearFilter ();
+		store.clearFilter ();
 	}
 });
