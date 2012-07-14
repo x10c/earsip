@@ -2,6 +2,7 @@ Ext.require ([
 	'Earsip.view.MainToolbar'
 ,	'Earsip.view.Berkas'
 ,	'Earsip.view.BerkasBerbagi'
+,	'Earsip.view.Notifikasi'
 ]);
 
 Ext.define ('Earsip.view.Main', {
@@ -35,7 +36,17 @@ Ext.define ('Earsip.view.Main', {
 				xtype	: 'berkas'
 			},{
 				xtype	: 'berkasberbagi'
+			},{ 
+				xtype	: 'notifikasi'
 			}]
+		,	do_remove_closable_tab : function (){
+				var len = this.items.length;
+				this.suspendLayout = true
+				for (var i = len-1; i > 2; i--) {
+					this.remove (this.getComponent (i));
+				}
+				this.suspendLayout = false
+			}
 		}]
 	}]
 ,	initComponent	: function ()
@@ -78,4 +89,5 @@ Ext.define ('Earsip.view.Main', {
 			}
 		});
 	}
+
 });

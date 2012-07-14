@@ -49,8 +49,8 @@ Ext.define ('Earsip.view.AdmSistem', {
 
 ,	listeners		: {
 		activate		: function (comp)
-		{
-			this.do_load ();
+		{	
+			
 
 			var b_save = this.down ('#save');
 
@@ -64,7 +64,12 @@ Ext.define ('Earsip.view.AdmSistem', {
 		{
 			this.destroy ();
 		}
+	,	afterrender : function (comp)
+		{
+			this.do_load ();
+		}
 	}
+	
 
 ,	do_load : function ()
 	{

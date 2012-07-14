@@ -18,7 +18,6 @@ Ext.define ('Earsip.view.Peminjaman', {
 	}
 ,	items			: [{
 		xtype			: 'grid'
-	,	id				: 'peminjaman_grid'
 	,	alias			: 'widget.peminjaman_grid'
 	,	itemId			: 'peminjaman_grid'
 	,	title			: 'Daftar Peminjaman'

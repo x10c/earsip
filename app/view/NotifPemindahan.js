@@ -19,7 +19,6 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 ,	items	:[{
 		xtype			: 'grid'
 	,	alias			: 'widget.pemindahan_grid'
-	,	id				: 'pemindahan_grid'
 	,	itemId			: 'pemindahan_grid'
 	,	title			: 'Notifikasi Pemindahan'
 	,	store			: 'Pemindahan'
@@ -28,26 +27,20 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 	,	plugins		: [
 			Ext.create ('Earsip.plugin.RowEditor')
 		]
-
-	,	columns			: [
-			Ext.create ('Ext.grid.RowNumberer')
-		,{
+	,	columns			: [{
+			xtype		: 'rownumberer'
+		},{
 			text		: 'ID'
 		,	dataIndex	: 'id'
 		, 	hidden		: true
 		, 	hideable	: false
-		,	editor		: {
-				xtype		: 'textfield'
-			}
 		},{
 			text		: 'Unit Kerja'
 		,	dataIndex	: 'unit_kerja_id'
 		,	flex		: 0.5
 		,	editor		: {
 				xtype			: 'combo'
-			,	store			: Ext.create ('Earsip.store.UnitKerja', {
-					autoLoad		: true
-				})
+			,	store			: Ext.getStore ('UnitKerja')
 			,	displayField	: 'nama'
 			,	valueField		: 'id'
 			,	mode			: 'local'
@@ -143,7 +136,6 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 		}]
 	},{
 		xtype			: 'grid'
-	,	id				: 'berkas_pindah_grid'
 	,	alias			: 'widget.berkas_pindah_grid'
 	,	itemId			: 'berkas_pindah_grid'
 	,	title			: 'Daftar Berkas'
@@ -245,9 +237,6 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			grid.getStore ().load ();
 			
 		}
-		,	removed			: function (comp)
-		{
-			this.destroy ();
-		}
+		
 	}
 });

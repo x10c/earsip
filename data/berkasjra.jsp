@@ -18,7 +18,19 @@ try {
 	}
 
 	String user_id = (String) session.getAttribute ("user.id");
-
+	String grup_id = (String) session.getAttribute ("user.grup_id");
+	String jra_query_text = "";
+	String status	= "";
+	
+	if (grup_id.equals ("3")) {
+		jra_query_text = "jra_inaktif";
+		status = "0";
+	}
+	else {
+		jra_query_text = "jra_aktif";
+		status = "1";
+	}
+	
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		tipe_file"
@@ -41,13 +53,17 @@ try {
 		+" ,		akses_berbagi_id"
 		+" ,		age (tgl_dibuat) as usia"
 		+" ,		get_berkas_path (pid) as lokasi"
+		+" ,		dateadd ('year'," + jra_query_text + ",tgl_dibuat) as tgl_jra"
 		+" from		m_berkas"
-		+" where	pegawai_id		= "+ user_id
-		+" and		status			= 1"
+		+" where	status			= "+ status
 		+" and		status_hapus	= 1"
-		+" and		date_part('years', age (tgl_dibuat)) >= jra_aktif"
-		+" order by tipe_file, nama";
-
+		+" and		arsip_status_id in (0,1)"
+		+" and		datediff('month', current_date, dateadd ('year'," + jra_query_text + ",tgl_dibuat)) <= 3"; // 3 months difference between berkas current age and berkas tgl_jra
+		if (!grup_id.equals ("3")) 
+			q +=" and pegawai_id = " + user_id;
+		q +=" order by tipe_file, nama";
+	
+	
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
 
@@ -79,6 +95,7 @@ try {
 				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
 				+" \n, usia             : '"+ rs.getString ("usia") +"'"
 				+" \n, lokasi           : '"+ rs.getString ("lokasi") +"'"
+				+" \n, tgl_jra           : '"+ rs.getString ("tgl_jra") +"'"
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

@@ -49,7 +49,7 @@ Ext.define ('Earsip.view.BerkasTree', {
 
 					sm.deselectAll ();
 					this.expandAll ();
-					sm.select (node);
+					if (node != null) sm.select (node);
 				} else {
 					Ext.msg.error (o.info);
 				}

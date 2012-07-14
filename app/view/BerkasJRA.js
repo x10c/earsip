@@ -4,12 +4,11 @@ Ext.require ([
 ]);
 
 Ext.define ('Earsip.view.BerkasJRA', {
-	extend		: 'Ext.container.Container'
-,	alias		: 'widget.lap_berkas_jra1'
-,	itemId		: 'lap_berkas_jra1'
-,	title		: 'Berkas JRA'
+	extend		: 'Ext.panel.Panel'
+,	alias		: 'widget.berkas_jra'
+,	itemId		: 'berkas_jra'
+,	title		: 'Notifikasi Berkas JRA'
 ,	layout		: 'border'
-,	closable	: true
 ,	items		: [{
 		xtype		: 'berkas_jra_list'
 	,	region		: 'center'
@@ -20,5 +19,8 @@ Ext.define ('Earsip.view.BerkasJRA', {
 	,	split		: true
 	,	collapsible	: true
 	,	header		: false
+	,	defaults	: {
+			readOnly	: true
+		}
 	}]
 });

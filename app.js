@@ -187,6 +187,7 @@ Ext.application ({
 	,	'BerkasJRA'
 	,	'LapBerkasJRA'
 	,	'LapBerkasMusnah'
+	,	'NotifPeminjaman'
 	]
 ,	views		: [
 		'Main'
@@ -243,6 +244,8 @@ Ext.application ({
 	,	'TransferBerkas'
 	,	'LapBerkasJRA'
 	,	'LapBerkasMusnah'
+	,	'Notifikasi'
+	,	'NotifikasiPeminjaman'
 	]
 ,	controllers	: [
 		'Login'
@@ -297,18 +300,15 @@ Ext.application ({
 			tb.do_load_menu ();
 			tree.do_load_tree ();
 			var tabpanel = mainview.down ('#content_tab');
+			
 			if (is_pusatarsip == 1){
 				Earsip.is_p_arsip = true;
-				if (tabpanel.getComponent ('notif_pemindahan') == undefined) {
-					tabpanel.add ({
-						xtype	: 'notif_pemindahan'
-					}); 
-					tabpanel.setActiveTab ('notif_pemindahan');
-				} 
 			}else {
-				tabpanel.remove ('notif_pemindahan');		
-
+				Earsip.is_p_arsip = false;
 			}
+			
+			var notif	= tabpanel.down ('#notifikasi');
+			notif.do_load_items ();
 		} else {
 			win.show ();
 		}

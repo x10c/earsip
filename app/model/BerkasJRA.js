@@ -23,6 +23,7 @@ Ext.define ('Earsip.model.BerkasJRA', {
 	,	'akses_berbagi_id'
 	,	'usia'
 	,	'lokasi'
+	,	'tgl_jra'
 	]
 ,	idProperty	: 'id'
 });

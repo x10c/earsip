@@ -21,7 +21,6 @@ Ext.define ('Earsip.view.Pemindahan', {
 ,	items	:[{
 		xtype			: 'grid'
 	,	alias			: 'widget.pemindahan_grid'
-	,	id				: 'pemindahan_grid'
 	,	itemId			: 'pemindahan_grid'
 	,	title			: 'Daftar Pemindahan'
 	,	store			: 'Pemindahan'
@@ -115,7 +114,6 @@ Ext.define ('Earsip.view.Pemindahan', {
 		}]
 	},{
 		xtype			: 'grid'
-	,	id				: 'berkas_pindah_grid'
 	,	alias			: 'widget.berkas_pindah_grid'
 	,	itemId			: 'berkas_pindah_grid'
 	,	title			: 'Daftar Berkas'

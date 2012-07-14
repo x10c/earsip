@@ -23,6 +23,12 @@ Ext.define ('Earsip.view.BerkasJRAList', {
 			}
 		}
 	},{
+		text		: 'Tanggal JRA'
+	,	width		: 100
+	,	dataIndex	: 'tgl_jra'
+	,	renderer	: function(v)
+		{return Ext.util.Format.date(v,'Y-m-d');}
+	},{
 		text		: 'Usia'
 	,	width		: 150
 	,	dataIndex	: 'usia'
