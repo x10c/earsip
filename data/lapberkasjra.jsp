@@ -57,8 +57,8 @@ try {
 			i++;
 		}
 		data	+="\n{ id			 : "+ rs.getString ("id")
-				+ "\n, tgl_dibuat    : '"+ rs.getString ("tgl_dibuat") + "'"
-				+ "\n, nama          : '"+ rs.getString ("nama") + "'"
+				+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") + "'"
+				+ "\n, nama          :'"+ rs.getString ("nama") + "'"
 				+ "\n, tahun	     : "+ rs.getString ("tahun")
 				+ "\n, bulan         : "+ rs.getString ("bulan")
 				+ "\n, hari    		 : "+ rs.getString ("hari")

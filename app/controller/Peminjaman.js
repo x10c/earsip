@@ -195,8 +195,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		grid.getStore ().insert (0, r);
 		editor.action = 'add';
 		editor.startEdit (0, 0);
-		Ext.data.StoreManager.lookup ('BerkasPinjam').filter ('arsip_status_id',0);
-		
+//		Ext.data.StoreManager.lookup ('BerkasPinjam').filter ('arsip_status_id',0);
 	}
 	
 , 	do_delete_berkas	: function (button)

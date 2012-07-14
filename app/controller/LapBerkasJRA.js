@@ -8,8 +8,11 @@ Ext.define ('Earsip.controller.LapBerkasJRA', {
 	{
 		this.control ({
 				'lap_berkas_jra button[action=print]': {
-				click : this.do_print_berkas_jra
-			}
+					click : this.do_print_berkas_jra
+				}
+			,	'lap_berkas_jra button[itemId=refresh]': {
+					click : this.do_refresh
+				}
 		})
 	}
 
@@ -37,5 +40,11 @@ Ext.define ('Earsip.controller.LapBerkasJRA', {
 				}
 			}]
 		}).show();
+	}
+
+,	do_refresh : function (b)
+	{
+		var p = this.getLap_berkas_jra ();
+		p.getStore ().load ();
 	}
 });

@@ -193,14 +193,6 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 				xtype		: 'textfield'
 			}
 		},{
-			text		: 'Kode Folder'
-		,	dataIndex	: 'kode_folder'
-		,	flex		: 1
-		,	editor		: {
-				xtype		: 'textfield'
-			,	allowBlank	: false
-			}
-		},{
 			text		: 'Kode Rak'
 		,	dataIndex	: 'kode_rak'
 		,	flex		: 1
@@ -216,6 +208,15 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 				xtype		: 'textfield'
 			,	allowBlank	: false
 			}
+		},{
+			text		: 'Kode Folder'
+		,	dataIndex	: 'kode_folder'
+		,	flex		: 1
+		,	editor		: {
+				xtype		: 'textfield'
+			,	allowBlank	: false
+			}
+
 		}]
 	,	dockedItems	: [{
 			xtype		: 'toolbar'

@@ -39,11 +39,12 @@ Ext.define('Earsip.view.PemusnahanWin', {
 			,	bodyPadding	: 5	
 			,	layout		: 'anchor'
 			,	region		: 'center'
-			,	anchor		: '50%'
 			,	defaults	: {
-					xtype	: 'textfield'
-				,	anchor	: '100%'
-			}
+					xtype		: 'textfield'
+				,	anchor		: '100%'
+				,	labelWidth	: 200
+				,	labelAlign	: 'right'
+				}
 			,	items		: [{
 					hidden			: true
 				,	itemId			: 'id'
@@ -147,7 +148,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				xtype	: 'grid'
 			,	itemId	: 'berkas_musnah_grid'
 			,	alias	: 'widget.berkas_musnah_grid'
-			,	title	: 'List Berkas'
+			,	title	: 'Daftar Berkas'
 			,	height	: 200
 			,	store	: 'PemusnahanRinci'
 			,	plugins	: [

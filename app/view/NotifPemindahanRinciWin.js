@@ -48,10 +48,6 @@ Ext.define('Earsip.view.NotifPemindahanRinciWin', {
 		,	name			: 'arsip_status_id'
 		, 	hidden			: true
 		},{
-			fieldLabel		: 'Kode Folder'
-		,	itemId			: 'kode_folder'
-		,	name			: 'kode_folder'
-		},{
 			fieldLabel		: 'Kode Rak'
 		,	itemId			: 'kode_rak'
 		,	name			: 'kode_rak'
@@ -60,7 +56,10 @@ Ext.define('Earsip.view.NotifPemindahanRinciWin', {
 			fieldLabel		: 'Kode Box'
 		,	itemId			: 'kode_box'
 		,	name			: 'kode_box'
-
+		},{
+			fieldLabel		: 'Kode Folder'
+		,	itemId			: 'kode_folder'
+		,	name			: 'kode_folder'
 		}]
 	}]
 ,	buttons			: [{
