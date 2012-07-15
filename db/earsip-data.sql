@@ -31,6 +31,7 @@ INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (33, 30, 'module', 'tr
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (34, 30, 'module', 'trans_transfer_berkas', 'Transfer berkas');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (40,  0,    'doc', 'lap', 'Laporan');
 INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (41, 40, 'module', 'lap_berkas_jra', 'Berkas JRA');
+INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (42, 40, 'module', 'lap_berkas_musnah', 'Berkas Musnah');
 
 
 --
@@ -80,9 +81,6 @@ INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, statu
 INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (1, 2, 2, 'NIP.0001', 'User Pusat Berkas', 'e50310084113a16a9ac94ec85156cb8c', 1);
 INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (10, 3, 2, 'NIP.0002', 'User Pusat Arsip', '3ac53a0f0b6ee2a6203176a72c61a153', 1);
 
-INSERT INTO m_berkas (pid, pegawai_id, nama) values (0, 1, 'Administrator');
-INSERT INTO m_berkas (pid, pegawai_id, nama) values (0, 2, 'User Pusat Berkas');
-INSERT INTO m_berkas (pid, pegawai_id, nama) values (0, 3, 'User Pusat Arsip');
 
 --
 -- TOC entry 2141 (class 0 OID 23329)
@@ -162,8 +160,8 @@ INSERT INTO r_berkas_klas (unit_kerja_id, kode, nama, keterangan) VALUES (7, '04
 -- Data for Name: r_berkas_tipe; Type: TABLE DATA; Schema: public; Owner: earsip
 --
 
-INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Formulir', 'Berkas berupa formulir');
-INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Berita Acara', 'Berkas berupa berita acara');
+INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Surat/Naskah', 'Berkas berupa surat/naskah');
+INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Nota Keuangan', 'Berkas berupa surat berharga');
 INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Gambar', 'Berkas berupa gambar diam');
 INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Video', 'Berkas berupa gambar bergerak');
 INSERT INTO r_berkas_tipe (nama, keterangan) VALUES ('Suara', 'Berkas berupa suara');
@@ -229,10 +227,11 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (23, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (30, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (31, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (32, 1, 0);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (33, 1, 4);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (33, 1, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (34, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (40, 1, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 1, 4);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (42, 1, 0);
 
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES ( 1, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES ( 2, 2, 0);
@@ -250,10 +249,11 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (23, 2, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (30, 2, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (31, 2, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (32, 2, 0);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (33, 2, 4);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (33, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (34, 2, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (40, 2, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 2, 4);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (42, 2, 0);
 
 
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES ( 1, 3, 0);
@@ -274,8 +274,9 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (31, 3, 0);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (32, 3, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (33, 3, 4);
 INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (34, 3, 0);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (40, 3, 0);
-INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 3, 0);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (40, 3, 4);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 3, 4);
+INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (42, 3, 4);
 
 
 --
@@ -287,3 +288,7 @@ INSERT INTO menu_akses (menu_id, grup_id, hak_akses_id) VALUES (41, 3, 0);
 INSERT INTO r_pemusnahan_metoda (nama, keterangan) VALUES ('Pembakaran', 'Pemusanahan arsip dengan cara dibakar');
 INSERT INTO r_pemusnahan_metoda (nama, keterangan) VALUES ('Pencacahan', 'Pemusnahan arsip dengan cara dicacah');
 INSERT INTO r_pemusnahan_metoda (nama, keterangan) VALUES ('Peleburan', 'Pemusnahan arsip dengan cara dilebur');
+
+INSERT INTO m_berkas (pid, pegawai_id, nama) values (0, 1, 'Administrator');
+INSERT INTO m_berkas (pid, pegawai_id, nama) values (0, 2, 'User Pusat Berkas');
+INSERT INTO m_berkas (pid, pegawai_id, nama) values (0, 3, 'User Pusat Arsip');
