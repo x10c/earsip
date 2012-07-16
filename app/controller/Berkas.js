@@ -102,7 +102,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.msg.error ('Gagal menghapus berkas!');
+				Ext.msg.error ('Gagal menyimpan data berkas!');
 			}
 		});
 	}
@@ -250,7 +250,7 @@ Ext.define ('Earsip.controller.Berkas', {
 				}
 			,	failure	: function (form, action)
 				{
-					Ext.msg.error (action.result.info);
+					Ext.msg.error ('Gagal menghapus berkas!');
 				}
 			});
 		}
@@ -288,7 +288,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.msg.error (action.result.info);
+				Ext.msg.error ('Gagal membuat direktori!');
 			}
 		});
 	}

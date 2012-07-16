@@ -14,6 +14,12 @@ Ext.define ('Earsip.controller.Login', {
 	},{
 		ref		: 'berkastree'
 	,	selector: 'berkastree'
+	},{
+		ref		: 'berkaslist'
+	,	selector: 'berkaslist'
+	},{
+		ref		: 'berkasform'
+	,	selector: 'berkasform'
 	}]
 
 ,	init	: function ()
@@ -83,6 +89,9 @@ Ext.define ('Earsip.controller.Login', {
 		this.getMainview ().open_view_main ();
 		this.getMaintoolbar ().do_load_menu ();
 		this.getBerkastree ().do_load_tree ();
+		this.getBerkaslist ().getStore ().removeAll ();
+		this.getBerkasform ().getForm ().reset ();
+
 		var notif	= tabpanel.down ('#notifikasi');
 		notif.do_load_items ();
 	}

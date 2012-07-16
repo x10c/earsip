@@ -33,6 +33,26 @@ Ext.define ('Earsip', {
 		,	type			: ''
 		}
 	}
+,	reset : function ()
+	{
+		this.berkas.id			= 0;
+		this.berkas.pid			= 0;
+		this.berkas.tree.id		= 0;
+		this.berkas.tree.pid	= 0;
+		this.share.id			= 0;
+		this.share.pid			= 0;
+		this.share.peg_id		= 0;
+		this.share.hak_akses_id	= 0;
+		this.arsip.id			= 0;
+		this.arsip.pid			= 0;
+		this.arsip.tree.id		= 0;
+		this.arsip.tree.pid		= 0;
+		this.arsip.tree.unit_kerja_id	= 0;
+		this.arsip.tree.kode_rak		= '';
+		this.arsip.tree.kode_box		= '';
+		this.arsip.tree.kode_folder		= '';
+		this.arsip.tree.type			= '';
+	}
 });
 
 Ext.msg = function ()

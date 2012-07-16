@@ -89,5 +89,4 @@ Ext.define ('Earsip.view.Main', {
 			}
 		});
 	}
-
 });

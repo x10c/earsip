@@ -85,6 +85,7 @@ Ext.define ('Earsip.controller.MainToolbar', {
 				var o = Ext.decode(response.responseText);
 				if (o.success == true) {
 					this.getMainview ().open_view_login (this.getLoginwindow ());
+					Earsip.reset ();
 				} else {
 					Ext.msg.error (o.info);
 				}
