@@ -8,6 +8,7 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.io.File" %>
@@ -15,8 +16,8 @@
 <%@ page import="java.io.InputStream" %>
 <%@ page import="java.io.InputStreamReader" %>
 <%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.lang.Runtime" %>
 <%@ page import="java.lang.Process" %>
+<%@ page import="java.lang.ProcessBuilder" %>
 <%@ page import="java.security.MessageDigest" %>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
@@ -24,15 +25,35 @@
 <%@ page import="org.apache.commons.fileupload.FileItemFactory" %>
 <%@ page import="org.apache.commons.io.filefilter.WildcardFileFilter" %>
 <%!
-public int pdf2image (String filename, String errmsg)
+String errmsg = "";
+
+public static boolean isWindows()
+{
+	String os = System.getProperty("os.name").toLowerCase();
+	return (os.indexOf("win") >= 0);
+}
+
+public int pdf2image (String dir, String filename)
 { try {
-	String[]			cmds	= { "convert", filename, filename +"_%d.png" };
-	Runtime				rt		= Runtime.getRuntime ();
-	Process				proc	= rt.exec (cmds);
-	InputStream			stderr	= proc.getErrorStream();
-	InputStreamReader	isr		= new InputStreamReader(stderr);
+	List<String> cmds = new ArrayList<String>();
+
+	if (isWindows ()) {
+		cmds.add ("cmd.exe");
+		cmds.add ("/c");
+	}
+	cmds.add ("convert");
+	cmds.add (filename);
+	cmds.add (filename +"_%d.png");
+
+	ProcessBuilder		pb		= new ProcessBuilder(cmds);
+
+	pb.directory (new File (dir));
+
+	final Process		proc	= pb.start();
+	InputStream			is		= proc.getInputStream();
+	InputStreamReader	isr		= new InputStreamReader(is);
 	BufferedReader		br		= new BufferedReader(isr);
-	String				line	= "";
+	String				line;
 
 	while ((line = br.readLine ()) != null) {
 		errmsg += line;
@@ -40,6 +61,7 @@ public int pdf2image (String filename, String errmsg)
 
 	return proc.waitFor ();
 } catch (Exception e) {
+	errmsg += e.toString ();
 	return 1;
 }}
 %>
@@ -82,7 +104,6 @@ try {
 	String		name		= "";
 	String		filename	= "";
 	String		mime		= "";
-	String		errmsg		= "";
 	int			exec_stat	= 0;
 	long		filesize	= 0;
 
@@ -117,7 +138,7 @@ try {
 	String sha = sb.toString ();
 
 	/* check user directory */
-	String	user_dir	= rpath + repo +"/"+ user_id;
+	String	user_dir	= rpath + repo + File.separator + user_id;
 	File	f_user_dir	= new File (user_dir);
 
 	if (! f_user_dir.exists ()) {
@@ -125,7 +146,7 @@ try {
 	}
 
 	/* save file stream to filesystem */
-	filename	= user_dir +"/"+ sha;
+	filename	= user_dir + File.separator + sha;
 	file		= new File (filename);
 
 	if (file.exists ()) {
@@ -147,7 +168,7 @@ try {
 	item_up.write (file);
 
 	if (mime.equalsIgnoreCase ("application/pdf")) {
-		exec_stat = pdf2image (filename, errmsg);
+		exec_stat = pdf2image (user_dir, sha);
 		if (exec_stat != 0) {
 			out.print ("{success:false,message:'"+ exec_stat +":"+ errmsg +"'}");
 			return;

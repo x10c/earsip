@@ -102,7 +102,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.msg.error (action.result.info);
+				Ext.msg.error ('Gagal menghapus berkas!');
 			}
 		});
 	}
