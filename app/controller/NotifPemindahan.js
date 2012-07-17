@@ -115,23 +115,10 @@ Ext.define ('Earsip.controller.NotifPemindahan', {
 		if (data.length <= 0) {
 			return;
 		}
-		new Ext.Window({
-			title	: 'Report Pemindahan'
-		,	height 	: 600
-		, 	width	: 700 
-		,	movable	: true
-		,	modal	: true,
-			items: [{
-				xtype : 'component'
-			,	autoEl : {
-					tag		: 'iframe'
-				,	src		: 'data/bapemindahanreport_submit.jsp?pemindahan_id=' + data[0].get ('id') 
-				,	height 	: '100%'
-				,	width	: '100%'
-				, 	style: 'border: 0 none'
-				}
-			}]
-		}).show();
+		
+		var url = 'data/bapemindahanreport_submit.jsp?pemindahan_id=' + data[0].get ('id') ;
+		window.open (url);
+		
 	
 		
 

@@ -37,22 +37,7 @@ Ext.define ('Earsip.controller.LapBerkasMusnah', {
 		if (records.length <= 0) {
 			return;
 		}
-		new Ext.Window({
-			title	: 'Report Berkas Musnah'
-		,	height 	: 600
-		, 	width	: 700 
-		,	movable	: true
-		,	modal	: true,
-			items: [{
-				xtype : 'component'
-			,	autoEl : {
-					tag		: 'iframe'
-				,	src		: 'data/lapberkasmusnahreport_submit.jsp?setelah_tgl=' + setelah_tgl_str + '&sebelum_tgl=' + sebelum_tgl_str
-				,	height 	: '100%'
-				,	width	: '100%'
-				, 	style: 'border: 0 none'
-				}
-			}]
-		}).show();
+		
+		window.open ('data/lapberkasmusnahreport_submit.jsp?setelah_tgl=' + setelah_tgl_str + '&sebelum_tgl=' + sebelum_tgl_str);
 	}
 });

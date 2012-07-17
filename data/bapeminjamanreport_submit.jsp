@@ -36,7 +36,8 @@ try {
 	parameters.put ("REPORT_LOCALE", locale);
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "peminjaman.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
-	response.setContentType("Application/pdf");
+	//response.setContentType("Application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=Berita Acara Peminjaman.pdf");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
 	
 } catch (Exception e) {

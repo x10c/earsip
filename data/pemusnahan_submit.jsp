@@ -117,6 +117,12 @@ try {
 				+" where id in (select berkas_id as id from t_pemusnahan_rinci where pemusnahan_id = " + id + ")" ;
 			db_stmt.executeUpdate (q);
 			
+			q	=" delete from m_arsip"
+				+" where berkas_id in (select id from m_berkas where id in " 
+				+" (select berkas_id as id from t_pemusnahan_rinci where pemusnahan_id = " + id + ")"
+				+" )";
+			db_stmt.executeUpdate (q);
+			
 			q	=" delete from t_pemusnahan_rinci"
 				+" where pemusnahan_id = " + id;
 			db_stmt.executeUpdate (q);

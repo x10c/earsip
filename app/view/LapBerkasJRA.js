@@ -34,7 +34,6 @@ Ext.define ('Earsip.view.LapBerkasJRA', {
 	},{
 		text			: 'JRA (Tahun)'
 	,	dataIndex		: 'jra'
-	//,	flex			: 1
 	},{
 		text			: 'Lokasi'
 	,	dataIndex		: 'lokasi'

@@ -135,24 +135,8 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 		if (data.length <= 0) {
 			return;
 		}
-		
-		new Ext.Window({
-			title	: 'Report Pemusnahan'
-		,	height 	: 600
-		, 	width	: 700 
-		,	movable	: true
-		,	modal	: true,
-			items: [{
-				xtype : 'component'
-			,	autoEl : {
-					tag		: 'iframe'
-				,	src		: 'data/bapemusnahanreport_submit.jsp?pemusnahan_id=' + data[0].get ('id')
-				,	height 	: '100%'
-				,	width	: '100%'
-				, 	style: 'border: 0 none'
-				}
-			}]
-		}).show();
+		var url = 'data/bapemusnahanreport_submit.jsp?pemusnahan_id=' + data[0].get ('id');
+		window.open (url);
 	}
 	
 	
