@@ -16,7 +16,7 @@ Ext.define ('Earsip.store.TipeArsip', {
 			type	: 'json'
 		,	root	: 'data'
 		}
-	,	write	: {
+	,	writer	: {
 			type	: 'json'
 		}
 	}

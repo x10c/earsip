@@ -58,11 +58,10 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 
 ,	list_itemdblclick : function (v, r, idx)
 	{
-		var bblist = this.getBerkasberbagilist ();
-
 		var t = r.get ("tipe_file");
 		if (t != 0) {
-			bblist.win_viewer.do_open (r);
+			Earsip.win_viewer.down ('#download').hide ();
+			Earsip.win_viewer.do_open (r);
 			return;
 		}
 

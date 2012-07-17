@@ -21,14 +21,7 @@ Ext.define ('Earsip.view.KlasArsip', {
 		Ext.create ('Earsip.plugin.RowEditor')
 	]
 ,	columns		: [{
-		text		: 'ID'
-	,	dataIndex	: 'id'
-	,	flex		: 0.1
-	,	editor		: {
-			xtype		: 'textfield'
-		,	disabled	: true
-		}
-	, 	groupable	: false
+		xtype		: 'rownumberer'
 	},{
 		text		: 'Unit Kerja ID'
 	,	dataIndex	: 'unit_kerja_id'

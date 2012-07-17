@@ -11,9 +11,18 @@ Ext.define ('Earsip.controller.BerkasJRA', {
 	{
 		this.control ({
 			'berkas_jra_list': {
-				selectionchange : this.list_selectionchange
+				itemdblclick : this.list_itemdblclick
+			,	selectionchange : this.list_selectionchange
 			}
 		})
+	}
+
+,	list_itemdblclick : function (v, r, idx)
+	{
+		if (r.get ("tipe_file") != 0) {
+			Earsip.win_viewer.down ('#download').hide ();
+			Earsip.win_viewer.do_open (r);
+		}
 	}
 
 ,	list_selectionchange : function (model, records)

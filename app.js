@@ -6,6 +6,7 @@ Ext.define ('Earsip', {
 ,	is_p_arsip		: false
 ,	repo_path		: ''
 ,	acl				: 0
+,	win_viewer		: undefined
 ,	berkas			: {
 		id				: 0
 	,	pid				: 0
@@ -98,6 +99,7 @@ Ext.define ('Earsip.plugin.RowEditor', {
 ,	cancelText			: 'Batal'
 ,	clicksToEdit		: 2 
 ,	clicksToMoveEditor	: 1
+,	errorSummary		: false
 ,	listeners			: {
 		beforeedit			: function (ed, e)
 		{

@@ -62,7 +62,7 @@ try {
 				+ "\n, tahun	     : "+ rs.getString ("tahun")
 				+ "\n, bulan         : "+ rs.getString ("bulan")
 				+ "\n, hari    		 : "+ rs.getString ("hari")
-				+ "\n, jra		 	 : "+ rs.getString ("jra_aktif")
+				+ "\n, jra		 	 : "+ rs.getString ("jra")
 				+ "\n, lokasi		 :'"+ rs.getString ("lokasi") + "'"
 				+ "\n}";
 	}

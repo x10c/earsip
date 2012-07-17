@@ -1,3 +1,23 @@
+CREATE OR REPLACE FUNCTION delete_pegawai (_id INT)
+ RETURNS character varying
+AS
+$$
+declare c int;
+BEGIN
+	SELECT	count(id)
+	INTO	c
+	FROM	m_berkas
+	WHERE	pegawai_id = _id
+	AND		pid != 0;
+	IF c > 0 THEN
+		return 'failure';
+	END IF;
+	delete from m_berkas where pegawai_id = _id;
+	delete from m_pegawai where id = _id;
+	return 'success';
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE FUNCTION update_menu_akses (_menu_id INT, _grup_id INT, _hak_akses_id INT) RETURNS VOID AS
 $$
 BEGIN

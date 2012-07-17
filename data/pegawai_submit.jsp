@@ -3,6 +3,7 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="org.json.JSONObject" %>
 <%
@@ -83,6 +84,32 @@ try {
 		db_stmt.setInt (5, Integer.parseInt (grup_id));
 		db_stmt.setString (6, password);
 
+		db_stmt.executeUpdate ();
+
+		/* create pegawai berkas */
+		q	=" select	id"
+			+" from		m_pegawai"
+			+" where	nip = ?";
+
+		db_stmt = db_con.prepareStatement (q);
+		db_stmt.setString (1, nip);
+
+		rs = db_stmt.executeQuery ();
+
+		if (rs.next ()) {
+			q	=" insert into m_berkas (pid, pegawai_id, nama)"
+				+" values (0, ?, ?)";
+
+			id = rs.getString ("id");
+
+			db_stmt = db_con.prepareStatement (q);
+			db_stmt.setInt (1, Integer.parseInt (id));
+			db_stmt.setString (2, nama);
+
+			db_stmt.executeUpdate ();
+		}
+
+		out.print ("{success:true,info:'Data pegawai \""+ nama +"\" telah tersimpan.'}");
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update	m_pegawai "
 			+" set		nip				= ?"
@@ -110,36 +137,30 @@ try {
 		} else {
 			db_stmt.setInt (7, Integer.parseInt (id));
 		}
-	}
 
-	db_stmt.executeUpdate ();
+		db_stmt.executeUpdate ();
 
-	/* create pegawai berkas */
-	if (action.equalsIgnoreCase ("create")) {
-		q	=" select	id"
-			+" from		m_pegawai"
-			+" where	nip = ?";
+		out.print ("{success:true,info:'Data pegawai \""+ nama +"\" telah tersimpan.'}");
+	} else if (action.equalsIgnoreCase ("destroy")) {
+		q	=" select delete_pegawai ("+ id +") as del_stat ";
 
-		db_stmt = db_con.prepareStatement (q);
-		db_stmt.setString (1, nip);
+		Statement stmt = db_con.createStatement ();
 
-		rs = db_stmt.executeQuery ();
+		rs = stmt.executeQuery (q);
 
-		if (rs.next ()) {
-			q	=" insert into m_berkas (pid, pegawai_id, nama)"
-				+" values (0, ?, ?)";
-
-			id = rs.getString ("id");
-
-			db_stmt = db_con.prepareStatement (q);
-			db_stmt.setInt (1, Integer.parseInt (id));
-			db_stmt.setString (2, nama);
-
-			db_stmt.executeUpdate ();
+		if (! rs.next ()) {
+			out.print ("{success:false,info:'Gagal menghapus data pegawai!'}");
+			return;
 		}
-	}
 
-	out.print ("{success:true,info:'Data pegawai \""+ nama +"\" telah tersimpan.'}");
+		String del_stat = rs.getString ("del_stat");
+
+		if (del_stat.equalsIgnoreCase ("failure")) {
+			out.print ("{success:false,info:'Data pegawai tidak dapat dihapus karena memiliki berkas!'}");
+			return;
+		}
+		out.print ("{success:true,info:'Data pegawai \""+ nama +"\" telah dihapus.'}");
+	}
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''") +"'}");

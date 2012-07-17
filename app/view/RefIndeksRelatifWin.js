@@ -23,6 +23,7 @@ Ext.define('Earsip.view.RefIndeksRelatifWin', {
 		,	anchor			: '100%'
 		,	selectOnFocus	: true
 		,	labelAlign		: 'right'
+		,	labelWidth		: 140
 		}
 	,	items		: [{
 			hidden			: true
@@ -39,7 +40,7 @@ Ext.define('Earsip.view.RefIndeksRelatifWin', {
 		,	editable		: false
 		,	allowBlank		: false
 		},{
-			xtype			: 'textfield'
+			xtype			: 'textarea'
 		,	fieldLabel		: 'Keterangan'
 		,	itemId			: 'keterangan'
 		,	name			: 'keterangan'
