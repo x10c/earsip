@@ -38,16 +38,29 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	name			: 'tgl_dibuat'
 	,	format			: 'Y-m-d'
 	},{
-		xtype			: 'combo'
-	,	fieldLabel		: 'Klasifikasi'
-	,	itemId			: 'berkas_klas_id'
-	,	name			: 'berkas_klas_id'
-	,	store			: Ext.getStore ('KlasArsip')
-	,	displayField	: 'nama'
-	,	valueField		: 'id'
-	,	editable		: false
-	,	triggerAction	: 'all'
-	,	allowBlank		: false
+		xtype 	: 'container'
+	,	layout	: 'hbox'
+	,	items	: [{
+			xtype			: 'combo'
+		,	fieldLabel		: 'Klasifikasi'
+		,	labelAlign		: 'right'
+		,	itemId			: 'berkas_klas_id'
+		,	name			: 'berkas_klas_id'
+		,	store			: Ext.getStore ('KlasArsip')
+		,	displayField	: 'nama'
+		,	valueField		: 'id'
+		,	editable		: false
+		,	triggerAction	: 'all'
+		,	allowBlank		: false
+		,	flex			: 1
+		},{
+			xtype			: 'button'
+		,	text			: 'Cari Indeks Relatif'
+		,	itemId			: 'indeks_relatif'
+		,	iconCls			: 'search'
+		,	width			: 140
+		}]
+		
 	},{
 		xtype			: 'combo'
 	,	fieldLabel		: 'Tipe'
@@ -100,4 +113,6 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'status_hapus'
 	,	hidden			: true
 	}]
+	
+
 });

@@ -5,6 +5,7 @@ Ext.define ('Earsip.store.KlasArsip', {
 ,	groupField	: 'unit_kerja_id'
 ,	sorters		: ['kode']
 ,	autoSync	: false
+,	autoLoad	: true
 ,	proxy		: {
 		type		: 'ajax'
 	,	api			: {

@@ -2,6 +2,7 @@ Ext.define ('Earsip.store.IndeksRelatif', {
 	extend	: 'Ext.data.Store'
 ,	model	: 'Earsip.model.IndeksRelatif'
 ,	storeId	: 'IndeksRelatif'
+,	autoLoad: true
 ,	proxy	: {
 		type	: 'ajax'
 	,	api		: {

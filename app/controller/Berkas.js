@@ -1,6 +1,7 @@
 Ext.require ([
 	'Earsip.view.Trash'
 ,	'Earsip.view.WinUpload'
+,	'Earsip.view.WinIndeksRelatif'
 ]);
 
 Ext.define ('Earsip.controller.Berkas', {
@@ -26,6 +27,9 @@ Ext.define ('Earsip.controller.Berkas', {
 	},{
 		ref		: 'winupload'
 	,	selector: 'winupload'
+	},{
+		ref		: 'win_indeks_relatif'
+	,	selector: 'win_indeks_relatif'
 	}]
 ,	init	: function ()
 	{
@@ -69,7 +73,10 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 
 		,	'berkasform combo[itemId=berkas_klas_id]': {
-				select : this.on_select_berkas_klas
+				select 	: this.on_select_berkas_klas
+			}
+		,	'berkasform button[itemId=indeks_relatif]':{
+				click  : this.do_search_indeks_relatif
 			}
 
 		,	'cariberkaswin button[itemId=cari]' : {
@@ -77,6 +84,12 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	'winupload' : {
 				close : this.winupload_close
+			}
+		,	'win_indeks_relatif #grid_ir' : {
+				selectionchange : this.grid_indeks_on_select
+			}
+		,	'win_indeks_relatif button[itemId=ambil]' : {
+				click : this.get_indeks_relatif
 			}
 		});
 	}
@@ -310,6 +323,11 @@ Ext.define ('Earsip.controller.Berkas', {
 		list_proxy.url = org_url;
 	}
 
+,	do_search_indeks_relatif : function (comp)
+	{
+		Ext.create ('Earsip.view.WinIndeksRelatif').show ();
+	}
+
 ,	winupload_close : function (win)
 	{
 		this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
@@ -321,5 +339,30 @@ Ext.define ('Earsip.controller.Berkas', {
 
 		berkasform.down ('#jra_aktif').setValue (records[0].get ('jra_aktif'));
 		berkasform.down ('#jra_inaktif').setValue (records[0].get ('jra_inaktif'));
+	}
+	
+,	grid_indeks_on_select : function (model, records)
+	{
+		var form = this.getWin_indeks_relatif ().down ('#form_ir');
+		form.loadRecord (records[0]);
+		
+	}
+,	get_indeks_relatif : function (btn)
+	{
+		var win = this.getWin_indeks_relatif ();
+		var grid = win.down ('#grid_ir');
+		var data = grid.getSelectionModel ().getSelection ();
+		if (data.length <= 0)
+			return;
+		
+		
+		var form = win.down ('#form_ir').getForm ();
+		var berkasform = this.getBerkasform (); 
+		var combo_klas = berkasform.down ('#berkas_klas_id');
+		var id = form.getRecord ().get ('id');
+		var r = combo_klas.getStore ().getById (id);
+		combo_klas.setValue (id);
+		this.on_select_berkas_klas (combo_klas,new Array(r));
+		win.close ();
 	}
 });

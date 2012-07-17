@@ -23,4 +23,10 @@ Ext.define ('Earsip.view.BerkasJRA', {
 			readOnly	: true
 		}
 	}]
+,	listeners : {
+		beforerender : function (comp)
+		{
+			this.down ('#berkas_jra_form').down ('#indeks_relatif').hide ();
+		}
+	}
 });

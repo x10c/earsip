@@ -20,10 +20,11 @@ try {
 	}
 	
 	
-	q	=" select	id"
-		+" ,		berkas_klas_id"
-		+" ,		keterangan"
-		+" from		r_ir"
+	q	=" select	A.id"
+		+" ,		A.berkas_klas_id"
+		+" ,		A.keterangan"
+		+" from		r_ir A"
+		+" left join r_berkas_klas B on A.berkas_klas_id = B.id"
 		+" order by berkas_klas_id, keterangan";
 
 	db_stmt = db_con.createStatement ();
