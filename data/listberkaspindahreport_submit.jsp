@@ -2,16 +2,14 @@
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
-  
+
 <%@ page import="net.sf.jasperreports.engine.JasperExportManager" %>
 <%@ page import="net.sf.jasperreports.engine.JasperFillManager" %>
 <%@ page import="net.sf.jasperreports.engine.JasperPrint" %>
 <%@ page import="net.sf.jasperreports.engine.JasperReport" %>
 <%@ page import="net.sf.jasperreports.engine.util.JRLoader" %>
-  
+
 <%@ page import="java.sql.Connection" %>
-
-
 <%	
 Connection	db_con			= null;
 Map parameters 				= null;
@@ -38,5 +36,4 @@ try {
 } catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''").replace("\"", "\\\"") +"'}");
 }
-
 %>

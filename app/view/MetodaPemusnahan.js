@@ -12,13 +12,7 @@ Ext.define ('Earsip.view.MetodaPemusnahan', {
 		Ext.create ('Earsip.plugin.RowEditor')
 	]
 ,	columns		: [{
-		text		: 'ID'
-	,	dataIndex	: 'id'
-	,	flex		: 0.2
-	,	editor		: {
-			xtype		: 'textfield'
-		,	disabled	: true
-		}
+		xtype		: 'rownumberer'
 	},{
 		text		: 'Nama'
 	,	dataIndex	: 'nama'

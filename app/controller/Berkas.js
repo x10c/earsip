@@ -154,10 +154,10 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	list_itemdblclick : function (v, r, idx)
 	{
-		var berkaslist	= this.getBerkaslist ();
-		var t			= r.get ("tipe_file");
+		var t = r.get ("tipe_file");
 		if (t != 0) {
-			berkaslist.win_viewer.do_open (r);
+			Earsip.win_viewer.down ('#download').show ();
+			Earsip.win_viewer.do_open (r);
 			return;
 		}
 

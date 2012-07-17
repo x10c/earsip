@@ -4,6 +4,7 @@ Ext.define ('Earsip.model.BerkasJRA', {
 		'id'
 	,	'pid'
 	,	'tipe_file'
+	,	'mime'
 	,	'sha'
 	,	'pegawai_id'
 	,	'unit_kerja_id'
@@ -24,6 +25,7 @@ Ext.define ('Earsip.model.BerkasJRA', {
 	,	'usia'
 	,	'lokasi'
 	,	'tgl_jra'
+	,	'n_output_images'
 	]
 ,	idProperty	: 'id'
 });

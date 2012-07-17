@@ -24,7 +24,6 @@ String			action		= "";
 String			pemindahan_id	= "";
 String			berkas_id		= "";
 String			nama            = "";
-String			status          = "";
 String			arsip_status_id = "";
 String			kode_folder     = "";
 String			kode_rak        = "";
@@ -40,7 +39,7 @@ try {
 	action	= request.getParameter ("action");
 	pemindahan_id = request.getParameter ("pemindahan_id");
 	berkas_id = request.getParameter ("berkas_id");
-	
+
 	if (pemindahan_id == null || berkas_id == null)
 	{
 		reader	= request.getReader ();
@@ -50,15 +49,13 @@ try {
 			line = reader.readLine();
 		}
 		reader.close();
-	
+
 		data			= sb.toString();
 		o				= (JSONObject) new JSONObject (data);
-		
-		
+
 		pemindahan_id	= o.getString ("pemindahan_id");
 		berkas_id 		= o.getString ("berkas_id");
 		nama			= o.getString ("nama");
-		status          = o.getString ("status");
 		arsip_status_id = o.getString ("arsip_status_id");
 		kode_folder     = o.getString ("kode_folder");
 		kode_rak        = o.getString ("kode_rak");
@@ -66,11 +63,10 @@ try {
 	} else
 	{
 		nama			= request.getParameter ("nama");
-	    status          = request.getParameter ("status");
-	    arsip_status_id = request.getParameter ("arsip_status_id");
-	    kode_folder     = request.getParameter ("kode_folder");
-	    kode_rak        = request.getParameter ("kode_rak");
-	    kode_box        = request.getParameter ("kode_box");
+		arsip_status_id = request.getParameter ("arsip_status_id");
+		kode_folder     = request.getParameter ("kode_folder");
+		kode_rak        = request.getParameter ("kode_rak");
+		kode_box        = request.getParameter ("kode_box");
 	}
 
 	if (action.equalsIgnoreCase ("create")) {
@@ -83,15 +79,15 @@ try {
 		q	=" update 	m_berkas"
 			+" set 		status = 0"
 			+" where 	id = ? or pid = ?";
-			
+
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setInt (1, Integer.parseInt (berkas_id));
 		db_stmt.setInt (2, Integer.parseInt (berkas_id));
-		
+
 		db_stmt.executeUpdate ();
-		
-		q 	=" select * from m_arsip where berkas_id = "+berkas_id;
-		
+
+		q	=" select * from m_arsip where berkas_id = "+berkas_id;
+
 		db_stmt2 = db_con.createStatement ();
 		rs		 = db_stmt2.executeQuery (q);
 		if (rs.next ())
@@ -110,16 +106,14 @@ try {
 				+" ,		berkas_id)"
 				+" values 	(?, ?, ?, ?)";
 		}
-		
-		
-			
+
 		db_stmt = db_con.prepareStatement (q);
-		
+
 		db_stmt.setString (1, kode_folder);
 		db_stmt.setString (2, kode_rak);
 		db_stmt.setString (3, kode_box);
 		db_stmt.setInt (4, Integer.parseInt (berkas_id));
-		
+
 		rs.close ();
 	} else if (action.equalsIgnoreCase ("destroy")) {
 		q	=" delete from t_pemindahan_rinci where pemindahan_id = ? and berkas_id = ?";

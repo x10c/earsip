@@ -43,7 +43,7 @@ Ext.define ('Earsip.controller.DocViewer', {
 		,	width		: 0
 		,	height		: 0
 		,	css			: 'display:none;visibility:hidden;height:0px;'
-		,	src			: 'data/download.jsp?berkas='+ dv.berkas.get('sha')
+		,	src			: 'Download?berkas='+ dv.berkas.get('sha')
 						+'&nama='+ dv.berkas.get ('nama')
 		});
 	}
@@ -81,7 +81,7 @@ Ext.define ('Earsip.controller.DocViewer', {
 		var	p	= dv.down ('#pages');
 
 		if (dv.mime == 'application/pdf') {
-			if (dv.seq != 0) {
+			if (dv.seq > 0) {
 				dv.seq		= dv.seq - 1;
 				dv.target	= dv.src +'_'+ dv.seq +'.png'
 
@@ -93,7 +93,7 @@ Ext.define ('Earsip.controller.DocViewer', {
 				,	src		: dv.target
 				});
 
-				dv.set_page_number (this.seq + 1);
+				dv.set_page_number (dv.seq + 1);
 			}
 		}
 	}

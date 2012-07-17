@@ -34,6 +34,7 @@ try {
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		tipe_file"
+		+" ,		mime"
 		+" ,		sha"
 		+" ,		pegawai_id"
 		+" ,		unit_kerja_id"
@@ -54,6 +55,7 @@ try {
 		+" ,		age (tgl_dibuat) as usia"
 		+" ,		get_berkas_path (pid) as lokasi"
 		+" ,		dateadd ('year'," + jra_query_text + ",tgl_dibuat) as tgl_jra"
+		+" ,		n_output_images"
 		+" from		m_berkas"
 		+" where	status			= "+ status
 		+" and		status_hapus	= 1"
@@ -76,6 +78,7 @@ try {
 		data	+="\n{ id            : "+ rs.getString ("id")
 				+ "\n, pid           : "+ rs.getString ("pid")
 				+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
+				+ "\n, mime          :'"+ rs.getString ("mime") +"'"
 				+ "\n, sha           :'"+ rs.getString ("sha") +"'"
 				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
 				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
@@ -95,7 +98,8 @@ try {
 				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
 				+" \n, usia             : '"+ rs.getString ("usia") +"'"
 				+" \n, lokasi           : '"+ rs.getString ("lokasi") +"'"
-				+" \n, tgl_jra           : '"+ rs.getString ("tgl_jra") +"'"
+				+" \n, tgl_jra          : '"+ rs.getString ("tgl_jra") +"'"
+				+" \n, n_output_images  :  "+ rs.getString ("n_output_images")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");

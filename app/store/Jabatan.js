@@ -2,7 +2,7 @@ Ext.define ('Earsip.store.Jabatan', {
 	extend		: 'Ext.data.Store'
 ,	storeId		: 'Jabatan'
 ,	model		: 'Earsip.model.Jabatan'
-,	autoLoad	: false
+,	autoLoad	: true
 ,	autoSync	: false
 ,	proxy		: {
 		type		: 'ajax'
@@ -10,7 +10,7 @@ Ext.define ('Earsip.store.Jabatan', {
 			read		: 'data/jabatan.jsp'
 		,	create		: 'data/jabatan_submit.jsp?action=create'
 		,	update		: 'data/jabatan_submit.jsp?action=update'
-		,	destro		: 'data/jabatan_submit.jsp?action=destroy'
+		,	destroy		: 'data/jabatan_submit.jsp?action=destroy'
 		}
 	,	reader		: {
 			type		: 'json'

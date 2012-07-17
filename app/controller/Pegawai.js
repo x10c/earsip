@@ -75,14 +75,23 @@ Ext.define ('Earsip.controller.Pegawai', {
 
 ,	do_del : function (b)
 	{
-		/* set status to non-aktif */
+		var grid = b.up ('#mas_pegawai');
+		var data = grid.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		grid.win.down ('#password').allowBlank = true;
+		grid.win.action = 'destroy';
+
+		this.do_submit (b);
 	}
 
 ,	do_submit : function (b)
 	{
 		var grid	= this.getMas_pegawai ();
-		var win		= b.up ('#pegawai_win');
-		var form	= win.down ('form').getForm ();
+		var form	= grid.win.down ('form').getForm ();
 
 		if (! form.isValid ()) {
 			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
@@ -92,7 +101,7 @@ Ext.define ('Earsip.controller.Pegawai', {
 		form.submit ({
 			scope	: this
 		,	params	: {
-				action	: win.action
+				action	: grid.win.action
 			}
 		,	success	: function (form, action)
 			{

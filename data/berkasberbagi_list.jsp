@@ -30,6 +30,7 @@ try {
 	q	=" select	m_berkas.id"
 		+" ,		pid"
 		+" ,		tipe_file"
+		+" ,		mime"
 		+" ,		sha"
 		+" ,		pegawai_id"
 		+" ,		unit_kerja_id"
@@ -47,6 +48,7 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
+		+" ,		n_output_images"
 		+" from		m_berkas";
 
 	if (pid.equalsIgnoreCase ("0")) {
@@ -56,6 +58,7 @@ try {
 			+" select	m_berkas.id"
 			+" ,		pid"
 			+" ,		tipe_file"
+			+" ,		mime"
 			+" ,		sha"
 			+" ,		pegawai_id"
 			+" ,		unit_kerja_id"
@@ -73,6 +76,7 @@ try {
 			+" ,		status"
 			+" ,		status_hapus"
 			+" ,		akses_berbagi_id"
+			+" ,		n_output_images"
 			+" from		m_berkas"
 			+" ,		m_berkas_berbagi"
 			+" where	akses_berbagi_id in (1,2)"
@@ -99,6 +103,7 @@ try {
 		data	+="\n{ id            : "+ rs.getString ("id")
 				+ "\n, pid           : "+ rs.getString ("pid")
 				+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
+				+ "\n, mime          :'"+ rs.getString ("mime") +"'"
 				+ "\n, sha           :'"+ rs.getString ("sha") +"'"
 				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
 				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
@@ -116,6 +121,7 @@ try {
 				+ "\n, status        : "+ rs.getString ("status")
 				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
 				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
+				+" \n, n_output_images  : "+ rs.getString ("n_output_images")
 				+ "\n}";
 	}
 	out.print ("{success:true,data:["+ data +"]}");
