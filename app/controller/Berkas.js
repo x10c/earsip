@@ -173,7 +173,8 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	list_selectionchange : function (model, records)
 	{
-		var berkaslist = this.getBerkaslist ();
+		var berkas		= this.getBerkas ();
+		var berkaslist	= this.getBerkaslist ();
 
 		if (records.length > 0) {
 			this.getMainview ().down ('#berkas_form').loadRecord (records[0]);
@@ -182,6 +183,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			Earsip.berkas.pid	= records[0].get ('pid');
 		}
 
+		berkas.down ('#save').setDisabled (! records.length);
 		berkaslist.down ('#del').setDisabled (! records.length);
 		berkaslist.down ('#share').setDisabled (! records.length);
 	}
