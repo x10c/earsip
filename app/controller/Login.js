@@ -60,6 +60,7 @@ Ext.define ('Earsip.controller.Login', {
 					} else {
 						this.after_login_success ();
 					}
+					Ext.StoreManager.lookup ('KlasArsip').load ();
 				}
 			,	failure	: function (form, action)
 				{

@@ -29,4 +29,11 @@ Ext.define ('Earsip.view.BerkasBerbagi', {
 		,	header		: false
 		}]
 	}]
+	
+,	listeners : {
+		beforerender : function (comp)
+		{
+			this.down ('#berkasberbagi_form').down ('#indeks_relatif').hide ();
+		}
+	}
 });

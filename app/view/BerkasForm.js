@@ -113,6 +113,4 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'status_hapus'
 	,	hidden			: true
 	}]
-	
-
 });

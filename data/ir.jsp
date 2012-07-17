@@ -19,12 +19,13 @@ try {
 		return;
 	}
 	
-	
+	String unit_kerja_id = (String) request.getAttribute ("user.unit_kerja_id");
 	q	=" select	A.id"
 		+" ,		A.berkas_klas_id"
 		+" ,		A.keterangan"
 		+" from		r_ir A"
 		+" left join r_berkas_klas B on A.berkas_klas_id = B.id"
+		+" where B.unit_kerja_id = " + unit_kerja_id
 		+" order by berkas_klas_id, keterangan";
 
 	db_stmt = db_con.createStatement ();
