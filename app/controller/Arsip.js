@@ -10,13 +10,19 @@ Ext.define ('Earsip.controller.Arsip', {
 		ref		:'arsiplist'
 	,	selector:'arsiplist'
 	},{
+		ref		:'arsipform'
+	,	selector:'arsipform'
+	},{
 		ref		:'arsipcariwin'
 	,	selector:'arsipcariwin'
 	}]
 ,	init	: function ()
 	{
 		this.control ({
-			'arsiptree': {
+			'mas_arsip button[itemId=save]' : {
+				click : this.do_save
+			}
+		,	'arsiptree': {
 				selectionchange : this.tree_selectionchange
 			}
 		,	'arsiptree button[itemId=refresh]': {
@@ -41,6 +47,32 @@ Ext.define ('Earsip.controller.Arsip', {
 		});
 	}
 
+,	do_save : function (b)
+	{
+		var form = this.getArsipform ().getForm ();
+
+		if (! form.isValid ()) {
+			return;
+		}
+
+		form.submit ({
+			scope	: this
+		,	success	: function (form, action)
+			{
+				if (action.result.success == true) {
+					Ext.msg.info (action.result.info);
+					this.getArsiptree ().do_load_tree ();
+				} else {
+					Ext.msg.error (action.result.info);
+				}
+			}
+		,	failure	: function (form, action)
+			{
+				Ext.msg.error ('Gagal menyimpan data arsip!');
+			}
+		});
+	}
+
 ,	tree_do_refresh : function (b)
 	{
 		this.getArsiptree ().do_load_tree ();
@@ -48,8 +80,6 @@ Ext.define ('Earsip.controller.Arsip', {
 
 ,	do_print_label : function (button)
 	{
-		
-		
 		var url = 'data/lapcetaklabel_submit.jsp?' +
 					'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
 					'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
@@ -108,17 +138,20 @@ Ext.define ('Earsip.controller.Arsip', {
 
 ,	list_selectionchange : function (model, records)
 	{
+		var arsip	= this.getMas_arsip ();
+		var klas_id	= false;
 		var list = this.getArsiplist ();
 		var form = this.getMas_arsip ().down ('#arsip_form');
-
-		form.loadRecord (new Earsip.model.Berkas ());
 
 		if (records.length > 0) {
 			form.loadRecord (records[0]);
 			list.record			= records[0];
 			Earsip.arsip.id		= records[0].get ('id');
 			Earsip.arsip.pid	= records[0].get ('pid');
+			klas_id				= records[0].get ('berkas_klas_id') != '' ? true : false;
 		}
+
+		arsip.down ('#save').setDisabled ((! records.length) && klas_id);
 	}
 
 ,	list_dirup : function (b)

@@ -24,17 +24,23 @@ Ext.define ('Earsip.view.Arsip', {
 		},{
 			xtype		: 'arsipform'
 		,	itemId		: 'arsip_form'
+		,	url			: 'data/arsip_submit.jsp'
 		,	region		: 'south'
 		,	split		: true
 		,	collapsible	: true
 		,	header		: false
+		,	buttons		: [
+			'->',{
+				text		: 'Simpan'
+			,	itemId		: 'save'
+			,	iconCls		: 'save'
+			,	disabled	: true
+			}]
 		}]
 	}]
 ,	listeners	: {
 		activate	: function (comp)
 		{
-			
-				
 			var tree = this.down ('arsiptree');
 			tree.do_load_tree ();
 			tree.do_config_label ();

@@ -29,8 +29,9 @@ Ext.define ('Earsip.view.BerkasTree', {
 		Ext.Ajax.request ({
 			url		: 'data/berkas_tree.jsp'
 		,	scope	: this
-		,	success	: function (response) {
-				var o = Ext.decode(response.responseText);
+		,	success	: function (response)
+			{
+				var o = Ext.decode (response.responseText);
 				if (o.success == true) {
 					var sm = this.getSelectionModel ();
 					var node;
@@ -49,7 +50,9 @@ Ext.define ('Earsip.view.BerkasTree', {
 
 					sm.deselectAll ();
 					this.expandAll ();
-					if (node != null) sm.select (node);
+					if (node != null) {
+						sm.select (node);
+					}
 				} else {
 					Ext.msg.error (o.info);
 				}

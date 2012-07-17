@@ -35,6 +35,9 @@ Ext.define ('Earsip.view.ArsipTree', {
 			{
 				var o = Ext.decode (response.responseText);
 				if (o.success == true) {
+					var sm = this.getSelectionModel ();
+					var node;
+
 					this.suspendEvents (false);
 					this.setRootNode (o.data);
 					this.getRootNode ().raw = o.data;
@@ -42,12 +45,15 @@ Ext.define ('Earsip.view.ArsipTree', {
 					this.doLayout();
 
 					if (Earsip.arsip.tree.pid != 0) {
-						var node = this.getRootNode ().findChild ('id', Earsip.arsip.tree.id, true);
+						node = this.getRootNode ().findChild ('id', Earsip.arsip.tree.id, true);
+					} else {
+						node = this.getRootNode ();
+					}
 
-						if (node != null) {
-							this.expandAll ();
-							this.getSelectionModel ().select (node);
-						}
+					sm.deselectAll ();
+					this.expandAll ();
+					if (node != null) {
+						sm.select (node);
 					}
 				} else {
 					Ext.msg.error (o.info);
