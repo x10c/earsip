@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA["BANK JATENG KANTOR PUSAT"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\earsip\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="kode_rak" class="java.lang.String">
 		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
