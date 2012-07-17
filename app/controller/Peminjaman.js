@@ -195,7 +195,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		grid.getStore ().insert (0, r);
 		editor.action = 'add';
 		editor.startEdit (0, 0);
-//		Ext.data.StoreManager.lookup ('BerkasPinjam').filter ('arsip_status_id',0);
+
 	}
 	
 , 	do_delete_berkas	: function (button)
@@ -334,23 +334,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		if (data.length <= 0) {
 			return;
 		}
-		
-		new Ext.Window({
-			title	: 'Report Pemindahan'
-		,	height 	: 600
-		, 	width	: 700 
-		,	movable	: true
-		,	modal	: true,
-			items: [{
-				xtype : 'component'
-			,	autoEl : {
-					tag		: 'iframe'
-				,	src		: 'data/bapeminjamanreport_submit.jsp?peminjaman_id=' + data[0].get ('id')
-				,	height 	: '100%'
-				,	width	: '100%'
-				, 	style: 'border: 0 none'
-				}
-			}]
-		}).show();
+		var url = 'data/bapeminjamanreport_submit.jsp?peminjaman_id=' + data[0].get ('id');
+		window.open (url);
 	}
 });

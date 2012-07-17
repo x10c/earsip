@@ -49,26 +49,12 @@ Ext.define ('Earsip.controller.Arsip', {
 ,	do_print_label : function (button)
 	{
 		
-		new Ext.Window({
-			title	: 'Cetak Label'
-		,	height 	: 600
-		, 	width	: 700 
-		,	movable	: true
-		,	modal	: true,
-			items: [{
-				xtype : 'component'
-			,	autoEl : {
-					tag		: 'iframe'
-				,	src		: 'data/lapcetaklabel_submit.jsp?' +
-							  'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
-							  'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
-							  'kode_box=' + Earsip.arsip.tree.kode_box
-				,	height 	: '100%'
-				,	width	: '100%'
-				, 	style: 'border: 0 none'
-				}
-			}]
-		}).show();
+		
+		var url = 'data/lapcetaklabel_submit.jsp?' +
+					'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
+					'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
+					'kode_box=' + Earsip.arsip.tree.kode_box
+		window.open (url);
 	}
 	
 ,	tree_selectionchange : function (tree, records)

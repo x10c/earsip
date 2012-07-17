@@ -163,7 +163,7 @@ try {
 					for (int i = 0; i < len; i++)
 					{
 						q +=" insert into peminjaman_rinci (peminjaman_id, berkas_id) values("+ id +","+ berkas.getString (i) +");";
-						q +=" update m_berkas set arsip_status_id = 1 where id = "+ berkas.getString (i) + +" or pid = "+ berkas.getString (i) + ";";
+						q +=" update m_berkas set arsip_status_id = 1 where id = "+ berkas.getString (i) +" or pid = "+ berkas.getString (i) + ";";
 					}
 				}
 				db_stmt.executeUpdate (q);

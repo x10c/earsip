@@ -43,7 +43,7 @@ try {
 	
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "lap_berkas_musnah.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
-	response.setContentType("Application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=Laporan Daftar Berkas Musnah.pdf");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
 	
 } catch (Exception e) {

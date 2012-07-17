@@ -41,7 +41,7 @@ try {
 	
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "label.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
-	response.setContentType("Application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=Label.pdf");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
 	
 } catch (Exception e) {

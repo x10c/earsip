@@ -48,7 +48,7 @@ try {
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	jlist.add (jasperprint);
 	exporter	= new JRPdfExporter ();
-	response.setContentType("application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=Berita Acara Pemusnahan.pdf");
 	exporter.setParameter (JRExporterParameter.JASPER_PRINT_LIST, jlist);
 	exporter.setParameter (JRExporterParameter.OUTPUT_STREAM, response.getOutputStream ());
 	exporter.exportReport ();

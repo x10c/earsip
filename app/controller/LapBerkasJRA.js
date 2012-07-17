@@ -19,27 +19,11 @@ Ext.define ('Earsip.controller.LapBerkasJRA', {
 ,	do_print_berkas_jra : function (button)
 	{
 		var grid =this.getLap_berkas_jra ();
-		var data = grid.getSelectionModel ().getSelection ();
-		if (data.length <= 0) {
+		var records = grid.getStore ().getRange ();
+		if (records.length <= 0) {
 			return;
 		}
-		new Ext.Window({
-			title	: 'Report Berkas JRA'
-		,	height 	: 600
-		, 	width	: 700 
-		,	movable	: true
-		,	modal	: true,
-			items: [{
-				xtype : 'component'
-			,	autoEl : {
-					tag		: 'iframe'
-				,	src		: 'data/lapberkasjrareport_submit.jsp'
-				,	height 	: '100%'
-				,	width	: '100%'
-				, 	style: 'border: 0 none'
-				}
-			}]
-		}).show();
+		window.open ('data/lapberkasjrareport_submit.jsp');
 	}
 
 ,	do_refresh : function (b)
