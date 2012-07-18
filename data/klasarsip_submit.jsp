@@ -35,7 +35,7 @@ try {
 	}
 	action	= request.getParameter ("action");
 	id 		= request.getParameter ("id");
-	
+	uk_id = (String) session.getAttribute ("user.unit_kerja_id");
 	if (id == null) {
 		reader	= request.getReader ();
 		line	= reader.readLine ();
@@ -48,14 +48,12 @@ try {
 		data			= sb.toString();
 		o				= (JSONObject) new JSONObject (data);
 		id				= o.getString ("id");
-		uk_id			= o.getString ("unit_kerja_id");
 		kode			= o.getString ("kode");
 		nama			= o.getString ("nama");
 		ket				= o.getString ("keterangan");
 		jra_aktif		= o.getInt ("jra_aktif");
 		jra_inaktif		= o.getInt ("jra_inaktif");
 	} else {
-		uk_id			= request.getParameter ("unit_kerja_id");
 		kode			= request.getParameter ("kode");
 		nama			= request.getParameter ("nama");
 		ket				= request.getParameter ("keterangan");
