@@ -36,6 +36,7 @@ Ext.define ('Earsip.view.Berkas', {
 				text		: 'Simpan'
 			,	itemId		: 'save'
 			,	iconCls		: 'save'
+			,	disabled	: true
 			}]
 		}]
 	}]

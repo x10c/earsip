@@ -33,12 +33,14 @@ try {
 		return;
 	}
 	
+	String report_path		= application.getRealPath ("/") + "report" + File.separator;
 	String pemusnahan_id	= request.getParameter ("pemusnahan_id");
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
 	
 	parameters.put ("pemusnahan_id",Integer.parseInt(pemusnahan_id));
 	parameters.put ("REPORT_LOCALE", locale);
+	parameters.put ("SUBREPORT_DIR", report_path);
 	
 	List <JasperPrint> jlist= new ArrayList ();
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "pemusnahan.jasper"));

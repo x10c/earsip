@@ -40,6 +40,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 	},{
 		xtype 	: 'container'
 	,	layout	: 'hbox'
+	,	margin	: '0 0 5 0'
 	,	items	: [{
 			xtype			: 'combo'
 		,	fieldLabel		: 'Klasifikasi'
@@ -59,6 +60,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 		,	itemId			: 'indeks_relatif'
 		,	iconCls			: 'search'
 		,	width			: 140
+		,	margin			: '0 0 0 10'
 		}]
 		
 	},{

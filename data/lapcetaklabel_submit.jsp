@@ -30,6 +30,7 @@ try {
 	String unit_kerja_id	= request.getParameter ("unit_kerja_id");
 	String kode_rak			= request.getParameter ("kode_rak");
 	String kode_box			= request.getParameter ("kode_box");
+	String report_path		= application.getRealPath ("/") + "report" + File.separator;
 	
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
@@ -38,6 +39,7 @@ try {
 	parameters.put ("kode_rak", kode_rak);
 	parameters.put ("kode_box", kode_box);
 	parameters.put ("REPORT_LOCALE", locale);
+	parameters.put ("SUBREPORT_DIR", report_path);
 	
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "label.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);

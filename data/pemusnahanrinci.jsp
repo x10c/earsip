@@ -18,13 +18,16 @@ try {
 		return;
 	}
 	String pemusnahan_id	 = request.getParameter ("pemusnahan_id");
-	q	=" select	berkas_id"
-		+" ,		keterangan"
-		+" ,		jml_lembar"
-		+" ,		jml_set"
-		+" ,		jml_berkas"
-		+" from		t_pemusnahan_rinci"
-		+" where	pemusnahan_id = "+ pemusnahan_id;
+	q	=" select	A.berkas_id"
+		+" ,		B.nama"
+		+" ,		A.keterangan"
+		+" ,		A.jml_lembar"
+		+" ,		A.jml_set"
+		+" ,		A.jml_berkas"
+		+" from		t_pemusnahan_rinci	A"
+		+" ,		m_berkas			B"
+		+" where	pemusnahan_id	= "+ pemusnahan_id
+		+" and		A.berkas_id		= B.id";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -36,6 +39,7 @@ try {
 			i++;
 		}
 		data	+="\n{ berkas_id		: "+ rs.getString ("berkas_id")
+				+ "\n, nama				:'"+ rs.getString ("nama") + "'"
 				+ "\n, keterangan		:'"+ rs.getString ("keterangan") + "'"
 				+ "\n, jml_lembar		: "+ rs.getString ("jml_lembar")
 				+ "\n, jml_set			: "+ rs.getString ("jml_set")
