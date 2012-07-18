@@ -38,7 +38,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		,	'trans_peminjaman #peminjaman_grid button[itemId=pengembalian]': {
 				click : this.do_pengembalian
 			}
-		,	'peminjaman_win  textfield': {
+		,	'peminjaman_win textfield': {
 				change: this.do_activate_grid
 			}
 		,	'peminjaman_win #peminjaman_rinci': {
@@ -78,18 +78,13 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var b_edit		= grid.down ('#edit');
 		var b_del		= grid.down ('#del');
 		var b_back		= grid.down ('#pengembalian');
+
 		b_edit.setDisabled (! records.length);
 		b_del.setDisabled (! records.length);
 		b_back.setDisabled (! records.length);
 
 		if (records.length > 0) {
-			b_edit.setDisabled (records[0].get ('status'));
-			b_del.setDisabled (records[0].get ('status'));
-			b_back.setDisabled (records[0].get ('status'));
-			if (peminjaman.win == undefined){
-				peminjaman.win		= Ext.create ('Earsip.view.PeminjamanWin', {});	
-			}
-			peminjaman.win.load (records[0]);
+			peminjaman.win.do_load (records[0]);
 			grid_berkas.getStore ().load ({
 				params	: {
 					peminjaman_id : records[0].get ('id')
@@ -102,10 +97,6 @@ Ext.define ('Earsip.controller.Peminjaman', {
 	{
 		var panel = this.getTrans_peminjaman ();
 		var	grid_peminjaman = panel.down ('#peminjaman_grid');
-		if (panel.win == undefined) {
-			panel.win = Ext.create ('Earsip.view.PeminjamanWin', {});
-		}
-		
 		var grid_rinci = panel.win.down ('#peminjaman_rinci');
 		var form = panel.win.down ('form').getForm ();
 		grid_peminjaman.getSelectionModel (). deselectAll ();
@@ -128,9 +119,6 @@ Ext.define ('Earsip.controller.Peminjaman', {
 ,	do_edit : function (b)
 	{
 		var panel = this.getTrans_peminjaman ();
-		if (panel.win == undefined) {
-			panel.win = Ext.create ('Earsip.view.PeminjamanWin', {});
-		}
 		panel.win.show ();
 		panel.win.action = 'update';
 	}
@@ -159,6 +147,7 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		panel.win_cari.show ();
 		
 	}
+
 ,	do_activate_grid : function (textfield)
 	{	
 		var win	 = textfield.up ('#peminjaman_win');
@@ -187,7 +176,6 @@ Ext.define ('Earsip.controller.Peminjaman', {
 	
 , 	do_add_berkas	: function (button)
 	{	
-		
 		var grid	= button.up ('#peminjaman_rinci');
 		var editor	= grid.getPlugin ('roweditor');
 		editor.cancelEdit ();
@@ -195,7 +183,6 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		grid.getStore ().insert (0, r);
 		editor.action = 'add';
 		editor.startEdit (0, 0);
-
 	}
 	
 , 	do_delete_berkas	: function (button)

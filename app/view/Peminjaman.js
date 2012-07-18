@@ -22,6 +22,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 	,	itemId			: 'peminjaman_grid'
 	,	title			: 'Daftar Peminjaman'
 	,	region			: 'center'
+	,	autoScroll		: true
 	,	store			: 'Peminjaman'
 	,	plugins		: [
 			Ext.create ('Earsip.plugin.RowEditor')
@@ -36,7 +37,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		},{
 			text		: 'Unit Kerja Peminjam'
 		,	dataIndex	: 'unit_kerja_peminjam_id'
-		,	flex		: 0.5
+		,	width		: 140
 		,	editor		: {
 				xtype			: 'combo'
 			,	store			: Ext.create ('Earsip.store.UnitKerja', {
@@ -56,31 +57,31 @@ Ext.define ('Earsip.view.Peminjaman', {
 		},{
 			text			: 'Nama Peminjam'
 		,	dataIndex		: 'nama_peminjam'
-		,	flex			: 0.5
+		,	width			: 120
 		},{
 			text			: 'Pimpinan Peminjam'
 		,	dataIndex		: 'nama_pimpinan_peminjam'
-		,	flex			: 0.5
+		,	width			: 120
 		},{
 			text			: 'Nama Petugas'
 		,	dataIndex		: 'nama_petugas'
-		,	flex			: 0.5
+		,	width			: 120
 		},{
 			text			: 'Pimpinan Petugas'
 		,	dataIndex		: 'nama_pimpinan_petugas'
-		,	flex			: 0.5
+		,	width			: 120
 		},{
-			text			: 'Tanggal Peminjaman'
+			text			: 'Tgl. Pinjam'
 		,	dataIndex		: 'tgl_pinjam'
-		,	flex			: 0.5
+		,	width			: 100
 		},{
-			text			: 'Tanggal Batas Pengembalian'
+			text			: 'Tgl. Batas Kembali'
 		,	dataIndex		: 'tgl_batas_kembali'
-		,	flex			: 0.5
+		,	width			: 120
 		},{
-			text			: 'Tanggal Kembali'
+			text			: 'Tgl. Kembali'
 		,	dataIndex		: 'tgl_kembali'
-		,	flex			: 0.5
+		,	width			: 100
 		,	hidden			: true
 		,	hideable		: false
 		},{
@@ -90,7 +91,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		},{
 			text			: 'Status'
 		,	dataIndex		: 'status'
-		,	flex			: 0.5
+		,	width			: 80
 		,	renderer		: function (v){
 				if (v == 0){
 					return String.format( '<span style="color: red">{0}</span>', 'Belum Kembali');
@@ -124,7 +125,6 @@ Ext.define ('Earsip.view.Peminjaman', {
 			,	itemId		: 'pengembalian'
 			,	iconCls		: 'dirup'
 			,	disabled	: true
-	
 			},'-','->','-',{
 				text		: 'Cari'
 			,	itemId		: 'search'
@@ -278,14 +278,13 @@ Ext.define ('Earsip.view.Peminjaman', {
 					}
 				}
 			});
-			
 		}
+	}
 
-	,	afterrender : function (comp)
-		{
-			if (Ext.getCmp ('peminjaman_win')!= undefined)
-				this.win = Ext.getCmp ('peminjaman_win');
-		}
+,	initComponent : function ()
+	{
+		this.win = Ext.create ('Earsip.view.PeminjamanWin', {});
+		this.win.hide ();
+		this.callParent (arguments);
 	}	
-	
 });

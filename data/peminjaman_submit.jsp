@@ -135,12 +135,8 @@ try {
 		db_pstmt.setString(9, keterangan);
 		db_pstmt.setInt(10, Integer.parseInt(id));
 		db_pstmt.executeUpdate ();
-		
 	}
-		
-	
 
-	
 	if (id!=null || !id.equals(""))
 		{
 			db_stmt = db_con.createStatement ();

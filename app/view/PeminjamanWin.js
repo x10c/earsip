@@ -6,7 +6,6 @@ Ext.require ([
 Ext.define('Earsip.view.PeminjamanWin', {
 	extend		: 'Ext.Window'
 ,	alias		: 'widget.peminjaman_win'
-,	id			: 'peminjaman_win'
 ,	title		: 'Peminjaman'
 ,	itemId		: 'peminjaman_win'
 ,   width		: 800
@@ -20,6 +19,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/peminjaman_submit.jsp'
+	,	itemId		: 'peminjaman_win_form'
 	,	plain		: true
 	,	frame		: true
 	,	autoScroll	: true
@@ -36,6 +36,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			hidden			: true
 		,	itemId			: 'id'
 		,	name			: 'id'
+		,	xtype			: 'textfield'
 		},{
 			xtype			: 'container'
 		,	plain			: true
@@ -82,7 +83,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	format			: 'Y-m-d'
 					,	value			: new Date ()
 					,	editable		: false
-					
 					},{
 						xtype			: 'datefield'
 					,	fieldLabel		: 'Tanggal Batas Pengembalian'
@@ -92,7 +92,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	allowblank		: false
 					,	editable		: false
 					,	value			: new Date ()
-					
 					},{
 						xtype			: 'datefield'
 					,	itemId			: 'tgl_kembali'
@@ -100,7 +99,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	format			: 'Y-m-d'
 					, 	value			: 'null'
 					,	hidden			: true
-					
 					}]
 				}]
 			},{
@@ -144,7 +142,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				,	itemId			: 'keterangan'
 				,	name			: 'keterangan'
 				}]
-				
 			}]
 		},{
 			xtype			: 'grid'
@@ -191,8 +188,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				}]
 			}]
 		}]
-	
-		
 	}]
 ,	buttons			: [{
 		text			: 'Simpan'
@@ -202,26 +197,15 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	formBind		: true
 	}]
 	
-,	load : function (record)
+,	do_load : function (record)
 	{
 		var grid	= this.down ('#peminjaman_rinci');
 		var form	= this.down ('form');
 		var store	= Ext.data.StoreManager.lookup ('BerkasPinjam');
-		
-		store.load ({
-			scope	: this
-		,	callback: function (r, op, success)
-			{
-				if (success) {
-					form.loadRecord (r);
-					grid.getStore ().load ({
-						params	: {
-							peminjaman_id  : form.getRecord ().get ('id')
-						}
-					});
-				}
-			}
-		});
+
+		form.loadRecord (record);
+
+		store.load ();
 		store.clearFilter ();
 	}
 });
