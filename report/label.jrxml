@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="label" printOrder="Horizontal" pageWidth="432" pageHeight="576" columnWidth="392" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="76"/>
 	<parameter name="div_id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[new Integer (0)]]></defaultValueExpression>
 	</parameter>
@@ -71,7 +71,7 @@ $P!{extra_query2}]]>
 					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="18"/>
+					<font fontName="SansSerif" size="18"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cabang}]]></textFieldExpression>
 			</textField>
@@ -84,7 +84,7 @@ $P!{extra_query2}]]>
 					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="true"/>
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[KODE RAK]]></text>
 			</staticText>
@@ -96,7 +96,7 @@ $P!{extra_query2}]]>
 					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="28" isBold="true"/>
+					<font fontName="SansSerif" size="28" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_rak}]]></textFieldExpression>
 			</textField>
@@ -107,7 +107,7 @@ $P!{extra_query2}]]>
 					<bottomPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="18" isBold="true"/>
+					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
@@ -140,7 +140,7 @@ $P!{extra_query2}]]>
 					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="28" isBold="true"/>
+					<font fontName="SansSerif" size="28" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_box}]]></textFieldExpression>
 			</textField>
@@ -153,7 +153,7 @@ $P!{extra_query2}]]>
 					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="true"/>
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[KODE BOX]]></text>
 			</staticText>
