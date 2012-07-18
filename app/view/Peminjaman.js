@@ -62,6 +62,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 			text			: 'Pimpinan Peminjam'
 		,	dataIndex		: 'nama_pimpinan_peminjam'
 		,	width			: 120
+		,	hidden			: true
 		},{
 			text			: 'Nama Petugas'
 		,	dataIndex		: 'nama_petugas'
@@ -70,6 +71,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 			text			: 'Pimpinan Petugas'
 		,	dataIndex		: 'nama_pimpinan_petugas'
 		,	width			: 120
+		,	hidden			: true
 		},{
 			text			: 'Tgl. Pinjam'
 		,	dataIndex		: 'tgl_pinjam'
@@ -82,7 +84,6 @@ Ext.define ('Earsip.view.Peminjaman', {
 			text			: 'Tgl. Kembali'
 		,	dataIndex		: 'tgl_kembali'
 		,	width			: 100
-		,	hidden			: true
 		,	hideable		: false
 		},{
 			text			: 'Keterangan'
