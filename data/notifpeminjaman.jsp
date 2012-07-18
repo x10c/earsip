@@ -29,7 +29,8 @@ try {
 		+" ,			tgl_kembali"
 		+" ,			keterangan"
 		+" from			t_peminjaman A"
-		+" where		datediff('week', current_date, tgl_batas_kembali) <= 1";
+		+" where		datediff('week', current_date, tgl_batas_kembali) <= 1"
+		+" and			tgl_kembali is null";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
