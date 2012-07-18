@@ -134,31 +134,12 @@ Ext.define ('Earsip.view.Pemusnahan', {
 		,	alias	: 'widget.berkas_musnah_grid'
 		,	title	: 'Daftar Berkas'
 		,	store	: 'PemusnahanRinci'
-		,	plugins	: [
-				Ext.create ('Earsip.plugin.RowEditor')
-			]
 		,	columns	: [{
 				xtype	 : 'rownumberer'
 			},{	
 				text	 	: 'Berkas'
-			,	dataIndex	: 'berkas_id'
+			,	dataIndex	: 'nama'
 			,	flex	 	: 1
-			,	editor		: {
-					xtype			: 'combo'
-				,	store			: Ext.create ('Earsip.store.BerkasMusnah', {
-						autoLoad		: true
-					})
-				,	displayField	: 'nama'
-				,	valueField		: 'id'
-				,	mode			: 'local'
-				,	typeAhead		: false
-				,	triggerAction	: 'all'
-				,	lazyRender		: true
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{
-				return combo_renderer (v, this.columns[colidx]);
-			}
 			},{
 				text	 	: 'Keterangan'
 			,	dataIndex	: 'keterangan'
@@ -166,15 +147,15 @@ Ext.define ('Earsip.view.Pemusnahan', {
 			},{
 				text	 	: 'Jumlah Lembar'
 			,	dataIndex	: 'jml_lembar'
-			,	flex	 	: .5
+			,	width	 	: 110
 			},{	
 				text	 	: 'Jumlah Set'
 			,	dataIndex	: 'jml_set'
-			,	flex	 	: .5
+			,	width	 	: 80
 			},{	
 				text	 	: 'Jumlah Berkas'
 			,	dataIndex	: 'jml_berkas'
-			,	flex	 	: .5
+			,	width	 	: 100
 			}]
 		}]
 	}]

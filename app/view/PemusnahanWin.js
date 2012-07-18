@@ -158,7 +158,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					xtype	: 'rownumberer'
 				},{
 					text	 	: 'Berkas'
-				,	dataIndex	: 'berkas_id'
+				,	dataIndex	: 'nama'
 				,	flex	 	: 1
 				,	editor		: {
 						xtype			: 'combobox'
@@ -183,7 +183,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				},{
 					text	 	: 'Jumlah Lembar'
 				,	dataIndex	: 'jml_lembar'
-				,	flex	 	: .5
+				,	width	 	: 110
 				,	editor		: {
 						xtype : 'numberfield'
 					,	allowBlank: false
@@ -191,7 +191,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				},{	
 					text	 	: 'Jumlah Set'
 				,	dataIndex	: 'jml_set'
-				,	flex	 	: .5
+				,	width	 	: 80
 				,	allowBlank	: false
 				,	editor		: {
 						xtype : 'numberfield'
@@ -200,7 +200,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				},{	
 					text	 	: 'Jumlah Berkas'
 				,	dataIndex	: 'jml_berkas'
-				,	flex	 	: .5
+				,	width	 	: 100
 				,	allowBlank	: false
 				,	editor		: {
 						xtype : 'numberfield'

@@ -5,7 +5,7 @@
 	<property name="ireport.y" value="42"/>
 	<parameter name="pemusnahan_id" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\earsip\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT C.nama as metoda_nama, A.tgl,B.nomor,
