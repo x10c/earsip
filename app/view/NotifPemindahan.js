@@ -53,7 +53,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 				return combo_renderer (v, this.columns[colidx]);
 			}
 		},{
-			text			: 'Kode'
+			text			: 'No Reg / No Surat'
 		,	dataIndex		: 'kode'
 		,	flex			: 0.5
 		,	editor		: {

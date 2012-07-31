@@ -39,7 +39,7 @@ Ext.define('Earsip.view.NotifPemindahanWin', {
 		,	showClear		: false
         ,	disabled		: true
 		},{
-			fieldLabel		: 'Kode'
+			fieldLabel		: 'No Reg/ No Surat'
 		,	itemId			: 'kode'
 		,	name			: 'kode'
 		,	showClear		: false

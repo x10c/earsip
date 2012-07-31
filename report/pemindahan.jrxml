@@ -352,7 +352,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="53" y="1" width="93" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="53" y="1" width="93" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -366,7 +366,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_unit} + " " + $F{kode_klas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="145" y="1" width="217" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="145" y="1" width="217" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -380,7 +380,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{masalah}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="362" y="1" width="34" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="362" y="1" width="34" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -394,7 +394,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[new Integer ($F{jra_aktif}.intValue () +  $F{jra_inaktif}.intValue ())]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="396" y="1" width="59" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="396" y="1" width="59" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -408,7 +408,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_folder}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="455" y="1" width="57" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="455" y="1" width="57" height="20"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -422,7 +422,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_box}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="512" y="1" width="60" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="512" y="1" width="60" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -434,7 +434,7 @@ where  F.id = $P{pemindahan_id}::integer]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_rak}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="1" width="53" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="1" width="53" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>

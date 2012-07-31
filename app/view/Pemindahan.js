@@ -40,7 +40,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 		,	hidden		: true
 		, 	hideable	: false
 		},{
-			text			: 'Kode'
+			text			: 'No Reg/ No Surat'
 		,	dataIndex		: 'kode'
 		,	flex			: 0.5
 		},{

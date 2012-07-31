@@ -33,7 +33,7 @@ Ext.define('Earsip.view.PemindahanWin', {
 		,	itemId			: 'unit_kerja_id'
 		,	name			: 'unit_kerja_id'
 		},{
-			fieldLabel		: 'Kode'
+			fieldLabel		: 'No Reg/ No Surat'
 		,	itemId			: 'kode'
 		,	name			: 'kode'
 		,	allowBlank		: false

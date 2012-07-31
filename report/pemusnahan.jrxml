@@ -5,7 +5,7 @@
 	<property name="ireport.y" value="42"/>
 	<parameter name="pemusnahan_id" class="java.lang.Integer"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT C.nama as metoda_nama, A.tgl,B.nomor,
@@ -144,7 +144,7 @@ ORDER BY B.nomor ASC]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="45" y="0" width="205" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="45" y="0" width="205" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -157,7 +157,7 @@ ORDER BY B.nomor ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="250" y="0" width="128" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="250" y="0" width="128" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -173,7 +173,7 @@ ORDER BY B.nomor ASC]]>
 				<reportElement x="378" y="0" width="194" height="20"/>
 			</rectangle>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="388" y="0" width="83" height="20">
+				<reportElement stretchType="RelativeToBandHeight" x="388" y="0" width="83" height="20">
 					<printWhenExpression><![CDATA[new java.lang.Boolean(($F{nomor}.intValue () % 2) == 1)]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -182,7 +182,7 @@ ORDER BY B.nomor ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomor}.toString () + "."]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="471" y="0" width="101" height="20">
+				<reportElement stretchType="RelativeToBandHeight" x="471" y="0" width="101" height="20">
 					<printWhenExpression><![CDATA[new java.lang.Boolean(($F{nomor}.intValue () % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -191,7 +191,7 @@ ORDER BY B.nomor ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomor}.toString () + "."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="45" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="45" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -214,8 +214,8 @@ ORDER BY B.nomor ASC]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Telah melakukan pemusnahan arsip dengan cara " + $F{metoda_nama}]]></textFieldExpression>
 			</textField>
-			<subreport>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="32" width="539" height="36"/>
+			<subreport isUsingCache="false">
+				<reportElement x="0" y="32" width="539" height="36"/>
 				<subreportParameter name="pemusnahan_id">
 					<subreportParameterExpression><![CDATA[$P{pemusnahan_id}]]></subreportParameterExpression>
 				</subreportParameter>

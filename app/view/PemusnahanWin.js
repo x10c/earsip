@@ -158,7 +158,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					xtype	: 'rownumberer'
 				},{
 					text	 	: 'Berkas'
-				,	dataIndex	: 'nama'
+				,	dataIndex	: 'berkas_id'
 				,	flex	 	: 1
 				,	editor		: {
 						xtype			: 'combobox'

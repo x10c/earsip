@@ -147,7 +147,7 @@ ORDER BY tgl_dibuat ASC]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="173" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="173" height="20"/>
 				<box leftPadding="10"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
@@ -155,7 +155,7 @@ ORDER BY tgl_dibuat ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="173" y="0" width="53" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="173" y="0" width="53" height="20"/>
 				<box leftPadding="0" rightPadding="10"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
@@ -163,7 +163,7 @@ ORDER BY tgl_dibuat ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{usia}.getYears()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="379" y="0" width="193" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="379" y="0" width="193" height="20"/>
 				<box leftPadding="10"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
@@ -171,7 +171,7 @@ ORDER BY tgl_dibuat ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{lokasi}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="327" y="0" width="52" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="327" y="0" width="52" height="20"/>
 				<box rightPadding="10"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
@@ -179,7 +179,7 @@ ORDER BY tgl_dibuat ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{jra_inaktif}.toString()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="226" y="0" width="53" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="226" y="0" width="53" height="20"/>
 				<box leftPadding="0" rightPadding="10"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
@@ -187,7 +187,7 @@ ORDER BY tgl_dibuat ASC]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{usia}.getMonths ()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="279" y="0" width="48" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="279" y="0" width="48" height="20"/>
 				<box leftPadding="0" rightPadding="10"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>

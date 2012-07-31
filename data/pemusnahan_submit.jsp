@@ -135,7 +135,6 @@ try {
 			if (!action.equalsIgnoreCase ("destroy"))
 			{
 				JSONArray	berkas = new JSONArray (request.getParameter ("berkas"));
-				
 				int len	= berkas.length ();
 				if (len > 0)
 				{

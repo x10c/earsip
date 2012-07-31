@@ -338,7 +338,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="330" y="0" width="128" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="330" y="0" width="128" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -351,7 +351,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="177" y="0" width="72" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="177" y="0" width="72" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -364,7 +364,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama_tipe}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="526" y="0" width="46" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="526" y="0" width="46" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -377,7 +377,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{jml_berkas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="249" y="0" width="81" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="249" y="0" width="81" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -390,7 +390,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{kode_unit} + " " + $F{kode_klas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="493" y="0" width="33" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="493" y="0" width="33" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -403,7 +403,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{jml_set}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="36" y="0" width="141" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="36" y="0" width="141" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -416,7 +416,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama_berkas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="458" y="0" width="35" height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="458" y="0" width="35" height="20" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -429,7 +429,7 @@ YANG TELAH DIMUSNAHKAN]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{jml_lembar}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="0" y="0" width="36" height="20"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="36" height="20"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>

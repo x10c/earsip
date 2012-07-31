@@ -32,7 +32,6 @@ try {
 		+" ,		arsip_status_id"
 		+" from		m_berkas"
 		+" where 	status_hapus	= 1"
-		+" and		arsip_status_id = 0"
 		+" and		unit_kerja_id is not null"; // non root directory
 
 	if (Integer.parseInt(grup_id) == 3) //  pusat arsip group
