@@ -28,6 +28,7 @@ try {
 		+" where	pid			= "+ id
 		+" and		tipe_file	= 0"
 		+" and		status		= 1" // 1:aktif, 0:inaktif
+		+" and		status_hapus	= 1"
 		+" order by nama";
 
 	rs = db_stmt.executeQuery (q);
@@ -85,6 +86,7 @@ try {
 		+" and		pid			= 0"
 		+" and		tipe_file	= 0"
 		+" and		status		= 1" // 1:aktif, 0:inaktif
+		+" and		status_hapus	= 1"
 		+" order by nama";
 
 	rs = db_stmt.executeQuery (q);
