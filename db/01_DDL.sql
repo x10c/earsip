@@ -135,9 +135,6 @@ create table M_BERKAS (
 comment on table M_BERKAS is
 'MASTER BERKAS';
 
-comment on column M_BERKAS.JRA is
-'Masa JRA dalam tahun';
-
 comment on column M_BERKAS.STATUS is
 '1 = AKTIF; 2 : INAKTIF';
 
