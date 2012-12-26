@@ -361,7 +361,7 @@ Ext.define ('Earsip.controller.Berkas', {
 		var form = win.down ('#form_ir').getForm ();
 		var berkasform = this.getBerkasform (); 
 		var combo_klas = berkasform.down ('#berkas_klas_id');
-		var id = form.getRecord ().get ('id');
+		var id = form.getRecord ().get ('berkas_klas_id');
 		var r = combo_klas.getStore ().getById (id);
 		combo_klas.setValue (id);
 		this.on_select_berkas_klas (combo_klas,new Array(r));

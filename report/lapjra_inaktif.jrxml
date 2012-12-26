@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="pegawai_id" class="java.lang.String"/>
+	<parameter name="pegawai_id" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT 	coalesce (tgl_dibuat,tgl_unggah) as tgl_dibuat
 ,	nama

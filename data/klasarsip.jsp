@@ -18,6 +18,7 @@ try {
 		return;
 	}
 	String unit_kerja_id = (String) session.getAttribute ("user.unit_kerja_id");
+	String grup_id 	= (String) session.getAttribute ("user.grup_id");
 	q	=" select	id"
 		+" , 		unit_kerja_id"
 		+" , 		kode"
@@ -25,9 +26,10 @@ try {
 		+" , 		keterangan"
 		+" ,		jra_aktif"
 		+" ,		jra_inaktif"
-		+" from 	r_berkas_klas"
-		+" where	unit_kerja_id = " + unit_kerja_id
-		+" order by nama";
+		+" from 	r_berkas_klas";
+		if (!grup_id.equals ("3"))
+			q +=" where	unit_kerja_id = " + unit_kerja_id;
+		q +=" order by nama";
 
 	db_stmt = db_con.createStatement ();
 	rs = db_stmt.executeQuery (q);

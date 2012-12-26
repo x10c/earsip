@@ -19,7 +19,7 @@ try {
 		return;
 	}
 	
-	String unit_kerja_id = (String) request.getAttribute ("user.unit_kerja_id");
+	String unit_kerja_id = (String) session.getAttribute ("user.unit_kerja_id");
 	q	=" select	A.id"
 		+" ,		A.berkas_klas_id"
 		+" ,		A.keterangan"

@@ -32,7 +32,7 @@ Ext.define('Earsip.view.WinIndeksRelatif',{
 			xtype 	: 'textfield'
 		}
 	,	items	: [{
-			itemId 	: 'id'
+			itemId 	: 'berkas_klas_id'
 		,	name	: 'berkas_klas_id'
 		},{
 			itemId	: 'keterangan'
