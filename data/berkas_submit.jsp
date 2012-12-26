@@ -28,37 +28,52 @@ try {
 	int		jra_aktif	= Integer.parseInt (request.getParameter ("jra_aktif"));
 	int		jra_inaktif	= Integer.parseInt (request.getParameter ("jra_inaktif"));
 	int		stat_hapus	= Integer.parseInt (request.getParameter ("status_hapus"));
+	int		tipe_file	= Integer.parseInt (request.getParameter ("tipe_file"));
 
-	q	=" update	m_berkas"
-		+" set		nama			= ?"
-		+" ,		tgl_dibuat		= ?"
-		+" ,		berkas_klas_id	= ?"
-		+" ,		berkas_tipe_id	= ?"
-		+" ,		nomor			= ?"
-		+" ,		pembuat			= ?"
-		+" ,		judul			= ?"
-		+" ,		masalah			= ?"
-		+" ,		jra_aktif		= ?"
-		+" ,		jra_inaktif		= ?"
-		+" ,		status_hapus	= ?"
-		+" where	id				= ?";
+	if (0 == stat_hapus) {
+		q =" delete from m_berkas where pid = ?";
+		db_stmt = db_con.prepareStatement (q);
+		db_stmt.setInt (1, id);
+		db_stmt.executeUpdate();
 
-	db_stmt	= db_con.prepareStatement (q);
+		q = " delete from m_berkas where id = ?";
+		db_stmt = db_con.prepareStatement (q);
+		db_stmt.setInt (1, id);
+		db_stmt.executeUpdate ();
+	} else {
+		q	=" update	m_berkas"
+			+" set		nama			= ?"
+			+" ,		tgl_dibuat		= ?"
+			+" ,		berkas_klas_id	= ?"
+			+" ,		berkas_tipe_id	= ?"
+			+" ,		nomor			= ?"
+			+" ,		pembuat			= ?"
+			+" ,		judul			= ?"
+			+" ,		masalah			= ?"
+			+" ,		jra_aktif		= ?"
+			+" ,		jra_inaktif		= ?"
+			+" ,		status_hapus	= ?"
+			+" where	id				= ?";
 
-	db_stmt.setString	(1, nama);
-	db_stmt.setDate		(2, Date.valueOf (tgl_dibuat));
-	db_stmt.setInt		(3, klas_id);
-	db_stmt.setInt		(4, tipe_id);
-	db_stmt.setString	(5, nomor);
-	db_stmt.setString	(6, pembuat);
-	db_stmt.setString	(7, judul);
-	db_stmt.setString	(8, masalah);
-	db_stmt.setInt		(9, jra_aktif);
-	db_stmt.setInt		(10, jra_inaktif);
-	db_stmt.setInt		(11, stat_hapus);
-	db_stmt.setInt		(12, id);
+		db_stmt	= db_con.prepareStatement (q);
 
-	db_stmt.executeUpdate ();
+		db_stmt.setString	(1, nama);
+		db_stmt.setDate		(2, Date.valueOf (tgl_dibuat));
+		db_stmt.setInt		(3, klas_id);
+		db_stmt.setInt		(4, tipe_id);
+		db_stmt.setString	(5, nomor);
+		db_stmt.setString	(6, pembuat);
+		db_stmt.setString	(7, judul);
+		db_stmt.setString	(8, masalah);
+		db_stmt.setInt		(9, jra_aktif);
+		db_stmt.setInt		(10, jra_inaktif);
+		db_stmt.setInt		(11, stat_hapus);
+		db_stmt.setInt		(12, id);
+
+		db_stmt.executeUpdate ();
+	}
+
+	db_stmt.close ();
 
 	out.print ("{success:true,info:'Data berkas telah tersimpan.'}");
 }

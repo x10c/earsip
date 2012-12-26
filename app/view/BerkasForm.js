@@ -27,6 +27,10 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	name			: 'pid'
 	,	hidden			: true
 	},{
+		itemId			:'tipe_file'
+	,	name			:'tipe_file'
+	,	hidden			:true
+	},{
 		fieldLabel		: 'Nama'
 	,	itemId			: 'nama'
 	,	name			: 'nama'
@@ -62,7 +66,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 		,	width			: 140
 		,	margin			: '0 0 0 10'
 		}]
-		
+
 	},{
 		xtype			: 'combo'
 	,	fieldLabel		: 'Tipe'

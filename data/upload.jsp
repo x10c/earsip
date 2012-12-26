@@ -152,7 +152,11 @@ try {
 	if (file.exists ()) {
 		q	=" select	nama"
 			+" from		m_berkas"
-			+" where	sha = '"+ sha +"'";
+			+" where	sha		= '"+ sha +"'"
+			+" and		nama	= '"+ name +"'"
+			+" and		pegawai_id		= "+ user_id
+			+" and		unit_kerja_id	= "+ uk_id
+			+" and		status_hapus	!= 0";
 
 		rs = db_stmt.executeQuery (q);
 
@@ -160,7 +164,10 @@ try {
 			name = rs.getString ("nama");
 
 			out.print ("{success:false"
-					+",message:'Berkas yang sama telah ada dengan nama \""+ name +"\".'}");
+					+",message:'Berkas yang sama telah ada dengan nama \""+ name +"\".'"
+					+",user_id:'"+ user_id +"'"
+					+",sha:'"+ sha +"'}"
+			);
 			return;
 		}
 	}
