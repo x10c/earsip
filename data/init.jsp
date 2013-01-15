@@ -1,9 +1,11 @@
-<%@ page import="java.sql.Connection" %>
+<%@ page import="java.io.File" %>
 <%@ page import="java.sql.Date" %>
 <%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.kilabit.ServletUtilities" %>
@@ -16,6 +18,7 @@
 	JSONArray			_a		= null;
 	JSONObject			_o		= null;
 	JSONObject			_r		= new JSONObject ();
+	int					_i		= 0;
 
 	db_con = (Connection) session.getAttribute ("db.con");
 

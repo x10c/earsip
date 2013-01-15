@@ -24,9 +24,18 @@ Ext.define ('Earsip.view.BerkasJRA', {
 		}
 	}]
 ,	listeners : {
-		beforerender : function (comp)
+		activate	:function (c)
+		{
+			c.down ('#berkas_jra_list').do_refresh ();
+		}
+	,	beforerender: function (comp)
 		{
 			this.down ('#berkas_jra_form').down ('#indeks_relatif').hide ();
 		}
+	}
+
+,	do_refresh	:function ()
+	{
+		this.down ('#berkas_jra_list').do_refresh ();
 	}
 });

@@ -14,17 +14,18 @@ Ext.define ('Earsip.view.BerkasList', {
 ,	store		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'
-	,	width		: 300
+	,	width		:320
 	,	hideable	: false
 	,	dataIndex	: 'nama'
 	,	locked		: true
 	,	renderer	: function (v, md, r)
 		{
 			if (r.get ('tipe_file') == 0) {
-				return "<span class='dir'>"+ v +"</span>";
+				md.tdCls = 'dir';
 			} else {
-				return "<span class='doc'>"+ v +"</span>";
+				md.tdCls = 'doc';
 			}
+			return v;
 		}
 	},{
 		text		: 'Klasifikasi'
@@ -40,10 +41,12 @@ Ext.define ('Earsip.view.BerkasList', {
 		text		: 'Tanggal Dibuat'
 	,	width		: 150
 	,	dataIndex	: 'tgl_dibuat'
+	,	align		:'center'
 	},{
 		text		: 'Status'
 	,	dataIndex	: 'status'
 	,	hidden		: true
+	,	width		: 100
 	,	renderer	: function (v, md, r)
 		{
 			if (v == 1) {
@@ -52,38 +55,34 @@ Ext.define ('Earsip.view.BerkasList', {
 			return 'Non-Aktif';
 		}
 	}]
-,	dockedItems	: [{
-		xtype		: 'toolbar'
-	,	dock		: 'top'
-	,	flex		: 1
-	,	items		: [{
-			text		: 'Unggah'
-		,	itemId		: 'upload'
-		,	iconCls		: 'upload'
-		},'-',{
-			text		: 'Refresh'
-		,	itemId		: 'refresh'
-		,	iconCls		: 'refresh'
-		},'-',{
-			text		: 'Kembali'
-		,	itemId		: 'dirup'
-		,	iconCls		: 'dirup'
-		},'-','->','-',{
-			text		: 'Cari'
-		,	itemId		: 'search'
-		,	iconCls		: 'search'
-		},'-',{
-			text		: 'Bagi'
-		,	itemId		: 'share'
-		,	iconCls		: 'dir'
-		,	disabled	: true
-		},'-',{
-			text		: 'Hapus'
-		,	itemId		: 'del'
-		,	iconCls		: 'del'
-		,	disabled	: true
-		}]
+,	tbar : [{
+		text		: 'Unggah'
+	,	itemId		: 'upload'
+	,	iconCls		: 'upload'
+	},'-',{
+		text		: 'Refresh'
+	,	itemId		: 'refresh'
+	,	iconCls		: 'refresh'
+	},'-',{
+		text		: 'Kembali'
+	,	itemId		: 'dirup'
+	,	iconCls		: 'dirup'
+	},'-','->','-',{
+		text		: 'Cari'
+	,	itemId		: 'search'
+	,	iconCls		: 'search'
+	},'-',{
+		text		: 'Bagi'
+	,	itemId		: 'share'
+	,	iconCls		: 'dir'
+	,	disabled	: true
+	},'-',{
+		text		: 'Hapus'
+	,	itemId		: 'del'
+	,	iconCls		: 'del'
+	,	disabled	: true
 	}]
+
 ,	initComponent	: function ()
 	{
 		this.win_share	= Ext.create ('Earsip.view.BerkasBerbagiWin', {});
@@ -92,11 +91,11 @@ Ext.define ('Earsip.view.BerkasList', {
 		this.callParent (arguments);
 	}
 
-,	do_load_list : function (berkas_id)
+,	do_refresh	: function ()
 	{
 		this.getStore ().load ({
 			params	: {
-				berkas_id : berkas_id
+				berkas_id : Earsip.berkas.tree.id
 			}
 		});
 	}

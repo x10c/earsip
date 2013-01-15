@@ -236,8 +236,12 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			grid.getStore ().load ();
 			grid = this.down ('#berkas_pindah_grid');
 			grid.getStore ().load ();
-			
 		}
-		
+	}
+
+,	do_refresh	:function ()
+	{
+		this.down ('#pemindahan_grid').getStore ().load ();
+		this.down ('#berkas_pindah_grid').getStore ().load ();
 	}
 });

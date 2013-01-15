@@ -51,4 +51,9 @@ Ext.define ('Earsip.view.BerkasBerbagiTree', {
 			}
 		});
 	}
+
+,	do_refresh	:function ()
+	{
+		this.do_load_tree ();
+	}
 });

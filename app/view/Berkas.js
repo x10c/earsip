@@ -40,4 +40,11 @@ Ext.define ('Earsip.view.Berkas', {
 			}]
 		}]
 	}]
+
+,	listeners	:{
+		activate	:function (c)
+		{
+			c.down ('#berkaslist').do_refresh ();
+		}
+	}
 });

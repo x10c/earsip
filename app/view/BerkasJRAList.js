@@ -5,6 +5,7 @@ Ext.require ([
 Ext.define ('Earsip.view.BerkasJRAList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.berkas_jra_list'
+,	id			:'berkas_jra_list'
 ,	store		: 'BerkasJRA'
 ,	columns		: [{
 		text		: 'Nama'
@@ -35,19 +36,18 @@ Ext.define ('Earsip.view.BerkasJRAList', {
 	,	dataIndex	: 'lokasi'
 	}]
 ,	dockedItems	: [{
-		xtype		: 'toolbar'
-	,	dock		: 'top'
-	,	flex		: 1
-	,	items		: [{
-			text		: 'Refresh'
-		,	itemId		: 'refresh'
-		,	iconCls		: 'refresh'
-		,	handler		: function ()
-			{
-				var grid = this.up ('grid');
-				grid.getStore ().load ({});
-			}
-		},'-'
-		]
+		text		: 'Refresh'
+	,	itemId		: 'refresh'
+	,	iconCls		: 'refresh'
+	,	handler		: function ()
+		{
+			var grid = this.up ('grid');
+			grid.getStore ().load ({});
+		}
 	}]
+
+,	do_refresh	:function ()
+	{
+		this.getStore ().load ();
+	}
 });

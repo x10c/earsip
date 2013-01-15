@@ -92,7 +92,7 @@ Ext.define ('Earsip.controller.BerkasBerbagiWin', {
 			{
 				var o = Ext.decode (resp.responseText);
 				if (o.success == true) {
-					this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
+					this.getBerkaslist ().do_refresh ();
 					win.hide ();
 				} else {
 					Ext.msg.error (o.info);

@@ -108,7 +108,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
-					this.getBerkaslist ().do_load_list (Earsip.berkas.pid);
+					this.getBerkaslist ().do_refresh (Earsip.berkas.pid);
 				} else {
 					Ext.msg.error (action.result.info);
 				}
@@ -128,7 +128,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			Earsip.berkas.tree.id	= records[0].get ('id');
 			Earsip.berkas.tree.pid	= records[0].get ('parentId');
 
-			this.getBerkaslist ().do_load_list (Earsip.berkas.id);
+			this.getBerkaslist ().do_refresh ();
 		}
 	}
 
@@ -200,7 +200,7 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	list_refresh : function (b)
 	{
-		this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
+		this.getBerkaslist ().do_refresh ();
 	}
 
 ,	do_dirup : function (b)
@@ -257,7 +257,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			,	success	: function (form, action)
 				{
 					if (action.result.success == true) {
-						this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
+						this.getBerkaslist ().do_refresh ();
 						Ext.msg.info (action.result.info);
 					} else {
 						Ext.msg.error (action.result.info);
@@ -296,7 +296,7 @@ Ext.define ('Earsip.controller.Berkas', {
 				if (action.result.success == true) {
 					Ext.msg.info ('Berkas baru telah dibuat!');
 					this.getBerkastree ().do_load_tree ();
-					this.getBerkaslist ().do_load_list (Earsip.berkas.pid);
+					this.getBerkaslist ().do_refresh ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
@@ -332,7 +332,7 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	winupload_close : function (win)
 	{
-		this.getBerkaslist ().do_load_list (Earsip.berkas.tree.id);
+		this.getBerkaslist ().do_refresh ();
 	}
 
 ,	on_select_berkas_klas : function (cb, records)

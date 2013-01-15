@@ -116,5 +116,8 @@ Ext.define ('Earsip.view.NotifPeminjaman', {
 		}
 	}	
 
-	
+,	do_refresh	:function ()
+	{
+		this.down ('#peminjaman_grid').getStore ().load ();
+	}
 });

@@ -23,9 +23,6 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 				itemdblclick : this.list_itemdblclick
 			,	selectionchange : this.list_selectionchange
 			}
-		,	'berkasberbagilist button[itemId=refresh]': {
-				click : this.list_do_refresh
-			}
 		,	'berkasberbagilist button[itemId=dirup]': {
 				click : this.do_dirup
 			}
@@ -83,11 +80,6 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 			this.getBerkasberbagi ().down ('#berkasberbagi_form').loadRecord (records[0]);
 			Earsip.share.id	= records[0].get ('id');
 		}
-	}
-
-,	list_do_refresh : function (b)
-	{
-		this.getBerkasberbagilist ().getStore ().load ();
 	}
 
 ,	do_dirup : function (b)

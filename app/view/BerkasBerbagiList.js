@@ -43,26 +43,19 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 	,	dataIndex	: 'tgl_dibuat'
 	,	width		: 150
 	}]
-,	dockedItems	: [{
-		xtype		: 'toolbar'
-	,	dock		: 'top'
-	,	flex		: 1
-	,	items		: [{
-			text		: 'Refresh'
-		,	itemId		: 'refresh'
-		,	iconCls		: 'refresh'
-		},'-',{
-			text		: 'Kembali'
-		,	itemId		: 'dirup'
-		,	iconCls		: 'dirup'
-		}]
-	}]
-,	listeners	: {
-		activate : function (comp)
+,	tbar : [{
+		text		: 'Refresh'
+	,	itemId		: 'refresh'
+	,	iconCls		: 'refresh'
+	,	handler		:function (b)
 		{
-			this.getStore ().load ();
+			b.up ('#berkasberbagilist').do_refresh ();
 		}
-	}
+	},'-',{
+		text		: 'Kembali'
+	,	itemId		: 'dirup'
+	,	iconCls		: 'dirup'
+	}]
 
 ,	initComponent	: function ()
 	{
@@ -84,5 +77,10 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 				}
 			}
 		});
+	}
+
+,	do_refresh	: function ()
+	{
+		this.getStore ().load ();
 	}
 });

@@ -31,7 +31,11 @@ Ext.define ('Earsip.view.BerkasBerbagi', {
 	}]
 	
 ,	listeners : {
-		beforerender : function (comp)
+		activate	: function (c)
+		{
+			c.down ('#berkasberbagitree').do_refresh ();
+		}
+	,	beforerender: function (comp)
 		{
 			this.down ('#berkasberbagi_form').down ('#indeks_relatif').hide ();
 		}

@@ -4,7 +4,6 @@ Ext.require ([
 ,	'Earsip.view.NotifPeminjaman'
 ]);
 
-
 Ext.define ('Earsip.view.Notifikasi', {
 	extend		: 'Ext.panel.Panel'
 ,	alias		: 'widget.notifikasi'
@@ -21,6 +20,18 @@ Ext.define ('Earsip.view.Notifikasi', {
 	,	animate: true
 	,	activeOnTop: true
     }
+,	listeners	:{
+		activate	:function (c)
+		{
+			c.down ('#berkas_jra').do_refresh ();
+
+			if (Earsip.is_p_arsip){
+				c.down ('#notif_pemindahan').do_refresh ();
+				c.down ('#notif_peminjaman').do_refresh ();
+			}
+		}
+	}
+
 ,	do_load_items : function(){
 		this.suspendLayout = true;
 		this.removeAll (true);
