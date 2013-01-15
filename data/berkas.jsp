@@ -1,23 +1,6 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ include file="init.jsp"%>
 <%
-Connection	db_con		= null;
-Statement	db_stmt		= null;
-ResultSet	rs			= null;
-String		q			= "";
-String		data		= "";
-int			i			= 0;
 try {
-	db_con = (Connection) session.getAttribute ("db.con");
-
-	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath());
-		return;
-	}
-
-	String user_id		= (String) session.getAttribute ("user.id");
 	String berkas_id	= request.getParameter ("berkas_id");
 
 	q	=" select	id"
@@ -43,7 +26,7 @@ try {
 		+" ,		akses_berbagi_id"
 		+" ,		n_output_images"
 		+" from		m_berkas"
-		+" where	pegawai_id		= "+ user_id
+		+" where	pegawai_id		= "+ _user_id
 		+" and		pid				= "+ berkas_id
 		+" and		status			= 1" // 1: aktif, 0:inaktif
 		+" and		status_hapus	= 1"
@@ -51,41 +34,43 @@ try {
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
-
+	_a		= new JSONArray ();
 	while (rs.next ()) {
-		if (i > 0) {
-			data += ",";
-		} else {
-			i++;
-		}
-		data	+="\n{ id            : "+ rs.getString ("id")
-				+ "\n, pid           : "+ rs.getString ("pid")
-				+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
-				+ "\n, mime          :'"+ rs.getString ("mime") +"'"
-				+ "\n, sha           :'"+ rs.getString ("sha") +"'"
-				+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
-				+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
-				+ "\n, berkas_klas_id: "+ rs.getString ("berkas_klas_id")
-				+ "\n, berkas_tipe_id: "+ rs.getString ("berkas_tipe_id")
-				+ "\n, nama          :'"+ rs.getString ("nama") +"'"
-				+ "\n, tgl_unggah    :'"+ rs.getString ("tgl_unggah") +"'"
-				+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") +"'"
-				+ "\n, nomor         :'"+ rs.getString ("nomor") +"'"
-				+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
-				+ "\n, judul         :'"+ rs.getString ("judul") +"'"
-				+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
-				+ "\n, jra_aktif     : "+ rs.getString ("jra_aktif")
-				+ "\n, jra_inaktif   : "+ rs.getString ("jra_inaktif")
-				+ "\n, status        : "+ rs.getString ("status")
-				+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
-				+" \n, akses_berbagi_id : "+ rs.getString ("akses_berbagi_id")
-				+" \n, n_output_images	: "+ rs.getString ("n_output_images")
-				+ "\n}";
+		_o = new JSONObject ();
+		_o.put ("id"				, rs.getString ("id"));
+		_o.put ("pid"				, rs.getString ("pid"));
+		_o.put ("tipe_file"			, rs.getString ("tipe_file"));
+		_o.put ("mime"				, rs.getString ("mime"));
+		_o.put ("sha"				, rs.getString ("sha"));
+		_o.put ("pegawai_id"		, rs.getString ("pegawai_id"));
+		_o.put ("unit_kerja_id"		, rs.getString ("unit_kerja_id"));
+		_o.put ("berkas_klas_id"	, rs.getString ("berkas_klas_id"));
+		_o.put ("berkas_tipe_id"	, rs.getString ("berkas_tipe_id"));
+		_o.put ("nama"				, rs.getString ("nama"));
+		_o.put ("tgl_unggah"		, rs.getString ("tgl_unggah"));
+		_o.put ("tgl_dibuat"		, rs.getString ("tgl_dibuat"));
+		_o.put ("nomor"				, rs.getString ("nomor"));
+		_o.put ("pembuat"			, rs.getString ("pembuat"));
+		_o.put ("judul"				, rs.getString ("judul"));
+		_o.put ("masalah"			, rs.getString ("masalah"));
+		_o.put ("jra_aktif"			, rs.getString ("jra_aktif"));
+		_o.put ("jra_inaktif"		, rs.getString ("jra_inaktif"));
+		_o.put ("status"			, rs.getString ("status"));
+		_o.put ("status_hapus"		, rs.getString ("status_hapus"));
+		_o.put ("akses_berbagi_id"	, rs.getString ("akses_berbagi_id"));
+		_o.put ("n_output_images"	, rs.getString ("n_output_images"));
+
+		_a.put (_o);
 	}
-	out.print ("{success:true,data:["+ data +"]}");
+
 	rs.close ();
+	db_stmt.close ();
+
+	_r.put ("success", true);
+	_r.put ("data", _a);
+} catch (Exception e) {
+	_r.put ("success", false);
+	_r.put ("data", e);
 }
-catch (Exception e) {
-	out.print ("{success:false,info:'"+ e.toString().replace("'","''").replace ("\"", "\\\"") +"'}");
-}
+out.print (_r);
 %>

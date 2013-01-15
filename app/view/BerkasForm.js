@@ -56,7 +56,6 @@ Ext.define ('Earsip.view.BerkasForm', {
 		,	valueField		: 'id'
 		,	editable		: false
 		,	triggerAction	: 'all'
-		,	allowBlank		: false
 		,	flex			: 1
 		},{
 			xtype			: 'button'
@@ -66,7 +65,6 @@ Ext.define ('Earsip.view.BerkasForm', {
 		,	width			: 140
 		,	margin			: '0 0 0 10'
 		}]
-
 	},{
 		xtype			: 'combo'
 	,	fieldLabel		: 'Tipe'
@@ -77,7 +75,6 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	valueField		: 'id'
 	,	editable		: false
 	,	triggerAction	: 'all'
-	,	allowBlank		: false
 	},{
 		fieldLabel		: 'Nomor'
 	,	itemId			: 'nomor'
@@ -105,14 +102,12 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'jra_aktif'
 	,	name			: 'jra_aktif'
 	,	minValue		: 1
-	,	allowBlank		: false
 	},{
 		xtype			: 'numberfield'
 	,	fieldLabel		: 'JRA Inaktif'
 	,	itemId			: 'jra_inaktif'
 	,	name			: 'jra_inaktif'
 	,	minValue		: 1
-	,	allowBlank		:false
 	},{
 		xtype			: 'numberfield'
 	,	name			: 'status_hapus'

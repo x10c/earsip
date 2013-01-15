@@ -108,6 +108,7 @@ Ext.define ('Earsip.controller.Pegawai', {
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
 					grid.getStore ().load ();
+					grid.win.hide ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
