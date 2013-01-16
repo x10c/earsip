@@ -44,8 +44,8 @@ try {
 		_o.put ("sha"				, rs.getString ("sha"));
 		_o.put ("pegawai_id"		, rs.getString ("pegawai_id"));
 		_o.put ("unit_kerja_id"		, rs.getString ("unit_kerja_id"));
-		_o.put ("berkas_klas_id"	, rs.getString ("berkas_klas_id"));
-		_o.put ("berkas_tipe_id"	, rs.getString ("berkas_tipe_id"));
+		_o.put ("berkas_klas_id"	, rs.getInt ("berkas_klas_id"));
+		_o.put ("berkas_tipe_id"	, rs.getInt ("berkas_tipe_id"));
 		_o.put ("nama"				, rs.getString ("nama"));
 		_o.put ("tgl_unggah"		, rs.getString ("tgl_unggah"));
 		_o.put ("tgl_dibuat"		, rs.getString ("tgl_dibuat"));
