@@ -4,14 +4,14 @@ try {
 	int		id			= Integer.parseInt (request.getParameter ("id"));
 	String	nama		= request.getParameter ("nama");
 	String	tgl_dibuat	= request.getParameter ("tgl_dibuat");
-	int		klas_id		= Integer.parseInt (request.getParameter ("berkas_klas_id"));
-	int		tipe_id		= Integer.parseInt (request.getParameter ("berkas_tipe_id"));
+	String	klas_id		= request.getParameter ("berkas_klas_id");
+	String	tipe_id		= request.getParameter ("berkas_tipe_id");
 	String	nomor		= request.getParameter ("nomor");
 	String	pembuat		= request.getParameter ("pembuat");
 	String	judul		= request.getParameter ("judul");
 	String	masalah		= request.getParameter ("masalah");
-	int		jra_aktif	= Integer.parseInt (request.getParameter ("jra_aktif"));
-	int		jra_inaktif	= Integer.parseInt (request.getParameter ("jra_inaktif"));
+	String	jra_aktif	= request.getParameter ("jra_aktif");
+	String	jra_inaktif	= request.getParameter ("jra_inaktif");
 	int		stat_hapus	= Integer.parseInt (request.getParameter ("status_hapus"));
 	int		tipe_file	= Integer.parseInt (request.getParameter ("tipe_file"));
 
@@ -31,14 +31,14 @@ try {
 		q	=" update	m_berkas"
 			+" set		nama			= ?"
 			+" ,		tgl_dibuat		= ?"
-			+" ,		berkas_klas_id	= ?"
-			+" ,		berkas_tipe_id	= ?"
+			+" ,		berkas_klas_id	= cast (? as int)"
+			+" ,		berkas_tipe_id	= cast (? as int)"
 			+" ,		nomor			= ?"
 			+" ,		pembuat			= ?"
 			+" ,		judul			= ?"
 			+" ,		masalah			= ?"
-			+" ,		jra_aktif		= ?"
-			+" ,		jra_inaktif		= ?"
+			+" ,		jra_aktif		= cast (? as int)"
+			+" ,		jra_inaktif		= cast (? as int)"
 			+" ,		status_hapus	= ?"
 			+" where	id				= ?";
 
@@ -47,14 +47,14 @@ try {
 		_i = 1;
 		db_ps.setString	(_i++, nama);
 		db_ps.setDate	(_i++, Date.valueOf (tgl_dibuat));
-		db_ps.setInt	(_i++, klas_id);
-		db_ps.setInt	(_i++, tipe_id);
+		db_ps.setString	(_i++, klas_id);
+		db_ps.setString	(_i++, tipe_id);
 		db_ps.setString	(_i++, nomor);
 		db_ps.setString	(_i++, pembuat);
 		db_ps.setString	(_i++, judul);
 		db_ps.setString	(_i++, masalah);
-		db_ps.setInt	(_i++, jra_aktif);
-		db_ps.setInt	(_i++, jra_inaktif);
+		db_ps.setString	(_i++, jra_aktif);
+		db_ps.setString	(_i++, jra_inaktif);
 		db_ps.setInt	(_i++, stat_hapus);
 		db_ps.setInt	(_i++, id);
 

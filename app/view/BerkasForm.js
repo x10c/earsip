@@ -54,9 +54,11 @@ Ext.define ('Earsip.view.BerkasForm', {
 		,	store			: Ext.getStore ('KlasArsip')
 		,	displayField	: 'nama'
 		,	valueField		: 'id'
-		,	editable		: false
+		,	forceSelection	:true
+		,	editable		:false
 		,	triggerAction	: 'all'
 		,	flex			: 1
+		,	emptyText		:'-'
 		},{
 			xtype			: 'button'
 		,	text			: 'Cari Indeks Relatif'
@@ -73,8 +75,10 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	name			: 'berkas_tipe_id'
 	,	displayField	: 'nama'
 	,	valueField		: 'id'
-	,	editable		: false
+	,	forceSelection	:true
+	,	editable		:false
 	,	triggerAction	: 'all'
+	,	emptyText		:'-'
 	},{
 		fieldLabel		: 'Nomor'
 	,	itemId			: 'nomor'

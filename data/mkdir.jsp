@@ -30,8 +30,11 @@ try {
 		+" ,	jra_aktif"
 		+" ,	jra_inaktif"
 		+" ) values (?, ?, ?, ?, to_date (?, 'YYYY-MM-DD')"
-		+"	, ?, ?, ?, ?, ?"
-		+"	, ?, ?, ?)";
+		+"	, cast (? as int), cast (? as int), ?, ?, ?"
+		+"	, ?"
+		+"	, cast (? as int)"
+		+"	, cast (? as int)"
+		+" )";
 
 	db_ps = db_con.prepareStatement (q);
 
@@ -42,15 +45,15 @@ try {
 	db_ps.setString (_i++, nama);
 	db_ps.setString (_i++, tgl_dibuat);
 
-	db_ps.setInt	(_i++, Integer.parseInt (klas_id.isEmpty () ? "1" : klas_id));
-	db_ps.setInt	(_i++, Integer.parseInt (tipe_id.isEmpty () ? "1" : tipe_id));
+	db_ps.setString	(_i++, klas_id);
+	db_ps.setString	(_i++, tipe_id);
 	db_ps.setString (_i++, nomor);
 	db_ps.setString (_i++, judul);
 	db_ps.setString (_i++, pembuat);
 
 	db_ps.setString (_i++, masalah);
-	db_ps.setInt	(_i++, Integer.parseInt (jra_aktif.isEmpty () ? "1" : jra_aktif));
-	db_ps.setInt	(_i++, Integer.parseInt (jra_inaktif.isEmpty () ? "1" : jra_inaktif));
+	db_ps.setString	(_i++, jra_aktif);
+	db_ps.setString	(_i++, jra_inaktif);
 
 	db_ps.executeUpdate ();
 	db_ps.close ();

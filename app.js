@@ -141,7 +141,7 @@ function store_renderer (valueField, displayField, store)
 	return function (v) {
 		var i = store.find (valueField, v);
 		if (i < 0) {
-			return v;
+			return "";
 		}
 		var rec = store.getAt (i);
 		return rec ? rec.get (displayField) : "";
