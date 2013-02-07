@@ -52,12 +52,12 @@ Ext.define('Earsip.view.PemindahanWin', {
 		,	name			: 'nama_petugas'
 		,	hidden			: true
 		},{
-			fieldLabel		: 'PJ Unit kerja'
+			fieldLabel		: 'Penanggung Jawab Unit kerja'
 		,	itemId			: 'pj_unit_kerja'
 		,	name			: 'pj_unit_kerja'
 		,	allowBlank		: false
 		},{
-			fieldLabel		: 'PJ Unit Arsip'
+			fieldLabel		: 'Penanggung Jawab Unit Arsip'
 		,	itemId			: 'pj_unit_arsip'
 		,	name			: 'pj_unit_arsip'
 		, 	hidden			: true

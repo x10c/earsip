@@ -61,13 +61,13 @@ Ext.define('Earsip.view.NotifPemindahanWin', {
 		,	hidden			: true
        
 		},{
-			fieldLabel		: 'PJ Unit Berkas'
+			fieldLabel		: 'Penanggung Jawab Unit Berkas'
 		,	itemId			: 'pj_unit_kerja'
 		,	name			: 'pj_unit_kerja'
 		,	showClear		: false
         ,	disabled		: true
 		},{
-			fieldLabel		: 'PJ Unit Arsip'
+			fieldLabel		: 'Penanggung Jawab Unit Arsip'
 		,	itemId			: 'pj_unit_arsip'
 		,	name			: 'pj_unit_arsip'
 		

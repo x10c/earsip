@@ -79,7 +79,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			}
 
 		},{
-			text			: 'PJ. Pusat Berkas'
+			text			: 'Penanggung Jawab Pusat Berkas'
 		,	dataIndex		: 'pj_unit_kerja'
 		,	flex			: 0.5
 		,	editable		: false
@@ -88,7 +88,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 			,	allowBlank	: false
 			}
 		},{
-			text			: 'PJ. Pusat Arsip'
+			text			: 'Penanggung Jawab Pusat Arsip'
 		,	dataIndex		: 'pj_unit_arsip'
 		,	flex			: 0.5
 		,	editor		: {

@@ -60,11 +60,11 @@ Ext.define ('Earsip.view.Pemindahan', {
 		,	hidden			: true
 		,	hideable		: true
 		},{
-			text			: 'PJ. Pusat Berkas'
+			text			: 'Penanggung Jawab Pusat Berkas'
 		,	dataIndex		: 'pj_unit_kerja'
 		,	flex			: 0.5
 		},{
-			text			: 'PJ. Pusat Arsip'
+			text			: 'Penanggung Jawab Pusat Arsip'
 		,	dataIndex		: 'pj_unit_arsip'
 		,	flex			: 0.5
 		,	hidden			: true

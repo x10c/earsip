@@ -63,11 +63,11 @@ Ext.define ('Earsip.view.Pemusnahan', {
 		,	dataIndex		: 'tgl'
 		,	flex			: 0.5
 		},{
-			text			: 'PJ. Unit Kerja'
+			text			: 'Penanggung Jawab Unit Kerja'
 		,	dataIndex		: 'pj_unit_kerja'
 		,	flex			: 0.5
 		},{
-			text			: 'PJ. Pusat Berkas/Arsip'
+			text			: 'Penanggung Jawab Pusat Berkas/Arsip'
 		,	dataIndex		: 'pj_berkas_arsip'
 		,	flex			: 0.5
 		}]

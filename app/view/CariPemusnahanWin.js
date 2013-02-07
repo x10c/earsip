@@ -58,11 +58,11 @@ Ext.define ('Earsip.view.CariPemusnahanWin', {
 		},{
 			itemId			: 'pj_unit_kerja'
 		,	name			: 'pj_unit_kerja'
-		,	emptyText		: 'PJ. Unit Kerja'
+		,	emptyText		: 'Penanggung Jawab Unit Kerja'
 		},{
 			itemId			: 'pj_berkas_arsip'
 		,	name			: 'pj_berkas_arsip'
-		,	emptyText		: 'PJ. Pusat Berkas/Arsip'
+		,	emptyText		: 'Penanggung Jawab Pusat Berkas/Arsip'
 		}]
 	,	buttons		: [{
 			text			: 'Cari'
