@@ -25,7 +25,6 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	anchor			: '100%'
 			,	selectOnFocus	: true
 			,	labelAlign		: 'right'
-			,	readOnly		: true
 			}
 		,	items			: [{
 				itemId			: 'id'
@@ -38,7 +37,8 @@ Ext.define ('Earsip.view.ArsipForm', {
 			},{
 				itemId			: 'nama'
 			,	name			: 'nama'
-			,	hidden			: true
+			,	fieldLabel		:'* Nama'
+			,	allowBlank		:false
 			},{
 				xtype			: 'datefield'
 			,	fieldLabel		: 'Tanggal dibuat'
@@ -47,41 +47,39 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	format			: 'Y-m-d'
 			},{
 				xtype			: 'combo'
-			,	fieldLabel		: 'Klasifikasi'
+			,	fieldLabel		: '* Klasifikasi'
 			,	itemId			: 'berkas_klas_id'
 			,	name			: 'berkas_klas_id'
 			,	store			: Ext.getStore ('KlasArsip')
 			,	displayField	: 'nama'
 			,	valueField		: 'id'
 			,	triggerAction	: 'all'
+			,	allowBlank		:false
 			},{
 				xtype			: 'combo'
-			,	fieldLabel		: 'Tipe'
+			,	fieldLabel		: '* Tipe'
 			,	store			: Ext.getStore ('TipeArsip')
 			,	itemId			: 'berkas_tipe_id'
 			,	name			: 'berkas_tipe_id'
 			,	displayField	: 'nama'
 			,	valueField		: 'id'
-			,	editable		: false
 			,	triggerAction	: 'all'
+			,	allowBlank		:false
 			},{
-				fieldLabel		: 'Kode Rak'
+				fieldLabel		: '* Kode Rak'
 			,	itemId			: 'kode_rak'
 			,	name			: 'kode_rak'
-			,	editable		: true
-			,	readOnly		: false
+			,	allowBlank		:false
 			},{
-				fieldLabel		: 'Kode Box'
+				fieldLabel		: '* Kode Box'
 			,	itemId			: 'kode_box'
 			,	name			: 'kode_box'
-			,	editable		: true
-			,	readOnly		: false
+			,	allowBlank		:false
 			},{
-				fieldLabel		: 'Kode Folder'
+				fieldLabel		: '* Kode Folder'
 			,	itemId			: 'kode_folder'
 			,	name			: 'kode_folder'
-			,	editable		: true
-			,	readOnly		: false
+			,	allowBlank		:false
 			}]
 		},{
 			xtype		: 'container'
@@ -92,8 +90,6 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	anchor			: '100%'
 			,	selectOnFocus	: true
 			,	labelAlign		: 'right'
-			,	editable		: false
-			,	readOnly		: true
 			}
 		,	items		: [{
 				fieldLabel		: 'Nomor'
@@ -116,6 +112,11 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	itemId			: 'masalah'
 			,	name			: 'masalah'
 			,	emptyText		: '-'
+			},{
+				xtype			:'numberfield'
+			,	fieldLabel		:'JRA Inaktif'
+			,	name			:'jra_inaktif'
+			,	itemId			:'jra_inaktif'
 			}]
 		}]
 	}]

@@ -87,18 +87,12 @@ Ext.define ('Earsip.view.Berkas', {
 					Ext.msg.info ('Berkas baru telah dibuat!');
 					berkas_list.do_refresh ();
 				} else {
-					Ext.msg.error ('Gagal membuat berkas baru!'
-						+'<br/><hr/>'
-						+ action.result.info
-					);
+					Ext.msg.error ('Gagal membuat berkas baru!<br/><hr/>'+ action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.msg.error ('Gagal membuat berkas baru!'
-					+'<br/><hr/>'
-					+ action.result.info
-					);
+				Ext.msg.error ('Gagal membuat berkas baru!<br/><hr/>'+ action.result.info);
 			}
 		});
 	}

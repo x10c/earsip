@@ -57,18 +57,21 @@ Ext.define ('Earsip.controller.Arsip', {
 
 		form.submit ({
 			scope	: this
+		,	params	:{
+				action	:'update'
+			}
 		,	success	: function (form, action)
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
 					this.getArsiptree ().do_load_tree ();
 				} else {
-					Ext.msg.error (action.result.info);
+					Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
 				}
 			}
 		,	failure	: function (form, action)
 			{
-				Ext.msg.error ('Gagal menyimpan data arsip!');
+				Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
 			}
 		});
 	}

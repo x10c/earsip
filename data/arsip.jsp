@@ -163,7 +163,7 @@ try {
 			+" ,		berkas_tipe_id"
 			+" ,		nama"
 			+" ,		tgl_unggah"
-			+" ,		coalesce (tgl_dibuat, tgl_unggah) as tgl_dibuat"
+			+" ,		tgl_dibuat"
 			+" ,		nomor"
 			+" ,		pembuat"
 			+" ,		judul"
@@ -179,7 +179,7 @@ try {
 			+" from		m_berkas"
 			+" ,		m_arsip"
 			+" where	m_berkas.id		= berkas_id"
-			+" and		status			= 0"
+			+" and		status			= 2"
 			+" and		status_hapus	= 1"
 			+" and		arsip_status_id in (0,1)";
 
