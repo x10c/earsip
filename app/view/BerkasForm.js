@@ -31,7 +31,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	name			:'tipe_file'
 	,	hidden			:true
 	},{
-		fieldLabel		: 'Nama'
+		fieldLabel		: '* Nama'
 	,	itemId			: 'nama'
 	,	name			: 'nama'
 	,	allowBlank		: false

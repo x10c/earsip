@@ -274,7 +274,8 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	do_mkdir_submit : function (button)
 	{
-		var form = this.getBerkas ().down ('#berkas_form').getForm ();
+		var berkas_form	= this.getBerkas ().down ('#berkas_form');
+		var form		= berkas_form.getForm ();
 
 		if (! form.isValid ()) {
 			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
@@ -285,9 +286,11 @@ Ext.define ('Earsip.controller.Berkas', {
 			return;
 		}
 
+		berkas_form.down ('#tipe_file').setValue (0);
+
 		form.submit ({
 			scope	: this
-		,	url		: 'data/mkdir.jsp'
+		,	url		: 'data/berkas_baru.jsp'
 		,	params	: {
 				berkas_id	: Earsip.berkas.tree.id
 			}

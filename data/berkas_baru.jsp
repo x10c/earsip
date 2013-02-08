@@ -1,17 +1,18 @@
 <%@ include file="init.jsp" %>
 <%
 try {
-	int		dir_id		= Integer.parseInt (request.getParameter ("berkas_id"));
+	int		dir_id		= ServletUtilities.getIntParameter (request, "berkas_id", 0);
+	int		tipe_file	= ServletUtilities.getIntParameter (request, "tipe_file", 0);
 	String	nama		= request.getParameter ("nama");
 	String	tgl_dibuat	= request.getParameter ("tgl_dibuat");
-	String	klas_id		= request.getParameter ("berkas_klas_id");
-	String	tipe_id		= request.getParameter ("berkas_tipe_id");
+	int		klas_id		= ServletUtilities.getIntParameter (request, "berkas_klas_id", 1);
+	int		tipe_id		= ServletUtilities.getIntParameter (request, "berkas_tipe_id", 1);
 	String	nomor		= request.getParameter ("nomor");
 	String	judul		= request.getParameter ("judul");
 	String	pembuat		= request.getParameter ("pembuat");
 	String	masalah		= request.getParameter ("masalah");
-	String	jra_aktif	= request.getParameter ("jra_aktif");
-	String	jra_inaktif	= request.getParameter ("jra_inaktif");
+	int		jra_aktif	= ServletUtilities.getIntParameter (request, "jra_aktif", 1);
+	int		jra_inaktif	= ServletUtilities.getIntParameter (request, "jra_inaktif", 1);
 
 	q	=" insert into m_berkas ("
 		+"		pid"
@@ -29,11 +30,12 @@ try {
 		+" ,	masalah"
 		+" ,	jra_aktif"
 		+" ,	jra_inaktif"
-		+" ) values (?, ?, ?, ?, to_date (?, 'YYYY-MM-DD')"
-		+"	, cast (? as int), cast (? as int), ?, ?, ?"
-		+"	, ?"
-		+"	, cast (? as int)"
-		+"	, cast (? as int)"
+
+		+" ,	tipe_file"
+		+" ) values ("
+		+"		?, ?, ?, ?, to_date (?, 'YYYY-MM-DD')"
+		+"	,	?, ?, ?, ?, ?"
+		+"	,	?, ?, ?, ?"
 		+" )";
 
 	db_ps = db_con.prepareStatement (q);
@@ -45,15 +47,16 @@ try {
 	db_ps.setString (_i++, nama);
 	db_ps.setString (_i++, tgl_dibuat);
 
-	db_ps.setString	(_i++, klas_id);
-	db_ps.setString	(_i++, tipe_id);
+	db_ps.setInt	(_i++, klas_id);
+	db_ps.setInt	(_i++, tipe_id);
 	db_ps.setString (_i++, nomor);
 	db_ps.setString (_i++, judul);
 	db_ps.setString (_i++, pembuat);
 
 	db_ps.setString (_i++, masalah);
-	db_ps.setString	(_i++, jra_aktif);
-	db_ps.setString	(_i++, jra_inaktif);
+	db_ps.setInt	(_i++, jra_aktif);
+	db_ps.setInt	(_i++, jra_inaktif);
+	db_ps.setInt	(_i++, tipe_file);
 
 	db_ps.executeUpdate ();
 	db_ps.close ();
