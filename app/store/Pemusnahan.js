@@ -1,3 +1,16 @@
+Ext.define ('Earsip.model.Pemusnahan', {
+	extend		:'Ext.data.Model'
+,	idProperty	:'id'
+,	fields		:[
+		'id'
+	,	'metoda_id'
+	,	'nama_petugas'
+	,	'tgl'
+	,	'pj_unit_kerja'
+	,	'pj_berkas_arsip'
+	]
+});
+
 Ext.define ('Earsip.store.Pemusnahan', {
 	extend		: 'Ext.data.Store'
 ,	storeId		: 'Pemusnahan'

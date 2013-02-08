@@ -1,3 +1,18 @@
+Ext.define ('Earsip.model.LapBerkasJRA', {
+	extend		:'Ext.data.Model'
+,	idProperty	:'id'
+,	fields		:[
+		'id'
+	,	'tgl_dibuat'
+	,	'nama'
+	,	'tahun'
+	,	'bulan'
+	,	'hari'
+	,	'jra'
+	,	'lokasi'
+	]
+});
+
 Ext.define ('Earsip.store.LapBerkasJRA', {
 	extend		: 'Ext.data.Store'
 ,	model		: 'Earsip.model.LapBerkasJRA'

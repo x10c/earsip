@@ -1,3 +1,11 @@
+Ext.define ('Earsip.model.TimPemusnahan', {
+	extend	:'Ext.data.Model'
+,	fields	:[
+		'nama'
+	,	'jabatan'
+	]
+});
+
 Ext.define ('Earsip.store.TimPemusnahan', {
 	extend		: 'Ext.data.Store'
 ,	storeId		: 'TimPemusnahan'

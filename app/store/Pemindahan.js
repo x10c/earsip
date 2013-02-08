@@ -1,3 +1,18 @@
+Ext.define ('Earsip.model.Pemindahan', {
+	extend		:'Ext.data.Model'
+,	idProperty	:'id'
+,	fields		:[
+		'id'
+	, 	'unit_kerja_id'
+	, 	'kode'
+	, 	'tgl'
+	, 	'status'
+	, 	'nama_petugas'
+	,	'pj_unit_kerja'
+	,	'pj_unit_arsip'
+	]
+});
+
 Ext.define ('Earsip.store.Pemindahan', {
 	extend		: 'Ext.data.Store'
 ,	storeId		: 'Pemindahan'

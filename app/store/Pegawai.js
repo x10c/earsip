@@ -1,3 +1,17 @@
+Ext.define ('Earsip.model.Pegawai', {
+	extend		:'Ext.data.Model'
+,	idProperty	:'id'
+,	fields		:[
+		'id'
+	,	'unit_kerja_id'
+	,	'grup_id'
+	,	'jabatan_id'
+	,	'nip'
+	,	'nama'
+	,	'status'
+	]
+});
+
 Ext.define ('Earsip.store.Pegawai', {
 	extend		: 'Ext.data.Store'
 ,	storeId		: 'Pegawai'
