@@ -30,7 +30,7 @@ try {
 	} else {
 		q	=" update	m_berkas"
 			+" set		nama			= ?"
-			+" ,		tgl_dibuat		= ?"
+			+" ,		tgl_dibuat		= to_date (?, 'YYYY-MM-DD')"
 			+" ,		berkas_klas_id	= cast (? as int)"
 			+" ,		berkas_tipe_id	= cast (? as int)"
 			+" ,		nomor			= ?"
@@ -46,7 +46,7 @@ try {
 
 		_i = 1;
 		db_ps.setString	(_i++, nama);
-		db_ps.setDate	(_i++, Date.valueOf (tgl_dibuat));
+		db_ps.setString	(_i++, tgl_dibuat);
 		db_ps.setString	(_i++, klas_id);
 		db_ps.setString	(_i++, tipe_id);
 		db_ps.setString	(_i++, nomor);
