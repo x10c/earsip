@@ -26,6 +26,8 @@
 .zoomout {background-image: url(images/zoomout16.png) !important;}
 .next {background-image: url(images/next16.png) !important;}
 .prev {background-image: url(images/prev16.png) !important;}
+.up		{background-image: url(images/up16.png) !important;}
+.down	{background-image: url(images/down16.png) !important;}
 
 .dir {
 	background-image	:url(images/dir16.png);

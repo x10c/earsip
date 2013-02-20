@@ -336,6 +336,7 @@ create table M_UNIT_KERJA (
    NAMA                 VARCHAR(128)         null,
    NAMA_PIMPINAN        VARCHAR(128)         null,
    KETERANGAN           VARCHAR(255)         null,
+   URUTAN				INT4				default 0,
    constraint PK_M_UNIT_KERJA primary key (ID),
    constraint AK_KEY_2_M_UNIT_K unique (KODE)
 );

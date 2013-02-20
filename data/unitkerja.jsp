@@ -23,8 +23,9 @@ try {
 		+" ,		nama"
 		+" ,		nama_pimpinan"
 		+" ,		keterangan"
+		+" ,		urutan"
 		+" from		m_unit_kerja"
-		+" order by id";
+		+" order by urutan desc";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -40,6 +41,7 @@ try {
 				+ "\n, nama				:'"+ rs.getString ("nama") +"'"
 				+ "\n, nama_pimpinan	:'"+ rs.getString ("nama_pimpinan") +"'"
 				+ "\n, keterangan		:'"+ rs.getString ("keterangan") +"'"
+				+ "\n, urutan			:"+ rs.getInt ("urutan")
 				+ "\n}";
 	}
 

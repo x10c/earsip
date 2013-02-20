@@ -10,9 +10,6 @@ Ext.define ('Earsip.controller.UnitKerja', {
 			'mas_unit_kerja button[itemId=add]' : {
 				click : this.do_add
 			}
-		,	'mas_unit_kerja button[itemId=refresh]' : {
-				click : this.do_refresh
-			}
 		,	'mas_unit_kerja button[itemId=del]' : {
 				click : this.do_delete
 			}
@@ -36,11 +33,6 @@ Ext.define ('Earsip.controller.UnitKerja', {
 
 		grid.getStore ().insert (0, r);
 		editor.startEdit (0, 0);
-	}
-
-,	do_refresh : function (b)
-	{
-		b.up ('#mas_unit_kerja').getStore ().load ();
 	}
 
 ,	do_delete : function (b)

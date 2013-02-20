@@ -40,25 +40,25 @@ INSERT INTO m_menu (id, pid, icon, nama_ref, nama) VALUES (42, 40, 'module', 'la
 -- Data for Name: m_unit_kerja; Type: TABLE DATA; Schema: public; Owner: earsip
 --
 
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DIRUT', 'Direktur Utama', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DIRPEM', 'Direktur Pemasaran', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DIRUM', 'Direktur Umum', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DIROPS', 'Direktur Operasional', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DIRKEP', 'Direktur Kepatuhan', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('PERC', 'Divisi Perencanaan dan Pengembangan', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('KRD', 'Divisi Kredit', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('US', 'Unit Usaha Syariah', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('PEM', 'Pemasaran', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('UM', 'Divisi Umum', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('SDM', 'Divisi SDM', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('MKHU', 'Divisi MKHU', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('SKAI', 'Satuan Kerja Audit Intern', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('TSI', 'Divisi TSI & Akuntansi - TSI', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('AKT', 'Divisi TSI & Akuntansi - Akuntansi', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('AMU', 'Tim AMU', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('DT', 'Divisi Dana dan Treasury - Treasury', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('TIK', 'Divisi TIK', '', '');
-INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan) VALUES ('FREUD', 'Divisi Freud', '', '');
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('DIRUT'	, 'Direktur Utama'						, '', '', 19);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('DIRPEM'	, 'Direktur Pemasaran'					, '', '', 18);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('DIRUM'	, 'Direktur Umum'						, '', '', 17);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('DIROPS'	, 'Direktur Operasional'				, '', '', 16);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('DIRKEP'	, 'Direktur Kepatuhan'					, '', '', 15);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('PERC'		, 'Divisi Perencanaan dan Pengembangan'	, '', '', 14);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('KRD'		, 'Divisi Kredit'						, '', '', 13);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('US'		, 'Unit Usaha Syariah'					, '', '', 12);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('PEM'		, 'Pemasaran'							, '', '', 11);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('UM'		, 'Divisi Umum'							, '', '', 10);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('SDM'		, 'Divisi SDM'							, '', '', 9);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('MKHU'		, 'Divisi MKHU'							, '', '', 8);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('SKAI'		, 'Satuan Kerja Audit Intern'			, '', '', 7);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('TSI'		, 'Divisi TSI & Akuntansi - TSI'		, '', '', 6);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('AKT'		, 'Divisi TSI & Akuntansi - Akuntansi'	, '', '', 5);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('AMU'		, 'Tim AMU'								, '', '', 4);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('DT'		, 'Divisi Dana dan Treasury - Treasury'	, '', '', 3);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('TIK'		, 'Divisi TIK'							, '', '', 2);
+INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES ('FREUD'	, 'Divisi Freud'						, '', '', 1);
 
 
 --

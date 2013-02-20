@@ -45,8 +45,8 @@ try {
 	String ket		= o.getString ("keterangan");
 
 	if (action.equalsIgnoreCase ("create")) {
-		q	=" insert into m_unit_kerja (kode, nama, nama_pimpinan, keterangan)"
-			+" values (?, ?, ?, ?)";
+		q	=" insert into m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan)"
+			+" values (?, ?, ?, ?, (select max (urutan) + 1 from m_unit_kerja))";
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setString (1, kode);
 		db_stmt.setString (2, nama);

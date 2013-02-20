@@ -7,6 +7,7 @@ Ext.define ('Earsip.model.UnitKerja', {
 	,	'nama'
 	,	'nama_pimpinan'
 	,	'keterangan'
+	,	'urutan'
 	]
 });
 
