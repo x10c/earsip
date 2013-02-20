@@ -153,8 +153,6 @@ Ext.define ('Earsip.controller.Arsip', {
 			Earsip.arsip.pid	= records[0].get ('pid');
 			klas_id				= records[0].get ('berkas_klas_id') != '' ? true : false;
 		}
-
-		arsip.down ('#save').setDisabled ((! records.length) && klas_id);
 	}
 
 ,	list_dirup : function (b)

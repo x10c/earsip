@@ -30,22 +30,6 @@ Ext.define ('Earsip.view.Arsip', {
 		,	split		: true
 		,	collapsible	: true
 		,	header		: false
-		,	buttons		: [{
-				text		:'Arsip Baru'
-			,	itemId		:'arsip_baru'
-			,	iconCls		:'add'
-			,	formBind	:true
-			,	tooltip		:'Isi form di atas, dan klik tombol ini untuk membuat arsip baru.'
-			,	handler		:function (b)
-				{
-					b.up ('#mas_arsip').arsip_baru_onclick ();
-				}
-			},'-','->','-',{
-				text		: 'Simpan'
-			,	itemId		: 'save'
-			,	iconCls		: 'save'
-			,	disabled	: true
-			}]
 		}]
 	}]
 ,	listeners	: {

@@ -120,4 +120,35 @@ Ext.define ('Earsip.view.ArsipForm', {
 			}]
 		}]
 	}]
+,	buttons		: [{
+		text		:'Arsip Baru'
+	,	itemId		:'arsip_baru'
+	,	iconCls		:'add'
+	,	tooltip		:'Isi form di atas, dan klik tombol ini untuk membuat arsip baru.'
+	,	disabled	:true
+	,	handler		:function (b)
+		{
+			b.up ('#mas_arsip').arsip_baru_onclick ();
+		}
+	},'-','->','-',{
+		text		: 'Simpan'
+	,	itemId		: 'save'
+	,	iconCls		: 'save'
+	,	disabled	: true
+	}]
+
+,	listeners	:{
+		validitychange	:function (f, valid, e)
+		{
+			var arsip_baru	= this.down ('#arsip_baru');
+			var save		= this.down ('#save');
+
+			s = !(valid && (is_pusatarsip == 1));
+
+			console.log (s);
+
+			arsip_baru.setDisabled (s);
+			save.setDisabled (s);
+		}
+	}
 });
