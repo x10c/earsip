@@ -21,8 +21,9 @@ try {
 	q	=" select	id"
 		+" ,		nama"
 		+" ,		keterangan"
+		+" ,		urutan"
 		+" from		r_jabatan"
-		+" order by id";
+		+" order by urutan desc";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -36,6 +37,7 @@ try {
 		data	+="{ id				: "+ rs.getString ("id")
 				+ ", nama			:'"+ rs.getString ("nama") +"'"
 				+ ", keterangan		:'"+ rs.getString ("keterangan") +"'"
+				+ ", urutan			:"+ rs.getInt ("urutan")
 				+ "}";
 	}
 

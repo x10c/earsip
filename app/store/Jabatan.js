@@ -5,6 +5,7 @@ Ext.define ('Earsip.model.Jabatan', {
 		'id'
 	,	'nama'
 	,	'keterangan'
+	,	'urutan'
 	]
 });
 

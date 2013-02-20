@@ -67,8 +67,8 @@ INSERT INTO m_unit_kerja (kode, nama, nama_pimpinan, keterangan, urutan) VALUES 
 -- Data for Name: r_jabatan; Type: TABLE DATA; Schema: public; Owner: earsip
 --
 
-INSERT INTO r_jabatan (nama, keterangan) VALUES ('Direktur Utama', 'Jabatan utama Direktur');
-INSERT INTO r_jabatan (nama, keterangan) VALUES ('Teknisi', 'Teknisi');
+INSERT INTO r_jabatan (nama, keterangan, urutan) VALUES ('Direktur Utama', 'Jabatan utama Direktur', 2);
+INSERT INTO r_jabatan (nama, keterangan, urutan) VALUES ('Teknisi', 'Teknisi', 1);
 
 
 --

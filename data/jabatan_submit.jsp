@@ -53,8 +53,8 @@ try {
 	}
 	
 	if (action.equalsIgnoreCase ("create")) {
-		q	=" insert into r_jabatan (nama, keterangan)"
-			+" values (?, ?)";
+		q	=" insert into r_jabatan (nama, keterangan, urutan)"
+			+" values (?, ?, (select max (urutan) + 1 from r_jabatan))";
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setString (1, nama);
 		db_stmt.setString (2, ket);

@@ -521,6 +521,7 @@ create table R_JABATAN (
    ID                   SERIAL               not null,
    NAMA                 VARCHAR(128)         null,
    KETERANGAN           VARCHAR(255)         null,
+   URUTAN				INT4				default 0,
    constraint PK_R_JABATAN primary key (ID)
 );
 

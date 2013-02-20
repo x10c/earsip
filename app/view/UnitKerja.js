@@ -61,6 +61,7 @@ Ext.define ('Earsip.view.UnitKerja', {
 					url		:'data/unit_kerja/reorder.jsp'
 				,	params	:{
 						id		:d[0].get ('id')
+					,	urutan	:d[0].get ('urutan')
 					,	value	:1
 					}
 				,	success	: function (response)
@@ -83,6 +84,7 @@ Ext.define ('Earsip.view.UnitKerja', {
 					url		:'data/unit_kerja/reorder.jsp'
 				,	params	:{
 						id		:d[0].get ('id')
+					,	urutan	:d[0].get ('urutan')
 					,	value	:-1
 					}
 				,	success	: function (response)
@@ -119,13 +121,13 @@ Ext.define ('Earsip.view.UnitKerja', {
 			this.down ('#urut_turun').setDisabled (s);
 			this.down ('#del').setDisabled (s);
 
-			if (data.length <= 0) {
+			if (s) {
 				return;
 			}
 
 			if (data[0].index == 0) {
 				this.down ('#urut_naik').setDisabled (true);
-			} else if (data[0].index == data[0].store.totalCount) {
+			} else if (data[0].index == (data[0].store.totalCount - 1)) {
 				this.down ('#urut_turun').setDisabled (true);
 			}
 		}

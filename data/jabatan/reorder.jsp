@@ -17,12 +17,12 @@ try {
 	if (v == 1) {
 		q	="	select	id"
 			+"	,		urutan"
-			+"	from	m_unit_kerja"
+			+"	from	r_jabatan"
 			+"	where	urutan = ? + ?";
 	} else {
 		q	="	select	id"
 			+"	,		urutan"
-			+"	from	m_unit_kerja"
+			+"	from	r_jabatan"
 			+"	where	urutan = ? - ?";
 	}
 
@@ -50,7 +50,7 @@ try {
 	db_ps.close ();
 	rs.close ();
 
-	q	="	update	m_unit_kerja"
+	q	="	update	r_jabatan"
 		+"	set		urutan	= ?"
 		+"	where	id		= ?";
 
@@ -61,7 +61,7 @@ try {
 	db_ps.executeUpdate ();
 	db_ps.close ();
 
-	q	="	update	m_unit_kerja"
+	q	="	update	r_jabatan"
 		+"	set		urutan	= ?"
 		+"	where	id		= ?";
 
@@ -73,11 +73,10 @@ try {
 	db_ps.close ();
 
 	_r.put ("success", true);
-	_r.put ("info", "Data telah diurutkan");
+	_r.put ("info", "Data telah diurutkan.");
 } catch (Exception e) {
 	_r.put ("success", false);
 	_r.put ("info", e);
 }
-
 out.print (_r);
 %>
