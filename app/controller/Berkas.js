@@ -1,6 +1,6 @@
 Ext.require ([
 	'Earsip.view.Trash'
-,	'Earsip.view.WinUpload'
+,	'Earsip.view.WinUploadSingle'
 ,	'Earsip.view.WinIndeksRelatif'
 ]);
 
@@ -25,8 +25,8 @@ Ext.define ('Earsip.controller.Berkas', {
 		ref		: 'cariberkaswin'
 	,	selector: 'cariberkaswin'
 	},{
-		ref		: 'winupload'
-	,	selector: 'winupload'
+		ref		: 'winuploadsingle'
+	,	selector: 'winuploadsingle'
 	},{
 		ref		: 'win_indeks_relatif'
 	,	selector: 'win_indeks_relatif'
@@ -195,7 +195,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			return;
 		}
 
-		Ext.create ('Earsip.view.WinUpload').show ();
+		Ext.create ('Earsip.view.WinUploadSingle').show ();
 	}
 
 ,	list_refresh : function (b)
