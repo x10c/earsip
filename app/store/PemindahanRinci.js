@@ -1,6 +1,6 @@
 Ext.define ('Earsip.model.PemindahanRinci', {
 	extend		:'Ext.data.Model'
-,	idProperty	:'pemindahan_id'
+,	idProperty	:'berkas_id'
 ,	fields		:[
 		'pemindahan_id'
 	,	'berkas_id'
