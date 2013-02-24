@@ -171,6 +171,18 @@ try {
 	filename	= user_dir + File.separator + sha;
 	file		= new File (filename);
 
+	/* IE : get filename without fake path */
+	int idx = name.lastIndexOf ('\\');
+
+	if (idx > 0) {
+		name = name.substring (idx + 1, name.length ());
+	} else {
+		idx = name.lastIndexOf ('/');
+		if (idx > 0) {
+			name = name.substring (idx + 1, name.length ());
+		}
+	}
+
 	if (file.exists ()) {
 		q	=" select	nama"
 			+" from		m_berkas"
