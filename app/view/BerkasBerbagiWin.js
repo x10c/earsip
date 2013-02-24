@@ -126,6 +126,7 @@ Ext.define ('Earsip.view.BerkasBerbagiWin', {
 					});
 
 					var hak_akses_id = record.get ('akses_berbagi_id');
+
 					if (hak_akses_id == 1 || hak_akses_id == 2) {
 						grid.setDisabled (false);
 					}

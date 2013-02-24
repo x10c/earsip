@@ -57,7 +57,7 @@ try {
 		_o.put ("jra_inaktif"		, rs.getString ("jra_inaktif"));
 		_o.put ("status"			, rs.getString ("status"));
 		_o.put ("status_hapus"		, rs.getString ("status_hapus"));
-		_o.put ("akses_berbagi_id"	, rs.getString ("akses_berbagi_id"));
+		_o.put ("akses_berbagi_id"	, rs.getInt ("akses_berbagi_id"));
 		_o.put ("n_output_images"	, rs.getString ("n_output_images"));
 
 		_a.put (_o);

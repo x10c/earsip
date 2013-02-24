@@ -32,12 +32,18 @@ Ext.define ('Earsip.controller.BerkasBerbagiWin', {
 	{
 		var grid	= b.up ('#berkasberbagi_win_grid');
 		var editor	= grid.getPlugin ('roweditor');
+		var peg		= Ext.getStore ('Pegawai').getAt (0);
+		var peg_id	= 0;
+
+		if (peg) {
+			peg_id = peg.get ('id');
+		}
 
 		editor.cancelEdit ();
 		var r = Ext.create ('Earsip.model.BerkasBerbagi', {
 				id				: 0
 			,	berkas_id		: Earsip.berkas.id
-			,	bagi_ke_peg_id	: 0
+			,	bagi_ke_peg_id	: peg_id
 			,	hak_akses_id	: Earsip.share.hak_akses_id
 			});
 
