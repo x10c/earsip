@@ -274,6 +274,7 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 					Ext.msg.info (action.result.info);
 					win.close ();
 					Ext.StoreManager.lookup ('BerkasMusnah').load ();
+					Ext.getStore ('Pemusnahan').load ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
