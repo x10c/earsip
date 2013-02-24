@@ -257,6 +257,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			,	success	: function (form, action)
 				{
 					if (action.result.success == true) {
+						this.getBerkastree ().do_load_tree ();
 						this.getBerkaslist ().do_refresh ();
 						Ext.msg.info (action.result.info);
 					} else {

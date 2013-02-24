@@ -1,4 +1,62 @@
+<%--
+	Copyright 2013 - kilabit.org
+
+	Author(s):
+	- m.shulhan (ms@kilabit.org)
+--%>
 <%@ include file="init.jsp"%>
+<%!
+	public int delete_recursively (Connection db_con, int org_id)
+	{
+		PreparedStatement	db_ps		= null;
+		ResultSet			db_rs		= null;
+		String				q			= "";
+		Statement			del_st		= null;
+		String				del_q		= "";
+		int					id			= 0;
+		int					pid			= 0;
+		int					tipe_file	= 0;
+
+		try {
+			q	="	select	id"
+				+"	,		pid"
+				+"	,		tipe_file"
+				+"	from	m_berkas"
+				+"	where	pid = ?";
+
+			db_ps	= db_con.prepareStatement (q);
+			db_ps.setInt (1, org_id);
+			db_rs	= db_ps.executeQuery ();
+
+			while (db_rs.next ()) {
+				id			= db_rs.getInt ("id");
+				pid			= db_rs.getInt ("pid");
+				tipe_file	= db_rs.getInt ("tipe_file");
+
+				if (tipe_file == 0) {
+					delete_recursively (db_con, id);
+				}
+			}
+
+			db_rs.close ();
+			db_ps.close ();
+
+			del_st	= db_con.createStatement ();
+
+			del_q	="	delete from m_berkas where pid = "+ org_id;
+			del_st.executeUpdate (del_q);
+
+			del_q	="	delete from m_berkas where id = "+ org_id;
+			del_st.executeUpdate (del_q);
+
+			del_st.close ();
+		} catch (Exception e) {
+			return 1;
+		} finally {
+			return 0;
+		}
+	}
+%>
 <%
 try {
 	int		id			= Integer.parseInt (request.getParameter ("id"));
@@ -16,17 +74,7 @@ try {
 	int		tipe_file	= Integer.parseInt (request.getParameter ("tipe_file"));
 
 	if (0 == stat_hapus) {
-		q =" delete from m_berkas where pid = ?";
-		db_ps = db_con.prepareStatement (q);
-		db_ps.setInt (1, id);
-		db_ps.executeUpdate();
-		db_ps.close ();
-
-		q =" delete from m_berkas where id = ?";
-		db_ps = db_con.prepareStatement (q);
-		db_ps.setInt (1, id);
-		db_ps.executeUpdate ();
-		db_ps.close ();
+		delete_recursively (db_con, id);
 	} else {
 		q	=" update	m_berkas"
 			+" set		nama			= ?"

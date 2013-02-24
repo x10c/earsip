@@ -1,3 +1,7 @@
+Ext.require ([
+	'Earsip.view.BerkasList'
+]);
+
 Ext.define ('Earsip.view.WinUploadSingle', {
 	extend		: 'Ext.window.Window'
 ,	alias		: 'widget.winuploadsingle'

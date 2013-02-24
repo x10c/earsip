@@ -10,7 +10,7 @@ Ext.require ([
 Ext.define ('Earsip.view.BerkasList', {
 	extend		: 'Ext.grid.Panel'
 ,	alias		: 'widget.berkaslist'
-,	itemId		: 'berkaslist'
+,	id			: 'berkaslist'
 ,	store		: 'Berkas'
 ,	columns		: [{
 		text		: 'Nama'
