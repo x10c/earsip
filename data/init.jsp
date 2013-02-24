@@ -1,3 +1,9 @@
+<%--
+	Copyright 2013 - x10c.Lab
+
+	Author(s):
+	- mhd.sulhan (ms@kilabit.org)
+--%>
 <%@ page import="java.io.File" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Connection" %>

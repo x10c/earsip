@@ -180,7 +180,7 @@ try {
 			+" from		m_berkas"
 			+" ,		m_arsip"
 			+" where	m_berkas.id		= berkas_id"
-			+" and		status			= 2"
+			+" and		status			!= 1"
 			+" and		status_hapus	= 1"
 			+" and		arsip_status_id in (0,1)";
 
