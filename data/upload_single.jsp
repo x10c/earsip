@@ -185,11 +185,12 @@ try {
 		if (rs.next ()) {
 			name = rs.getString ("nama");
 
-			out.print ("{success:false"
-					+",message:'Berkas yang sama telah ada dengan nama \""+ name +"\".'"
-					+",user_id:'"+ _user_id +"'"
-					+",sha:'"+ sha +"'}"
-			);
+			_r.put ("success", false);
+			_r.put ("info", "Berkas yang sama telah ada dengan nama '"+ name +"'.");
+			_r.put ("sha", sha);
+			_r.put ("user_id", _user_id);
+
+			out.print (_r);
 			return;
 		}
 	}
@@ -199,7 +200,9 @@ try {
 	if (mime.equalsIgnoreCase ("application/pdf")) {
 		exec_stat = pdf2image (user_dir, sha);
 		if (exec_stat != 0) {
-			out.print ("{success:false,message:'"+ exec_stat +":"+ errmsg +"'}");
+			_r.put ("success", false);
+			_r.put ("info", exec_stat +":"+ errmsg);
+			out.print (_r);
 			return;
 		}
 		outs = f_user_dir.listFiles ((FileFilter) new WildcardFileFilter (sha +"_*.png"));
@@ -248,9 +251,9 @@ try {
 
 	db_stmt.executeUpdate (q);
 
-	_r.put ("success", true);
-	_r.put ("info", "Berkas '"+ name +"' telah tersimpan.");
-	_r.put ("file", name);
+	_r.put ("success"	, true);
+	_r.put ("info"		, "Berkas '"+ name +"' telah tersimpan.");
+	_r.put ("file"		, name);
 } catch (Exception e) {
 	_r.put ("success", false);
 	_r.put ("info", e);
