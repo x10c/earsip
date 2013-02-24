@@ -111,8 +111,6 @@ Ext.define ('Earsip.view.Jabatan', {
 				return;
 			}
 
-			console.log (data[0]);
-
 			if (data[0].index == 0) {
 				this.down ('#urut_naik').setDisabled (true);
 			} else if (data[0].index == (data[0].store.totalCount - 1)) {

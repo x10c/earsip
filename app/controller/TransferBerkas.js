@@ -56,7 +56,6 @@ Ext.define ('Earsip.controller.TransferBerkas', {
 			}
 		,	failure	: function (form, action)
 			{
-				console.log (action.failureType);
 				Ext.msg.error ('Gagal melakukan koneksi ke server!');
 			}
 		});

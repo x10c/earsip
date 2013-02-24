@@ -1,25 +1,9 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="org.json.JSONArray" %>
-<%@ page import="org.json.JSONObject" %>
+<%@ include file="init.jsp" %>
 <%
-Connection	db_con		= null;
-Statement	db_stmt		= null;
-ResultSet	rs			= null;
-String		q			= "";
 String		data		= "";
 int			i			= 0;
 try {
-	db_con = (Connection) session.getAttribute ("db.con");
-
-	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath());
-		return;
-	}
-
-	int			grup_id			= Integer.parseInt ((String) session.getAttribute ("user.grup_id"));
+	int			grup_id			= Integer.parseInt (_user_gid);
 	String		id				= request.getParameter ("id");
 	String		pid				= request.getParameter ("pid");
 	String		unit_kerja_id	= request.getParameter ("unit_kerja_id");
@@ -37,27 +21,35 @@ try {
 			+" ,		nama"
 			+" from		m_unit_kerja";
 
+		/* if user is  not in grup arsip, they can see all files from all unit-kerja */
+		if (grup_id != 3) {
+			q +=" where	id = "+ _user_uk;
+		}
+
 		rs = db_stmt.executeQuery (q);
 
 		while (rs.next ()) {
 			unit_kerja_id = rs.getString ("id");
 
 			node = new JSONObject ();
-			node.put ("id", unit_kerja_id);
-			node.put ("pid", 0);
-			node.put ("tipe_file", 0);
-			node.put ("nama", rs.getString ("nama"));
-			node.put ("unit_kerja_id", unit_kerja_id);
-			node.put ("kode_rak", 0);
-			node.put ("kode_box", 0);
-			node.put ("kode_folder", 0);
-			node.put ("type", "unit_kerja");
+			node.put ("id"				, unit_kerja_id +".0.0.0");
+			node.put ("pid"				, 0);
+			node.put ("tipe_file"		, 0);
+			node.put ("nama"			, rs.getString ("nama"));
+			node.put ("unit_kerja_id"	, unit_kerja_id);
+			node.put ("kode_rak"		, 0);
+			node.put ("kode_box"		, 0);
+			node.put ("kode_folder"		, 0);
+			node.put ("type"			, "unit_kerja");
 
 			arr_data.put (node);
 		}
 
 		rs.close ();
-		out.print ("{success:true,data:"+ arr_data +"}");
+		db_stmt.close ();
+
+		_r.put ("success"	,true);
+		_r.put ("data"		,arr_data);
 
 	} else if (type.equalsIgnoreCase ("unit_kerja")) {
 		q	=" select	distinct"
@@ -73,21 +65,24 @@ try {
 			kode_rak = rs.getString ("kode_rak");
 
 			node = new JSONObject ();
-			node.put ("id", kode_rak);
-			node.put ("pid", unit_kerja_id);
-			node.put ("tipe_file", 0);
-			node.put ("nama", kode_rak);
-			node.put ("unit_kerja_id", unit_kerja_id);
-			node.put ("kode_rak", kode_rak);
-			node.put ("kode_box", 0);
-			node.put ("kode_folder", 0);
-			node.put ("type", "rak");
+			node.put ("id"				, unit_kerja_id +"."+ kode_rak +".0.0");
+			node.put ("pid"				, unit_kerja_id +".0.0.0");
+			node.put ("tipe_file"		, 0);
+			node.put ("nama"			, "RAK - "+ kode_rak);
+			node.put ("unit_kerja_id"	, unit_kerja_id);
+			node.put ("kode_rak"		, kode_rak);
+			node.put ("kode_box"		, 0);
+			node.put ("kode_folder"		, 0);
+			node.put ("type"			, "rak");
 
 			arr_data.put (node);
 		}
 
 		rs.close ();
-		out.print ("{success:true,data:"+ arr_data +"}");
+		db_stmt.close ();
+
+		_r.put ("success"	,true);
+		_r.put ("data"		,arr_data);
 
 	} else if (type.equalsIgnoreCase ("rak")) {
 		q	=" select	distinct"
@@ -104,21 +99,24 @@ try {
 			kode_box	= rs.getString ("kode_box");
 			node		= new JSONObject ();
 
-			node.put ("id", kode_box);
-			node.put ("pid", kode_rak);
-			node.put ("tipe_file", 0);
-			node.put ("nama", kode_box);
-			node.put ("unit_kerja_id", unit_kerja_id);
-			node.put ("kode_rak", kode_rak);
-			node.put ("kode_box", kode_box);
-			node.put ("kode_folder", 0);
-			node.put ("type", "box");
+			node.put ("id"				, unit_kerja_id +"."+ kode_rak +"."+ kode_box +".0");
+			node.put ("pid"				, unit_kerja_id +"."+ kode_rak +".0.0");
+			node.put ("tipe_file"		, 0);
+			node.put ("nama"			, "BOX - "+ kode_box);
+			node.put ("unit_kerja_id"	, unit_kerja_id);
+			node.put ("kode_rak"		, kode_rak);
+			node.put ("kode_box"		, kode_box);
+			node.put ("kode_folder"		, 0);
+			node.put ("type"			, "box");
 
 			arr_data.put (node);
 		}
 
 		rs.close();
-		out.print ("{success:true,data:"+ arr_data +"}");
+		db_stmt.close ();
+
+		_r.put ("success"	,true);
+		_r.put ("data"		,arr_data);
 
 	} else if (type.equalsIgnoreCase ("box")) {
 		q	=" select	distinct"
@@ -136,21 +134,24 @@ try {
 			node		= new JSONObject ();
 			kode_folder	= rs.getString ("kode_folder");
 
-			node.put ("id", kode_folder);
-			node.put ("pid", kode_box);
-			node.put ("tipe_file", 0);
-			node.put ("nama", kode_folder);
-			node.put ("unit_kerja_id", unit_kerja_id);
-			node.put ("kode_rak", kode_rak);
-			node.put ("kode_box", kode_box);
-			node.put ("kode_folder", kode_folder);
-			node.put ("type", "folder");
+			node.put ("id"				, unit_kerja_id +"."+ kode_rak +"."+ kode_box +"."+ kode_folder);
+			node.put ("pid"				, unit_kerja_id +"."+ kode_rak +"."+ kode_box +".0");
+			node.put ("tipe_file"		, 0);
+			node.put ("nama"			, "FOLDER - "+ kode_folder);
+			node.put ("unit_kerja_id"	, unit_kerja_id);
+			node.put ("kode_rak"		, kode_rak);
+			node.put ("kode_box"		, kode_box);
+			node.put ("kode_folder"		, kode_folder);
+			node.put ("type"			, "folder");
 
 			arr_data.put (node);
 		}
 
 		rs.close();
-		out.print ("{success:true,data:"+ arr_data +"}");
+		db_stmt.close ();
+
+		_r.put ("success"	,true);
+		_r.put ("data"		,arr_data);
 
 	} else if (type.equalsIgnoreCase ("folder")) {
 		q	=" select	m_berkas.id"
@@ -201,38 +202,39 @@ try {
 		rs = db_stmt.executeQuery (q);
 
 		while (rs.next ()) {
-			if (i > 0) {
-				data += ",";
-			} else {
-				i++;
-			}
-			data	+="\n{ id            : "+ rs.getString ("id")
-					+ "\n, pid           : "+ rs.getString ("pid")
-					+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
-					+ "\n, sha           :'"+ rs.getString ("sha") +"'"
-					+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
-					+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
-					+ "\n, berkas_klas_id: "+ rs.getString ("berkas_klas_id")
-					+ "\n, berkas_tipe_id: "+ rs.getString ("berkas_tipe_id")
-					+ "\n, nama          :'"+ rs.getString ("nama") +"'"
-					+ "\n, tgl_unggah    :'"+ rs.getString ("tgl_unggah") +"'"
-					+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") +"'"
-					+ "\n, nomor         :'"+ rs.getString ("nomor") +"'"
-					+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
-					+ "\n, judul         :'"+ rs.getString ("judul") +"'"
-					+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
-					+ "\n, jra_aktif     : "+ rs.getString ("jra_aktif")
-					+ "\n, jra_inaktif   : "+ rs.getString ("jra_inaktif")
-					+ "\n, status        : "+ rs.getString ("status")
-					+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
-					+ "\n, akses_berbagi_id	: "+ rs.getString ("akses_berbagi_id")
-					+ "\n, kode_rak			: '"+ rs.getString ("kode_rak") +"'"
-					+ "\n, kode_box			: '"+ rs.getString ("kode_box") +"'"
-					+ "\n, kode_folder		: '"+ rs.getString ("kode_folder") +"'"
-					+ "\n}";
+			node		= new JSONObject ();
+			node.put ("id"					, rs.getString ("id"));
+			node.put ("pid"					, unit_kerja_id +"."+ kode_rak +"."+ kode_box +"."+ kode_folder);
+			node.put ("tipe_file"			, rs.getInt ("tipe_file"));
+			node.put ("sha"					, rs.getString ("sha"));
+			node.put ("pegawai_id"			, rs.getInt ("pegawai_id"));
+			node.put ("unit_kerja_id"		, rs.getInt ("unit_kerja_id"));
+			node.put ("berkas_klas_id"		, rs.getInt ("berkas_klas_id"));
+			node.put ("berkas_tipe_id"		, rs.getInt ("berkas_tipe_id"));
+			node.put ("nama"				, rs.getString ("nama"));
+			node.put ("tgl_unggah"			, rs.getString ("tgl_unggah"));
+			node.put ("tgl_dibuat"			, rs.getString ("tgl_dibuat"));
+			node.put ("nomor"				, rs.getString ("nomor"));
+			node.put ("pembuat"				, rs.getString ("pembuat"));
+			node.put ("judul"				, rs.getString ("judul"));
+			node.put ("masalah"				, rs.getString ("masalah"));
+			node.put ("jra_aktif"			, rs.getInt ("jra_aktif"));
+			node.put ("jra_inaktif"			, rs.getInt ("jra_inaktif"));
+			node.put ("status"				, rs.getInt ("status"));
+			node.put ("status_hapus"		, rs.getInt ("status_hapus"));
+			node.put ("akses_berbagi_id"	, rs.getInt ("akses_berbagi_id"));
+			node.put ("kode_rak"			, rs.getString ("kode_rak"));
+			node.put ("kode_box"			, rs.getString ("kode_box"));
+			node.put ("kode_folder"			, rs.getString ("kode_folder"));
+
+			arr_data.put (node);
 		}
-		out.print ("{success:true,data:["+ data +"]}");
+
 		rs.close ();
+		db_stmt.close ();
+
+		_r.put ("success"	,true);
+		_r.put ("data"		,arr_data);
 
 	} else if (type.equalsIgnoreCase ("arsip_folder")) {
 		q	=" select	m_berkas.id"
@@ -265,42 +267,45 @@ try {
 		rs = db_stmt.executeQuery (q);
 
 		while (rs.next ()) {
-			if (i > 0) {
-				data += ",";
-			} else {
-				i++;
-			}
-			data	+="\n{ id            : "+ rs.getString ("id")
-					+ "\n, pid           : "+ rs.getString ("pid")
-					+ "\n, tipe_file     : "+ rs.getString ("tipe_file")
-					+ "\n, sha           :'"+ rs.getString ("sha") +"'"
-					+ "\n, pegawai_id    : "+ rs.getString ("pegawai_id")
-					+ "\n, unit_kerja_id : "+ rs.getString ("unit_kerja_id")
-					+ "\n, berkas_klas_id: "+ rs.getString ("berkas_klas_id")
-					+ "\n, berkas_tipe_id: "+ rs.getString ("berkas_tipe_id")
-					+ "\n, nama          :'"+ rs.getString ("nama") +"'"
-					+ "\n, tgl_unggah    :'"+ rs.getString ("tgl_unggah") +"'"
-					+ "\n, tgl_dibuat    :'"+ rs.getString ("tgl_dibuat") +"'"
-					+ "\n, nomor         :'"+ rs.getString ("nomor") +"'"
-					+ "\n, pembuat       :'"+ rs.getString ("pembuat") +"'"
-					+ "\n, judul         :'"+ rs.getString ("judul") +"'"
-					+ "\n, masalah       :'"+ rs.getString ("masalah") +"'"
-					+ "\n, jra_aktif     : "+ rs.getString ("jra_aktif")
-					+ "\n, jra_inaktif   : "+ rs.getString ("jra_inaktif")
-					+ "\n, status        : "+ rs.getString ("status")
-					+ "\n, status_hapus  : "+ rs.getString ("status_hapus")
-					+ "\n, akses_berbagi_id	: "+ rs.getString ("akses_berbagi_id")
-					+ "\n, n_output_images	: "+ rs.getString ("n_output_images")
-					+ "\n, kode_rak			: '"+ kode_rak +"'"
-					+ "\n, kode_box			: '"+ kode_box +"'"
-					+ "\n, kode_folder		: '"+ kode_folder +"'"
-					+ "\n}";
+			node		= new JSONObject ();
+			node.put ("id"					, rs.getString ("id"));
+			node.put ("pid"					, unit_kerja_id +"."+ kode_rak +"."+ kode_box +"."+ kode_folder);
+			node.put ("tipe_file"			, rs.getInt ("tipe_file"));
+			node.put ("sha"					, rs.getString ("sha"));
+			node.put ("pegawai_id"			, rs.getInt ("pegawai_id"));
+			node.put ("unit_kerja_id"		, rs.getInt ("unit_kerja_id"));
+			node.put ("berkas_klas_id"		, rs.getInt ("berkas_klas_id"));
+			node.put ("berkas_tipe_id"		, rs.getInt ("berkas_tipe_id"));
+			node.put ("nama"				, rs.getString ("nama"));
+			node.put ("tgl_unggah"			, rs.getString ("tgl_unggah"));
+			node.put ("tgl_dibuat"			, rs.getString ("tgl_dibuat"));
+			node.put ("nomor"				, rs.getString ("nomor"));
+			node.put ("pembuat"				, rs.getString ("pembuat"));
+			node.put ("judul"				, rs.getString ("judul"));
+			node.put ("masalah"				, rs.getString ("masalah"));
+			node.put ("jra_aktif"			, rs.getInt ("jra_aktif"));
+			node.put ("jra_inaktif"			, rs.getInt ("jra_inaktif"));
+			node.put ("status"				, rs.getInt ("status"));
+			node.put ("status_hapus"		, rs.getInt ("status_hapus"));
+			node.put ("akses_berbagi_id"	, rs.getInt ("akses_berbagi_id"));
+			node.put ("kode_rak"			, rs.getString ("kode_rak"));
+			node.put ("kode_box"			, rs.getString ("kode_box"));
+			node.put ("kode_folder"			, rs.getString ("kode_folder"));
+			node.put ("n_output_images"		, rs.getInt ("n_output_images"));
+
+			arr_data.put (node);
 		}
-		out.print ("{success:true,data:["+ data +"]}");
 		rs.close ();
+		db_stmt.close ();
+
+		_r.put ("success"	,true);
+		_r.put ("data"		,arr_data);
 	}
 }
 catch (Exception e) {
-	out.print ("{success:false,info:'"+ e.toString().replace("'","''").replace ("\"", "\\\"") +"'}");
+	_r.put ("success"	,true);
+	_r.put ("info"		,e);
+} finally {
+	out.print (_r);
 }
 %>

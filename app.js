@@ -173,6 +173,7 @@ Ext.application ({
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
 	,	'Arsip'
+	,	'ArsipTree'
 	,	'Pemusnahan'
 	,	'PemusnahanRinci'
 	,	'TimPemusnahan'

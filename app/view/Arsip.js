@@ -13,8 +13,9 @@ Ext.define ('Earsip.view.Arsip', {
 ,	closable	: true
 ,	items		: [{
 		xtype		: 'arsiptree'
-	,	itemId		:'arsip_tree'
 	,	region		: 'west'
+	,	width		: 220
+	,	split		: true
 	},{
 		xtype		: 'container'
 	,	region		: 'center'
@@ -32,13 +33,12 @@ Ext.define ('Earsip.view.Arsip', {
 		,	header		: false
 		}]
 	}]
-,	listeners	: {
-		activate	: function (comp)
-		{
-			var tree = this.down ('arsiptree');
-			tree.do_load_tree ();
-			tree.do_config_label ();
-		}
+
+,	do_refresh:	function ()
+	{
+		var tree = this.down ('#arsiptree');
+		tree.do_refresh ();
+		tree.do_config_label ();
 	}
 
 ,	arsip_baru_onclick: function ()
@@ -61,7 +61,7 @@ Ext.define ('Earsip.view.Arsip', {
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
-					arsip_tree.do_load_tree ();
+					arsip_tree.do_refresh ();
 				} else {
 					Ext.msg.error ('Gagal membuat arsip baru!<br/><hr/>'+ action.result.info);
 				}

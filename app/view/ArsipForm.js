@@ -145,8 +145,6 @@ Ext.define ('Earsip.view.ArsipForm', {
 
 			s = !(valid && (is_pusatarsip == 1));
 
-			console.log (s);
-
 			arsip_baru.setDisabled (s);
 			save.setDisabled (s);
 		}

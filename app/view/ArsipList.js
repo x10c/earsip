@@ -3,6 +3,7 @@ Ext.require ([
 ,	'Earsip.store.KlasArsip'
 ,	'Earsip.store.TipeArsip'
 ,	'Earsip.view.ArsipCariWin'
+,	'Earsip.view.ArsipTree'
 ]);
 
 Ext.define ('Earsip.view.ArsipList', {
@@ -57,6 +58,28 @@ Ext.define ('Earsip.view.ArsipList', {
 		,	iconCls		: 'search'
 		}]
 	}]
+
+,	listeners	:{
+		itemdblclick	:function (v, r)
+		{
+			var t = r.get ("tipe_file");
+
+			if (t != 0) {
+				return;
+			}
+
+			Earsip.arsip.id		= r.get ("id")
+			Earsip.arsip.pid	= r.get ("pid");
+
+			var tree	= Ext.getCmp ('arsiptree');
+			var node	= tree.getRootNode ().findChild ('id', Earsip.arsip.id, true);
+
+			if (node) {
+				tree.expandAll ();
+				tree.getSelectionModel ().select (node);
+			}
+		}
+	}
 
 ,	initComponent	: function ()
 	{

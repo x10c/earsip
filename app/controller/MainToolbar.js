@@ -64,6 +64,10 @@ Ext.define ('Earsip.controller.MainToolbar', {
 			tabpanel.add ({
 				xtype	: button.itemId
 			});
+			c = tabpanel.getComponent (button.itemId);
+		}
+		if (c.do_refresh) {
+			c.do_refresh ();
 		}
 		tabpanel.setActiveTab (button.itemId);
 	}

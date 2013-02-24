@@ -25,15 +25,11 @@ Ext.define ('Earsip.controller.Arsip', {
 		,	'arsiptree': {
 				selectionchange : this.tree_selectionchange
 			}
-		,	'arsiptree button[itemId=refresh]': {
-				click : this.tree_do_refresh
-			}
 		,	'arsiptree button[itemId=label]': {
 				click : this.do_print_label
 			}
 		,	'arsiplist': {
-				itemdblclick : this.list_itemdblclick
-			,	selectionchange : this.list_selectionchange
+				selectionchange : this.list_selectionchange
 			}
 		,	'arsiplist button[itemId=dirup]': {
 				click : this.list_dirup
@@ -64,7 +60,7 @@ Ext.define ('Earsip.controller.Arsip', {
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
-					this.getArsiptree ().do_load_tree ();
+					this.getArsiptree ().do_refresh ();
 				} else {
 					Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
 				}
@@ -74,11 +70,6 @@ Ext.define ('Earsip.controller.Arsip', {
 				Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
 			}
 		});
-	}
-
-,	tree_do_refresh : function (b)
-	{
-		this.getArsiptree ().do_load_tree ();
 	}
 
 ,	do_print_label : function (button)
@@ -101,11 +92,11 @@ Ext.define ('Earsip.controller.Arsip', {
 		Earsip.arsip.pid				= records[0].get ('parentId');
 		Earsip.arsip.tree.id			= records[0].get ('id');
 		Earsip.arsip.tree.pid			= records[0].get ('parentId');
-		Earsip.arsip.tree.type			= records[0].raw.type;
-		Earsip.arsip.tree.unit_kerja_id	= records[0].raw.unit_kerja_id;
-		Earsip.arsip.tree.kode_rak		= records[0].raw.kode_rak;
-		Earsip.arsip.tree.kode_box		= records[0].raw.kode_box;
-		Earsip.arsip.tree.kode_folder	= records[0].raw.kode_folder;
+		Earsip.arsip.tree.type			= records[0].get ('type');
+		Earsip.arsip.tree.unit_kerja_id	= records[0].get ('unit_kerja_id');
+		Earsip.arsip.tree.kode_rak		= records[0].get ('kode_rak');
+		Earsip.arsip.tree.kode_box		= records[0].get ('kode_box');
+		Earsip.arsip.tree.kode_folder	= records[0].get ('kode_folder');
 
 		if (Earsip.arsip.pid == null) {
 			Earsip.arsip.pid			= 0;
@@ -120,23 +111,6 @@ Ext.define ('Earsip.controller.Arsip', {
 			Earsip.arsip.tree.type != 'folder'))
 		)
 		this.getArsiplist ().do_load_list ();
-	}
-
-,	list_itemdblclick : function (v, r)
-	{
-		var t = r.get ("tipe_file");
-		if (t != 0) {
-			return;
-		}
-
-		Earsip.arsip.id		= r.get ("id");
-		Earsip.arsip.pid	= r.get ("pid");
-
-		var tree	= this.getArsiptree ();
-		var node	= tree.getRootNode ().findChild ('id', Earsip.arsip.id, true);
-
-		tree.expandAll ();
-		tree.getSelectionModel ().select (node);
 	}
 
 ,	list_selectionchange : function (model, records)
