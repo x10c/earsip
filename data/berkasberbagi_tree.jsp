@@ -1,15 +1,10 @@
 <%--
- % Copyright 2012 - kilabit.org
- %
- % Author(s):
- %  - m.shulhan (ms@kilabit.org)
+	Copyright 2013 - x10c.Lab
+
+	Author(s):
+	- mhd.sulhan (ms@kilabit.org)
 --%>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="org.json.JSONArray" %>
-<%@ page import="org.json.JSONObject" %>
+<%@ include file="init.jsp" %>
 <%!
 public JSONArray get_list_dir (Connection db_con, int berkas_id)
 {
@@ -53,10 +48,11 @@ try {
 	}
 
 	rs.close();
+	db_stmt.close ();
 
-	return nodes;
 } catch (Exception e) {
 	log("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+} finally {
 	return nodes;
 }}
 
@@ -123,54 +119,45 @@ try {
 	}
 
 	rs.close();
-
-	return nodes;
+	db_stmt.close ();
 } catch (Exception e) {
 	log("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+} finally {
 	return nodes;
 }}
 %>
 <%
-String q = "";
 try {
-	Connection db_con = (Connection) session.getAttribute("db.con");
-	if (db_con == null || (db_con != null && db_con.isClosed())) {
-		response.sendRedirect(request.getContextPath());
-		return;
-	}
+	db_stmt		= db_con.createStatement();
 
-	Statement	db_stmt		= db_con.createStatement();
-	ResultSet	rs			= null;
 	String		data		= "";
 	JSONArray	childs		= null;
 	JSONObject	root		= new JSONObject ();
 	JSONArray	roots		= new JSONArray ();
 	JSONObject	node		= null;
-	String		user_id		= (String) session.getAttribute ("user.id");
-	String		user_name	= (String) session.getAttribute ("user.nama");
 	int			peg_id		= 0;
 	String		nama		= "";
 
 	q	=" select	distinct"
-		+" 			pegawai_id"
+		+"			m_berkas.id"
+		+" ,		pegawai_id"
 		+" ,		m_pegawai.nama"
 		+" from		m_berkas"
 		+" ,		m_pegawai"
 		+" where	akses_berbagi_id in (3,4)"
 		+" and		pegawai_id	= m_pegawai.id"
-		+" and		pegawai_id	!= "+ user_id
 		+" union all"
 		+" select	distinct"
-		+"			pegawai_id"
+		+"			m_berkas.id"
+		+" ,		pegawai_id"
 		+" ,		m_pegawai.nama"
 		+" from		m_berkas"
 		+" ,		m_berkas_berbagi"
 		+" ,		m_pegawai"
 		+" where	(akses_berbagi_id in (1,2)"
 		+" and		m_berkas.id		= berkas_id"
-		+" and		bagi_ke_peg_id	= "+ user_id +")"
+		+" and		bagi_ke_peg_id	= "+ _user_id +")"
 		+" and		pegawai_id		= m_pegawai.id"
-		+" and		pegawai_id		!= "+ user_id
 		+" order by pegawai_id";
 
 	rs = db_stmt.executeQuery (q);
@@ -185,12 +172,12 @@ try {
 		peg_id	= rs.getInt ("pegawai_id");
 		nama	= rs.getString ("nama");
 
-		node.put ("id", nama +"_"+ peg_id);
+		node.put ("id", rs.getString ("id"));
 		node.put ("pid", 0);
 		node.put ("text", nama);
 		node.put ("pegawai_id", peg_id);
 
-		childs = get_top_list_dir (db_con, user_id, peg_id, 0);
+		childs = get_top_list_dir (db_con, _user_id, peg_id, 0);
 
 		if (childs.length () <= 0) {
 			node.put ("children", new JSONArray());
@@ -204,8 +191,14 @@ try {
 	root.put ("children", roots);
 
 	rs.close ();
-	out.print ("{success:true,data:"+ root +"}");
+	db_stmt.close ();
+
+	_r.put ("success", true);
+	_r.put ("data", root);
 } catch (Exception e) {
-	out.print("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+	_r.put ("success", false);
+	_r.put ("info", e);
+} finally {
+	out.print (_r);
 }
 %>

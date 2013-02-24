@@ -1,29 +1,63 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ include file="init.jsp" %>
 <%
-Connection	db_con		= null;
-Statement	db_stmt		= null;
-ResultSet	rs			= null;
-String		q			= "";
 String		data		= "";
 int			i			= 0;
 try {
-	db_con = (Connection) session.getAttribute ("db.con");
-
-	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath());
-		return;
-	}
-
-	String	user_id		= (String) session.getAttribute ("user.id");
 	String	id			= request.getParameter ("id");
 	String	pid			= request.getParameter ("pid");
 	String	peg_id		= request.getParameter ("peg_id");
+	String	nama		= "";
 
 	if (id.equalsIgnoreCase ("0")) {
-		out.print ("{success:true,data:["+ data +"]}");
+		q	=" select	distinct"
+			+"			A.id"
+			+" ,		A.pegawai_id"
+			+" ,		B.nama"
+			+" from		m_berkas	as A"
+			+" ,		m_pegawai	as B"
+			+" where	A.akses_berbagi_id in (3,4)"
+			+" and		A.pegawai_id	= B.id"
+			+" union all"
+			+" select	distinct"
+			+"			A.id"
+			+" ,		A.pegawai_id"
+			+" ,		C.nama"
+			+" from		m_berkas			as A"
+			+" ,		m_berkas_berbagi	as B"
+			+" ,		m_pegawai			as C"
+			+" where	("
+			+"				A.akses_berbagi_id	in (1,2)"
+			+"		and		A.id				= B.berkas_id"
+			+"		and		B.bagi_ke_peg_id	= "+ _user_id
+			+" )"
+			+" and		A.pegawai_id		= C.id"
+			+" order by pegawai_id";
+
+		db_stmt	= db_con.createStatement ();
+		rs	= db_stmt.executeQuery (q);
+		_a	= new JSONArray ();
+
+		while (rs.next ()) {
+			peg_id	= rs.getString ("pegawai_id");
+			nama	= rs.getString ("nama");
+			_o		= new JSONObject ();
+
+			_o.put ("id", rs.getString ("id"));
+			_o.put ("pid", 0);
+			_o.put ("nama", nama);
+			_o.put ("pegawai_id", peg_id);
+			_o.put ("tipe_file", 0);
+
+			_a.put (_o);
+		}
+
+		rs.close ();
+		db_stmt.close ();
+
+		_r.put ("success", true);
+		_r.put ("data", _a);
+
+		out.print (_r);
 		return;
 	}
 
@@ -81,7 +115,7 @@ try {
 			+" ,		m_berkas_berbagi"
 			+" where	akses_berbagi_id in (1,2)"
 			+"	and		berkas_id		= m_berkas.id"
-			+"	and		bagi_ke_peg_id	= "+ user_id
+			+"	and		bagi_ke_peg_id	= "+ _user_id
 			+" and		pegawai_id		= "+ peg_id;
 	} else if (id.equalsIgnoreCase ("0")) {
 		q	+=" where id = "+ pid;

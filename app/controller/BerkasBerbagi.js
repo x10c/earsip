@@ -68,8 +68,10 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 		var tree	= this.getBerkasberbagitree ();
 		var node	= tree.getRootNode ().findChild ('id', Earsip.share.id, true);
 
-		tree.expandAll ();
-		tree.getSelectionModel ().select (node);
+		if (node) {
+			tree.expandAll ();
+			tree.getSelectionModel ().select (node);
+		}
 	}
 
 ,	list_selectionchange : function (model, records)
@@ -84,10 +86,6 @@ Ext.define ('Earsip.controller.BerkasBerbagi', {
 
 ,	do_dirup : function (b)
 	{
-		if (Earsip.share.pid == 0) {
-			return;
-		}
-
 		var tree	= this.getBerkasberbagitree ();
 		var root	= tree.getRootNode ();
 		var node	= null;
