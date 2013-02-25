@@ -78,7 +78,6 @@ Ext.define('Earsip.view.PengembalianWin', {
 			,	fieldLabel		: 'Tanggal Pengembalian'
 			,	itemId			: 'tgl_kembali'
 			,	name			: 'tgl_kembali'
-			,	format			: 'Y-m-d'
 			,	anchor			: '100%'
 			,	allowBlank		: false
 			}]

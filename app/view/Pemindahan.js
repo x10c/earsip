@@ -47,6 +47,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 			text			: 'Tanggal'
 		,	dataIndex		: 'tgl'
 		,	flex			: 0.5
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'status'
 		,	dataIndex		: 'status'

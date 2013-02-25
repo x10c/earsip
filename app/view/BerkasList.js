@@ -42,6 +42,8 @@ Ext.define ('Earsip.view.BerkasList', {
 	,	width		: 150
 	,	dataIndex	: 'tgl_dibuat'
 	,	align		:'center'
+	,	renderer	: function(v)
+			{return date_renderer (v);}
 	},{
 		text		: 'Status'
 	,	dataIndex	: 'status'

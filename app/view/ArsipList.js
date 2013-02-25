@@ -39,6 +39,8 @@ Ext.define ('Earsip.view.ArsipList', {
 		text		: 'Tanggal Dibuat'
 	,	width		: 150
 	,	dataIndex	: 'tgl_dibuat'
+	,	renderer	: function(v)
+			{return date_renderer (v);}
 	}]
 ,	dockedItems	: [{
 		xtype		: 'toolbar'

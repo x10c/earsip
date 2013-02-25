@@ -46,14 +46,12 @@ Ext.define ('Earsip.view.CariPemusnahanWin', {
 		,	columnWidth		: .5
 		,	itemId			: 'tgl_setelah'
 		,	name			: 'tgl_setelah'
-		,	format			: 'Y-m-d'
 		,	emptyText		: 'Setelah Tanggal'
 		},{
 			xtype			: 'datefield'
 		,	columnWidth		: .5
 		,	itemId			: 'tgl_sebelum'
 		,	name			: 'tgl_sebelum'
-		,	format			: 'Y-m-d'
 		,	emptyText		: 'Sebelum Tanggal'
 		},{
 			itemId			: 'pj_unit_kerja'

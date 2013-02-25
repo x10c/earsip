@@ -50,7 +50,6 @@ Ext.define('Earsip.view.NotifPemindahanWin', {
 		,	fieldLabel		: 'Tanggal'
 		,	itemId			: 'tgl'
 		,	name			: 'tgl'
-		,	format			: 'Y-m-d'
 		,	allowBlank		: false
 		,	showClear		: false
         ,	disabled		: true

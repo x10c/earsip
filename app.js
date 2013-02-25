@@ -148,6 +148,11 @@ function store_renderer (valueField, displayField, store)
 	}
 }
 
+function date_renderer (valueField)
+{
+	return Ext.util.Format.date(valueField,'d F Y');
+}
+
 Ext.application ({
 	name		: 'Earsip'
 ,	appFolder	: 'app'
@@ -272,6 +277,8 @@ Ext.application ({
 	
 ,	launch		: function ()
 	{
+		Ext.form.field.Date.prototype.format = 'd F Y';
+		Ext.form.field.Date.prototype.submitFormat = 'Y-m-d';
 		var win			= Ext.create ('Earsip.view.LoginWindow', {});
 		var mainview	= Ext.create ('Earsip.view.Main', {});
 		var viewport	= Ext.create ('Ext.container.Viewport', {

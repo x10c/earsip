@@ -68,6 +68,8 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 				xtype		: 'textfield'
 			,	allowBlank	: false
 			}
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Nama Petugas'
 		,	dataIndex		: 'nama_petugas'

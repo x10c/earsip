@@ -37,6 +37,8 @@ Ext.define ('Earsip.view.TrashList', {
 		text		: 'Tanggal Dibuat'
 	,	width		: 150
 	,	dataIndex	: 'tgl_dibuat'
+	,	renderer	: function(v)
+			{return date_renderer (v);}
 	},{
 		text		: 'Status'
 	,	dataIndex	: 'status'

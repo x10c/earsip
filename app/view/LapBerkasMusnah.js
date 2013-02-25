@@ -37,7 +37,6 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 				fieldLabel	: 'Setelah Tanggal'
 			,	itemId		: 'setelah_tgl'
 			,	name		: 'setelah_tgl'
-			,	format		: 'Y-m-d'
 			,	editable	: false
 			,	allowBlank	: false
 			,	value		: new Date ()
@@ -45,7 +44,6 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 				fieldLabel	: 'Sebelum Tanggal'
 			,	itemId		: 'sebelum_tgl'
 			,	name		: 'sebelum_tgl'
-			,	format		: 'Y-m-d'
 			,	editable	: false
 			,	allowBlank	: false
 			,	value		: new Date ()
@@ -82,6 +80,8 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 			text		: 'Musnah Tanggal'
 		,	dataIndex	: 'tgl'
 		,	flex		: 1
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text		: 'Keterangan'
 		,	dataIndex	: 'keterangan'

@@ -70,7 +70,6 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				,	fieldLabel		: 'Tanggal Pemusnahan'
 				,	itemId			: 'tgl'
 				,	name			: 'tgl'
-				,	format			: 'Y-m-d'
 				,	allowBlank		: false
 				,	editable		: false
 				,	value			: new Date ()

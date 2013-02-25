@@ -78,6 +78,8 @@ Ext.define ('Earsip.view.Label', {
 			text		: 'Musnah Tanggal'
 		,	dataIndex	: 'tgl'
 		,	flex		: 1
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text		: 'Keterangan'
 		,	dataIndex	: 'keterangan'

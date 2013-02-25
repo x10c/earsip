@@ -44,7 +44,6 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	fieldLabel		: 'Tanggal dibuat'
 			,	itemId			: 'tgl_dibuat'
 			,	name			: 'tgl_dibuat'
-			,	format			: 'Y-m-d'
 			},{
 				xtype			: 'combo'
 			,	fieldLabel		: '* Klasifikasi'

@@ -25,7 +25,7 @@ Ext.define ('Earsip.view.BerkasJRAList', {
 	,	width		: 100
 	,	dataIndex	: 'tgl_jra'
 	,	renderer	: function(v)
-		{return Ext.util.Format.date(v,'Y-m-d');}
+		{return date_renderer (v);}
 	},{
 		text		: 'Usia'
 	,	width		: 150

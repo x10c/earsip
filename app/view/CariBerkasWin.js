@@ -43,14 +43,12 @@ Ext.define ('Earsip.view.CariBerkasWin', {
 		,	xtype			: 'datefield'
 		,	itemId			: 'tgl_dibuat_setelah'
 		,	name			: 'tgl_dibuat_setelah'
-		,	format			: 'Y-m-d'
 		,	emptyText		: '-'
 		},{
 			fieldLabel		: 'Tanggal dibuat sebelum'
 		,	xtype			: 'datefield'
 		,	itemId			: 'tgl_dibuat_sebelum'
 		,	name			: 'tgl_dibuat_sebelum'
-		,	format			: 'Y-m-d'
 		,	emptyText		: '-'
 		},{
 			xtype			: 'combo'

@@ -80,7 +80,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	fieldLabel		: 'Tanggal Peminjaman'
 					,	itemId			: 'tgl_pinjam'
 					,	name			: 'tgl_pinjam'
-					,	format			: 'Y-m-d'
 					,	value			: new Date ()
 					,	editable		: false
 					},{
@@ -88,7 +87,6 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	fieldLabel		: 'Tanggal Batas Pengembalian'
 					,	itemId			: 'tgl_batas_kembali'
 					,	name			: 'tgl_batas_kembali'
-					,	format			: 'Y-m-d'
 					,	allowblank		: false
 					,	editable		: false
 					,	value			: new Date ()
@@ -96,7 +94,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 						xtype			: 'datefield'
 					,	itemId			: 'tgl_kembali'
 					,	name			: 'tgl_kembali'
-					,	format			: 'Y-m-d'
+					//,	format			: 'Y-m-d'
 					, 	value			: 'null'
 					,	hidden			: true
 					}]

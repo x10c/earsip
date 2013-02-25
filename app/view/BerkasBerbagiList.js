@@ -42,6 +42,8 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 		text		: 'Tanggal Dibuat'
 	,	dataIndex	: 'tgl_dibuat'
 	,	width		: 150
+	,	renderer	: function(v)
+			{return date_renderer (v);}
 	}]
 ,	tbar : [{
 		text		: 'Refresh'

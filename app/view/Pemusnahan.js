@@ -62,6 +62,8 @@ Ext.define ('Earsip.view.Pemusnahan', {
 			text			: 'Tanggal Pemusnahan'
 		,	dataIndex		: 'tgl'
 		,	flex			: 0.5
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Penanggung Jawab Unit Kerja'
 		,	dataIndex		: 'pj_unit_kerja'

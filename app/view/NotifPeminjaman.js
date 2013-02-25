@@ -68,16 +68,22 @@ Ext.define ('Earsip.view.NotifPeminjaman', {
 			text			: 'Tanggal Peminjaman'
 		,	dataIndex		: 'tgl_pinjam'
 		,	flex			: 0.5
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Tanggal Batas Pengembalian'
 		,	dataIndex		: 'tgl_batas_kembali'
 		,	flex			: 0.5
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Tanggal Kembali'
 		,	dataIndex		: 'tgl_kembali'
 		,	flex			: 0.5
 		,	hidden			: true
 		,	hideable		: false
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Keterangan'
 		,	dataIndex		: 'keterangan'

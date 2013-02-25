@@ -42,7 +42,6 @@ Ext.define('Earsip.view.PemindahanWin', {
 		,	fieldLabel		: 'Tanggal'
 		,	itemId			: 'tgl'
 		,	name			: 'tgl'
-		,	format			: 'Y-m-d'
 		,	allowBlank		: false
 		,	editable		: false
 		,	value			: new Date ()

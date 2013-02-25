@@ -40,7 +40,6 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	fieldLabel		: 'Tanggal'
 	,	itemId			: 'tgl_dibuat'
 	,	name			: 'tgl_dibuat'
-	,	format			: 'Y-m-d'
 	},{
 		xtype 	: 'container'
 	,	layout	: 'hbox'
