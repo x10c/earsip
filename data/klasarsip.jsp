@@ -14,7 +14,7 @@ try {
 		+" ,		jra_inaktif"
 		+" from 	r_berkas_klas";
 
-		if (! _user_gid.equals ("3")) {
+		if (! _user_gid.equals ("1") && ! _user_gid.equals ("3")) {
 			q +=" where	unit_kerja_id = " + _user_uk;
 		}
 
