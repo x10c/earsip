@@ -94,10 +94,10 @@ Ext.define ('Earsip.view.NotifPeminjaman', {
 		,	flex			: 0.5
 		,	renderer		: function (v){
 				if (v == 0){
-					return String.format( '<span style="color: red">{0}</span>', 'Belum Kembali');
+					return Ext.String.format( '<span style="color: red">{0}</span>', 'Belum Kembali');
 				}
 				else {
-					return String.format( '<span style="color: green">{0}</span>', 'Sudah Kembali');;
+					return Ext.String.format( '<span style="color: green">{0}</span>', 'Sudah Kembali');;
 				}
 			}
 		}]

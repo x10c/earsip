@@ -100,7 +100,7 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 		,	renderer	: function (v)
 			{
 				if (v == null || v == 'null') 
-					return String.format( '<span style="color: red">{0}</span>', 'Harap diisi');
+					return Ext.String.format( '<span style="color: red">{0}</span>', 'Harap diisi');
 				else {
 					return v;
 				}
@@ -115,9 +115,9 @@ Ext.define ('Earsip.view.NotifPemindahan', {
 		,	renderer	: function (v)
 			{
 				if (v == 1) {
-					return String.format( '<span style="color: green">{0}</span>', 'Lengkap');
+					return Ext.String.format( '<span style="color: green">{0}</span>', 'Lengkap');
 				} else {
-					return String.format( '<span style="color: red">{0}</span>', 'Tidak Lengkap');
+					return Ext.String.format( '<span style="color: red">{0}</span>', 'Tidak Lengkap');
 				}
 			}
 		}]
