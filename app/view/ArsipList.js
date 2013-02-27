@@ -16,7 +16,6 @@ Ext.define ('Earsip.view.ArsipList', {
 	,	width		: 300
 	,	hideable	: false
 	,	dataIndex	: 'nama'
-	,	locked		: true
 	,	renderer	: function (v, md, r)
 		{
 			if (r.get ('tipe_file') == 0) {
@@ -25,22 +24,6 @@ Ext.define ('Earsip.view.ArsipList', {
 				return "<span class='doc'>"+ v +"</span>";
 			}
 		}
-	},{
-		text		: 'Klasifikasi'
-	,	width		: 150
-	,	dataIndex	: 'berkas_klas_id'
-	,	renderer	: store_renderer ('id', 'nama', Ext.getStore ('KlasArsip'))
-	},{
-		text		: 'Tipe'
-	,	width		: 150
-	,	dataIndex	: 'berkas_tipe_id'
-	,	renderer	: store_renderer ('id', 'nama', Ext.getStore ('TipeArsip'))
-	},{
-		text		: 'Tanggal Dibuat'
-	,	width		: 150
-	,	dataIndex	: 'tgl_dibuat'
-	,	renderer	: function(v)
-			{return date_renderer (v);}
 	}]
 ,	dockedItems	: [{
 		xtype		: 'toolbar'
@@ -50,14 +33,43 @@ Ext.define ('Earsip.view.ArsipList', {
 			text		: 'Refresh'
 		,	itemId		: 'refresh'
 		,	iconCls		: 'refresh'
+		,	handler		:function (b)
+			{
+				Earsip.arsip.tree.type = 'folder';
+				b.up ('grid').do_refresh ();
+			}
 		},'-',{
 			text		: 'Kembali'
 		,	itemId		: 'dirup'
 		,	iconCls		: 'dirup'
+		,	handler		:function (b)
+			{
+				Earsip.arsip.tree.type	= 'arsip_folder';
+				Earsip.arsip.tree.id	= Earsip.arsip.tree.pid;
+				Earsip.arsip.tree.pid	= 0;
+				b.up ('grid').do_refresh ();
+			}
 		},'-','->','-',{
 			text		: 'Cari'
 		,	itemId		: 'search'
 		,	iconCls		: 'search'
+		,	handler		:function (b)
+			{
+				b.up ('grid').win_search.show ();
+			}
+		},'-',{
+			text		:'Cetak label'
+		,	itemId		:'cetak_label'
+		,	iconCls		:'print'
+		,	disabled	:true
+		,	handler		:function (b)
+			{
+				var url = 'data/lapcetaklabel_submit.jsp?' +
+							'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
+							'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
+							'kode_box=' + Earsip.arsip.tree.kode_box
+				window.open (url);
+			}
 		}]
 	}]
 
@@ -70,16 +82,11 @@ Ext.define ('Earsip.view.ArsipList', {
 				return;
 			}
 
-			Earsip.arsip.id		= r.get ("id")
-			Earsip.arsip.pid	= r.get ("pid");
+			Earsip.arsip.tree.id	= r.get ("id")
+			Earsip.arsip.tree.pid	= r.get ("pid");
+			Earsip.arsip.tree.type	='arsip_folder';
 
-			var tree	= Ext.getCmp ('arsiptree');
-			var node	= tree.getRootNode ().findChild ('id', Earsip.arsip.id, true);
-
-			if (node) {
-				tree.expandAll ();
-				tree.getSelectionModel ().select (node);
-			}
+			this.do_refresh ();
 		}
 	}
 
@@ -87,6 +94,11 @@ Ext.define ('Earsip.view.ArsipList', {
 	{
 		this.win_search	= Ext.create ('Earsip.view.ArsipCariWin', {});
 		this.callParent (arguments);
+	}
+
+,	do_refresh		:function ()
+	{
+		this.do_load_list ();
 	}
 
 ,	do_load_list : function (berkas_id)

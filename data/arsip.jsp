@@ -204,7 +204,7 @@ try {
 		while (rs.next ()) {
 			node		= new JSONObject ();
 			node.put ("id"					, rs.getString ("id"));
-			node.put ("pid"					, unit_kerja_id +"."+ kode_rak +"."+ kode_box +"."+ kode_folder);
+			node.put ("pid"					, rs.getString ("pid"));
 			node.put ("tipe_file"			, rs.getInt ("tipe_file"));
 			node.put ("sha"					, rs.getString ("sha"));
 			node.put ("pegawai_id"			, rs.getInt ("pegawai_id"));
@@ -258,9 +258,17 @@ try {
 			+" ,		status_hapus"
 			+" ,		akses_berbagi_id"
 			+" ,		n_output_images"
+			+" ,		kode_rak"
+			+" ,		kode_box"
+			+" ,		kode_folder"
 			+" from		m_berkas"
-			+" where	pid				= "+ id
-			+" and		status_hapus	= 1";
+			+" ,		m_arsip"
+			+" where	m_berkas.id		= berkas_id"
+			+" and		pid				= "+ id
+			+" and		status_hapus	= 1"
+			+" and		kode_rak		='"+ kode_rak +"'"
+			+" and		kode_box		='"+ kode_box +"'"
+			+" and		kode_folder		='"+ kode_folder +"'";
 
 		q += " order by tipe_file, nama";
 
@@ -269,7 +277,7 @@ try {
 		while (rs.next ()) {
 			node		= new JSONObject ();
 			node.put ("id"					, rs.getString ("id"));
-			node.put ("pid"					, unit_kerja_id +"."+ kode_rak +"."+ kode_box +"."+ kode_folder);
+			node.put ("pid"					, rs.getString ("pid"));
 			node.put ("tipe_file"			, rs.getInt ("tipe_file"));
 			node.put ("sha"					, rs.getString ("sha"));
 			node.put ("pegawai_id"			, rs.getInt ("pegawai_id"));
@@ -288,9 +296,6 @@ try {
 			node.put ("status"				, rs.getInt ("status"));
 			node.put ("status_hapus"		, rs.getInt ("status_hapus"));
 			node.put ("akses_berbagi_id"	, rs.getInt ("akses_berbagi_id"));
-			node.put ("kode_rak"			, rs.getString ("kode_rak"));
-			node.put ("kode_box"			, rs.getString ("kode_box"));
-			node.put ("kode_folder"			, rs.getString ("kode_folder"));
 			node.put ("n_output_images"		, rs.getInt ("n_output_images"));
 
 			arr_data.put (node);

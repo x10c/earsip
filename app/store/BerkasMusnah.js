@@ -22,7 +22,7 @@ Ext.define ('Earsip.store.BerkasMusnah', {
 ,	model		: 'Earsip.model.BerkasMusnah'
 ,	storeId		: 'BerkasMusnah'
 ,	autoSync	: false
-,	autoLoad	: true
+,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
 	,	id			: 'berkasmusnah'

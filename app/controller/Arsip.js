@@ -4,9 +4,6 @@ Ext.define ('Earsip.controller.Arsip', {
 		ref		:'mas_arsip'
 	,	selector:'mas_arsip'
 	},{
-		ref		:'arsiptree'
-	,	selector:'arsiptree'
-	},{
 		ref		:'arsiplist'
 	,	selector:'arsiplist'
 	},{
@@ -22,20 +19,8 @@ Ext.define ('Earsip.controller.Arsip', {
 			'mas_arsip button[itemId=save]' : {
 				click : this.do_save
 			}
-		,	'arsiptree': {
-				selectionchange : this.tree_selectionchange
-			}
-		,	'arsiptree button[itemId=label]': {
-				click : this.do_print_label
-			}
 		,	'arsiplist': {
 				selectionchange : this.list_selectionchange
-			}
-		,	'arsiplist button[itemId=dirup]': {
-				click : this.list_dirup
-			}
-		,	'arsiplist button[itemId=search]': {
-				click : this.open_search_win
 			}
 		,	'arsipcariwin button[itemId=search]' : {
 				click : this.do_search
@@ -60,7 +45,6 @@ Ext.define ('Earsip.controller.Arsip', {
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
-					this.getArsiptree ().do_refresh ();
 				} else {
 					Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
 				}
@@ -72,53 +56,14 @@ Ext.define ('Earsip.controller.Arsip', {
 		});
 	}
 
-,	do_print_label : function (button)
-	{
-		var url = 'data/lapcetaklabel_submit.jsp?' +
-					'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
-					'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
-					'kode_box=' + Earsip.arsip.tree.kode_box
-		window.open (url);
-	}
-	
-,	tree_selectionchange : function (tree, records)
-	{
-		var tb = this.getArsiptree ().down ('toolbar');
-		if (records.length <= 0) {
-			return;
-		}
-
-		Earsip.arsip.id					= records[0].get ('id');
-		Earsip.arsip.pid				= records[0].get ('parentId');
-		Earsip.arsip.tree.id			= records[0].get ('id');
-		Earsip.arsip.tree.pid			= records[0].get ('parentId');
-		Earsip.arsip.tree.type			= records[0].get ('type');
-		Earsip.arsip.tree.unit_kerja_id	= records[0].get ('unit_kerja_id');
-		Earsip.arsip.tree.kode_rak		= records[0].get ('kode_rak');
-		Earsip.arsip.tree.kode_box		= records[0].get ('kode_box');
-		Earsip.arsip.tree.kode_folder	= records[0].get ('kode_folder');
-
-		if (Earsip.arsip.pid == null) {
-			Earsip.arsip.pid			= 0;
-			Earsip.arsip.tree.pid		= 0;
-		}
-		
-		tb.down ('#label').setDisabled(
-			!(Earsip.is_p_arsip 
-			&& 
-			(Earsip.arsip.tree.type != 'root'
-			&&
-			Earsip.arsip.tree.type != 'folder'))
-		)
-		this.getArsiplist ().do_load_list ();
-	}
-
 ,	list_selectionchange : function (model, records)
 	{
 		var arsip	= this.getMas_arsip ();
 		var klas_id	= false;
 		var list = this.getArsiplist ();
 		var form = this.getMas_arsip ().down ('#arsip_form');
+
+		list.down ('#cetak_label').setDisabled (! records.length > 0);
 
 		if (records.length > 0) {
 			form.loadRecord (records[0]);
@@ -127,27 +72,6 @@ Ext.define ('Earsip.controller.Arsip', {
 			Earsip.arsip.pid	= records[0].get ('pid');
 			klas_id				= records[0].get ('berkas_klas_id') != '' ? true : false;
 		}
-	}
-
-,	list_dirup : function (b)
-	{
-		var tree	= this.getArsiptree ();
-		var root	= tree.getRootNode ();
-		var node	= null;
-
-		if (root.get ('id') == Earsip.arsip.tree.pid) {
-			node = root;
-		} else {
-			node = root.findChild ('id', Earsip.arsip.tree.pid, true);
-		}
-
-		tree.expandAll ();
-		tree.getSelectionModel ().select (node);
-	}
-
-,	open_search_win : function (b)
-	{
-		this.getArsiplist ().win_search.show ();
 	}
 
 ,	do_search : function (b)

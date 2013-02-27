@@ -6,6 +6,8 @@ Ext.require ([
 Ext.define ('Earsip.view.ArsipForm', {
 	extend		: 'Ext.form.Panel'
 ,	alias		: 'widget.arsipform'
+,	itemId		: 'arsip_form'
+,	url			: 'data/arsip_submit.jsp'
 ,	plain		: true
 ,	frame		: true
 ,	autoScroll	: true
@@ -64,6 +66,16 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	valueField		: 'id'
 			,	triggerAction	: 'all'
 			,	allowBlank		:false
+			},{
+				fieldLabel		:'Unit Kerja'
+			,	xtype			:'combo'
+			,	store			:Ext.getStore ('UnitKerja')
+			,	itemId			:'unit_kerja_id'
+			,	name			:'unit_kerja_id'
+			,	displayField	:'nama'
+			,	valueField		:'id'
+			,	triggerAction	:'all'
+			,	disabled		:true
 			},{
 				fieldLabel		: '* Kode Rak'
 			,	itemId			: 'kode_rak'

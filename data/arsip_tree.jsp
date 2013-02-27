@@ -118,15 +118,16 @@ public JSONArray get_list_arsip_folder (Connection db_con, String pid
 			node.put ("depth"			, depth);
 			node.put ("index"			, index++);
 			node.put ("leaf"			, true);
-
+/*
 			childs = get_list_dir (db_con, unit_kerja_id, kode_rak, kode_box, kode_folder, arsip_id, depth + 1);
 
 			if (childs.length () > 0) {
 				node.put ("leaf", false);
 				node.put ("children", childs);
 			}
-
+*/
 			nodes.put (node);
+
 		}
 		rs.close ();
 		db_stmt.close ();

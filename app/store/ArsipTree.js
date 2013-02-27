@@ -28,6 +28,7 @@ Ext.define ('Earsip.store.ArsipTree', {
 	}
 ,	proxy		:{
 		type		:'ajax'
+	,	timeout		:120
 	,	api			:{
 			read		:'data/arsip_tree.jsp'
 		}

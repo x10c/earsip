@@ -42,6 +42,7 @@ try {
 				+ "\n, nama_pimpinan	:'"+ rs.getString ("nama_pimpinan") +"'"
 				+ "\n, keterangan		:'"+ rs.getString ("keterangan") +"'"
 				+ "\n, urutan			:"+ rs.getInt ("urutan")
+				+ "\n, type				:'unit_kerja'"
 				+ "\n}";
 	}
 

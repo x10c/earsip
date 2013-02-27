@@ -109,9 +109,13 @@ if (user_grup_id != null && user_grup_id.equals ("3")) {
 		var _g_repo_path		= '<%= request.getContextPath() + repo_root %>';
 		var _g_max_upload_size	= <%= max_upload_size %>;
 	</script>
+<%--
 	<script type="text/javascript" src="app/plupload/plupload.full.js"></script>
+--%>
 	<script type="text/javascript" src="extjs/ext-all.js"></script>
+<%--
 	<script type="text/javascript" src="extjs/Ext.ux.panel.UploadPanel.js"></script>
+--%>
 	<script type="text/javascript" src="app.js"></script>
 </head>
 <body>

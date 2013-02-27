@@ -153,6 +153,14 @@ function date_renderer (valueField)
 	return Ext.util.Format.date(valueField,'d F Y');
 }
 
+/* Add clear function to remove all data from grid, without sync */
+Ext.override (Ext.grid.Panel, {
+	clearData: function ()
+	{
+		this.getStore ().loadData ([], false);
+	}
+});
+
 Ext.application ({
 	name		: 'Earsip'
 ,	appFolder	: 'app'
@@ -178,7 +186,9 @@ Ext.application ({
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
 	,	'Arsip'
-	,	'ArsipTree'
+	,	'Arsip.Rak'
+	,	'Arsip.Box'
+	,	'Arsip.Folder'
 	,	'Pemusnahan'
 	,	'PemusnahanRinci'
 	,	'TimPemusnahan'
