@@ -65,6 +65,11 @@ Ext.define ('Earsip.controller.Arsip', {
 
 		list.down ('#cetak_label').setDisabled (! records.length > 0);
 
+		if (_g_user_gid == '3') {
+			form.down ('#arsip_baru').setDisabled (! records.length > 0);
+			form.down ('#save').setDisabled (! records.length > 0);
+		}
+
 		if (records.length > 0) {
 			form.loadRecord (records[0]);
 			list.record			= records[0];

@@ -1,55 +1,53 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
+<%--
+	Copyright 2013 - x10c.Lab
+
+	Author(s):
+	- mhd.sulhan (ms@kilabit.org)
+--%>
+<%@ include file="init.jsp" %>
 <%
-Connection	db_con		= null;
-Statement	db_stmt		= null;
-ResultSet	rs			= null;
-String		q			= "";
-String		db_url		= "";
-String		data		= "";
-int			i			= 0;
 try {
-	db_con = (Connection) session.getAttribute ("db.con");
-
-	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath ());
-		return;
-	}
-
 	q	=" select	id"
 		+" ,		kode"
 		+" ,		nama"
 		+" ,		nama_pimpinan"
 		+" ,		keterangan"
 		+" ,		urutan"
-		+" from		m_unit_kerja"
-		+" order by urutan desc";
+		+" from		m_unit_kerja";
+
+	if (!_user_gid.equals ("1") && !_user_gid.equals ("3")) {
+		q	+="	where	id = "+ _user_uk;
+	}
+
+	q	+=" order by urutan desc";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
 
+	_a		= new JSONArray ();
 	while (rs.next ()) {
-		if (i > 0) {
-			data += ",";
-		} else {
-			i++;
-		}
-		data	+="\n{ id				: "+ rs.getString ("id")
-				+ "\n, kode				:'"+ rs.getString ("kode") +"'"
-				+ "\n, nama				:'"+ rs.getString ("nama") +"'"
-				+ "\n, nama_pimpinan	:'"+ rs.getString ("nama_pimpinan") +"'"
-				+ "\n, keterangan		:'"+ rs.getString ("keterangan") +"'"
-				+ "\n, urutan			:"+ rs.getInt ("urutan")
-				+ "\n, type				:'unit_kerja'"
-				+ "\n}";
+		_o	= new JSONObject ();
+		_o.put ("id"			, rs.getString ("id"));
+		_o.put ("kode"			, rs.getString ("kode"));
+		_o.put ("nama"			, rs.getString ("nama"));
+		_o.put ("nama_pimpinan"	, rs.getString ("nama_pimpinan"));
+		_o.put ("keterangan"	, rs.getString ("keterangan"));
+		_o.put ("urutan"		, rs.getInt ("urutan"));
+		_o.put ("type"			, "unit_kerja");
+
+		_a.put (_o);
 	}
 
-	out.print ("{success:true,data:["+ data +"]}");
 	rs.close ();
-}
-catch (Exception e) {
-	out.print ("{success:false,info:'"+ e.toString().replace("'","''") +"'}");
+	db_stmt.close ();
+
+	_r.put ("success"	, true);
+	_r.put ("data"		, _a);
+
+} catch (Exception e) {
+	_r.put ("success"	, false);
+	_r.put ("info"		, e);
+} finally {
+	out.print (_r);
 }
 %>

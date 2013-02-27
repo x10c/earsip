@@ -246,10 +246,12 @@ Ext.define ('Earsip.controller.Pemindahan', {
 			{
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
+					form.reset ();
 					if (win.action=='update') {
 						win.hide ();
+					} else if (win.action == 'create') {
+						Ext.getStore ('BerkasPindah').load ();
 					} else {
-						form.reset ();
 						win.down ('#pemindahan_id').setValue (idc);
 					}
 					grid.params = {

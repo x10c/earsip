@@ -1,52 +1,38 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ include file="init.jsp" %>
 <%
-Connection	db_con		= null;
-Statement	db_stmt		= null;
-ResultSet	rs			= null;
-String		q			= "";
-String		data		= "";
-int			i			= 0;
 try {
-	db_con = (Connection) session.getAttribute ("db.con");
-
-	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath());
-		return;
-	}
-
-	String user_id		= (String) session.getAttribute ("user.id");
-
-	q	=" SELECT	A.id"
-		+" ,		A.nama"
-		+" FROM		m_berkas A"
-		+" WHERE	A.id NOT IN (SELECT berkas_id FROM t_pemindahan_rinci)"
-		+" AND		pegawai_id		= "+ user_id
-		+" AND		status_hapus	= 1"
-		+" AND		arsip_status_id = 0"
-		+" AND 		unit_kerja_id IS NOT null"
-		+" and		datediff('month', current_date, dateadd ('year', jra_aktif,tgl_dibuat)) <= 3"
-		+" ORDER BY nama";
+	q	="	SELECT	id"
+		+"	,		nama"
+		+"	FROM	m_berkas"
+		+"	WHERE	id NOT IN (SELECT berkas_id FROM t_pemindahan_rinci)"
+		+"	and		pegawai_id		= "+ _user_id
+		+"	AND		status_hapus	= 1"
+		+"	AND		arsip_status_id	= 0"
+		+"	AND 	unit_kerja_id	is not null"
+		+"	and		datediff('month', current_date, dateadd ('year', jra_aktif, tgl_dibuat)) <= 3";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
 
+	_a		= new JSONArray ();
 	while (rs.next ()) {
-		if (i > 0) {
-			data += ",";
-		} else {
-			i++;
-		}
-		data	+="\n{ id            	: "+ rs.getString ("id")
-				+ "\n, nama          	:'"+ rs.getString ("nama") +"'"
-				+ "\n}";
+		_o	= new JSONObject ();
+		_o.put ("id"	, rs.getString ("id"));
+		_o.put ("nama"	, rs.getString ("nama"));
+
+		_a.put (_o);
 	}
-	out.print ("{success:true,data:["+ data +"]}");
+
 	rs.close ();
-}
-catch (Exception e) {
-	out.print ("{success:false,info:'"+ e.toString().replace("'","''").replace ("\"", "\\\"") +"'}");
+	db_stmt.close ();
+
+	_r.put ("success"	,true);
+	_r.put ("data"		,_a);
+
+} catch (Exception e) {
+	_r.put ("success"	,false);
+	_r.put ("data"		,e);
+} finally {
+	out.print (_r);
 }
 %>

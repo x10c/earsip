@@ -3,7 +3,6 @@ Ext.require ([
 ,	'Earsip.view.PemindahanRinciWin'
 ,	'Earsip.store.Pemindahan'
 ,	'Earsip.store.PemindahanRinci'
-,	'Earsip.store.BerkasPindah'
 ]);
 
 Ext.define ('Earsip.view.Pemindahan', {
@@ -74,16 +73,17 @@ Ext.define ('Earsip.view.Pemindahan', {
 		},{
 			text		: 'Status'
 		,	dataIndex	: 'status'
-		,	width		: 80
+		,	width		: 120
+		,	align		:'center'
 		,	editor		: {
 				xtype		: 'textfield'
 			}
 		,	renderer	: function (v)
 			{
 				if (v == 1) {
-					return String.format( '<span style="color: green">{0}</span>', 'Lengkap');
+					return Ext.String.format( '<span style="color: green">{0}</span>', 'Lengkap');
 				} else {
-					return String.format( '<span style="color: red">{0}</span>', 'Tidak Lengkap');
+					return Ext.String.format( '<span style="color: red">{0}</span>', 'Tidak Lengkap');
 				}
 			}
 		}]
