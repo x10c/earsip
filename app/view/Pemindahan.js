@@ -3,7 +3,6 @@ Ext.require ([
 ,	'Earsip.view.PemindahanRinciWin'
 ,	'Earsip.store.Pemindahan'
 ,	'Earsip.store.PemindahanRinci'
-,	'Earsip.store.BerkasPindah'
 ]);
 
 Ext.define ('Earsip.view.Pemindahan', {
@@ -74,7 +73,8 @@ Ext.define ('Earsip.view.Pemindahan', {
 		},{
 			text		: 'Status'
 		,	dataIndex	: 'status'
-		,	width		: 80
+		,	width		: 120
+		,	align		:'center'
 		,	editor		: {
 				xtype		: 'textfield'
 			}

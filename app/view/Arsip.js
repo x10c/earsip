@@ -98,6 +98,7 @@ Ext.define ('Earsip.view.Arsip', {
 					m.down ('#arsip_box').clearData ();
 					m.down ('#arsip_folder').clearData ();
 					m.down ('#arsiplist').clearData ();
+					m.down ('#arsiplist').down ('#cetak_label').setDisabled (! d.length > 0);
 
 					Earsip.arsip.tree.type			= "";
 					Earsip.arsip.tree.kode_rak		= "0";
