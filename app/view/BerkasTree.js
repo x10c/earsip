@@ -1,3 +1,7 @@
+Ext.require ([
+	'Earsip.store.BerkasTree'
+]);
+
 Ext.define ('Earsip.view.BerkasTree', {
 	extend		: 'Ext.tree.Panel'
 ,	alias		: 'widget.berkastree'
@@ -6,17 +10,18 @@ Ext.define ('Earsip.view.BerkasTree', {
 ,	width		: 220
 ,	margins		: '5 0 0 5'
 ,	split		: true
-,	dockedItems	: [{
-		xtype		: 'toolbar'
-	,	dock		: 'top'
-	,	flex		: 1
-	,	items		: [{
-			itemId		: 'refresh'
-		,	iconCls		: 'refresh'
-		},'-','->','-',{
-			itemId		: 'trash'
-		,	iconCls		: 'trash'
-		}]
+,	store		:'BerkasTree'
+,	rootVisible	:false
+,	tbar		: [{
+		itemId		: 'refresh'
+	,	iconCls		: 'refresh'
+	,	handler		:function (b)
+		{
+			b.up ('treepanel').do_refresh ();
+		}
+	},'-','->','-',{
+		itemId		: 'trash'
+	,	iconCls		: 'trash'
 	}]
 
 ,	initComponent	: function()
@@ -24,37 +29,29 @@ Ext.define ('Earsip.view.BerkasTree', {
 		this.callParent (arguments);
 	}
 
-,	do_load_tree : function ()
+,	do_refresh	:function ()
 	{
-		Ext.Ajax.request ({
-			url		: 'data/berkas_tree.jsp'
-		,	scope	: this
-		,	success	: function (response)
+		this.getStore ().load ({
+			success	: function (response)
 			{
 				var o = Ext.decode (response.responseText);
-				if (o.success == true) {
-					var sm = this.getSelectionModel ();
-					var node;
-
-					this.suspendEvents (false);
-					this.setRootNode (o.data);
-					this.getRootNode ().raw = o.data;
-					this.resumeEvents ();
-					this.doLayout();
-
-					if (Earsip.berkas.tree.pid != 0) {
-						node = this.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
-					} else {
-						node = this.getRootNode ();
-					}
-
-					sm.deselectAll ();
-					this.expandAll ();
-					if (node != null) {
-						sm.select (node);
-					}
-				} else {
+				if (o.success != true) {
 					Ext.msg.error (o.info);
+					return;
+				}
+	
+				var node;
+
+				if (Earsip.berkas.tree.pid != 0) {
+					node = this.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
+				} else {
+					node = this.getRootNode ();
+				}
+
+				sm.deselectAll ();
+				this.expandAll ();
+				if (node != null) {
+					sm.select (node);
 				}
 			}
 		,	failure	: function (response) {

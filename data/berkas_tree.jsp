@@ -1,14 +1,10 @@
 <%--
- % Copyright 2012 - kilabit.org
- %
- % Author(s):
- %  - m.shulhan (ms@kilabit.org)
+	Copyright 2013 - x10c.lab
+
+	Author(s):
+	- mhd.sulhan (ms@kilabit.org)
 --%>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="org.json.JSONArray" %>
-<%@ page import="org.json.JSONObject" %>
+<%@ include file="init.jsp" %>
 <%!
 public JSONArray get_list_dir (int id, Connection db_con)
 {
@@ -44,75 +40,65 @@ try {
 
 		childs = get_list_dir (id, db_con);
 
-		if (childs.length () <= 0) {
-			node.put ("children", new JSONArray());
-		} else {
-			node.put ("children", childs);
-		}
+		node.put ("children", childs);
 
 		nodes.put (node);
 	}
 
 	rs.close();
+	db_stmt.close ();
 
-	return nodes;
 } catch (Exception e) {
 	log("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+} finally {
 	return nodes;
 }}
 %>
 <%
-String q = "";
-try {
-	Connection db_con = (Connection) session.getAttribute("db.con");
-	if (db_con == null || (db_con != null && db_con.isClosed())) {
-		response.sendRedirect(request.getContextPath());
-		return;
-	}
-
-	Statement	db_stmt		= db_con.createStatement();
-	ResultSet	rs			= null;
-	String		data		= "";
 	JSONArray	childs		= null;
-	JSONObject	node		= new JSONObject();
-	String		user_id		= (String) session.getAttribute ("user.id");
-	String		user_name	= (String) session.getAttribute ("user.nama");
 	int			id			= 0;
 
+try {
 	q	=" select	id"
 		+" ,		nama"
 		+" from		m_berkas"
-		+" where	pegawai_id	= "+ user_id
-		+" and		pid			= 0"
-		+" and		tipe_file	= 0"
-		+" and		status		= 1" // 1:aktif, 0:inaktif
+		+" where	pegawai_id		= "+ _user_id
+		+" and		pid				= 0"
+		+" and		tipe_file		= 0"
+		+" and		status			= 1" // 1:aktif, 0:inaktif
 		+" and		status_hapus	= 1"
 		+" order by nama";
 
-	rs = db_stmt.executeQuery (q);
+	db_stmt	= db_con.createStatement ();
+	rs		= db_stmt.executeQuery (q);
 
 	if (! rs.next ()) {
-		out.print("{success:false,info:'Direktori user \""+ user_id +"\"  belum ada!'}");
-		return;
+		throw new Exception ("Direktori user \""+ _user_id +"\" belum ada!");
 	}
 
 	id = rs.getInt ("id");
 
-	node.put ("id", id);
-	node.put ("pid", 0);
-	node.put ("text", rs.getString ("nama"));
+	_o	= new JSONObject ();
+	_o.put ("id"	, id);
+	_o.put ("pid"	, 0);
+	_o.put ("text"	, rs.getString ("nama"));
+
+	rs.close ();
+	db_stmt.close ();
 
 	childs = get_list_dir (id, db_con);
 
-	if (childs.length () <= 0) {
-		node.put ("children", new JSONArray());
-	} else {
-		node.put ("children", childs);
-	}
+	_o.put ("children", childs);
 
-	rs.close ();
-	out.print ("{success:true,data:"+ node +"}");
+	_a	= new JSONArray ();
+	_a.put (_o);
+
+	_r.put ("success"	,true);
+	_r.put ("children"	,_a);
 } catch (Exception e) {
-	out.print("{success:false,info:'"+ e.toString().replace("'","\\'") +"'}");
+	_r.put ("success"	,false);
+	_r.put ("info"		,e);
+} finally {
+	out.print (_r);
 }
 %>

@@ -17,7 +17,6 @@ try {
 		return;
 	}
 
-	String	user_id				= (String) session.getAttribute ("user.id");
 	String	text				= request.getParameter ("text");
 	String	uk_peminjam_id		= request.getParameter ("unit_kerja_peminjam");
 	String	nm_peminjam			= request.getParameter ("nama_peminjam");
