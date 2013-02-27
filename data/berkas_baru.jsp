@@ -14,6 +14,10 @@ try {
 	int		jra_aktif	= ServletUtilities.getIntParameter (request, "jra_aktif", 1);
 	int		jra_inaktif	= ServletUtilities.getIntParameter (request, "jra_inaktif", 1);
 
+	if (null == tgl_dibuat || tgl_dibuat.isEmpty ()) {
+		tgl_dibuat = _sdf.format (new Date ());
+	}
+
 	q	=" insert into m_berkas ("
 		+"		pid"
 		+" ,	pegawai_id"

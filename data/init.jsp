@@ -27,6 +27,7 @@
 	JSONObject			_o		= null;
 	JSONObject			_r		= new JSONObject ();
 	int					_i		= 0;
+	SimpleDateFormat	_sdf	= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	db_con = (Connection) session.getAttribute ("db.con");
 
