@@ -5,20 +5,27 @@
 <%@ include file="init.jsp" %>
 <%
 try {
-	q	=" select	id"
-		+" , 		unit_kerja_id"
-		+" , 		kode"
-		+" , 		nama"
-		+" , 		keterangan"
-		+" ,		jra_aktif"
-		+" ,		jra_inaktif"
-		+" from 	r_berkas_klas";
+	String	query	= request.getParameter ("query");
+
+	q	=" select	A.id"
+		+" , 		A.unit_kerja_id"
+		+" , 		A.kode"
+		+" , 		B.nama ||' - '|| A.kode ||' - '|| A.nama as nama"
+		+" , 		A.keterangan"
+		+" ,		A.jra_aktif"
+		+" ,		A.jra_inaktif"
+		+" from 	r_berkas_klas	A"
+		+" ,		m_unit_kerja	B"
+		+" where	A.unit_kerja_id = B.id";
 
 		if (! _user_gid.equals ("1") && ! _user_gid.equals ("3")) {
-			q +=" where	unit_kerja_id = " + _user_uk;
+			q	+=" and	A.unit_kerja_id = " + _user_uk;
+		}
+		if (query != null && ! query.equals ("")) {
+			q	+="	and A.nama ilike '%"+ query +"%'";
 		}
 
-		q +=" order by nama";
+		q +=" order by B.nama, A.kode, A.nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);

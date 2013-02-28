@@ -19,7 +19,7 @@ Ext.define ('Earsip.store.KlasArsip', {
 ,	groupField	: 'unit_kerja_id'
 ,	sorters		: ['kode']
 ,	autoSync	: false
-,	autoLoad	: true
+,	autoLoad	: false
 ,	proxy		: {
 		type		: 'ajax'
 	,	api			: {
