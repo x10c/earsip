@@ -27,7 +27,7 @@ try {
 	_a		= new JSONArray ();
 	while (rs.next ()) {
 		_o	= new JSONObject ();
-		_o.put ("id"			, rs.getString ("id"));
+		_o.put ("id"			, rs.getInt ("id"));
 		_o.put ("kode"			, rs.getString ("kode"));
 		_o.put ("nama"			, rs.getString ("nama"));
 		_o.put ("nama_pimpinan"	, rs.getString ("nama_pimpinan"));
