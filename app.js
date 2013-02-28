@@ -2,6 +2,7 @@ Ext.Loader.setConfig ({ enabled: true });
 
 Ext.define ('Earsip', {
 	singleton		: true
+,	pageSize		:20
 ,	username		: ''
 ,	is_p_arsip		: false
 ,	repo_path		: ''

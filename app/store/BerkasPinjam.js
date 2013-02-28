@@ -22,6 +22,7 @@ Ext.define ('Earsip.store.BerkasPinjam', {
 ,	storeId		: 'BerkasPinjam'
 ,	autoSync	: false
 ,	autoLoad	: false
+,	pageSize	:Earsip.pageSize
 ,	proxy		: {
 		type		: 'ajax'
 	,	api			: {

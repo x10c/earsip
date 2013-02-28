@@ -164,6 +164,9 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				,	allowBlank		: false
 				,	autoSelect		: true
 				,	triggerAction	: 'all'
+				,	pageSize		:Earsip.pageSize
+				,	typeAhead		:true
+				,	forceSelection	:true
 				}
 			,	renderer	: function (v, md, r, rowidx, colidx)
 				{
