@@ -39,7 +39,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 			},{
 				itemId			: 'nama'
 			,	name			: 'nama'
-			,	fieldLabel		:'* Nama'
+			,	fieldLabel		:'* Nama Berkas'
 			,	allowBlank		:false
 			},{
 				xtype			: 'datefield'
@@ -119,7 +119,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	emptyText		: '-'
 			},{
 				xtype			: 'textarea'
-			,	fieldLabel		: 'Masalah'
+			,	fieldLabel		: 'Keterangan'
 			,	itemId			: 'masalah'
 			,	name			: 'masalah'
 			,	emptyText		: '-'

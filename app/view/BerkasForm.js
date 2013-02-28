@@ -31,7 +31,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	name			:'tipe_file'
 	,	hidden			:true
 	},{
-		fieldLabel		: '* Nama'
+		fieldLabel		: '* Nama Berkas'
 	,	itemId			: 'nama'
 	,	name			: 'nama'
 	,	allowBlank		: false
@@ -94,7 +94,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	emptyText		: '-'
 	},{
 		xtype			: 'textarea'
-	,	fieldLabel		: 'Masalah'
+	,	fieldLabel		: 'Keterangan'
 	,	itemId			: 'masalah'
 	,	name			: 'masalah'
 	,	emptyText		: '-'

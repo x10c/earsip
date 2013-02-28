@@ -12,7 +12,7 @@ Ext.define ('Earsip.view.ArsipList', {
 ,	itemId		: 'arsiplist'
 ,	store		: 'Arsip'
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Berkas'
 	,	width		: 300
 	,	hideable	: false
 	,	dataIndex	: 'nama'
