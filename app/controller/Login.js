@@ -89,7 +89,7 @@ Ext.define ('Earsip.controller.Login', {
 		}
 		this.getMainview ().open_view_main ();
 		this.getMaintoolbar ().do_load_menu ();
-		this.getBerkastree ().do_load_tree ();
+		this.getBerkastree ().do_refresh ();
 		this.getBerkaslist ().getStore ().removeAll ();
 		this.getBerkasform ().getForm ().reset ();
 

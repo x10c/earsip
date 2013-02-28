@@ -40,9 +40,6 @@ Ext.define ('Earsip.controller.Berkas', {
 		,	'berkastree': {
 				selectionchange : this.tree_selectionchange
 			}
-		,	'berkastree button[itemId=refresh]': {
-				click : this.tree_refresh
-			}
 		,	'berkastree button[itemId=trash]': {
 				click : this.do_open_trash
 			}
@@ -130,11 +127,6 @@ Ext.define ('Earsip.controller.Berkas', {
 
 			this.getBerkaslist ().do_refresh ();
 		}
-	}
-
-,	tree_refresh : function ()
-	{
-		this.getBerkastree ().do_load_tree ();
 	}
 
 ,	do_open_trash : function (b)
@@ -257,7 +249,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			,	success	: function (form, action)
 				{
 					if (action.result.success == true) {
-						this.getBerkastree ().do_load_tree ();
+						this.getBerkastree ().do_refresh ();
 						this.getBerkaslist ().do_refresh ();
 						Ext.msg.info (action.result.info);
 					} else {
@@ -299,7 +291,7 @@ Ext.define ('Earsip.controller.Berkas', {
 			{
 				if (action.result.success == true) {
 					Ext.msg.info ('Berkas baru telah dibuat!');
-					this.getBerkastree ().do_load_tree ();
+					this.getBerkastree ().do_refresh ();
 					this.getBerkaslist ().do_refresh ();
 				} else {
 					Ext.msg.error (action.result.info);

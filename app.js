@@ -166,6 +166,7 @@ Ext.application ({
 ,	appFolder	: 'app'
 ,	stores		: [
 		'Berkas'
+	,	'BerkasTree'
 	,	'BerkasBerbagi'
 	,	'BerkasBerbagiList'
 	,	'User'
@@ -309,7 +310,7 @@ Ext.application ({
 			var tree	= main.down ('#berkastree');
 
 			tb.do_load_menu ();
-			tree.do_load_tree ();
+			tree.do_refresh ();
 			var tabpanel = mainview.down ('#content_tab');
 			
 			if (is_pusatarsip == 1){

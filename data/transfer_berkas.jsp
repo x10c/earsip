@@ -17,7 +17,6 @@ try {
 	}
 
 	db_stmt				= db_con.createStatement ();
-	String user_nip		= (String) session.getAttribute ("user.nip");
 	String from_peg		= request.getParameter ("from_peg");
 	String to_peg		= request.getParameter ("to_peg");
 	String to_peg_id	= "";

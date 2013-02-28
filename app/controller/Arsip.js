@@ -79,8 +79,8 @@ Ext.define ('Earsip.controller.Arsip', {
 
 ,	do_search : function (b)
 	{
-		var cariform	= this.getArsipcariwin ().down ('form').getForm ();
 		var list		= this.getArsiplist ();
+		var cariform	= list.win_search.down ('form').getForm ()
 		var list_store	= list.getStore ();
 		var list_proxy	= list_store.getProxy ();
 		var org_url		= list_proxy.url;
