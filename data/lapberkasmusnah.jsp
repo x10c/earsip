@@ -20,7 +20,7 @@ try {
 	String setelah_tgl	= request.getParameter ("setelah_tgl");
 	String sebelum_tgl	= request.getParameter ("sebelum_tgl");
 
-	q   =" 		SELECT C.id"
+	q   =" 		SELECT A.id"
 		+"	,	A.nama"
 		+"	, 	A.judul"
 		+"	,	D.kode as kode_klas"

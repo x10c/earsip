@@ -76,15 +76,21 @@ Ext.define ('Earsip.view.Peminjaman', {
 			text			: 'Tgl. Pinjam'
 		,	dataIndex		: 'tgl_pinjam'
 		,	width			: 100
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Tgl. Batas Kembali'
 		,	dataIndex		: 'tgl_batas_kembali'
 		,	width			: 120
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Tgl. Kembali'
 		,	dataIndex		: 'tgl_kembali'
 		,	width			: 100
 		,	hideable		: false
+		,	renderer	: function(v)
+			{return date_renderer (v);}
 		},{
 			text			: 'Keterangan'
 		,	dataIndex		: 'keterangan'

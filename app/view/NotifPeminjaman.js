@@ -36,7 +36,9 @@ Ext.define ('Earsip.view.NotifPeminjaman', {
 		,	flex		: 0.5
 		,	editor		: {
 				xtype			: 'combo'
-			,	store			: Ext.getStore ('Earsip.store.UnitKerja')
+			,	store			: Ext.create ('Earsip.store.UnitKerja', {
+					autoLoad		: true
+				})
 			,	displayField	: 'nama'
 			,	valueField		: 'id'
 			,	mode			: 'local'

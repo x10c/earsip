@@ -30,8 +30,8 @@ Ext.define ('Earsip.controller.LapBerkasMusnah', {
 	}
 ,	do_print_berkas_musnah : function (button)
 	{	
-		var setelah_tgl_str = this.getLap_berkas_musnah ().down ('#setelah_tgl').getRawValue ();
-		var sebelum_tgl_str = this.getLap_berkas_musnah ().down ('#sebelum_tgl').getRawValue ();
+		var setelah_tgl_str = this.getLap_berkas_musnah ().down ('#setelah_tgl').getSubmitValue ();
+		var sebelum_tgl_str = this.getLap_berkas_musnah ().down ('#sebelum_tgl').getSubmitValue ();
 		var grid =this.getLap_berkas_musnah ().down ('grid');
 		var records = grid.getStore ().getRange ();
 		if (records.length <= 0) {
