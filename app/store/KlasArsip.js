@@ -6,6 +6,7 @@ Ext.define ('Earsip.model.KlasArsip', {
 	,	'unit_kerja_id'
 	,	'kode'
 	,	'nama'
+	,	'nama_alt'
 	,	'keterangan'
 	,	'jra_aktif'
 	,	'jra_inaktif'

@@ -10,7 +10,8 @@ try {
 	q	=" select	A.id"
 		+" , 		A.unit_kerja_id"
 		+" , 		A.kode"
-		+" , 		B.nama ||' - '|| A.kode ||' - '|| A.nama as nama"
+		+" ,		A.nama"
+		+" , 		B.nama ||' - '|| A.kode ||' - '|| A.nama as nama_alt"
 		+" , 		A.keterangan"
 		+" ,		A.jra_aktif"
 		+" ,		A.jra_inaktif"
@@ -36,6 +37,7 @@ try {
 		_o.put ("unit_kerja_id"	, rs.getInt ("unit_kerja_id"));
 		_o.put ("kode"			, rs.getString ("kode"));
 		_o.put ("nama"			, rs.getString ("nama"));
+		_o.put ("nama_alt"		, rs.getString ("nama_alt"));
 		_o.put ("keterangan"	, rs.getString ("keterangan"));
 		_o.put ("jra_aktif"		, rs.getString ("jra_aktif"));
 		_o.put ("jra_inaktif"	, rs.getString ("jra_inaktif"));

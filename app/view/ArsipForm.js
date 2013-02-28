@@ -52,7 +52,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	itemId			: 'berkas_klas_id'
 			,	name			: 'berkas_klas_id'
 			,	store			: Ext.getStore ('KlasArsip')
-			,	displayField	: 'nama'
+			,	displayField	: 'nama_alt'
 			,	valueField		: 'id'
 			,	triggerAction	: 'all'
 			,	allowBlank		:false
