@@ -265,8 +265,10 @@ Ext.define ('Earsip.view.Arsip', {
 
 		f.submit ({
 			scope	:this
+		,	url		:'data/arsip_submit.jsp'
 		,	params	:{
-				action	:'create'
+				action			:'create'
+			,	unit_kerja_id	:arsip_form.down ('#unit_kerja_id').getValue ()
 			}
 		,	success	:function (form, action)
 			{

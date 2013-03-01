@@ -56,6 +56,14 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	valueField		: 'id'
 			,	triggerAction	: 'all'
 			,	allowBlank		:false
+			,	listeners		:{
+					select			:function (c, d)
+					{
+						if (d.length > 0) {
+							c.up ('form').down ('#unit_kerja_id').setValue (d[0].get ('unit_kerja_id'));
+						}
+					}
+				}
 			},{
 				xtype			: 'combo'
 			,	fieldLabel		: '* Tipe'
@@ -151,12 +159,6 @@ Ext.define ('Earsip.view.ArsipForm', {
 ,	initComponent	:function (opt)
 	{
 		this.callParent (opt || arguments);
-
-		var fuk = this.down ('#unit_kerja_id');
-
-		if (1 == is_pusatarsip) {
-			fuk.setDisabled (false);
-		}
 	}
 
 ,	listeners	:{

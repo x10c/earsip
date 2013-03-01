@@ -10,6 +10,7 @@ try {
 	String				action			= request.getParameter ("action");
 	int					id				= ServletUtilities.getIntParameter (request, "id", 0);
 	int					pid				= ServletUtilities.getIntParameter (request, "pid", 0);
+	int					uk_id			= ServletUtilities.getIntParameter (request, "unit_kerja_id", Integer.parseInt (_user_uk));
 	String				nama			= request.getParameter ("nama");
 	String				tgl_dibuat		= request.getParameter ("tgl_dibuat");
 	int					berkas_klas_id	= ServletUtilities.getIntParameter (request, "berkas_klas_id", 1);
@@ -63,7 +64,7 @@ try {
 
 		db_ps.setInt	(_i++, 0);
 		db_ps.setInt	(_i++, Integer.parseInt (_user_id));
-		db_ps.setInt	(_i++, Integer.parseInt (_user_uk));
+		db_ps.setInt	(_i++, uk_id);
 
 		db_ps.setString	(_i++, nama);
 		db_ps.setString	(_i++, tgl_dibuat);
