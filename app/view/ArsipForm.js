@@ -148,6 +148,17 @@ Ext.define ('Earsip.view.ArsipForm', {
 	,	disabled	: true
 	}]
 
+,	initComponent	:function (opt)
+	{
+		this.callParent (opt || arguments);
+
+		var fuk = this.down ('#unit_kerja_id');
+
+		if (1 == is_pusatarsip) {
+			fuk.setDisabled (false);
+		}
+	}
+
 ,	listeners	:{
 		validitychange	:function (f, valid, e)
 		{
