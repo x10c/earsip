@@ -58,6 +58,26 @@ Ext.define ('Earsip.view.Berkas', {
 		}
 	}
 
+,	initComponent	: function()
+	{
+		this.callParent (arguments);
+
+		var tree	= this.down ('#berkastree');
+		var sm		= tree.getSelectionModel ();
+
+		if (Earsip.berkas.tree.pid != 0) {
+			node = tree.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
+		} else {
+			node = tree.getRootNode ().getChildAt (0);
+		}
+
+		sm.deselectAll ();
+		tree.expandAll ();
+		if (node != null) {
+			sm.select (node);
+		}
+	}
+
 ,	onclick_berkas_baru: function ()
 	{
 		var berkas_form = this.down ('#berkas_form');
