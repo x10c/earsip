@@ -38,6 +38,10 @@ public int pdf2image (String dir, String filename)
 		cmds.add ("/c");
 	}
 	cmds.add ("convert");
+	cmds.add ("-density");
+	cmds.add ("148");
+	cmds.add ("-quality");
+	cmds.add ("100");
 	cmds.add (filename);
 	cmds.add (filename +"_%d.png");
 
