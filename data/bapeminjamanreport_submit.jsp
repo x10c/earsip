@@ -3,13 +3,13 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Locale" %>
-  
+
 <%@ page import="net.sf.jasperreports.engine.JasperExportManager" %>
 <%@ page import="net.sf.jasperreports.engine.JasperFillManager" %>
 <%@ page import="net.sf.jasperreports.engine.JasperPrint" %>
 <%@ page import="net.sf.jasperreports.engine.JasperReport" %>
 <%@ page import="net.sf.jasperreports.engine.util.JRLoader" %>
-  
+
 <%@ page import="java.sql.Connection" %>
 
 
@@ -36,8 +36,8 @@ try {
 	parameters.put ("REPORT_LOCALE", locale);
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "peminjaman.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
-	//response.setContentType("Application/pdf");
-	response.setHeader("Content-Disposition","attachment;filename=Berita Acara Peminjaman.pdf");
+	response.setContentType("application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=\"Berita Acara Peminjaman.pdf\"");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
 	
 } catch (Exception e) {

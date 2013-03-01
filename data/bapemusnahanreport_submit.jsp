@@ -6,7 +6,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
-  
 <%@ page import="net.sf.jasperreports.engine.JRExporter" %>
 <%@ page import="net.sf.jasperreports.engine.JRExporterParameter" %>
 <%@ page import="net.sf.jasperreports.engine.export.JRPdfExporter" %>
@@ -14,7 +13,7 @@
 <%@ page import="net.sf.jasperreports.engine.JasperPrint" %>
 <%@ page import="net.sf.jasperreports.engine.JasperReport" %>
 <%@ page import="net.sf.jasperreports.engine.util.JRLoader" %>
-  
+
 <%@ page import="java.sql.Connection" %>
 
 
@@ -50,7 +49,8 @@ try {
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	jlist.add (jasperprint);
 	exporter	= new JRPdfExporter ();
-	response.setHeader("Content-Disposition","attachment;filename=Berita Acara Pemusnahan.pdf");
+	response.setContentType("application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=\"Berita Acara Pemusnahan.pdf\"");
 	exporter.setParameter (JRExporterParameter.JASPER_PRINT_LIST, jlist);
 	exporter.setParameter (JRExporterParameter.OUTPUT_STREAM, response.getOutputStream ());
 	exporter.exportReport ();

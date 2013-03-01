@@ -44,7 +44,7 @@ try {
 
 	
 
-    if (action.equalsIgnoreCase ("destroy")) {
+	if (action.equalsIgnoreCase ("destroy")) {
 		q	=" delete from t_tim_pemusnahan"
 			+" where pemusnahan_id = ? and nomor = ?";
 		db_stmt = db_con.prepareStatement (q);

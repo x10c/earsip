@@ -24,7 +24,7 @@ try {
 
 	response.setContentType ((mimetype != null) ? mimetype : "application/octet-stream");
 	response.setContentLength ((int) f.length());
-	response.setHeader("Content-Disposition","attachment;filename="+ nama);
+	response.setHeader("Content-Disposition","attachment;filename=\""+ nama +"\"");
 
 	DataInputStream dis = new DataInputStream (new FileInputStream(f));
 

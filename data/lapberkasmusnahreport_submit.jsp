@@ -4,13 +4,13 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-  
+
 <%@ page import="net.sf.jasperreports.engine.JasperExportManager" %>
 <%@ page import="net.sf.jasperreports.engine.JasperFillManager" %>
 <%@ page import="net.sf.jasperreports.engine.JasperPrint" %>
 <%@ page import="net.sf.jasperreports.engine.JasperReport" %>
 <%@ page import="net.sf.jasperreports.engine.util.JRLoader" %>
-  
+
 <%@ page import="java.sql.Connection" %>
 
 
@@ -43,7 +43,8 @@ try {
 	
 	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "lap_berkas_musnah.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
-	response.setHeader("Content-Disposition","attachment;filename=Laporan Daftar Berkas Musnah.pdf");
+	response.setContentType ("application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=\"Laporan Daftar Berkas Musnah.pdf\"");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
 	
 } catch (Exception e) {

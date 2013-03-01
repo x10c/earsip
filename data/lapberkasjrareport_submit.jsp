@@ -38,7 +38,8 @@ try {
 		jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "lapjra_aktif.jasper"));
 	}
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
-	response.setHeader("Content-Disposition","attachment;filename=Laporan Daftar Berkas JRA.pdf");
+	response.setContentType ("application/pdf");
+	response.setHeader("Content-Disposition","attachment;filename=\"Laporan Daftar Berkas JRA.pdf\"");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
 	
 } catch (Exception e) {
