@@ -34,7 +34,7 @@ Ext.define ('Earsip.view.Berkas', {
 			,	iconCls		: 'add'
 			,	formBind	:true
 			},'-',{
-				text		:'Berkas Baru'
+				text		:'Berkas Tanpa Scan'
 			,	itemId		:'berkas_baru'
 			,	iconCls		:'add'
 			,	formBind	:true
