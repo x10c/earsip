@@ -35,7 +35,7 @@ Ext.define ('Earsip.view.Pemusnahan', {
 		, 	hidden		: true
 		, 	hideable	: false
 		},{
-			text		: 'Metoda Pemusnahan'
+			text		: 'Metode Pemusnahan'
 		,	dataIndex	: 'metoda_id'
 		,	flex		: 0.5
 		,	editor		: {
@@ -122,7 +122,7 @@ Ext.define ('Earsip.view.Pemusnahan', {
 		,	columns	: [{
 				xtype	 : 'rownumberer'
 			},{
-				text	 : 'Nama'
+				text	 : 'Nama Anggota Tim'
 			,	dataIndex: 'nama'
 			,	flex	 : 1
 			},{	

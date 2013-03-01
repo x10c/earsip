@@ -5,7 +5,7 @@ Ext.define ('Earsip.view.MetodaPemusnahan', {
 ,	alias		: 'widget.ref_metoda_pemusnahan'
 ,	itemId		: 'ref_metoda_pemusnahan'
 ,	store		: 'MetodaPemusnahan'
-,	title		: 'Metoda Pemusnahan'
+,	title		: 'Metode Pemusnahan'
 ,	closable	: true
 ,	plugins		:
 	[
@@ -14,7 +14,7 @@ Ext.define ('Earsip.view.MetodaPemusnahan', {
 ,	columns		: [{
 		xtype		: 'rownumberer'
 	},{
-		text		: 'Nama'
+		text		: 'Nama Metode'
 	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	editor		: {

@@ -14,7 +14,7 @@ Ext.define ('Earsip.view.TipeArsip', {
 ,	columns		: [{
 		xtype		: 'rownumberer'
 	},{
-		text		: 'Nama'
+		text		: 'Nama Tipe Arsip'
 	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	editor		: {

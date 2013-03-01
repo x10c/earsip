@@ -51,7 +51,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				,	name			: 'id'
 				},{
 					xtype			: 'combo'
-				,	fieldLabel		: 'Metoda Pemusnahan'
+				,	fieldLabel		: 'Metode Pemusnahan'
 				,	itemId			: 'metoda_id'
 				,	name			: 'metoda_id'
 				,	store			: 'MetodaPemusnahan'
@@ -103,7 +103,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 			,	columns	: [{
 					xtype	: 'rownumberer'
 				},{
-					text	 : 'Nama'
+					text	 : 'Nama Anggota Tim'
 				,	dataIndex: 'nama'
 				,	flex	 : 1
 				,	editor	 : {

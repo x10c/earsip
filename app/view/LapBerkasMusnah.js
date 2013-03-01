@@ -73,7 +73,7 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 		,	dataIndex	: 'kode'
 		,	flex		: 1
 		},{
-			text		: 'Judul'
+			text		: 'Perihal'
 		,	dataIndex	: 'judul'
 		,	flex		: 1
 		},{

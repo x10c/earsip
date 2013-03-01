@@ -10,7 +10,7 @@ Ext.define ('Earsip.view.TrashList', {
 ,	itemId		: 'trashlist'
 ,	store		: 'Trash'
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Berkas'
 	,	flex		: 1
 	,	sortable	: false
 	,	hideable	: false

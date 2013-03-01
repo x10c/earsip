@@ -11,7 +11,7 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 ,	itemId		: 'berkasberbagilist'
 ,	store		: 'BerkasBerbagiList'
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Berkas'
 	,	dataIndex	: 'nama'
 	,	width		: 300
 	,	hideable	: false

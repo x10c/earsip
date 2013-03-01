@@ -12,7 +12,7 @@ Ext.define ('Earsip.view.Jabatan', {
 		Ext.create ('Earsip.plugin.RowEditor')
 	]
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Jabatan'
 	,	dataIndex	: 'nama'
 	,	width		: 100
 	,	editor		: {

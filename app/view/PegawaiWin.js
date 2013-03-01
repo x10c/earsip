@@ -40,7 +40,7 @@ Ext.define ('Earsip.view.PegawaiWin', {
 		,	name			: 'nip'
 		,	allowBlank		: false
 		},{
-			fieldLabel		: 'Nama'
+			fieldLabel		: 'Nama Pegawai'
 		,	itemId			: 'nama'
 		,	name			: 'nama'
 		,	allowBlank		: false

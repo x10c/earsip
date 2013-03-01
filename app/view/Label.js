@@ -71,7 +71,7 @@ Ext.define ('Earsip.view.Label', {
 		,	dataIndex	: 'kode'
 		,	flex		: 1
 		},{
-			text		: 'Judul'
+			text		: 'Perihal'
 		,	dataIndex	: 'judul'
 		,	flex		: 1
 		},{

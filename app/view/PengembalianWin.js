@@ -63,7 +63,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 			,	disabled		: true
 
 			},{
-				fieldLabel		: 'Nama'
+				fieldLabel		: 'Nama Peminjam'
 			,	itemId			: 'nama_peminjam'
 			,	name			: 'nama_peminjam'
 			,	disabled		: true

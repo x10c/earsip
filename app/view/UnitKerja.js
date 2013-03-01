@@ -20,7 +20,7 @@ Ext.define ('Earsip.view.UnitKerja', {
 		,	allowBlank	: false
 		}
 	},{
-		text		: 'Nama'
+		text		: 'Nama Unit Kerja'
 	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	editor		: {

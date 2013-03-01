@@ -220,7 +220,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 				return combo_renderer (v, this.columns[colidx]);
 			}
 		},{
-			text		: 'Judul'
+			text		: 'Perihal'
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'
@@ -237,7 +237,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 				return combo_renderer (v, this.columns[colidx]);
 			}
 		},{
-			text		: 'Masalah'
+			text		: 'Keterangan'
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'

@@ -11,7 +11,7 @@ Ext.define ('Earsip.view.Grup', {
 		Ext.create ('Earsip.plugin.RowEditor')
 	]
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Grup'
 	,	dataIndex	: 'nama'
 	,	width		: 100
 	,	editor		: {

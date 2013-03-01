@@ -57,7 +57,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	anchor	: '100%'
 					}
 				,	items	: [{
-						fieldLabel		: 'Nama'
+						fieldLabel		: 'Nama Petugas'
 					,	itemId			: 'nama_petugas'
 					,	name			: 'nama_petugas'
 					,	disabled 		: true
@@ -128,7 +128,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	name			: 'nama_pimpinan_peminjam'
 					,	allowBlank		: false
 					},{
-						fieldLabel		: 'Nama'
+						fieldLabel		: 'Nama Peminjam'
 					,	itemId			: 'nama_peminjam'
 					,	name			: 'nama_peminjam'
 					,	allowBlank		: false

@@ -17,7 +17,7 @@ Ext.define ('Earsip.view.Pegawai', {
 		Ext.create ('Earsip.plugin.RowEditor')
 	]
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Pegawai'
 	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	editor		: {

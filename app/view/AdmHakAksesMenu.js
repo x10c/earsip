@@ -30,7 +30,7 @@ Ext.define ('Earsip.view.AdmHakAksesMenu', {
 	,	dataIndex		: 'pid'
 	,	width			: 80
 	},{
-		text			: 'Nama'
+		text			: 'Nama Menu'
 	,	dataIndex		: 'nama'
 	,	flex			: 1
 	},{

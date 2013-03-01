@@ -113,7 +113,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 			,	name			: 'pembuat'
 			,	emptyText		: '-'
 			},{
-				fieldLabel		: 'Judul'
+				fieldLabel		: 'Perihal'
 			,	itemId			: 'judul'
 			,	name			: 'judul'
 			,	emptyText		: '-'

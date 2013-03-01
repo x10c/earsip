@@ -54,7 +54,7 @@ Ext.define ('Earsip.view.KlasArsip', {
 		}
 	, 	groupable	: false
 	},{
-		text		: 'Nama'
+		text		: 'Nama Klasifikasi'
 	,	dataIndex	: 'nama'
 	,	flex		: 1
 	,	editor		: {

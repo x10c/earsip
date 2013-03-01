@@ -34,7 +34,7 @@ Ext.define ('Earsip.view.ArsipCariWin', {
 		,	name			: 'text'
 		,	emptyText		: '-'
 		},{
-			fieldLabel		: 'Nama'
+			fieldLabel		: 'Nama Berkas'
 		,	itemId			: 'nama'
 		,	name			: 'nama'
 		,	emptyText		: '-'
@@ -81,7 +81,7 @@ Ext.define ('Earsip.view.ArsipCariWin', {
 		,	name			: 'pembuat'
 		,	emptyText		: '-'
 		},{
-			fieldLabel		: 'Judul'
+			fieldLabel		: 'Perihal'
 		,	itemId			: 'judul'
 		,	name			: 'judul'
 		,	emptyText		: '-'

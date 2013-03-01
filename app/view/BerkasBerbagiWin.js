@@ -41,7 +41,7 @@ Ext.define ('Earsip.view.BerkasBerbagiWin', {
 		,	name		: 'id'
 		,	hidden		: true
 		},{
-			fieldLabel	: 'Nama'
+			fieldLabel	: 'Nama Berkas'
 		,	itemId		: 'nama'
 		,	name		: 'nama'
 		,	disabled	: true

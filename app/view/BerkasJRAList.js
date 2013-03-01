@@ -8,7 +8,7 @@ Ext.define ('Earsip.view.BerkasJRAList', {
 ,	id			:'berkas_jra_list'
 ,	store		: 'BerkasJRA'
 ,	columns		: [{
-		text		: 'Nama'
+		text		: 'Nama Berkas'
 	,	flex		: 1
 	,	hideable	: false
 	,	dataIndex	: 'nama'
