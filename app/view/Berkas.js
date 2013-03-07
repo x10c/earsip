@@ -106,6 +106,7 @@ Ext.define ('Earsip.view.Berkas', {
 				if (action.result.success == true) {
 					Ext.msg.info ('Berkas baru telah dibuat!');
 					berkas_list.do_refresh ();
+					form.reset ();
 				} else {
 					Ext.msg.error ('Gagal membuat berkas baru!<br/><hr/>'+ action.result.info);
 				}

@@ -106,6 +106,7 @@ Ext.define ('Earsip.controller.Berkas', {
 				if (action.result.success == true) {
 					Ext.msg.info (action.result.info);
 					this.getBerkaslist ().do_refresh (Earsip.berkas.pid);
+					form.reset ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
@@ -192,7 +193,9 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	list_refresh : function (b)
 	{
+		var form			= this.getBerkasform ().getForm ();
 		this.getBerkaslist ().do_refresh ();
+		form.reset ();
 	}
 
 ,	do_dirup : function (b)
@@ -251,6 +254,7 @@ Ext.define ('Earsip.controller.Berkas', {
 					if (action.result.success == true) {
 						this.getBerkastree ().do_refresh ();
 						this.getBerkaslist ().do_refresh ();
+						form.reset ();
 						Ext.msg.info (action.result.info);
 					} else {
 						Ext.msg.error (action.result.info);
@@ -293,6 +297,7 @@ Ext.define ('Earsip.controller.Berkas', {
 					Ext.msg.info ('Berkas baru telah dibuat!');
 					this.getBerkastree ().do_refresh ();
 					this.getBerkaslist ().do_refresh ();
+					form.reset ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
