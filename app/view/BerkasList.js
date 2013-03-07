@@ -58,7 +58,7 @@ Ext.define ('Earsip.view.BerkasList', {
 		}
 	}]
 ,	tbar : [{
-		text		: 'Unggah'
+		text		: 'Berkas Unggah'
 	,	itemId		: 'upload'
 	,	iconCls		: 'upload'
 	},'-',{
