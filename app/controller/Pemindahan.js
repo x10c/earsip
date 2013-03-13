@@ -133,15 +133,29 @@ Ext.define ('Earsip.controller.Pemindahan', {
 
 ,	do_delete_pemindahan : function (button)
 	{
-		var grid = button.up ('#pemindahan_grid');
-		var data = grid.getSelectionModel ().getSelection ();
+		var panel		= this.getTrans_pemindahan ();
+		var grid		= panel.down ('#pemindahan_grid');
+		var grid_rinci	= panel.down ('#berkas_pindah_grid');
+		var data		= grid.getSelectionModel ().getSelection ();
+
 		if (data.length <= 0) {
 			return;
 		}
 
 		var store = grid.getStore ();
 		store.remove (data);
-		store.sync ();
+		store.sync ({
+			scope	:this
+		,	success	:function ()
+			{
+				grid_rinci.getStore ().loadData ([], false);
+				Ext.msg.info ("Data telah dihapus");
+			}
+		,	failure	:function ()
+			{
+				Ext.msg.error ("Gagal menghapus data.");
+			}
+		});
 	}
 
 ,	do_add_berkas_pindah: function (button)

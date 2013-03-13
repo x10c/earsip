@@ -120,6 +120,14 @@ try {
 		db_pstmt.setInt (8, Integer.parseInt (id));
 
 	} else if (action.equalsIgnoreCase ("destroy")) {
+		q	="	delete from	t_pemindahan_rinci"
+			+"	where		pemindahan_id	= ?";
+
+		db_pstmt = db_con.prepareStatement (q);
+		db_pstmt.setInt (1, Integer.parseInt (id));
+		db_pstmt.executeUpdate ();
+		db_pstmt.close ();
+
 		q	=" delete from t_pemindahan where id = ?";
 		db_pstmt = db_con.prepareStatement (q);
 		db_pstmt.setInt (1, Integer.parseInt (id));

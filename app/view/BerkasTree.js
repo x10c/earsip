@@ -44,7 +44,6 @@ Ext.define ('Earsip.view.BerkasTree', {
 					if (node == null) {
 						node = this.getRootNode ().getChildAt (0);
 					}
-
 					if (node != null) {
 						node.expand ();
 					}
