@@ -39,6 +39,7 @@ Ext.define('Earsip.view.NotifPemindahanRinciWin', {
 		,	name			: 'nama'
 		,	editable		: false
 		,	allowBlank		: false
+		,	disabled		:true
 		},{
 			itemId			: 'status'
 		,	name			: 'status'
