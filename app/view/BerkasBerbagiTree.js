@@ -31,6 +31,9 @@ Ext.define ('Earsip.view.BerkasBerbagiTree', {
 				if (o.success == true) {
 					this.suspendEvents (false);
 					this.setRootNode (o.data);
+					this.getRootNode ().cascadeBy (function (n){
+						n.set ('iconCls', 'treeicon');
+					});
 					this.resumeEvents ();
 					this.doLayout();
 

@@ -27,4 +27,10 @@ Ext.define ('Earsip.store.BerkasTree', {
 			type		:'json'
 		}
 	}
+
+, 	listeners: {
+        append: function( thisNode, newChildNode, index, eOpts ) {
+                newChildNode.set('iconCls', 'treeicon');
+        }
+    }
 });
