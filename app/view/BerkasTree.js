@@ -32,30 +32,27 @@ Ext.define ('Earsip.view.BerkasTree', {
 ,	do_refresh	:function ()
 	{
 		this.getStore ().load ({
-			success	: function (response)
+			scope		:this
+		,	callback	: function (data, op, success)
 			{
-				var o = Ext.decode (response.responseText);
-				if (o.success != true) {
-					Ext.msg.error (o.info);
-					return;
-				}
-	
-				var node;
+				if (success) {
+					var node = null;
 
-				if (Earsip.berkas.tree.pid != 0) {
-					node = this.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
+					if (Earsip.berkas.tree.pid != 0) {
+						node = this.getRootNode ().findChild ('id', Earsip.berkas.tree.id, true);
+					}
+					if (node == null) {
+						node = this.getRootNode ().getChildAt (0);
+					}
+
+					if (node != null) {
+						node.expand ();
+					}
+
+					this.selectPath (node.getPath ());
 				} else {
-					node = this.getRootNode ();
+					Ext.msg.error ('Server error: data berkas tidak dapat diambil!');
 				}
-
-				sm.deselectAll ();
-				this.expandAll ();
-				if (node != null) {
-					sm.select (node);
-				}
-			}
-		,	failure	: function (response) {
-				Ext.msg.error ('Server error: data berkas tidak dapat diambil!');
 			}
 		});
 	}
