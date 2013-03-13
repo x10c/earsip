@@ -9,6 +9,9 @@ ResultSet	rs			= null;
 String		q			= "";
 String		data		= "";
 int			i			= 0;
+int			start		= 0;
+int			limit		= 0;
+int			total		= 0;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
 
@@ -21,6 +24,9 @@ try {
 	String grup_id = (String) session.getAttribute ("user.grup_id");
 	String jra_query_text = "";
 	String status	= "";
+
+	start	= Integer.parseInt (request.getParameter ("start"));
+	limit	= Integer.parseInt (request.getParameter ("limit"));
 	
 	if (grup_id.equals ("3")) {
 		jra_query_text = "jra_inaktif";
@@ -30,7 +36,27 @@ try {
 		jra_query_text = "jra_aktif";
 		status = "1";
 	}
-	
+
+	q	=" select	count (*)		as total"
+		+" from		m_berkas"
+		+" where	status			= "+ status
+		+" and		status_hapus	= 1"
+		+" and		arsip_status_id in (0,1)"
+		+" and		datediff('month', current_date, dateadd ('year'," + jra_query_text + ",tgl_dibuat)) <= 3"; // 3 months difference between berkas current age and berkas tgl_jra
+		if (!grup_id.equals ("3")) {
+			q +=" and pegawai_id = " + user_id;
+		}
+
+	db_stmt = db_con.createStatement ();
+	rs		= db_stmt.executeQuery (q);
+
+	if (rs.next ()) {
+		total = rs.getInt ("total");
+	}
+
+	rs.close ();
+	db_stmt.close ();
+
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		tipe_file"
@@ -61,11 +87,12 @@ try {
 		+" and		status_hapus	= 1"
 		+" and		arsip_status_id in (0,1)"
 		+" and		datediff('month', current_date, dateadd ('year'," + jra_query_text + ",tgl_dibuat)) <= 3"; // 3 months difference between berkas current age and berkas tgl_jra
-		if (!grup_id.equals ("3")) 
+		if (!grup_id.equals ("3")) {
 			q +=" and pegawai_id = " + user_id;
-		q +=" order by tipe_file, nama";
-	
-	
+		}
+		q	+=	"	order by tipe_file, nama"
+			+	"	limit "+ limit +" offset "+ start;
+
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
 
@@ -102,7 +129,7 @@ try {
 				+" \n, n_output_images  :  "+ rs.getString ("n_output_images")
 				+ "\n}";
 	}
-	out.print ("{success:true,data:["+ data +"]}");
+	out.print ("{success:true,total:"+ total +",data:["+ data +"]}");
 	rs.close ();
 }
 catch (Exception e) {

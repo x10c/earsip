@@ -45,6 +45,11 @@ Ext.define ('Earsip.view.BerkasJRAList', {
 			grid.getStore ().load ({});
 		}
 	}]
+,	bbar		:[{
+		xtype		:'pagingtoolbar'
+	,	store		:'BerkasJRA'
+	,	displayInfo	:true
+	}]
 
 ,	do_refresh	:function ()
 	{

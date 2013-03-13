@@ -36,6 +36,7 @@ Ext.define ('Earsip.store.BerkasJRA', {
 ,	model		: 'Earsip.model.BerkasJRA'
 ,	autoSync	: false
 ,	autoLoad	: false
+,	pageSize	:50
 ,	proxy		: {
 		type		: 'ajax'
 	,	url			: 'data/berkasjra.jsp'
