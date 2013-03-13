@@ -29,6 +29,16 @@
 .up		{background-image: url(images/up16.png) !important;}
 .down	{background-image: url(images/down16.png) !important;}
 
+.treeicon 
+{ 
+    background-image: url(images/folder.png) !important; 
+    background-repeat: no-repeat; 
+}
+
+.x-grid-tree-node-expanded .treeicon {
+  background-image: url(images/open_folder.png) !important; 
+}
+
 .dir {
 	background-image	:url(images/dir16.png);
 	background-position	:0;
@@ -105,4 +115,4 @@
 }
 #msg-div .msg-error p {
 	margin		: 0;
-}
+} 
