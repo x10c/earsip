@@ -57,33 +57,6 @@ Ext.define ('Earsip.view.BerkasList', {
 			return 'Non-Aktif';
 		}
 	}]
-,	tbar : [{
-		text		: 'Berkas Unggah'
-	,	itemId		: 'upload'
-	,	iconCls		: 'upload'
-	},'-',{
-		text		: 'Refresh'
-	,	itemId		: 'refresh'
-	,	iconCls		: 'refresh'
-	},'-',{
-		text		: 'Kembali'
-	,	itemId		: 'dirup'
-	,	iconCls		: 'dirup'
-	},'-','->','-',{
-		text		: 'Cari'
-	,	itemId		: 'search'
-	,	iconCls		: 'search'
-	},'-',{
-		text		: 'Bagi'
-	,	itemId		: 'share'
-	,	iconCls		: 'dir'
-	,	disabled	: true
-	},'-',{
-		text		: 'Hapus'
-	,	itemId		: 'del'
-	,	iconCls		: 'del'
-	,	disabled	: true
-	}]
 
 ,	initComponent	: function ()
 	{
@@ -96,7 +69,8 @@ Ext.define ('Earsip.view.BerkasList', {
 ,	do_refresh	: function ()
 	{
 		this.getStore ().load ({
-			params	: {
+			scope	:this
+		,	params	: {
 				berkas_id : Earsip.berkas.tree.id
 			}
 		});

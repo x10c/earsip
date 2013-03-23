@@ -19,6 +19,10 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	labelAlign		: 'right'
 	}
 ,	items		: [{
+		itemId			: 'berkas_id'
+	,	name			: 'berkas_id'
+	,	hidden			: true
+	},{
 		itemId			: 'id'
 	,	name			: 'id'
 	,	hidden			: true
@@ -116,4 +120,22 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'status_hapus'
 	,	hidden			: true
 	}]
+
+,	set_disabled	:function (s)
+	{
+		this.down ('#nama').setDisabled (s);
+		this.down ('#tgl_dibuat').setDisabled (s);
+		this.down ('#berkas_klas_id').setDisabled (s);
+		this.down ('#indeks_relatif').setDisabled (s);
+		this.down ('#berkas_tipe_id').setDisabled (s);
+		this.down ('#nomor').setDisabled (s);
+		this.down ('#pembuat').setDisabled (s);
+		this.down ('#judul').setDisabled (s);
+		this.down ('#masalah').setDisabled (s);
+		this.down ('#jra_aktif').setDisabled (s);
+		this.down ('#jra_inaktif').setDisabled (s);
+
+		this.down ('#save').setDisabled (s);
+		this.down ('#mkdir').setDisabled (s);
+	}
 });

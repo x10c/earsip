@@ -34,10 +34,7 @@ Ext.define ('Earsip.controller.Berkas', {
 ,	init	: function ()
 	{
 		this.control ({
-			'berkas button[itemId=save]': {
-				click : this.do_form_save
-			}
-		,	'berkastree': {
+			'berkastree': {
 				selectionchange : this.tree_selectionchange
 			}
 		,	'berkastree button[itemId=trash]': {
@@ -45,10 +42,6 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	'berkaslist' : {
 				itemdblclick : this.list_itemdblclick
-			,	selectionchange : this.list_selectionchange
-			}
-		,	'berkas button[itemId=mkdir]': {
-				click : this.do_mkdir_submit
 			}
 		,	'berkaslist button[itemId=upload]': {
 				click : this.do_upload
@@ -87,33 +80,6 @@ Ext.define ('Earsip.controller.Berkas', {
 			}
 		,	'win_indeks_relatif button[itemId=ambil]' : {
 				click : this.get_indeks_relatif
-			}
-		});
-	}
-
-,	do_form_save : function (b)
-	{
-		var form = this.getBerkas ().down ('#berkas_form').getForm ();
-
-		if (! form.isValid ()) {
-			return;
-		}
-
-		form.submit ({
-			scope	: this
-		,	success	: function (form, action)
-			{
-				if (action.result.success == true) {
-					Ext.msg.info (action.result.info);
-					this.getBerkaslist ().do_refresh (Earsip.berkas.pid);
-					form.reset ();
-				} else {
-					Ext.msg.error (action.result.info);
-				}
-			}
-		,	failure	: function (form, action)
-			{
-				Ext.msg.error ('Gagal menyimpan data berkas!');
 			}
 		});
 	}
@@ -164,23 +130,6 @@ Ext.define ('Earsip.controller.Berkas', {
 		berkastree.getSelectionModel ().select (node);
 	}
 
-,	list_selectionchange : function (model, records)
-	{
-		var berkas		= this.getBerkas ();
-		var berkaslist	= this.getBerkaslist ();
-
-		if (records.length > 0) {
-			this.getMainview ().down ('#berkas_form').loadRecord (records[0]);
-			berkaslist.record	= records[0];
-			Earsip.berkas.id	= records[0].get ('id');
-			Earsip.berkas.pid	= records[0].get ('pid');
-		}
-
-		berkas.down ('#save').setDisabled (! records.length);
-		berkaslist.down ('#del').setDisabled (! records.length);
-		berkaslist.down ('#share').setDisabled (! records.length);
-	}
-
 ,	do_upload : function (b)
 	{
 		if (Earsip.berkas.tree.id <= 0) {
@@ -193,9 +142,13 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	list_refresh : function (b)
 	{
-		var form			= this.getBerkasform ().getForm ();
+		var form	= this.getBerkasform ();
+		var bform	= form.getForm ();
+
 		this.getBerkaslist ().do_refresh ();
-		form.reset ();
+
+		bform.reset ();
+		form.set_disabled (true);
 	}
 
 ,	do_dirup : function (b)
@@ -234,7 +187,7 @@ Ext.define ('Earsip.controller.Berkas', {
 
 ,	do_delete : function (b)
 	{
-		var form			= this.getMainview ().down ('#berkas_form');
+		var form			= this.getMainview ().down ('#berkasform');
 		var stat_hapus_f	= form.getComponent ('status_hapus');
 
 		Ext.Msg.confirm ('Konfirmasi'
@@ -249,6 +202,7 @@ Ext.define ('Earsip.controller.Berkas', {
 
 			form.submit ({
 				scope	: this
+			,	url		: 'data/berkas_submit.jsp'
 			,	success	: function (form, action)
 				{
 					if (action.result.success == true) {
@@ -267,46 +221,6 @@ Ext.define ('Earsip.controller.Berkas', {
 			});
 		}
 		, this);
-	}
-
-,	do_mkdir_submit : function (button)
-	{
-		var berkas_form	= this.getBerkas ().down ('#berkas_form');
-		var form		= berkas_form.getForm ();
-
-		if (! form.isValid ()) {
-			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
-			return;
-		}
-		if (Earsip.berkas.tree.id <= 0) {
-			Ext.msg.error ('Pilih tempat untuk direktori baru terlebih dahulu!');
-			return;
-		}
-
-		berkas_form.down ('#tipe_file').setValue (0);
-
-		form.submit ({
-			scope	: this
-		,	url		: 'data/berkas_baru.jsp'
-		,	params	: {
-				berkas_id	: Earsip.berkas.tree.id
-			}
-		,	success	: function (form, action)
-			{
-				if (action.result.success == true) {
-					Ext.msg.info ('Berkas baru telah dibuat!');
-					this.getBerkastree ().do_refresh ();
-					this.getBerkaslist ().do_refresh ();
-					form.reset ();
-				} else {
-					Ext.msg.error (action.result.info);
-				}
-			}
-		,	failure	: function (form, action)
-			{
-				Ext.msg.error ('Gagal membuat direktori!');
-			}
-		});
 	}
 
 ,	do_search : function (b)
