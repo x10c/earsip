@@ -47,7 +47,7 @@ Ext.define ('Earsip.view.WinUploadSingle', {
 				,	success	:function (fp, o)
 					{
 						Ext.msg.info ('Berkas anda "'+ o.result.file +'" telah tersimpan!');
-						Ext.getCmp ('berkaslist').do_refresh ();
+						Ext.getCmp ('berkaslist').do_refresh (parseInt (o.result.id));
 						win.close ();
 					}
 				,	failure	:function (fp, o)

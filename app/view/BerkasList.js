@@ -66,12 +66,32 @@ Ext.define ('Earsip.view.BerkasList', {
 		this.callParent (arguments);
 	}
 
-,	do_refresh	: function ()
+,	do_refresh	: function (id)
 	{
 		this.getStore ().load ({
 			scope	:this
 		,	params	: {
 				berkas_id : Earsip.berkas.tree.id
+			}
+		,	callback:function (r, op, s)
+			{
+				if (id == undefined) {
+					return	;
+				}
+
+				var berkas		= Ext.getCmp ('berkas');
+				var berkasform	= berkas.down ('#berkasform');
+				var rid;
+
+				for (var i = 0; i < r.length; i++) {
+					rid = parseInt (r[i].get ('id'));
+
+					if (id == rid) {
+						this.getSelectionModel ().select (r[i]);
+						berkasform.set_disabled (false);
+						break;
+					}
+				}
 			}
 		});
 	}

@@ -266,6 +266,23 @@ try {
 		+" where	id = "+ pid;
 
 	db_stmt.executeUpdate (q);
+	db_stmt.close ();
+
+	q	="	select	id"
+		+"	from	m_berkas"
+		+"	where	sha				= '"+ sha +"'"
+		+"	and		pegawai_id		= "+ _user_id
+		+"	and		unit_kerja_id	= "+ _user_uk;
+
+	db_stmt	= db_con.createStatement ();
+	rs		= db_stmt.executeQuery (q);
+
+	rs.next ();
+
+	_r.put ("id"		, rs.getString ("id"));
+
+	db_stmt.close ();
+	rs.close ();
 
 	_r.put ("success"	, true);
 	_r.put ("info"		, "Berkas '"+ name +"' telah tersimpan.");
