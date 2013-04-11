@@ -174,7 +174,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'
-			,	store			: 'BerkasPinjam'
+			,	store			: 'BerkasInAktif'
 			,	valueField		: 'id'
 			,	displayField	: 'nama'
 			,	allowBlank		: false
@@ -190,7 +190,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'
-			,	store			: 'BerkasPinjam'
+			,	store			: 'BerkasInAktif'
 			,	valueField		: 'id'
 			,	displayField	: 'nomor'
 			,	allowBlank		: false
@@ -207,7 +207,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'
-			,	store			: 'BerkasPinjam'
+			,	store			: 'BerkasInAktif'
 			,	valueField		: 'id'
 			,	displayField	: 'pembuat'
 			,	allowBlank		: false
@@ -224,7 +224,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'
-			,	store			: 'BerkasPinjam'
+			,	store			: 'BerkasInAktif'
 			,	valueField		: 'id'
 			,	displayField	: 'judul'
 			,	allowBlank		: false
@@ -241,7 +241,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	flex		: 1
 		,	editor		: {
 				xtype			: 'combobox'
-			,	store			: 'BerkasPinjam'
+			,	store			: 'BerkasInAktif'
 			,	valueField		: 'id'
 			,	displayField	: 'masalah'
 			,	allowBlank		: false
@@ -258,7 +258,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		,	flex		: 0.4
 		,	editor		: {
 				xtype			: 'combobox'
-			,	store			: 'BerkasPinjam'
+			,	store			: 'BerkasInAktif'
 			,	valueField		: 'id'
 			,	displayField	: 'jra_inaktif'
 			,	allowBlank		: false
@@ -276,7 +276,7 @@ Ext.define ('Earsip.view.Peminjaman', {
 		activate		: function (comp)
 		{
 			this.down ('#peminjaman_grid').getStore ().load ();
-			Ext.StoreManager.lookup ('BerkasPinjam').load ({
+			Ext.StoreManager.lookup ('BerkasInAktif').load ({
 				scope	: this
 			,	callback: function (r, op, success){
 					if (success)

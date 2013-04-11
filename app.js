@@ -151,6 +151,7 @@ function store_renderer (valueField, displayField, store)
 
 function date_renderer (valueField)
 {
+	console.log (valueField);
 	if (valueField == 'null') return '-';
 	return Ext.util.Format.date(valueField,'d F Y');
 }
@@ -168,6 +169,7 @@ Ext.application ({
 ,	appFolder	: 'app'
 ,	stores		: [
 		'Berkas'
+	,	'BerkasInAktif'
 	,	'BerkasTree'
 	,	'BerkasBerbagi'
 	,	'BerkasBerbagiList'

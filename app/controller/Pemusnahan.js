@@ -93,6 +93,7 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 	{
 		var panel = this.getTrans_pemusnahan ();
 		var grid  = panel.down ('#pemusnahan_grid');
+		var berkasmusnah_store = Ext.StoreManager.lookup ('BerkasMusnah');
 		if (panel.win == undefined) {
 			panel.win = Ext.create ('Earsip.view.PemusnahanWin', {});
 		}
@@ -103,6 +104,8 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 		grid.getSelectionModel (). deselectAll ();
 		form.reset ();
 		panel.win.down ('#nama_petugas').setValue (Earsip.username);
+		berkasmusnah_store.filter ('arsip_status_id',0);
+		berkasmusnah_store.load ();
 		grid_berkas.getStore ().load();
 		grid_tim.getStore ().load();
 		panel.win.show ();
@@ -148,10 +151,18 @@ Ext.define ('Earsip.controller.Pemusnahan', {
 		if (data.length <= 0) {
 			return;
 		}
-
-		var store = grid.getStore ();
-		store.remove (data);
-		store.sync ();
+		
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus berkas?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var store = grid.getStore ();
+			store.remove (data);
+			store.sync ();
+		},this);
 	}
 
 ,	do_open_win_cari	: function (button)

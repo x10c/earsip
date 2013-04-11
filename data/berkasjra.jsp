@@ -80,7 +80,7 @@ try {
 		+" ,		akses_berbagi_id"
 		+" ,		age (tgl_dibuat) as usia"
 		+" ,		get_berkas_path (pid) as lokasi"
-		+" ,		dateadd ('year'," + jra_query_text + ",tgl_dibuat) as tgl_jra"
+		+" ,		Date (dateadd ('year'," + jra_query_text + ",tgl_dibuat)) as tgl_jra"
 		+" ,		n_output_images"
 		+" from		m_berkas"
 		+" where	status			= "+ status

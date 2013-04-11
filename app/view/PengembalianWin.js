@@ -96,7 +96,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 			,	flex		: 1
 			,	editor		: {
 					xtype			: 'combobox'
-				,	store			: 'BerkasPinjam'
+				,	store			: 'BerkasInAktif'
 				,	valueField		: 'id'
 				,	displayField	: 'nama'
 				,	allowBlank		: false
@@ -123,7 +123,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 		var grid = this.down ('#peminjaman_rinci');
 		var form = this.down ('form');
 		
-		Ext.data.StoreManager.lookup ('BerkasPinjam').load ({
+		Ext.data.StoreManager.lookup ('BerkasInAktif').load ({
 			scope	: this
 		,	callback: function (r, op, success)
 			{

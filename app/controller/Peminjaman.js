@@ -81,9 +81,9 @@ Ext.define ('Earsip.controller.Peminjaman', {
 
 		b_edit.setDisabled (! records.length);
 		b_del.setDisabled (! records.length);
-		b_back.setDisabled (! records.length);
 
 		if (records.length > 0) {
+			b_back.setDisabled (records[0].get ('status'));
 			peminjaman.win.do_load (records[0]);
 			grid_berkas.getStore ().load ({
 				params	: {
@@ -99,9 +99,12 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		var	grid_peminjaman = panel.down ('#peminjaman_grid');
 		var grid_rinci = panel.win.down ('#peminjaman_rinci');
 		var form = panel.win.down ('form').getForm ();
+		var berkaspinjam_store = Ext.StoreManager.lookup ('BerkasPinjam');
 		grid_peminjaman.getSelectionModel (). deselectAll ();
 		form.reset ();
 		panel.win.down ('#nama_petugas').setValue (Earsip.username);
+		berkaspinjam_store.filter ('arsip_status_id',0);
+		berkaspinjam_store.load ();
 		grid_rinci.getStore ().load();
 		panel.win.show ();
 		panel.win.action = 'create';
@@ -131,10 +134,20 @@ Ext.define ('Earsip.controller.Peminjaman', {
 		if (data.length <= 0) {
 			return;
 		}
-
-		var store = grid.getStore ();
-		store.remove (data);
-		store.sync ();
+		
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus berkas?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			
+			var store = grid.getStore ();
+			store.remove (data);
+			store.sync ();
+		}
+		, this);
 	}
 	
 ,	do_open_win_cari	: function (button)

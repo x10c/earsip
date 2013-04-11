@@ -205,8 +205,15 @@ Ext.define('Earsip.view.PeminjamanWin', {
 		var store	= Ext.data.StoreManager.lookup ('BerkasPinjam');
 
 		form.loadRecord (record);
-
-		store.load ();
 		store.clearFilter ();
+		store.load ();
+		
+	}
+,	listeners : {
+		hide	: function (comp){
+			var store	= Ext.data.StoreManager.lookup ('BerkasPinjam');
+			store.clearFilter ();
+			store.load ();
+		}
 	}
 });

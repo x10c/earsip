@@ -231,17 +231,21 @@ Ext.define('Earsip.view.PemusnahanWin', {
 	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
+	
 ,	load : function (record)
 	{
 		var grid_berkas = this.down ('#berkas_musnah_grid');
 		var grid_tim = this.down ('#tim_pemusnah_grid');
 		var form = this.down ('form');
-		Ext.data.StoreManager.lookup ('BerkasMusnah').load ({
+		var store = Ext.data.StoreManager.lookup ('BerkasMusnah');
+		
+		form.loadRecord (record);
+		store.clearFilter ();
+		store.load ({
 			scope	: this
 		,	callback: function (r, op, success)
 			{
 				if (success) {
-					form.loadRecord (record);
 					grid_berkas.getStore ().load ({
 						params	: {
 							pemusnahan_id  : record.get ('id')
@@ -255,6 +259,13 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				}
 			}
 		});
-		Ext.data.StoreManager.lookup ('BerkasMusnah').clearFilter ();
+		
+	}
+,	listeners : {
+		hide	: function (comp){
+			var store	= Ext.data.StoreManager.lookup ('BerkasMusnah');
+			store.clearFilter ();
+			store.load ();
+		}
 	}
 });
