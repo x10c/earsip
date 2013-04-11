@@ -46,6 +46,7 @@ try {
 		+" on		m_berkas.id = m_arsip.berkas_id"
 		+" where	status			= 0"
 		+" and		status_hapus	= 1"
+		+" and		arsip_status_id = 0"
 		+" and		unit_kerja_id is not null";
 
 	if (query != null && !query.equals ("")) {

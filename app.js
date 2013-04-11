@@ -151,6 +151,7 @@ function store_renderer (valueField, displayField, store)
 
 function date_renderer (valueField)
 {
+	if (valueField == 'null') return '-';
 	return Ext.util.Format.date(valueField,'d F Y');
 }
 
