@@ -170,121 +170,34 @@ Ext.define ('Earsip.view.Peminjaman', {
 		, 	hideable	: false
 		},{
 			text		: 'Berkas'
-		,	dataIndex	: 'berkas_id'
+		,	dataIndex	: 'nama'
 		,	flex		: 1
-		,	editor		: {
-				xtype			: 'combobox'
-			,	store			: 'BerkasInAktif'
-			,	valueField		: 'id'
-			,	displayField	: 'nama'
-			,	allowBlank		: false
-			,	autoSelect		: true
-			,	triggerAction	: 'all'
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{
-				return combo_renderer (v, this.columns[colidx]);
-			}
 		},{
 			text		: 'Nomor'
+		,	dataIndex	: 'nomor'
 		,	flex		: 1
-		,	editor		: {
-				xtype			: 'combobox'
-			,	store			: 'BerkasInAktif'
-			,	valueField		: 'id'
-			,	displayField	: 'nomor'
-			,	allowBlank		: false
-			,	autoSelect		: true
-			,	triggerAction	: 'all'
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{	
-				v = r.get ('berkas_id');
-				return combo_renderer (v, this.columns[colidx]);
-			}
 		},{
 			text		: 'Pembuat'
+		,	dataIndex	:'pembuat'
 		,	flex		: 1
-		,	editor		: {
-				xtype			: 'combobox'
-			,	store			: 'BerkasInAktif'
-			,	valueField		: 'id'
-			,	displayField	: 'pembuat'
-			,	allowBlank		: false
-			,	autoSelect		: true
-			,	triggerAction	: 'all'
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{	
-				v = r.get ('berkas_id');
-				return combo_renderer (v, this.columns[colidx]);
-			}
 		},{
 			text		: 'Perihal'
+		,	dataIndex	:'judul'
 		,	flex		: 1
-		,	editor		: {
-				xtype			: 'combobox'
-			,	store			: 'BerkasInAktif'
-			,	valueField		: 'id'
-			,	displayField	: 'judul'
-			,	allowBlank		: false
-			,	autoSelect		: true
-			,	triggerAction	: 'all'
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{	
-				v = r.get ('berkas_id');
-				return combo_renderer (v, this.columns[colidx]);
-			}
 		},{
 			text		: 'Keterangan'
+		,	dataIndex	:'masalah'
 		,	flex		: 1
-		,	editor		: {
-				xtype			: 'combobox'
-			,	store			: 'BerkasInAktif'
-			,	valueField		: 'id'
-			,	displayField	: 'masalah'
-			,	allowBlank		: false
-			,	autoSelect		: true
-			,	triggerAction	: 'all'
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{	
-				v = r.get ('berkas_id');
-				return combo_renderer (v, this.columns[colidx]);
-			}
 		},{
 			text		: 'JRA(Tahun)'
+		,	dataIndex	:'jra_inaktif'
 		,	flex		: 0.4
-		,	editor		: {
-				xtype			: 'combobox'
-			,	store			: 'BerkasInAktif'
-			,	valueField		: 'id'
-			,	displayField	: 'jra_inaktif'
-			,	allowBlank		: false
-			,	autoSelect		: true
-			,	triggerAction	: 'all'
-			}
-		,	renderer	: function (v, md, r, rowidx, colidx)
-			{	
-				v = r.get ('berkas_id');
-				return combo_renderer (v, this.columns[colidx]);
-			}
 		}]
 	}]
 ,	listeners		: {
 		activate		: function (comp)
 		{
 			this.down ('#peminjaman_grid').getStore ().load ();
-			Ext.StoreManager.lookup ('BerkasInAktif').load ({
-				scope	: this
-			,	callback: function (r, op, success){
-					if (success)
-					{
-						this.down ('#berkas_pinjam_grid').getStore ().load ();
-					}
-				}
-			});
 		}
 	}
 

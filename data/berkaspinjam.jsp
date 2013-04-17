@@ -9,10 +9,17 @@ try {
 	q	=" select	count (*) as total"
 		+" from		m_berkas"
 		+" right join m_arsip"
-		+" on		m_berkas.id = m_arsip.berkas_id"
+		+" on		m_berkas.id		= m_arsip.berkas_id"
 		+" where	status			= 0"
 		+" and		status_hapus	= 1"
 		+" and		arsip_status_id = 0"
+		+" and		m_berkas.id not in ("
+		+"				select	distinct (B.berkas_id)"
+		+"				from	t_peminjaman		A"
+		+"				,		peminjaman_rinci	B"
+		+"				where	A.id				= B.peminjaman_id"
+		+"				and		A.tgl_kembali		= null"
+		+"			)"
 		+" and		unit_kerja_id is not null";
 
 	if (query != null && !query.equals ("")) {
@@ -48,6 +55,13 @@ try {
 		+" where	status			= 0"
 		+" and		status_hapus	= 1"
 		+" and		arsip_status_id in (0,1)"
+		+" and		m_berkas.id not in ("
+		+"				select	distinct (B.berkas_id)"
+		+"				from	t_peminjaman		A"
+		+"				,		peminjaman_rinci	B"
+		+"				where	A.id				= B.peminjaman_id"
+		+"				and		A.tgl_kembali		= null"
+		+"			)"
 		+" and		unit_kerja_id is not null";
 
 	if (query != null && !query.equals ("")) {

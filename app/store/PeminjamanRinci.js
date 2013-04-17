@@ -1,9 +1,18 @@
 Ext.define ('Earsip.model.PeminjamanRinci', {
 	extend		:'Ext.data.Model'
-,	idProperty	:'peminjaman_id'
 ,	fields		:[
 		'peminjaman_id'
 	,	'berkas_id'
+	,	'nama'
+	,	'nomor'
+	,	'pembuat'
+	,	'judul'
+	,	'masalah'
+	,	'jra_aktif'
+	,	'jra_inaktif'
+	,	'status'
+	,	'status_hapus'
+	,	'arsip_status_id'
 	]
 });
 

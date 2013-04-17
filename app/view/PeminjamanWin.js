@@ -170,7 +170,12 @@ Ext.define('Earsip.view.PeminjamanWin', {
 				}
 			,	renderer	: function (v, md, r, rowidx, colidx)
 				{
-					return combo_renderer (v, this.columns[colidx]);
+					var n = combo_renderer (v, this.columns[colidx]);
+					if (n == v) {
+						return r.get ('nama');
+					}
+
+					return n;
 				}
 			}]
 			,	dockedItems	: [{

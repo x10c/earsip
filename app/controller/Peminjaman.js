@@ -90,6 +90,8 @@ Ext.define ('Earsip.controller.Peminjaman', {
 					peminjaman_id : records[0].get ('id')
 				}
 			});
+		} else {
+			grid_berkas.clearData ();
 		}
 	}
 

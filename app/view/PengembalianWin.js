@@ -92,21 +92,8 @@ Ext.define('Earsip.view.PengembalianWin', {
 			]
 		,	columns			: [{
 				text		: 'Berkas'
-			,	dataIndex	: 'berkas_id'
+			,	dataIndex	: 'nama'
 			,	flex		: 1
-			,	editor		: {
-					xtype			: 'combobox'
-				,	store			: 'BerkasInAktif'
-				,	valueField		: 'id'
-				,	displayField	: 'nama'
-				,	allowBlank		: false
-				,	autoSelect		: true
-				,	triggerAction	: 'all'
-				}
-			,	renderer	: function (v, md, r, rowidx, colidx)
-				{
-					return combo_renderer (v, this.columns[colidx]);
-				}
 			}]
 		}]
 	}]
@@ -122,21 +109,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 	{
 		var grid = this.down ('#peminjaman_rinci');
 		var form = this.down ('form');
-		
-		Ext.data.StoreManager.lookup ('BerkasInAktif').load ({
-			scope	: this
-		,	callback: function (r, op, success)
-			{
-				if (success) {
-					form.loadRecord (record);
-					grid.getStore ().load ({
-						params	: {
-							peminjaman_id  : form.getRecord ().get ('id')
-						}
-					});
-				}
-			}
-		});
+
 		Ext.data.StoreManager.lookup ('BerkasPinjam').clearFilter ();
 	}
 });
