@@ -14,7 +14,7 @@
 <%@ page import="java.sql.Connection" %>
 
 
-<%	
+<%
 Connection	db_con			= null;
 Map parameters 				= null;
 JasperReport jasperreport 	= null;
@@ -27,26 +27,27 @@ try {
 		response.sendRedirect (request.getContextPath());
 		return;
 	}
-	
+
 	String setelah_tgl	= request.getParameter ("setelah_tgl");
 	String sebelum_tgl	= request.getParameter ("sebelum_tgl");
-	
-	
+
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
-	
+
 	SimpleDateFormat formater = new SimpleDateFormat ("yyyy-MM-dd");
 	parameters.put ("REPORT_LOCALE", locale);
 	parameters.put ("setelah_tgl", formater.parse(setelah_tgl));
 	parameters.put ("sebelum_tgl", formater.parse(sebelum_tgl));
-	
-	
-	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "lap_berkas_musnah.jasper"));
+
+	ServletContext	sc			= session.getServletContext ();
+	String			report_path	= sc.getRealPath ("/report" + File.separator +"lap_berkas_musnah.jasper");
+
+	jasperreport = (JasperReport) JRLoader.loadObject(report_path);
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	response.setContentType ("application/pdf");
 	response.setHeader("Content-Disposition","attachment;filename=\"Laporan Daftar Berkas Musnah.pdf\"");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
-	
+
 } catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''").replace("\"", "\\\"") +"'}");
 }

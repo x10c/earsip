@@ -34,7 +34,11 @@ try {
 	
 	parameters.put ("peminjaman_id", Integer.parseInt(peminjaman_id));
 	parameters.put ("REPORT_LOCALE", locale);
-	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "peminjaman.jasper"));
+
+	ServletContext	sc		= session.getServletContext ();
+	String			path	= sc.getRealPath ("/report" + File.separator + "peminjaman.jasper");
+
+	jasperreport = (JasperReport) JRLoader.loadObject(path);
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	response.setContentType("application/pdf");
 	response.setHeader("Content-Disposition","attachment;filename=\"Berita Acara Peminjaman.pdf\"");

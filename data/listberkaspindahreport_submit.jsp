@@ -25,10 +25,13 @@ try {
 	
 	String pemindahan_id	= request.getParameter ("pemindahan_id");
 	parameters = new HashMap ();
-	
+
+	ServletContext	sc			= session.getServletContext ();
+	String			report_path	= sc.getRealPath ("/report" + File.separator +"listberkaspindah.jasper");
+
 	parameters.put ("pemindahan_id",Integer.parseInt(pemindahan_id));
 	
-	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "listberkaspindah.jasper"));
+	jasperreport = (JasperReport) JRLoader.loadObject(report_path);
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	response.setContentType ("application/pdf");
 	response.setHeader("Content-Disposition","attachment;filename=\"Daftar Berkas Pindah.pdf\"");

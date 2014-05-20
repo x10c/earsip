@@ -3,12 +3,16 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.util.Properties" %>
+<%@ page import="java.io.InputStream" %>
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.io.File" %>
 <%
 Properties props = new Properties ();
 
-props.load (new FileInputStream (application.getRealPath ("WEB-INF"+ File.separator +"web.conf")));
+ServletContext	context		= session.getServletContext ();
+InputStream		is			= context.getResourceAsStream ("/WEB-INF"+ File.separator +"web.conf");
+
+props.load (is);
 
 String		db_url		= props.getProperty ("db");
 String		db_class	= props.getProperty ("db.class");
@@ -86,9 +90,8 @@ if (user == null) {
 		session.setAttribute ("user.nama", user_name);
 		session.setAttribute ("user.nip", user_nip);
 		is_login = 1;
-		
-	} 
-	
+
+	}
 } else {
 	is_login = 1;
 }

@@ -31,8 +31,10 @@ try {
 		response.sendRedirect (request.getContextPath());
 		return;
 	}
-	
-	String report_path		= application.getRealPath ("/") + "report" + File.separator;
+
+	ServletContext	sc			= session.getServletContext ();
+	String			report_path	= sc.getRealPath ("/report" + File.separator);
+
 	String pemusnahan_id	= request.getParameter ("pemusnahan_id");
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
@@ -42,10 +44,10 @@ try {
 	parameters.put ("SUBREPORT_DIR", report_path);
 	
 	List <JasperPrint> jlist= new ArrayList ();
-	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "pemusnahan.jasper"));
+	jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("/report" + File.separator + "pemusnahan.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	jlist.add (jasperprint);
-	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "pemusnahan_sub.jasper"));
+	jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("/report" + File.separator + "pemusnahan_sub.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	jlist.add (jasperprint);
 	exporter	= new JRPdfExporter ();

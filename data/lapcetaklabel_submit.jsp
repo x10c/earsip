@@ -21,6 +21,7 @@ JasperPrint	 jasperprint	= null;
 Locale	locale				= null;
 try {
 	db_con = (Connection) session.getAttribute ("db.con");
+	ServletContext sc = session.getServletContext ();
 
 	if (db_con == null || (db_con != null && db_con.isClosed ())) {
 		response.sendRedirect (request.getContextPath());
@@ -30,7 +31,7 @@ try {
 	String unit_kerja_id	= request.getParameter ("unit_kerja_id");
 	String kode_rak			= request.getParameter ("kode_rak");
 	String kode_box			= request.getParameter ("kode_box");
-	String report_path		= application.getRealPath ("/") + "report" + File.separator;
+	String report_path		= sc.getRealPath ("/report" + File.separator);
 	
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
@@ -41,7 +42,7 @@ try {
 	parameters.put ("REPORT_LOCALE", locale);
 	parameters.put ("SUBREPORT_DIR", report_path);
 	
-	jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "label.jasper"));
+	jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("report" + File.separator + "label.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	response.setContentType ("application/pdf");
 	response.setHeader("Content-Disposition","attachment;filename=\"Label.pdf\"");

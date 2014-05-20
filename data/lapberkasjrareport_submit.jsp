@@ -11,7 +11,7 @@
 <%@ page import="net.sf.jasperreports.engine.util.JRLoader" %>
 
 <%@ page import="java.sql.Connection" %>
-<%	
+<%
 Connection		db_con			= null;
 Map				parameters 		= null;
 JasperReport	jasperreport 	= null;
@@ -24,24 +24,26 @@ try {
 		response.sendRedirect (request.getContextPath());
 		return;
 	}
-	
+
 	String user_id	= (String) session.getAttribute ("user.id");
-	
+
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
-	
+
+	ServletContext	sc = session.getServletContext ();
+
 	parameters.put ("pegawai_id", Integer.parseInt(user_id));
 	parameters.put ("REPORT_LOCALE", locale);
 	if (user_id.equals ("3")) {
-		jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "lapjra_inaktif.jasper"));
+		jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("/report" + File.separator + "lapjra_inaktif.jasper"));
 	} else {
-		jasperreport = (JasperReport) JRLoader.loadObject(application.getRealPath ("report" + File.separator + "lapjra_aktif.jasper"));
+		jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("/report" + File.separator + "lapjra_aktif.jasper"));
 	}
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	response.setContentType ("application/pdf");
 	response.setHeader("Content-Disposition","attachment;filename=\"Laporan Daftar Berkas JRA.pdf\"");
 	JasperExportManager.exportReportToPdfStream(jasperprint, response.getOutputStream ());
-	
+
 } catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''").replace("\"", "\\\"") +"'}");
 }
