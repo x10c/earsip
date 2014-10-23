@@ -111,5 +111,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 		var form = this.down ('form');
 
 		Ext.data.StoreManager.lookup ('BerkasPinjam').clearFilter ();
+
+		form.loadRecord (record);
 	}
 });
