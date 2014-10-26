@@ -42,7 +42,7 @@ try {
 	parameters.put ("REPORT_LOCALE", locale);
 	parameters.put ("SUBREPORT_DIR", report_path);
 	
-	jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("report" + File.separator + "label.jasper"));
+	jasperreport = (JasperReport) JRLoader.loadObject(sc.getRealPath ("/report" + File.separator + "label.jasper"));
 	jasperprint = JasperFillManager.fillReport(jasperreport, parameters, db_con);
 	response.setContentType ("application/pdf");
 	response.setHeader("Content-Disposition","attachment;filename=\"Label.pdf\"");

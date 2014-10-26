@@ -220,7 +220,7 @@ ORDER BY B.nomor ASC]]>
 					<subreportParameterExpression><![CDATA[$P{pemusnahan_id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "pemusnahan_suberport_subreport1.jasper"]]></subreportExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "/pemusnahan_suberport_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</columnFooter>
