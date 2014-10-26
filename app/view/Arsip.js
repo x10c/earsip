@@ -1,5 +1,5 @@
 Ext.require ([
-	'Earsip.store.UnitKerja'
+	'Earsip.store.Arsip.UnitKerja'
 ,	'Earsip.store.Arsip.Rak'
 ,	'Earsip.store.Arsip.Box'
 ,	'Earsip.store.Arsip.Folder'
@@ -22,7 +22,7 @@ Ext.define ('Earsip.view.Arsip', {
 	,	items		: [{
 			xtype		:'grid'
 		,	itemId		:'arsip_uk'
-		,	store		:'UnitKerja'
+		,	store		:'Arsip.UnitKerja'
 		,	region		:'west'
 		,	split		: true
 		,	width		:200

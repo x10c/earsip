@@ -190,6 +190,7 @@ Ext.application ({
 	,	'PemindahanRinci'
 	,	'BerkasPindah'
 	,	'Arsip'
+	,	'Arsip.UnitKerja'
 	,	'Arsip.Rak'
 	,	'Arsip.Box'
 	,	'Arsip.Folder'
