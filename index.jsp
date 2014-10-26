@@ -95,6 +95,7 @@ if (user == null) {
 } else {
 	is_login = 1;
 }
+
 if (user_grup_id != null && user_grup_id.equals ("3")) {
 	is_pusatarsip = 1;
 }
@@ -107,7 +108,7 @@ if (user_grup_id != null && user_grup_id.equals ("3")) {
 	<link rel="stylesheet" type="text/css" href="app.css">
 	<script>
 		var is_login			= <%= is_login %>;
-		var is_pusatarsip		= '<%= is_pusatarsip %>';
+		var is_pusatarsip		= <%= is_pusatarsip %>;
 		var _g_username			= '<%= user_name %>';
 		var _g_repo_path		= '<%= request.getContextPath() + repo_root %>';
 		var _g_max_upload_size	= <%= max_upload_size %>;

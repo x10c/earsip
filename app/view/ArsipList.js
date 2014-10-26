@@ -65,8 +65,8 @@ Ext.define ('Earsip.view.ArsipList', {
 		,	handler		:function (b)
 			{
 				var url = 'data/lapcetaklabel_submit.jsp?' +
-							'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&&' +
-							'kode_rak=' + Earsip.arsip.tree.kode_rak + '&&' +
+							'unit_kerja_id=' + Earsip.arsip.tree.unit_kerja_id + '&' +
+							'kode_rak=' + Earsip.arsip.tree.kode_rak + '&' +
 							'kode_box=' + Earsip.arsip.tree.kode_box
 				window.open (url);
 			}
