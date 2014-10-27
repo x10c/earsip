@@ -52,6 +52,7 @@ Ext.define ('Earsip.controller.Pegawai', {
 		if (panel.win == undefined) {
 			panel.win = Ext.create ('Earsip.view.PegawaiWin', {});
 		}
+		panel.win.down ('form').getForm ().reset ();
 		panel.win.down ('#password').allowBlank = false;
 		panel.win.show ();
 		panel.win.action = 'create';
@@ -59,11 +60,21 @@ Ext.define ('Earsip.controller.Pegawai', {
 
 ,	do_edit : function (b)
 	{
+		var grid = b.up ("#mas_pegawai");
+		var data = grid.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
 		var panel = this.getMas_pegawai ();
+
 		if (panel.win == undefined) {
 			panel.win = Ext.create ('Earsip.view.PegawaiWin', {});
 		}
+
 		panel.win.down ('#password').allowBlank = true;
+		panel.win.down ('form').loadRecord (data[0]);
 		panel.win.show ();
 		panel.win.action = 'update';
 	}
