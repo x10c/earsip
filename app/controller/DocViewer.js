@@ -79,6 +79,8 @@ Ext.define ('Earsip.controller.DocViewer', {
 		var dv	= this.getDocviewer ();
 		var c	= dv.down ('#content');
 		var	p	= dv.down ('#pages');
+		var ci	= dv.down ('#content-img');
+		var sz	= ci.getSize ();
 
 		if (dv.mime == 'application/pdf') {
 			if (dv.seq > 0) {
@@ -91,6 +93,8 @@ Ext.define ('Earsip.controller.DocViewer', {
 				,	mode	: 'image'
 				,	itemId	: 'content-img'
 				,	src		: dv.target
+				,	width	: sz.width
+				,	height	: sz.height
 				});
 
 				dv.set_page_number (dv.seq + 1);
@@ -103,6 +107,8 @@ Ext.define ('Earsip.controller.DocViewer', {
 		var dv	= this.getDocviewer ();
 		var c	= dv.down ('#content');
 		var	p	= dv.down ('#pages');
+		var ci	= dv.down ('#content-img');
+		var sz	= ci.getSize ();
 
 		if (dv.mime == 'application/pdf') {
 			if (dv.seq >= (dv.n_image - 1)) {
@@ -118,6 +124,8 @@ Ext.define ('Earsip.controller.DocViewer', {
 		,	mode	: 'image'
 		,	itemId	: 'content-img'
 		,	src		: dv.target
+		,	width	: sz.width
+		,	height	: sz.height
 		});
 
 		dv.set_page_number (dv.seq + 1);

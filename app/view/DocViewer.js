@@ -3,8 +3,7 @@ Ext.define ('Earsip.view.DocViewer', {
 ,	alias		: 'widget.docviewer'
 ,	itemId		: 'docviewer'
 ,	title		: 'Berkas'
-,	width		: 700
-,	height		: 500
+,	maximized	: true
 ,	resizable	: true
 ,	closeable	: true
 ,	maximizable	: true
@@ -80,6 +79,8 @@ Ext.define ('Earsip.view.DocViewer', {
 		,	mode	: 'image'
 		,	itemId	: 'content-img'
 		,	src		: this.target
+		,	width	: 800
+		,	height	: 600
 		});
 
 		this.setTitle ('Berkas :: '+ berkas.get ('nama'));
