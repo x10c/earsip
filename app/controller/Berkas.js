@@ -1,6 +1,5 @@
 Ext.require ([
-	'Earsip.view.Trash'
-,	'Earsip.view.WinUploadSingle'
+	'Earsip.view.WinUploadSingle'
 ,	'Earsip.view.WinIndeksRelatif'
 ]);
 

@@ -182,7 +182,6 @@ Ext.application ({
 	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'IndeksRelatif'
-	,	'Trash'
 	,	'Peminjaman'
 	,	'PeminjamanRinci'
 	,	'BerkasPinjam'
@@ -220,15 +219,10 @@ Ext.application ({
 	,	'BerkasBerbagi'
 
 	,	'AdmSistem'
-	,	'AdmHakAksesMenu'
-	,	'Grup'
-	,	'AdmHakAkses'
+
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'PegawaiWin'
-
-	,	'TrashList'
-	,	'Trash'
 
 	,	'KlasArsip'
 	,	'KlasArsipWin'
@@ -264,8 +258,6 @@ Ext.application ({
 ,	controllers	: [
 		'Login'
 	,	'MainToolbar'
-	,	'AdmHakAkses'
-	,	'Grup'
 	,	'UnitKerja'
 	,	'Pegawai'
 	,	'KlasArsip'
@@ -275,7 +267,6 @@ Ext.application ({
 	,	'Jabatan'
 	,	'GantiPassword'
 	,	'Berkas'
-	,	'Trash'
 	,	'BerkasBerbagi'
 	,	'BerkasBerbagiWin'
 	,	'Peminjaman'
