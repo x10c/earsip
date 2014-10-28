@@ -38,10 +38,10 @@ try {
 
 		childs = get_list_dir (db_con, berkas_id);
 
-		if (childs.length () <= 0) {
-			node.put ("children", new JSONArray());
-		} else {
+		if (childs.length () > 0) {
 			node.put ("children", childs);
+		} else {
+			node.put ("leaf", true);
 		}
 
 		nodes.put (node);
@@ -114,10 +114,10 @@ try {
 
 		childs = get_list_dir (db_con, berkas_id);
 
-		if (childs.length () <= 0) {
-			node.put ("children", new JSONArray());
-		} else {
+		if (childs.length () > 0) {
 			node.put ("children", childs);
+		} else {
+			node.put ("leaf", true);
 		}
 
 		nodes.put (node);
@@ -183,10 +183,10 @@ try {
 
 		childs = get_top_list_dir (db_con, _user_id, peg_id, 0);
 
-		if (childs.length () <= 0) {
-			node.put ("children", new JSONArray());
-		} else {
+		if (childs.length () > 0) {
 			node.put ("children", childs);
+		} else {
+			node.put ("leaf", true);
 		}
 
 		roots.put (node);

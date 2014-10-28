@@ -16,8 +16,7 @@ try {
 
 	if (id.equalsIgnoreCase ("0")) {
 		q	=" select	distinct"
-			+"			A.id"
-			+" ,		A.pegawai_id"
+			+" 			A.pegawai_id"
 			+" ,		B.nama"
 			+" from		m_berkas	as A"
 			+" ,		m_pegawai	as B"
@@ -25,8 +24,7 @@ try {
 			+" and		A.pegawai_id	= B.id"
 			+" union all"
 			+" select	distinct"
-			+"			A.id"
-			+" ,		A.pegawai_id"
+			+" 			A.pegawai_id"
 			+" ,		C.nama"
 			+" from		m_berkas			as A"
 			+" ,		m_berkas_berbagi	as B"
@@ -48,7 +46,7 @@ try {
 			nama	= rs.getString ("nama");
 			_o		= new JSONObject ();
 
-			_o.put ("id", rs.getString ("id"));
+			_o.put ("id", peg_id);
 			_o.put ("pid", 0);
 			_o.put ("nama", nama);
 			_o.put ("pegawai_id", peg_id);
