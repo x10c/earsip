@@ -14,91 +14,87 @@ Ext.define ('Earsip.view.Berkas', {
 		xtype		: 'berkastree'
 	,	region		: 'west'
 	},{
-		xtype		: 'container'
+		xtype		: 'berkaslist'
 	,	region		: 'center'
-	,	layout		: 'border'
-	,	items		: [{
-			xtype		: 'berkaslist'
-		,	region		: 'center'
-		,	tbar		: [{
-				text		: 'Berkas dengan scan'
-			,	itemId		: 'upload'
-			,	iconCls		: 'upload'
-			},'-',{
-				text		:'Berkas tanpa scan'
-			,	itemId		:'berkas_baru'
-			,	iconCls		:'add'
-			,	formBind	:true
-			,	handler		:function (b)
-				{
-					b.up ('#berkas').list_onclick_berkas_noscan ();
-				}
-			},'-',{
-				text		: 'Refresh'
-			,	itemId		: 'refresh'
-			,	iconCls		: 'refresh'
-			},'-',{
-				text		: 'Kembali'
-			,	itemId		: 'dirup'
-			,	iconCls		: 'dirup'
-			},'-','->','-',{
-				text		: 'Cari'
-			,	itemId		: 'search'
-			,	iconCls		: 'search'
-			},'-',{
-				text		: 'Bagi'
-			,	itemId		: 'share'
-			,	iconCls		: 'dir'
-			,	disabled	: true
-			},'-',{
-				text		: 'Hapus'
-			,	itemId		: 'del'
-			,	iconCls		: 'del'
-			,	disabled	: true
-			}]
-
-		,	listeners	:{
-				selectionchange	:function (m, r)
-				{
-					this.up ('#berkas').list_on_select (r);
-				}
+	,	tbar		: [{
+			text		: 'Berkas dengan scan'
+		,	itemId		: 'upload'
+		,	iconCls		: 'upload'
+		},'-',{
+			text		:'Berkas tanpa scan'
+		,	itemId		:'berkas_baru'
+		,	iconCls		:'add'
+		,	formBind	:true
+		,	handler		:function (b)
+			{
+				b.up ('#berkas').list_onclick_berkas_noscan ();
 			}
-		},{
-			xtype		: 'berkasform'
-		,	id			: 'berkasform'
-		,	url			: 'data/berkas_submit.jsp'
-		,	region		: 'south'
-		,	split		: true
-		,	collapsible	: true
-		,	header		: false
-		,	buttons		: [{
-				text		: 'Folder baru'
-			,	itemId		: 'mkdir'
-			,	iconCls		: 'add'
-			,	disabled	:true
-			,	handler		:function (b)
-				{
-					b.up ('#berkas').form_do_mkdir ();
-				}
-			},'-','->','-',{
-				text		: 'Ubah data'
-			,	itemId		: 'edit'
-			,	iconCls		: 'edit'
-			,	disabled	: true
-			,	handler		:function (b)
-				{
-					b.up ('#berkas').form_do_edit ();
-				}
-			},'-',{
-				text		: 'Simpan'
-			,	itemId		: 'save'
-			,	iconCls		: 'save'
-			,	disabled	:true
-			,	handler		:function (b)
-				{
-					b.up ('#berkas').form_do_save ();
-				}
-			}]
+		},'-',{
+			text		: 'Refresh'
+		,	itemId		: 'refresh'
+		,	iconCls		: 'refresh'
+		},'-',{
+			text		: 'Kembali'
+		,	itemId		: 'dirup'
+		,	iconCls		: 'dirup'
+		},'-','->','-',{
+			text		: 'Cari'
+		,	itemId		: 'search'
+		,	iconCls		: 'search'
+		},'-',{
+			text		: 'Bagi'
+		,	itemId		: 'share'
+		,	iconCls		: 'dir'
+		,	disabled	: true
+		},'-',{
+			text		: 'Hapus'
+		,	itemId		: 'del'
+		,	iconCls		: 'del'
+		,	disabled	: true
+		}]
+
+	,	listeners	:{
+			selectionchange	:function (m, r)
+			{
+				this.up ('#berkas').list_on_select (r);
+			}
+		}
+	},{
+		xtype		: 'berkasform'
+	,	id			: 'berkasform'
+	,	url			: 'data/berkas_submit.jsp'
+	,	region		: 'east'
+	,	split		: true
+	,	collapsible	: true
+	,	header		: false
+	,	width		: 400
+	,	buttons		: [{
+			text		: 'Folder baru'
+		,	itemId		: 'mkdir'
+		,	iconCls		: 'add'
+		,	disabled	:true
+		,	handler		:function (b)
+			{
+				b.up ('#berkas').form_do_mkdir ();
+			}
+		},'-','->','-',{
+			text		: 'Ubah data'
+		,	itemId		: 'edit'
+		,	iconCls		: 'edit'
+		,	disabled	: true
+		,	handler		:function (b)
+			{
+				b.up ('#berkas').form_do_edit ();
+			}
+		},'-',{
+			text		: 'Simpan'
+		,	itemId		: 'save'
+		,	iconCls		: 'save'
+		,	disabled	:true
+		,	handler		:function (b)
+			{
+				b.up ('#berkas').form_do_save ();
+			}
 		}]
 	}]
 

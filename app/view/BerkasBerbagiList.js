@@ -13,7 +13,7 @@ Ext.define ('Earsip.view.BerkasBerbagiList', {
 ,	columns		: [{
 		text		: 'Nama Berkas'
 	,	dataIndex	: 'nama'
-	,	width		: 300
+	,	width		: 280
 	,	hideable	: false
 	,	locked		: true
 	,	renderer	: function (v, md, r)

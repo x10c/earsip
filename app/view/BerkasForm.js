@@ -45,30 +45,25 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'tgl_dibuat'
 	,	name			: 'tgl_dibuat'
 	},{
-		xtype 	: 'container'
-	,	layout	: 'hbox'
-	,	margin	: '0 0 5 0'
-	,	items	: [{
-			xtype			: 'combo'
-		,	fieldLabel		: 'Klasifikasi'
-		,	labelAlign		: 'right'
-		,	itemId			: 'berkas_klas_id'
-		,	name			: 'berkas_klas_id'
-		,	store			: Ext.getStore ('KlasArsip')
-		,	displayField	: 'nama_alt'
-		,	valueField		: 'id'
-		,	forceSelection	:true
-		,	flex			: 1
-		,	emptyText		:'-'
-		,	typeAhead		:true
-		},{
-			xtype			: 'button'
-		,	text			: 'Cari Indeks Relatif'
-		,	itemId			: 'indeks_relatif'
-		,	iconCls			: 'search'
-		,	width			: 140
-		,	margin			: '0 0 0 10'
-		}]
+		xtype			: 'combo'
+	,	fieldLabel		: 'Klasifikasi'
+	,	labelAlign		: 'right'
+	,	itemId			: 'berkas_klas_id'
+	,	name			: 'berkas_klas_id'
+	,	store			: Ext.getStore ('KlasArsip')
+	,	displayField	: 'nama_alt'
+	,	valueField		: 'id'
+	,	forceSelection	:true
+	,	flex			: 1
+	,	emptyText		:'-'
+	,	typeAhead		:true
+	},{
+		xtype			: 'button'
+	,	text			: 'Cari Indeks Relatif'
+	,	itemId			: 'indeks_relatif'
+	,	iconCls			: 'search'
+	,	width			: 140
+	,	margin			: '0 0 10 0'
 	},{
 		xtype			: 'combo'
 	,	fieldLabel		: 'Tipe'

@@ -15,10 +15,11 @@ Ext.define ('Earsip.view.BerkasJRA', {
 	},{
 		xtype		: 'berkasform'
 	,	itemId		: 'berkas_jra_form'
-	,	region		: 'south'
+	,	region		: 'east'
 	,	split		: true
 	,	collapsible	: true
 	,	header		: false
+	,	width		: 400
 	,	defaults	: {
 			readOnly	: true
 		}

@@ -10,10 +10,6 @@ Ext.define ('Earsip.view.Notifikasi', {
 ,	itemId		: 'notifikasi'
 ,	title		: 'Notifikasi'
 ,	layout		: 'accordion'
-,	defaults: {
-        // applied to each contained panel
-        bodyStyle: 'padding:15px'
-    }
 ,	layoutConfig: {
         // layout-specific configs go here
         titleCollapse: false

@@ -14,20 +14,16 @@ Ext.define ('Earsip.view.BerkasBerbagi', {
 		xtype		: 'berkasberbagitree'
 	,	region		: 'west'
 	},{
-		xtype		: 'container'
+		xtype		: 'berkasberbagilist'
 	,	region		: 'center'
-	,	layout		: 'border'
-	,	items		: [{
-			xtype		: 'berkasberbagilist'
-		,	region		: 'center'
-		},{
-			xtype		: 'berkasform'
-		,	itemId		: 'berkasberbagi_form'
-		,	region		: 'south'
-		,	split		: true
-		,	collapsible	: true
-		,	header		: false
-		}]
+	},{
+		xtype		: 'berkasform'
+	,	itemId		: 'berkasberbagi_form'
+	,	region		: 'east'
+	,	width		: 400
+	,	split		: true
+	,	collapsible	: true
+	,	header		: false
 	}]
 	
 ,	listeners : {
