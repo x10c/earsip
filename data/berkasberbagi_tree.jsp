@@ -1,8 +1,8 @@
 <%--
-	Copyright 2013 - x10c.Lab
+	Copyright 2014
 
 	Author(s):
-	- mhd.sulhan (ms@kilabit.org)
+	- Mhd Sulhan (ms@kilabit.info)
 --%>
 <%@ include file="init.jsp" %>
 <%!
@@ -74,9 +74,14 @@ try {
 		+" from		m_berkas"
 		+" where	tipe_file	= 0"
 		+" and		status		= 1"
-		+" and		pegawai_id	= "+ peg_id
 		+" and		akses_berbagi_id in (3,4)"
-		+" union all"
+		+" and		pegawai_id	= "+ peg_id;
+
+	if (berkas_id != 0) {
+		q +=" and pid = "+ berkas_id;
+	}
+
+	q	+=" union all "
 		+" select	distinct"
 		+" 			m_berkas.id"
 		+" ,		pid"
@@ -85,15 +90,15 @@ try {
 		+" ,		m_berkas_berbagi"
 		+" where	tipe_file		= 0"
 		+" and		status			= 1"
-		+" and		pegawai_id		= "+ peg_id
 		+" and		m_berkas.id		= berkas_id"
 		+" and		bagi_ke_peg_id	= "+ user_id
-		+" and		akses_berbagi_id in (1,2)"
-		+" order by nama";
+		+" and		akses_berbagi_id in (1,2)";
 
 	if (berkas_id != 0) {
 		q +=" and pid = "+ berkas_id;
 	}
+
+	q	+=" order by nama";
 
 	rs = db_stmt.executeQuery (q);
 
@@ -135,12 +140,12 @@ try {
 	JSONObject	root		= new JSONObject ();
 	JSONArray	roots		= new JSONArray ();
 	JSONObject	node		= null;
+	int			id			= 0;
 	int			peg_id		= 0;
 	String		nama		= "";
 
 	q	=" select	distinct"
-		+"			m_berkas.id"
-		+" ,		pegawai_id"
+		+" 			pegawai_id"
 		+" ,		m_pegawai.nama"
 		+" from		m_berkas"
 		+" ,		m_pegawai"
@@ -148,8 +153,7 @@ try {
 		+" and		pegawai_id	= m_pegawai.id"
 		+" union all"
 		+" select	distinct"
-		+"			m_berkas.id"
-		+" ,		pegawai_id"
+		+" 			pegawai_id"
 		+" ,		m_pegawai.nama"
 		+" from		m_berkas"
 		+" ,		m_berkas_berbagi"
@@ -172,7 +176,7 @@ try {
 		peg_id	= rs.getInt ("pegawai_id");
 		nama	= rs.getString ("nama");
 
-		node.put ("id", rs.getString ("id"));
+		node.put ("id", peg_id);
 		node.put ("pid", 0);
 		node.put ("text", nama);
 		node.put ("pegawai_id", peg_id);
