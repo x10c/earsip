@@ -14,6 +14,7 @@ try {
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		tipe_file"
+		+" ,		mime"
 		+" ,		sha"
 		+" ,		pegawai_id"
 		+" ,		unit_kerja_id"
@@ -31,6 +32,7 @@ try {
 		+" ,		status"
 		+" ,		status_hapus"
 		+" ,		akses_berbagi_id"
+		+" ,		n_output_images"
 		+" from		m_berkas"
 		+" where	pegawai_id		= "+ _user_id
 		+" and		status			= 1"
@@ -80,6 +82,7 @@ try {
 		_o.put ("id"				, rs.getString ("id"));
 		_o.put ("pid"				, rs.getString ("pid"));
 		_o.put ("tipe_file"			, rs.getString ("tipe_file"));
+		_o.put ("mime"				, rs.getString ("mime"));
 		_o.put ("sha"				, rs.getString ("sha"));
 		_o.put ("pegawai_id"		, rs.getString ("pegawai_id"));
 		_o.put ("unit_kerja_id"		, rs.getString ("unit_kerja_id"));
@@ -97,6 +100,7 @@ try {
 		_o.put ("status"			, rs.getString ("status"));
 		_o.put ("status_hapus"		, rs.getString ("status_hapus"));
 		_o.put ("akses_berbagi_id"	, rs.getString ("akses_berbagi_id"));
+		_o.put ("n_output_images"	, rs.getString ("n_output_images"));
 
 		_a.put (_o);
 	}
