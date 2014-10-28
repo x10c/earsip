@@ -5,11 +5,10 @@ Ext.require ([
 ]);
 
 Ext.define ('Earsip.view.Notifikasi', {
-	extend		: 'Ext.panel.Panel'
+	extend		: 'Ext.tab.Panel'
 ,	alias		: 'widget.notifikasi'
 ,	itemId		: 'notifikasi'
 ,	title		: 'Notifikasi'
-,	layout		: 'accordion'
 ,	layoutConfig: {
         // layout-specific configs go here
         titleCollapse: false
