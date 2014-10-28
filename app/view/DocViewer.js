@@ -80,7 +80,6 @@ Ext.define ('Earsip.view.DocViewer', {
 		,	itemId	: 'content-img'
 		,	src		: this.target
 		,	width	: 800
-		,	height	: 600
 		});
 
 		this.setTitle ('Berkas :: '+ berkas.get ('nama'));

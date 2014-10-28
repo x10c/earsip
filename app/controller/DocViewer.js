@@ -94,7 +94,6 @@ Ext.define ('Earsip.controller.DocViewer', {
 				,	itemId	: 'content-img'
 				,	src		: dv.target
 				,	width	: sz.width
-				,	height	: sz.height
 				});
 
 				dv.set_page_number (dv.seq + 1);
@@ -125,7 +124,6 @@ Ext.define ('Earsip.controller.DocViewer', {
 		,	itemId	: 'content-img'
 		,	src		: dv.target
 		,	width	: sz.width
-		,	height	: sz.height
 		});
 
 		dv.set_page_number (dv.seq + 1);
