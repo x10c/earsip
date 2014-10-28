@@ -19,7 +19,7 @@ Ext.define ('Earsip.view.BerkasTree', {
 		{
 			b.up ('treepanel').do_refresh ();
 		}
-	}]
+	},'-']
 
 ,	initComponent	: function()
 	{
