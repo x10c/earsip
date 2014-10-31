@@ -9,7 +9,8 @@ Ext.define ('Earsip.view.BerkasJRA', {
 ,	itemId		: 'berkas_jra'
 ,	title		: 'Notifikasi Berkas JRA'
 ,	layout		: 'border'
-,	items		: [{
+,	items		:
+	[{
 		xtype		: 'berkas_jra_list'
 	,	region		: 'center'
 	},{
@@ -20,11 +21,13 @@ Ext.define ('Earsip.view.BerkasJRA', {
 	,	collapsible	: true
 	,	header		: false
 	,	width		: 400
-	,	defaults	: {
+	,	defaults	:
+		{
 			readOnly	: true
 		}
 	}]
-,	listeners : {
+,	listeners :
+	{
 		activate	:function (c)
 		{
 			c.down ('#berkas_jra_list').do_refresh ();
@@ -38,5 +41,30 @@ Ext.define ('Earsip.view.BerkasJRA', {
 ,	do_refresh	:function ()
 	{
 		this.down ('#berkas_jra_list').do_refresh ();
+	}
+
+,	list_on_itemdblclick : function (v, r, idx)
+	{
+		if (r.get ("tipe_file") != 0) {
+			Earsip.win_viewer.down ('#download').hide ();
+			Earsip.win_viewer.do_open (r);
+		}
+	}
+
+,	list_on_selectionchange : function (m, r)
+	{
+		var list = this.down ("#berkas_jra_list");
+
+		if (r.length > 0) {
+			this.down ('#berkas_jra_form').loadRecord (r[0]);
+		}
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#berkas_jra_list").on ("itemdblclick", this.list_on_itemdblclick, this);
+		this.down ("#berkas_jra_list").on ("selectionchange", this.list_on_selectionchange, this);
 	}
 });
