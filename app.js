@@ -261,7 +261,6 @@ Ext.application ({
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'
 	,	'BerkasBerbagi'
-	,	'BerkasBerbagiWin'
 	,	'Peminjaman'
 	,	'Pemindahan'
 	,	'Pemusnahan'
