@@ -42,3 +42,5 @@ Ext.define ('Earsip.store.Berkas', {
 		}
 	}
 });
+
+//# sourceURL=app/store/Berkas.js
