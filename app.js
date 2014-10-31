@@ -260,7 +260,6 @@ Ext.application ({
 	,	'MainToolbar'
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'
-	,	'BerkasBerbagi'
 	,	'Peminjaman'
 	,	'Pemindahan'
 	,	'Pemusnahan'
