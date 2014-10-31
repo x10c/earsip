@@ -62,6 +62,7 @@ Ext.define('Earsip.view.KlasArsipWin', {
 	}]
 ,	buttons			: [{
 		text			: 'Simpan'
+	,	itemId			: "save"
 	,	type			: 'submit'
 	,	action			: 'submit'
 	,	iconCls			: 'save'

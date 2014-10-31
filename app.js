@@ -259,7 +259,6 @@ Ext.application ({
 		'Login'
 	,	'MainToolbar'
 	,	'Pegawai'
-	,	'KlasArsip'
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'
