@@ -6,7 +6,6 @@ Ext.define('Earsip.view.RefIndeksRelatifWin', {
 ,   width		: 500
 ,	closable	: true
 ,	resizable	: false
-,	draggable	: false
 ,	autoHeight	: true
 ,	layout		: 'fit'
 ,	border		: false
@@ -49,10 +48,10 @@ Ext.define('Earsip.view.RefIndeksRelatifWin', {
 	}]
 ,	buttons			: [{
 		text			: 'Simpan'
+	,	itemId			: "save"
 	,	type			: 'submit'
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
-
 });

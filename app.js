@@ -258,7 +258,6 @@ Ext.application ({
 ,	controllers	: [
 		'Login'
 	,	'MainToolbar'
-	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'
 	,	'Berkas'
