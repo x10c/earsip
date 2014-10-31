@@ -272,7 +272,6 @@ Ext.application ({
 	,	'Pemusnahan'
 	,	'NotifPemindahan'
 	,	'BerkasJRA'
-	,	'TransferBerkas'
 	,	'DocViewer'
 	,	'LapBerkasJRA'
 	,	'LapBerkasMusnah'
