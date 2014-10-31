@@ -112,6 +112,7 @@ Ext.define ('Earsip.view.UnitKerja', {
 		,	disabled	:true
 		}]
 	}]
+
 ,	listeners	:{
 		selectionchange	:function (model, data, e)
 		{
@@ -136,5 +137,44 @@ Ext.define ('Earsip.view.UnitKerja', {
 ,	do_refresh	:function ()
 	{
 		this.getStore ().load ();
+	}
+
+,	do_add : function (b)
+	{
+		var editor = this.getPlugin ('roweditor');
+
+		editor.cancelEdit ();
+		editor.action = 'add';
+		var r = Ext.create ('Earsip.model.UnitKerja', {
+				id				: 0
+			,	kode			: ''
+			,	nama			: ''
+			,	nama_pimpinan	: ''
+			,	keterangan		: ''
+			});
+
+		this.getStore ().insert (0, r);
+		editor.startEdit (0, 0);
+	}
+
+,	do_delete : function (b)
+	{
+		var data	= this.getSelectionModel ().getSelection ();
+		var store	= this.getStore ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		store.remove (data);
+		store.sync ();
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#add").on ("click", this.do_add, this);
+		this.down ("#del").on ("click", this.do_delete, this);
 	}
 });
