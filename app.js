@@ -258,7 +258,6 @@ Ext.application ({
 ,	controllers	: [
 		'Login'
 	,	'MainToolbar'
-	,	'MetodaPemusnahan'
 	,	'GantiPassword'
 	,	'Peminjaman'
 	,	'Pemindahan'

@@ -51,7 +51,9 @@ Ext.define ('Earsip.view.MetodaPemusnahan', {
 		,	disabled	: true
 		}]
 	}]
-,	listeners	: {
+
+,	listeners	:
+	{
 		activate	: function (comp)
 		{
 			this.getStore ().load ();
@@ -60,5 +62,52 @@ Ext.define ('Earsip.view.MetodaPemusnahan', {
 		{
 			this.destroy ();
 		}
+	,	selectionchange : function (m, r)
+		{
+			var bdel = this.down('#del');
+			bdel.setDisabled (! r.length);
+		}
+	}
+
+,	do_add : function (b)
+	{
+		var editor = this.getPlugin ('roweditor');
+
+		editor.action = 'add';
+		editor.cancelEdit ();
+		var r = Ext.create ('Earsip.model.MetodaPemusnahan', {
+				id			: 0
+			,	nama		: ''
+			,	keterangan	: ''
+			});
+
+		this.getStore ().insert (0, r);
+		editor.startEdit (0, 0);
+	}
+
+,	do_delete : function (b)
+	{
+		var d = this.getSelectionModel ().getSelection ();
+		if (d.length <= 0) {
+			return;
+		}
+
+		var s = this.getStore ();
+		s.remove (d);
+		s.sync ();
+	}
+
+,	do_refresh : function (b)
+	{
+		this.getStore ().load ();
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#add").on ("click", this.do_add, this);
+		this.down ("#del").on ("click", this.do_delete, this);
+		this.down ("#refresh").on ("click", this.do_refresh, this);
 	}
 });
