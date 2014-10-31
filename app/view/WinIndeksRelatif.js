@@ -6,7 +6,7 @@ Ext.define('Earsip.view.WinIndeksRelatif',{
 ,	modal	: true
 ,	width	: 400
 ,	height	: 300
-,	closeAction : 'destroy'
+,	closeAction : 'hide'
 ,	layout	: 'fit'
 ,	items	: [{
 		xtype 	: 'grid'

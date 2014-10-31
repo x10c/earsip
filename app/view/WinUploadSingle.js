@@ -6,7 +6,7 @@ Ext.define ('Earsip.view.WinUploadSingle', {
 	extend		: 'Ext.window.Window'
 ,	alias		: 'widget.winuploadsingle'
 ,	title		: 'Unggah berkas'
-,	closeAction	: 'destroy'
+,	closeAction	: 'hide'
 ,	resizable	: true
 ,	layout		: 'fit'
 ,	items		: [{

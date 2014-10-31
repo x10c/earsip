@@ -1,4 +1,4 @@
-Ext.Loader.setConfig ({ enabled: true, disableCaching: false });
+Ext.Loader.setConfig ({ enabled: true });
 
 Ext.define ('Earsip', {
 	singleton		: true
@@ -260,7 +260,6 @@ Ext.application ({
 	,	'MainToolbar'
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'
-	,	'Berkas'
 	,	'BerkasBerbagi'
 	,	'BerkasBerbagiWin'
 	,	'Peminjaman'
