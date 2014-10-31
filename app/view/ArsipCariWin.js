@@ -90,6 +90,22 @@ Ext.define ('Earsip.view.ArsipCariWin', {
 			text			: 'Cari'
 		,	itemId			: 'search'
 		,	formBind		: true
+		,	handler			: function (b)
+			{
+				var list		= Ext.ComponentQuery.query ("#arsiplist")[0];
+				var cariform	= list.win_search.down ('form').getForm ()
+				var list_store	= list.getStore ();
+				var list_proxy	= list_store.getProxy ();
+				var org_url		= list_proxy.url;
+
+				list_proxy.url = 'data/arsip_cari.jsp'
+
+				list_store.load ({
+					params	: cariform.getValues ()
+				});
+
+				list_proxy.url = org_url;
+			}
 		}]
 	}]
 });

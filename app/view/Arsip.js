@@ -70,6 +70,7 @@ Ext.define ('Earsip.view.Arsip', {
 				m.down ('#arsip_rak').clearData ();
 				m.down ('#arsip_box').clearData ();
 				m.down ('#arsip_folder').clearData ();
+				m.down ('#arsiplist').clearData ();
 			}
 		},{
 			xtype		:'grid'
@@ -234,11 +235,35 @@ Ext.define ('Earsip.view.Arsip', {
 					});
 				}
 			}
-
 		},{
 			xtype		:'arsiplist'
 		,	width		:200
 		,	region		:'center'
+		,	listeners	:
+			{
+				selectionchange	:function (model, records)
+				{
+					var arsip	= this.up ("#mas_arsip");
+					var klas_id	= false;
+					var list	= arsip.down ("#arsiplist");
+					var form	= arsip.down ('#arsip_form');
+
+					if (_g_user_gid == '3') {
+						form.down ('#arsip_baru').setDisabled (! records.length > 0);
+						form.down ('#save').setDisabled (! records.length > 0);
+					}
+
+					form.setDisabled (records.length <= 0);
+
+					if (records.length > 0) {
+						form.loadRecord (records[0]);
+						list.record			= records[0];
+						Earsip.arsip.id		= records[0].get ('id');
+						Earsip.arsip.pid	= records[0].get ('pid');
+						klas_id				= records[0].get ('berkas_klas_id') != '' ? true : false;
+					}
+				}
+			}
 		}]
 	},{
 		xtype		: 'arsipform'
@@ -246,6 +271,7 @@ Ext.define ('Earsip.view.Arsip', {
 	,	header		: false
 	,	split		: true
 	,	collapsible	: true
+	,	disabled	: true
 	}]
 
 ,	do_refresh:	function ()
@@ -283,5 +309,41 @@ Ext.define ('Earsip.view.Arsip', {
 				Ext.msg.error ('Gagal membuat arsip baru!<br/><hr/>'+ action.result.info);
 			}
 		});
+	}
+
+,	arsipform_do_save : function (b)
+	{
+		var form = b.up ("#arsip_form").getForm ();
+
+		if (! form.isValid ()) {
+			return;
+		}
+
+		form.submit ({
+			scope	: this
+		,	url		:'data/arsip_submit.jsp'
+		,	params	:{
+				action	:'update'
+			}
+		,	success	: function (form, action)
+			{
+				if (action.result.success == true) {
+					Ext.msg.info (action.result.info);
+				} else {
+					Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
+				}
+			}
+		,	failure	: function (form, action)
+			{
+				Ext.msg.error ('Gagal menyimpan data arsip!<br/><hr/>'+ action.result.info);
+			}
+		});
+	}
+
+,	initComponent	:function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#arsip_form").down ("#save").on ("click", this.arsipform_do_save);
 	}
 });
