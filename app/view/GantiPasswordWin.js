@@ -11,14 +11,17 @@ Ext.define ('Earsip.view.GantiPasswordWin', {
 ,	layout			: 'fit'
 ,	border			: true
 ,	modal			: true
-,	items			: [{
+,	defaultFocus	: 'old_psw'
+,	items			:
+	[{
 		xtype			: 'form'
 	,	url				: 'data/gantipassword.jsp'
 	,	plain			: true
 	,	frame			: true
 	,	border			: 0
 	,	bodyPadding		: 5
-	,	defaults		: {
+	,	defaults		:
+		{
 			xtype			: 'textfield'
 		,	allowBlank		: false
 		,	anchor			: '100%'
@@ -26,7 +29,8 @@ Ext.define ('Earsip.view.GantiPasswordWin', {
 		,	labelWidth		: 200
 		,	labelAlign		: 'right'
 		}
-	,	items			: [{
+	,	items			:
+		[{
         	fieldLabel		: 'Password Lama'
         ,	itemId			: 'old_psw'
 		,	inputType		: 'password'
@@ -43,17 +47,47 @@ Ext.define ('Earsip.view.GantiPasswordWin', {
         ,	name			: 'conf_psw'
         }]
 	}]
-,	defaultFocus	: 'old_psw'
-,	buttons			: [{
+,	buttons			:
+	[{
 		text	: 'Simpan'
+	,	itemId	: "save"
 	,	type	: 'submit'
 	,	action	: 'submit'
 	,	iconCls	: 'save'
 	,	formBind: true
 	}]
 
+,	do_submit: function (b)
+	{
+		var form	= this.down ('form').getForm ();
+
+		if (! form.isValid ()) {
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu.');
+			return;
+		}
+
+		form.submit ({
+			scope	: this
+		,	success	: function (form, action)
+			{
+				if (action.result.success == true) {
+					Ext.msg.info (action.result.info);
+					this.destroy ();
+				} else {
+					Ext.msg.error (action.result.info);
+				}
+			}
+		,	failure	: function (form, action)
+			{
+				Ext.msg.error (action.result.info);
+			}
+		});
+	}
+
 ,	initComponent	: function ()
 	{
 		this.callParent (arguments);
+
+		this.down ("#save").on ("click", this.do_submit, this);
 	}
 });
