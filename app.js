@@ -260,7 +260,6 @@ Ext.application ({
 	,	'MainToolbar'
 	,	'Pegawai'
 	,	'KlasArsip'
-	,	'TipeArsip'
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'
