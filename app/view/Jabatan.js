@@ -79,6 +79,7 @@ Ext.define ('Earsip.view.Jabatan', {
 			}
 		},'-',{
 			text		: 'Tambah'
+		,	itemId		: "add"
 		,	action		: 'add'
 		,	iconCls		: 'add'
 		},'-',{
@@ -122,5 +123,42 @@ Ext.define ('Earsip.view.Jabatan', {
 ,	do_refresh	:function ()
 	{
 		this.getStore ().load ();
+	}
+
+,	do_add : function (b)
+	{
+		var editor = this.getPlugin ('roweditor');
+
+		editor.action = 'add';
+		editor.cancelEdit ();
+		var r = Ext.create ('Earsip.model.Jabatan', {
+				id			: 0
+			,	nama		: ''
+			,	keterangan	: ''
+			});
+
+		this.getStore ().insert (0, r);
+		editor.startEdit (0, 0);
+	}
+
+,	do_delete : function (b)
+	{
+		var data = this.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		var s = this.getStore ();
+		s.remove (data);
+		s.sync ();
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#add").on ("click", this.do_add, this);
+		this.down ("#del").on ("click", this.do_delete, this);
 	}
 });

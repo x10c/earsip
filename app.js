@@ -263,7 +263,6 @@ Ext.application ({
 	,	'TipeArsip'
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
-	,	'Jabatan'
 	,	'GantiPassword'
 	,	'Berkas'
 	,	'BerkasBerbagi'
