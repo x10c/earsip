@@ -12,7 +12,6 @@ Ext.define ('Earsip.view.PegawaiWin', {
 ,	width		: 500
 ,	closable	: true
 ,	resizable	: false
-,	draggable	: false
 ,	autoHeight	: true
 ,	layout		: 'fit'
 ,	border		: false
@@ -91,8 +90,10 @@ Ext.define ('Earsip.view.PegawaiWin', {
 	}]
 ,	buttons			: [{
 		text			: 'Simpan'
+	,	itemId			: "submit"
 	,	type			: 'submit'
 	,	action			: 'submit'
+	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
 });

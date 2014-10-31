@@ -1,4 +1,4 @@
-Ext.Loader.setConfig ({ enabled: true });
+Ext.Loader.setConfig ({ enabled: true, disableCaching: false });
 
 Ext.define ('Earsip', {
 	singleton		: true
@@ -258,7 +258,6 @@ Ext.application ({
 ,	controllers	: [
 		'Login'
 	,	'MainToolbar'
-	,	'Pegawai'
 	,	'IndeksRelatif'
 	,	'MetodaPemusnahan'
 	,	'GantiPassword'

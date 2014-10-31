@@ -6,7 +6,6 @@ Ext.define('Earsip.view.KlasArsipWin', {
 ,   width		: 500
 ,	closable	: true
 ,	resizable	: false
-,	draggable	: false
 ,	autoHeight	: true
 ,	layout		: 'fit'
 ,	border		: false

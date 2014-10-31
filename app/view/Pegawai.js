@@ -117,15 +117,112 @@ Ext.define ('Earsip.view.Pegawai', {
 		,	disabled	: true
 		}]
 	}]
-,	listeners	: {
+
+,	listeners	:
+	{
 		activate	: function (comp)
 		{
 			this.getStore ().load ();
 		}
-	,	afterrender : function (comp)
+	,	selectionchange : function (m, r)
 		{
+			var b_edit	= this.down ('#edit');
+			var b_del	= this.down ('#del');
+
+			b_edit.setDisabled (! r.length);
+			b_del.setDisabled (! r.length);
+
+			if (r.length > 0) {
+				this.win.down ('form').loadRecord (r[0]);
+			}
+		}
+	}
+
+,	do_add : function (b)
+	{
+		this.win.down ('form').getForm ().reset ();
+		this.win.down ('#password').allowBlank = false;
+		this.win.show ();
+		this.win.action = 'create';
+	}
+
+,	do_edit : function (b)
+	{
+		var data = this.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		this.win.down ('#password').allowBlank = true;
+		this.win.down ('form').loadRecord (data[0]);
+		this.win.show ();
+		this.win.action = 'update';
+	}
+
+,	do_refresh : function (b)
+	{
+		this.getStore ().load ();
+	}
+
+,	do_delete : function (b)
+	{
+		var data = this.getSelectionModel ().getSelection ();
+
+		if (data.length <= 0) {
+			return;
+		}
+
+		this.win.down ('#password').allowBlank = true;
+		this.win.action = 'destroy';
+
+		this.do_submit (b);
+	}
+
+,	do_submit : function (b)
+	{
+		var form = this.win.down ('form').getForm ();
+
+		if (! form.isValid ()) {
+			Ext.msg.error ('Silahkan isi semua kolom yang kosong terlebih dahulu');
+			return;
+		}
+
+		form.submit ({
+			scope	: this
+		,	params	: {
+				action	: this.win.action
+			}
+		,	success	: function (form, action)
+			{
+				if (action.result.success == true) {
+					Ext.msg.info (action.result.info);
+					this.getStore ().load ();
+					this.win.hide ();
+				} else {
+					Ext.msg.error (action.result.info);
+				}
+			}
+		,	failure	: function (form, action)
+			{
+				Ext.msg.error (action.result.info);
+			}
+		});
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#add").on ("click", this.do_add, this);
+		this.down ("#edit").on ("click", this.do_edit, this);
+		this.down ("#del").on ("click", this.do_delete, this);
+		this.down ("#refresh").on ("click", this.do_refresh, this);
+
+		if (this.win == undefined) {
 			this.win = Ext.create ('Earsip.view.PegawaiWin', {});
-			this.win.hide ();
+
+			this.win.down ("#submit").on ("click", this.do_submit, this);
 		}
 	}
 });
