@@ -259,7 +259,6 @@ Ext.application ({
 		'Login'
 	,	'MainToolbar'
 	,	'Peminjaman'
-	,	'Pemindahan'
 	,	'NotifPemindahan'
 	]
 	

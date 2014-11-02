@@ -66,6 +66,7 @@ Ext.define('Earsip.view.PemindahanRinciWin', {
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
+	,	itemId			: "save"
 	}]
 ,	listeners	: {
 		activate	: function (comp)

@@ -73,5 +73,6 @@ Ext.define('Earsip.view.PemindahanWin', {
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
+	,	itemId			: "save"
 	}]
 });
