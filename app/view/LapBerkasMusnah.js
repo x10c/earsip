@@ -53,6 +53,7 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 			,	type			: 'filter'
 			,	action			: 'filter'
 			,	iconCls			: 'upload'
+			,	itemId			: "filter"
 			}]
 		}]
 	},{
@@ -95,10 +96,13 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 			,	itemId		: 'print'
 			,	iconCls		: 'print'
 			,	action		: 'print'
+			,	itemId		: "print"
 			}]
 		}]
 	}]
-,	listeners	: {
+
+,	listeners	:
+	{
 		activate : function (comp)
 		{
 		
@@ -111,4 +115,43 @@ Ext.define ('Earsip.view.LapBerkasMusnah', {
 		}
 	}
 
+,	do_filter : function (b)
+	{
+		var setelah_tgl_str = this.down ('#setelah_tgl').getValue ();
+		var sebelum_tgl_str = this.down ('#sebelum_tgl').getValue ();
+
+		var grid = this.down ('#grid_berkas_musnah');
+
+		grid.getStore ().load ({
+			params	: {
+				setelah_tgl : setelah_tgl_str
+			,	sebelum_tgl	: sebelum_tgl_str
+			}
+		});
+	}
+
+,	do_print : function (b)
+	{
+		var setelah_tgl_str = this.down ('#setelah_tgl').getSubmitValue ();
+		var sebelum_tgl_str = this.down ('#sebelum_tgl').getSubmitValue ();
+
+		var grid = this.down ('#grid_berkas_musnah');
+		var r = grid.getStore ().getRange ();
+
+		if (r.length <= 0) {
+			return;
+		}
+
+		window.open ('data/lapberkasmusnahreport_submit.jsp'
+					+'?setelah_tgl='+ setelah_tgl_str
+					+'&sebelum_tgl='+ sebelum_tgl_str);
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#filter").on ("click", this.do_filter, this);
+		this.down ("#print").on ("click", this.do_print, this);
+	}
 });

@@ -262,7 +262,6 @@ Ext.application ({
 	,	'Pemindahan'
 	,	'Pemusnahan'
 	,	'NotifPemindahan'
-	,	'LapBerkasMusnah'
 	]
 	
 ,	launch		: function ()
