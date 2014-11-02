@@ -61,5 +61,25 @@ Ext.define ('Earsip.view.LapBerkasJRA', {
 		}
 	}
 
+,	do_print : function (b)
+	{
+		var r = this.getStore ().getRange ();
+		if (r.length <= 0) {
+			return;
+		}
+		window.open ('data/lapberkasjrareport_submit.jsp');
+	}
 
+,	do_refresh : function (b)
+	{
+		this.getStore ().load ();
+	}
+
+,	initComponent : function (opt)
+	{
+		this.callParent (opt);
+
+		this.down ("#print").on ("click", this.do_print, this);
+		this.down ("#refresh").on ("click", this.do_refresh, this);
+	}
 });
