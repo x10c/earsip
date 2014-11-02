@@ -201,6 +201,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
+	,	itemId			: "save"
 	}]
 	
 ,	do_load : function (record)

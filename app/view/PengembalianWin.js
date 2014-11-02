@@ -16,7 +16,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 ,	autoHeight	: true
 ,	layout		: 'fit'
 ,	border		: false
-,	closeAction	: 'destroy'
+,	closeAction	: 'hide'
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/pengembalian_submit.jsp'
@@ -103,6 +103,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
+	,	itemId			: "save"
 	}]
 	
 ,	load : function (record)

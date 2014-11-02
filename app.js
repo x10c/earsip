@@ -98,7 +98,7 @@ Ext.define ('Earsip.plugin.RowEditor', {
 ,	pluginId			: 'roweditor'
 ,	saveText			: 'Simpan'
 ,	cancelText			: 'Batal'
-,	clicksToEdit		: 2 
+,	clicksToEdit		: 2
 ,	clicksToMoveEditor	: 1
 ,	errorSummary		: false
 ,	listeners			: {
@@ -235,7 +235,7 @@ Ext.application ({
 
 	,	'MetodaPemusnahan'
 	,	'Jabatan'
-	
+
 	,	'Peminjaman'
 	,	'PeminjamanWin'
 	,	'Pemindahan'
@@ -258,10 +258,9 @@ Ext.application ({
 ,	controllers	: [
 		'Login'
 	,	'MainToolbar'
-	,	'Peminjaman'
 	,	'NotifPemindahan'
 	]
-	
+
 ,	launch		: function ()
 	{
 		Ext.form.field.Date.prototype.format = 'd F Y';
