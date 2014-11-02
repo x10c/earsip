@@ -32,6 +32,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 		,	frame	: true
 		,	items	: [{
 				xtype		: 'form'
+			,	itemId		: "pemusnahan_win_form"
 			,	url			: 'data/pemusnahan_submit.jsp'
 			,	plain		: true
 			,	frame		: true
@@ -230,6 +231,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
+	,	itemId			: "save"
 	}]
 	
 ,	load : function (record)

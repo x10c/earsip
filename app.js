@@ -260,7 +260,6 @@ Ext.application ({
 	,	'MainToolbar'
 	,	'Peminjaman'
 	,	'Pemindahan'
-	,	'Pemusnahan'
 	,	'NotifPemindahan'
 	]
 	
