@@ -69,5 +69,6 @@ Ext.define('Earsip.view.NotifPemindahanRinciWin', {
 	,	action			: 'submit'
 	,	iconCls			: 'save'
 	,	formBind		: true
+	,	itemId			: "save"
 	}]
 });
