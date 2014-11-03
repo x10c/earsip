@@ -13,6 +13,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 ,	closable: true
 ,	plain	: true
 ,	layout	: 'border'
+,	idc		: -1
 ,	defaults: {
 		split		: true
 	,	autoScroll	: true
@@ -189,7 +190,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 			b_del.setDisabled (r[0].get ('status'));
 			b_add_rinci.setDisabled (r[0].get ('status'));
 
-			idc = r[0].get ('id');
+			this.idc = r[0].get ('id');
 
 			this.win.down ('form').loadRecord (r[0]);
 
@@ -261,7 +262,7 @@ Ext.define ('Earsip.view.Pemindahan', {
 ,	detail_do_add : function (b)
 	{
 		this.win_rinci.down ('form').getForm ().reset ();
-		this.win_rinci.down ('#pemindahan_id').setValue (idc);
+		this.win_rinci.down ('#pemindahan_id').setValue (this.idc);
 		this.win_rinci.show ();
 		this.win_rinci.action = 'create';
 	}
@@ -352,11 +353,12 @@ Ext.define ('Earsip.view.Pemindahan', {
 					form.reset ();
 					this.win_rinci.hide ();
 					Ext.getStore ('BerkasPindah').load ();
-					this.win_rinci.down ('#pemindahan_id').setValue (idc);
+					this.win_rinci.down ('#pemindahan_id').setValue (this.idc);
 
 					grid.params = {
-						pemindahan_id : idc
-					}
+						pemindahan_id : this.idc
+					};
+
 					grid.getStore ().load ({
 						params	: grid.params
 					});
