@@ -9,6 +9,7 @@ Ext.define ('Earsip.view.WinUploadSingle', {
 ,	closeAction	: 'hide'
 ,	resizable	: true
 ,	layout		: 'fit'
+,	modal		: true
 ,	items		: [{
 		xtype		:'form'
 	,	layout		:'anchor'

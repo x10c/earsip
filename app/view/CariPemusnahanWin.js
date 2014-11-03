@@ -6,6 +6,7 @@ Ext.define ('Earsip.view.CariPemusnahanWin', {
 ,	title		: 'Cari Pemusnahan'
 ,	closable	: true
 ,	autoHeight	: true
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	itemId		: 'caripemusnahan_form'

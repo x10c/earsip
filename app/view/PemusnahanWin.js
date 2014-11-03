@@ -20,6 +20,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 ,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype	: 'panel'
 	,	layout	: 'anchor'

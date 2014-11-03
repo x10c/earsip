@@ -7,6 +7,7 @@ Ext.define ('Earsip.view.WinUpload', {
 ,	layout		: 'fit'
 ,	width		: 700
 ,	height		: 400
+,	modal		: true
 ,	items		: [{
 		xtype			: 'xuploadpanel'
 	,	chunk_size		: _g_max_upload_size +' KB'

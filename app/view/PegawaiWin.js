@@ -16,6 +16,7 @@ Ext.define ('Earsip.view.PegawaiWin', {
 ,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/pegawai_submit.jsp'

@@ -10,6 +10,7 @@ Ext.define('Earsip.view.RefIndeksRelatifWin', {
 ,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/ir_submit.jsp'

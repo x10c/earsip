@@ -23,6 +23,7 @@ Ext.define ('Earsip.view.BerkasBerbagiWin', {
 ,	autoHeight	: true
 ,	layout		: 'fit'
 ,	border		: false
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	itemId		: 'berkasberbagi_win_form'

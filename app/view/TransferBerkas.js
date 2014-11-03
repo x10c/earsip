@@ -10,6 +10,7 @@ Ext.define ('Earsip.view.TransferBerkas', {
 ,	closable	: true
 ,	autoHeight	: true
 ,	resizable	: false
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	itemId		: 'transferberkas_form'

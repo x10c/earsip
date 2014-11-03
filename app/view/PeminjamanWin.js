@@ -16,6 +16,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 ,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/peminjaman_submit.jsp'

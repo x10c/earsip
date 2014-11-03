@@ -8,6 +8,7 @@ Ext.define('Earsip.view.WinIndeksRelatif',{
 ,	height	: 300
 ,	closeAction : 'hide'
 ,	layout	: 'fit'
+,	modal		: true
 ,	items	: [{
 		xtype 	: 'grid'
 	,	itemId	: 'grid_ir'

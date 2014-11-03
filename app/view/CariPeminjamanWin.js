@@ -24,6 +24,7 @@ Ext.define ('Earsip.view.CariPeminjamanWin', {
 ,	title		: 'Cari peminjaman'
 ,	closable	: true
 ,	autoHeight	: true
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	itemId		: 'caripeminjaman_form'

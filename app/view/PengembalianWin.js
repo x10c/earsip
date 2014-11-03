@@ -17,6 +17,7 @@ Ext.define('Earsip.view.PengembalianWin', {
 ,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/pengembalian_submit.jsp'

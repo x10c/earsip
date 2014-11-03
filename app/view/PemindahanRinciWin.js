@@ -11,6 +11,7 @@ Ext.define('Earsip.view.PemindahanRinciWin', {
 ,	layout		: 'anchor'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/pemindahanrinci_submit.jsp'

@@ -11,6 +11,7 @@ Ext.define('Earsip.view.NotifPemindahanWin', {
 ,	layout		: 'anchor'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/pemindahan_submit.jsp'

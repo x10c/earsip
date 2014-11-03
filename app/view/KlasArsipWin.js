@@ -10,6 +10,7 @@ Ext.define('Earsip.view.KlasArsipWin', {
 ,	layout		: 'fit'
 ,	border		: false
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	url			: 'data/klasarsip_submit.jsp'

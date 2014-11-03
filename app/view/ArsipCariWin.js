@@ -11,6 +11,7 @@ Ext.define ('Earsip.view.ArsipCariWin', {
 ,	closable	: true
 ,	autoHeight	: true
 ,	closeAction	: 'hide'
+,	modal		: true
 ,	items		: [{
 		xtype		: 'form'
 	,	itemId		: 'arsipcari_form'
