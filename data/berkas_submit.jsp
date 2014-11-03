@@ -1,8 +1,8 @@
 <%--
-	Copyright 2013 - kilabit.org
+	Copyright 2014 - kilabit.info
 
 	Author(s):
-	- m.shulhan (ms@kilabit.org)
+	- m.shulhan (ms@kilabit.info)
 --%>
 <%@ include file="init.jsp"%>
 <%!
@@ -93,14 +93,14 @@ try {
 		db_ps	= db_con.prepareStatement (q);
 
 		_i = 1;
-		db_ps.setString	(_i++, nama);
+		db_ps.setString	(_i++, nama.trim ());
 		db_ps.setString	(_i++, tgl_dibuat);
 		db_ps.setString	(_i++, klas_id);
 		db_ps.setString	(_i++, tipe_id);
 		db_ps.setString	(_i++, nomor);
-		db_ps.setString	(_i++, pembuat);
-		db_ps.setString	(_i++, judul);
-		db_ps.setString	(_i++, masalah);
+		db_ps.setString	(_i++, pembuat.trim ());
+		db_ps.setString	(_i++, judul.trim ());
+		db_ps.setString	(_i++, masalah.trim ());
 		db_ps.setString	(_i++, jra_aktif);
 		db_ps.setString	(_i++, jra_inaktif);
 		db_ps.setInt	(_i++, stat_hapus);
