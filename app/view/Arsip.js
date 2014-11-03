@@ -267,11 +267,12 @@ Ext.define ('Earsip.view.Arsip', {
 		}]
 	},{
 		xtype		: 'arsipform'
-	,	region		: 'south'
+	,	region		: 'east'
 	,	header		: false
 	,	split		: true
 	,	collapsible	: true
 	,	disabled	: true
+	,	width		: 400
 	}]
 
 ,	do_refresh:	function ()
