@@ -1,7 +1,7 @@
 Ext.define('Earsip.view.KlasArsipWin', {
 	extend		: 'Ext.Window'
 ,	alias		: 'widget.klas_arsip_win'
-,	title		: 'Klasifikasi Arsip'
+,	title		: 'Klasifikasi Berkas'
 ,	itemId		: 'klas_arsip_win'
 ,   width		: 500
 ,	closable	: true

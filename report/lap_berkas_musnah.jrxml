@@ -3,11 +3,11 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="setelah_tgl" class="java.util.Date">
-		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	<parameter name="setelah_tgl" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="sebelum_tgl" class="java.util.Date">
-		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	<parameter name="sebelum_tgl" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT A.nama, A.judul, D.kode as kode_klas, E.kode as kode_unit, C.tgl, B.keterangan FROM m_berkas A
@@ -60,14 +60,17 @@ AND C.tgl <= '$P!{sebelum_tgl}']]>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Dari tanggal :" + new java.text.SimpleDateFormat("dd MMMM yyyy").format($P{setelah_tgl})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Dari tanggal : " + new java.text.SimpleDateFormat("dd MMMM yyyy")
+    .format (
+        new java.text.SimpleDateFormat("yyyy-MM-dd").parse($P{setelah_tgl})
+    )]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement positionType="Float" x="0" y="20" width="323" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["sampai dengan :" + new java.text.SimpleDateFormat("dd MMMM yyyy").format($P{sebelum_tgl})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["sampai dengan : " + new java.text.SimpleDateFormat("dd MMMM yyyy").format (new java.text.SimpleDateFormat("yyyy-MM-dd").parse($P{sebelum_tgl}))]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

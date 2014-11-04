@@ -34,10 +34,9 @@ try {
 	locale = new Locale ("in", "ID");
 	parameters = new HashMap ();
 
-	SimpleDateFormat formater = new SimpleDateFormat ("yyyy-MM-dd");
 	parameters.put ("REPORT_LOCALE", locale);
-	parameters.put ("setelah_tgl", formater.parse(setelah_tgl));
-	parameters.put ("sebelum_tgl", formater.parse(sebelum_tgl));
+	parameters.put ("setelah_tgl", setelah_tgl);
+	parameters.put ("sebelum_tgl", sebelum_tgl);
 
 	ServletContext	sc			= session.getServletContext ();
 	String			report_path	= sc.getRealPath ("/report" + File.separator +"lap_berkas_musnah.jasper");

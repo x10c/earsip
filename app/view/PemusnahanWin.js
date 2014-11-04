@@ -188,6 +188,8 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				,	editor		: {
 						xtype : 'numberfield'
 					,	allowBlank: false
+					, 	allowNegative : false
+					,	minValue	: 1
 					}
 				},{	
 					text	 	: 'Jumlah Set'
@@ -197,6 +199,8 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				,	editor		: {
 						xtype : 'numberfield'
 					,	allowBlank: false
+					, 	allowNegative : false
+					,	minValue	: 1
 					}
 				},{	
 					text	 	: 'Jumlah Berkas'
@@ -206,6 +210,8 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				,	editor		: {
 						xtype : 'numberfield'
 					,	allowBlank: false
+					, 	allowNegative : false
+					,	minValue	: 1
 					}
 				}]
 			,	dockedItems	: [{
