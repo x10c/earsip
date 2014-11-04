@@ -278,8 +278,8 @@ Ext.define ('Earsip.view.Pemusnahan', {
 
 ,	win_on_validitychange : function (form, valid)
 	{
-		win.down ('#tim_pemusnah_grid').setDisabled (! valid);
-		win.down ('#berkas_musnah_grid').setDisabled (! valid);
+		this.win.down ('#tim_pemusnah_grid').setDisabled (! valid);
+		this.win.down ('#berkas_musnah_grid').setDisabled (! valid);
 	}
 
 ,	win_on_itemdblclick : function (v, r, item, idx)
