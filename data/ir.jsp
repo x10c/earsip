@@ -1,53 +1,41 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ include file="init.jsp" %>
 <%
-Connection	db_con			= null;
-Statement	db_stmt			= null;
-ResultSet	rs				= null;
-String		q				= "";
-String		db_url			= "";
-String		data			= "";
-
-int			i				= 0;
 try {
-	db_con = (Connection) session.getAttribute ("db.con");
-
-	if (db_con == null || (db_con != null && db_con.isClosed ())) {
-		response.sendRedirect (request.getContextPath ());
-		return;
-	}
-	
-	String unit_kerja_id = (String) session.getAttribute ("user.unit_kerja_id");
 	q	=" select	A.id"
 		+" ,		A.berkas_klas_id"
 		+" ,		A.keterangan"
 		+" from		r_ir A"
-		+" left join r_berkas_klas B on A.berkas_klas_id = B.id"
-		+" where B.unit_kerja_id = " + unit_kerja_id
-		+" order by berkas_klas_id, keterangan";
+		+" ,		r_berkas_klas B"
+		+" where	A.berkas_klas_id = B.id";
 
-	db_stmt = db_con.createStatement ();
-	rs = db_stmt.executeQuery (q);
-	
-
-	while (rs.next ()) {
-		if (i > 0) {
-			data += ",";
-		} else {
-			i++;
-		}
-		data	+="{ id : "+ rs.getString ("id")
-				+ ", berkas_klas_id	: "+ rs.getString ("berkas_klas_id")
-				+ ", keterangan :'"+ rs.getString ("keterangan") +"'"
-				+ "}";
+	if (! _user_gid.equals ("1")) {
+		q	+=" and	B.unit_kerja_id = " + _user_uk;
 	}
 
-	out.print ("{success:true,data:["+ data +"]}");
+	q	+=" order by berkas_klas_id, keterangan";
+
+	db_stmt	= db_con.createStatement ();
+	rs		= db_stmt.executeQuery (q);
+	_a		= new JSONArray ();
+
+	while (rs.next ()) {
+		_o = new JSONObject ();
+		_o.put ("id", rs.getInt ("id"));
+		_o.put ("berkas_klas_id", rs.getInt ("berkas_klas_id"));
+		_o.put ("keterangan", rs.getString ("keterangan"));
+
+		_a.put (_o);
+	}
+
 	rs.close ();
+	db_stmt.close ();
+
+	_r.put ("success"	, true);
+	_r.put ("data"		, _a);
 }
 catch (Exception e) {
-	out.print ("{success:false,info:'"+ e.toString().replace("'","''") +"'}");
+	_r.put ("success"	, false);
+	_r.put ("info"		, e);
 }
+out.print (_r);
 %>
