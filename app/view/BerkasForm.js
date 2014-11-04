@@ -57,6 +57,7 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	flex			: 1
 	,	emptyText		:'-'
 	,	typeAhead		:true
+	,	editable		: false
 	},{
 		xtype			: 'button'
 	,	text			: 'Cari Indeks Relatif'
