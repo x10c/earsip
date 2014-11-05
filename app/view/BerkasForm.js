@@ -104,12 +104,16 @@ Ext.define ('Earsip.view.BerkasForm', {
 	,	itemId			: 'jra_aktif'
 	,	name			: 'jra_aktif'
 	,	minValue		: 1
+	,	disabled		: true
+	,	hideTrigger		: true
 	},{
 		xtype			: 'numberfield'
 	,	fieldLabel		: 'JRA Inaktif'
 	,	itemId			: 'jra_inaktif'
 	,	name			: 'jra_inaktif'
 	,	minValue		: 1
+	,	disabled		: true
+	,	hideTrigger		: true
 	},{
 		xtype			: 'numberfield'
 	,	name			: 'status_hapus'
@@ -128,8 +132,6 @@ Ext.define ('Earsip.view.BerkasForm', {
 		this.down ('#pembuat').setDisabled (s);
 		this.down ('#judul').setDisabled (s);
 		this.down ('#masalah').setDisabled (s);
-		this.down ('#jra_aktif').setDisabled (s);
-		this.down ('#jra_inaktif').setDisabled (s);
 
 		this.down ('#save').setDisabled (s);
 		this.down ('#mkdir').setDisabled (s);
