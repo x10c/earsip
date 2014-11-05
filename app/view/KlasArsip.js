@@ -176,7 +176,7 @@ Ext.define ('Earsip.view.KlasArsip', {
 		}
 
 		var s = this.getStore ();
-		s.remove (data);
+		s.remove (d);
 		s.sync ();
 	}
 
