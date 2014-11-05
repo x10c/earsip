@@ -135,6 +135,7 @@ Ext.define ('Earsip.view.Berkas', {
 		berkasform.getForm ().url = 'data/berkas_submit.jsp';
 		berkasform.set_disabled (false);
 		berkasform.down ('#save').setDisabled (false);
+		berkasform.down ('#mkdir').setDisabled (true);
 	}
 
 ,	form_do_mkdir	:function ()
