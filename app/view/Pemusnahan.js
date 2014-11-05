@@ -251,17 +251,21 @@ Ext.define ('Earsip.view.Pemusnahan', {
 
 , 	do_delete : function (b)
 	{
-		var grid = b.up ('#pemusnahan_grid');
-		var data = grid.getSelectionModel ().getSelection ();
-
-		if (data.length <= 0) {
-			return;
-		}
-
 		Ext.Msg.confirm ('Konfirmasi'
 		, 'Apakah anda yakin mau menghapus berkas?'
 		, function (b)
 		{
+			if (b == 'no') {
+				return;
+			}
+			var grid = b.up ('#pemusnahan_grid');
+			var data = grid.getSelectionModel ().getSelection ();
+	
+			if (data.length <= 0) {
+				return;
+			}
+
+		
 			if (b == 'no') {
 				return;
 			}

@@ -92,15 +92,24 @@ Ext.define ('Earsip.view.TipeArsip', {
 
 ,	do_delete : function (button)
 	{
-		var data = this.getSelectionModel ().getSelection ();
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus data Tipe Berkas?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var data = this.getSelectionModel ().getSelection ();
 
-		if (data.length <= 0) {
+			if (data.length <= 0) {
 			return;
-		}
+			}
 
-		var store = this.getStore ();
-		store.remove (data);
-		store.sync ();
+			var store = this.getStore ();
+			store.remove (data);
+			store.sync ();
+		}
+		, this);
 	}
 
 ,	initComponent : function (opt)

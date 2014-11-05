@@ -87,14 +87,24 @@ Ext.define ('Earsip.view.MetodaPemusnahan', {
 
 ,	do_delete : function (b)
 	{
-		var d = this.getSelectionModel ().getSelection ();
-		if (d.length <= 0) {
-			return;
-		}
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus metoda pemusnahan?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			
+			var d = this.getSelectionModel ().getSelection ();
+			if (d.length <= 0) {
+				return;
+			}
 
-		var s = this.getStore ();
-		s.remove (d);
-		s.sync ();
+			var s = this.getStore ();
+			s.remove (d);
+			s.sync ();
+		}
+		, this);
 	}
 
 ,	do_refresh : function (b)

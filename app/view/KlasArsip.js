@@ -171,15 +171,24 @@ Ext.define ('Earsip.view.KlasArsip', {
 
 ,	do_delete : function (button)
 	{
-		var d = this.getSelectionModel ().getSelection ();
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus data klasifikasi berkas?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var d = this.getSelectionModel ().getSelection ();
 
-		if (d.length <= 0) {
-			return;
+			if (d.length <= 0) {
+				return;
+			}
+
+			var s = this.getStore ();
+			s.remove (d);
+			s.sync ();
 		}
-
-		var s = this.getStore ();
-		s.remove (d);
-		s.sync ();
+		, this);
 	}
 
 ,	do_submit : function (b)

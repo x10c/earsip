@@ -159,15 +159,24 @@ Ext.define ('Earsip.view.UnitKerja', {
 
 ,	do_delete : function (b)
 	{
-		var data	= this.getSelectionModel ().getSelection ();
-		var store	= this.getStore ();
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus unit kerja?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var data	= this.getSelectionModel ().getSelection ();
+			var store	= this.getStore ();
 
-		if (data.length <= 0) {
-			return;
+			if (data.length <= 0) {
+				return;
+			}
+
+			store.remove (data);
+			store.sync ();
 		}
-
-		store.remove (data);
-		store.sync ();
+		, this);
 	}
 
 ,	initComponent : function (opt)
