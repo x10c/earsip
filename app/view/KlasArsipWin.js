@@ -33,6 +33,8 @@ Ext.define('Earsip.view.KlasArsipWin', {
 		,	itemId			: 'kode'
 		,	name			: 'kode'
 		,	allowBlank		: false
+		,	maxLength		: 6
+		,	enforceMaxLength: true
 		},{
 			fieldLabel		: 'Nama Klasifikasi'
 		,	itemId			: 'nama'

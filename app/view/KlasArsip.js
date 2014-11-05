@@ -49,8 +49,10 @@ Ext.define ('Earsip.view.KlasArsip', {
 	,	dataIndex	: 'kode'
 	,	flex		: 1
 	,	editor		: {
-			xtype		: 'textfield'
-		,	allowBlank	: false
+			xtype				: 'textfield'
+		,	allowBlank			: false
+		,	maxLength			: 6
+		,	enforceMaxLength	: true
 		}
 	, 	groupable	: false
 	},{
