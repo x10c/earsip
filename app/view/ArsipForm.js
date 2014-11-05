@@ -118,6 +118,7 @@ Ext.define ('Earsip.view.ArsipForm', {
 	,	fieldLabel		:'JRA Inaktif'
 	,	name			:'jra_inaktif'
 	,	itemId			:'jra_inaktif'
+	,	minValue		: 1
 	}]
 ,	buttons		: [{
 		text		:'Arsip Baru'
