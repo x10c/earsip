@@ -68,33 +68,88 @@ Ext.define ('Earsip.view.Berkas', {
 	,	collapsible	: true
 	,	header		: false
 	,	width		: 400
-	,	buttons		: [{
-			text		: 'Folder baru'
-		,	itemId		: 'mkdir'
-		,	iconCls		: 'add'
-		,	disabled	:true
-		,	handler		:function (b)
-			{
-				b.up ('#berkas').form_do_mkdir ();
-			}
-		},'-','->','-',{
-			text		: 'Ubah data'
-		,	itemId		: 'edit'
-		,	iconCls		: 'edit'
-		,	disabled	: true
-		,	handler		:function (b)
-			{
-				b.up ('#berkas').form_do_edit ();
-			}
-		},'-',{
-			text		: 'Simpan'
-		,	itemId		: 'save'
-		,	iconCls		: 'save'
-		,	disabled	:true
-		,	handler		:function (b)
-			{
-				b.up ('#berkas').form_do_save ();
-			}
+	,	dockedItems	:
+		[{
+			xtype		:"toolbar"
+		,	dock		:"bottom"
+		,	itemId		:"bar_mkdir"
+		,	hidden		:true
+		,	items		:
+			[{
+				xtype		:"button"
+			,	text		:"Batal"
+			,	itemId		:"mkdir_cancel"
+			,	iconCls		:"del"
+			,	handler		:function (b)
+				{
+					var berkas = b.up ("#berkas");
+					var form = berkas.down ("#berkasform");
+
+					berkas.down ("#berkastree").setDisabled (false);
+					berkas.down ("#berkaslist").setDisabled (false);
+					form.set_disabled (true);
+					form.down ("#bar_mkdir").hide ();
+					form.down ("#bar_default").show ();
+				}
+			},"-","->","-",{
+				xtype		:"button"
+			,	text		: 'Folder baru'
+			,	itemId		: 'mkdir'
+			,	iconCls		: 'add'
+			,	handler		:function (b)
+				{
+					b.up ('#berkas').form_do_mkdir ();
+				}
+			}]
+		},{
+			xtype	:"toolbar"
+		,	dock	:"bottom"
+		,	itemId	:"bar_default"
+		,	hidden	:false
+		,	items	:
+			[{
+				xtype		:"button"
+			,	text		:"Ubah data"
+			,	itemId		:"edit"
+			,	iconCls		:"edit"
+			,	handler		:function (b)
+				{
+					b.up ('#berkas').form_do_edit ();
+				}
+			}]
+		},{
+			xtype	:"toolbar"
+		,	dock	:"bottom"
+		,	itemId	:"bar_edit"
+		,	hidden	:true
+		,	items	:
+			[{
+				xtype		:"button"
+			,	text		:"Batal"
+			,	itemId		:"edit_cancel"
+			,	iconCls		:"del"
+			,	handler		:function (b)
+				{
+					var berkas = b.up ("#berkas");
+					var form = b.up ("#berkasform");
+
+					berkas.down ("#berkaslist").setDisabled (false);
+					berkas.down ("#berkastree").setDisabled (false);
+
+					form.down ("#bar_edit").hide ();
+					form.down ("#bar_default").show ();
+					form.set_disabled (true);
+				}
+			},"-","->","-",{
+				xtype		:"button"
+			,	text		:"Simpan"
+			,	itemId		:"save"
+			,	iconCls		:"save"
+			,	handler		:function (b)
+				{
+					b.up ('#berkas').form_do_save ();
+				}
+			}]
 		}]
 	}]
 
@@ -126,6 +181,11 @@ Ext.define ('Earsip.view.Berkas', {
 		berkasform.down ('#pid').setValue (Earsip.berkas.tree.id);
 		berkasform.down ('#tipe_file').setValue (1);
 		berkasform.set_disabled (false);
+
+		berkasform.down ("#bar_default").hide ();
+		berkasform.down ("#bar_mkdir").show ();
+		this.down ("#berkaslist").setDisabled (true);
+		this.down ("#berkastree").setDisabled (true);
 	}
 
 ,	form_do_edit	: function ()
@@ -134,9 +194,10 @@ Ext.define ('Earsip.view.Berkas', {
 
 		berkasform.getForm ().url = 'data/berkas_submit.jsp';
 		berkasform.set_disabled (false);
-		berkasform.down ('#save').setDisabled (false);
-		berkasform.down ('#mkdir').setDisabled (true);
-		berkasform.down ('#edit').setDisabled (true);
+		berkasform.down ('#bar_default').hide ();
+		berkasform.down ('#bar_edit').show ();
+		this.down ("#berkaslist").setDisabled (true);
+		this.down ("#berkastree").setDisabled (true);
 	}
 
 ,	form_do_mkdir	:function ()
@@ -171,6 +232,10 @@ Ext.define ('Earsip.view.Berkas', {
 					berkaslist.do_refresh ();
 					form.reset ();
 					berkasform.set_disabled (true);
+					berkastree.setDisabled (false);
+					berkaslist.setDisabled (false);
+					berkasform.down ("#bar_mkdir").hide ();
+					berkasform.down ("#bar_default").show ();
 				} else {
 					Ext.msg.error (action.result.info);
 				}
@@ -184,6 +249,7 @@ Ext.define ('Earsip.view.Berkas', {
 
 ,	form_do_save	:function ()
 	{
+		var berkastree	= this.down ("#berkastree");
 		var berkasform	= this.down ('#berkasform');
 		var berkaslist	= this.down ('#berkaslist');
 		var form		= berkasform.getForm ();
@@ -205,6 +271,10 @@ Ext.define ('Earsip.view.Berkas', {
 					berkaslist.do_refresh (Earsip.berkas.pid);
 					form.reset ();
 					berkasform.set_disabled (true);
+					berkasform.down ("#bar_edit").hide ();
+					berkasform.down ("#bar_default").show ();
+					berkaslist.setDisabled (false);
+					berkastree.setDisabled (false);
 				} else {
 					Ext.msg.error (action.result.info);
 				}
