@@ -268,6 +268,7 @@ Ext.define ('Earsip.view.Berkas', {
 					} else if (action.result.data) {
 						Ext.msg.info (action.result.data);
 					}
+					berkastree.do_refresh ();
 					berkaslist.do_refresh (Earsip.berkas.pid);
 					form.reset ();
 					berkasform.set_disabled (true);
