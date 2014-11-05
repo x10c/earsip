@@ -1,8 +1,8 @@
 <%--
- % Copyright 2012 - kilabit.org
+ % Copyright 2012,2014 - kilabit.info
  %
  % Author(s):
- %	- m.shulhan (ms@kilabit.org)
+ %	- mhd sulhan (ms@kilabit.info)
 --%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
@@ -47,7 +47,7 @@ public int pdf2image (String dir, String filename)
 	cmds.add ("-quality");
 	cmds.add ("100");
 	cmds.add (filename);
-	cmds.add (filename ,"_%d.png");
+	cmds.add (filename +"_%d.png");
 
 	ProcessBuilder		pb		= new ProcessBuilder(cmds);
 

@@ -1,8 +1,8 @@
 <%--
-	Copyright 2013 - kilabit.org
+	Copyright 2013,2014 - kilabit.info
 
 	Author(s):
-	- m.shulhan (ms@kilabit.org)
+	- mhd sulhan (ms@kilabit.info)
 --%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>

@@ -527,7 +527,7 @@ Ext.define ('Earsip.view.Berkas', {
 		}
 
 		if (this.win_upload == undefined) {
-			this.win_upload = Ext.create ('Earsip.view.WinUploadSingle');
+			this.win_upload = Ext.create ('Earsip.view.WinUpload');
 
 			this.win_upload.on ("close", this.win_upload_on_close, this);
 		}

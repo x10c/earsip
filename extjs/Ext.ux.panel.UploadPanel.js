@@ -4,7 +4,7 @@
 // Please link to this page if you find this extension usefull
 // Version 0.2
 // @authors:
-// - mhd sulhan (ms@kilabit.org)
+// - mhd sulhan (ms@kilabit.info)
 
 Ext.define ('Ext.ux.panel.UploadPanel',
 {
@@ -16,7 +16,7 @@ Ext.define ('Ext.ux.panel.UploadPanel',
 	}
 
 // Configuration
-,	title			: 'Unggah'
+,	title			: 'Daftar Berkas Unggah'
 ,	url				: 'data/upload.jsp'	// URL to your server-side upload-script
 ,	chunk_size		: '512kb'			// The chunk-size
 ,	max_file_size	: '100mb'			// The max. allowed file-size
@@ -30,8 +30,8 @@ Ext.define ('Ext.ux.panel.UploadPanel',
 ,	texts:
 	{
 		status						: ['Menunggu', 'Mengunggah', 'Tak diketahui', 'Gagal', 'Selesai']
-	,	DragDropAvailable			: 'Drag&Drop files here'
-	,	noDragDropAvailable			: 'This Browser doesn\'t support drag&drop.'
+	,	DragDropAvailable			: 'Tarik dan Tempatkan berkas di sini'
+	,	noDragDropAvailable			: 'Peramban ini tidak mendukung "Drag and Drop."'
 	,	emptyTextTpl				: '<div style="color:#808080; margin:0 auto; text-align:center; top:48%; position:relative;">{0}</div>'
 	,	cols						: ["Berkas", "Ukuran", "Status", "Pesan"]
 	,	addButtonText				: 'Tambah file'
@@ -299,7 +299,7 @@ Ext.define ('Ext.ux.panel.UploadPanel',
 	{
 		this.store.each (
 			function (record) {
-				if ( record.get( 'status' ) == 5 ) {
+				if (record && record.get( 'status' ) == 5 ) {
 					this.remove_file( record.get( 'id' ) );
 				}
 			}, this
