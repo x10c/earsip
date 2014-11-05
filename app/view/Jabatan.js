@@ -143,15 +143,24 @@ Ext.define ('Earsip.view.Jabatan', {
 
 ,	do_delete : function (b)
 	{
-		var data = this.getSelectionModel ().getSelection ();
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus data jabatan?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var data = this.getSelectionModel ().getSelection ();
 
-		if (data.length <= 0) {
-			return;
+			if (data.length <= 0) {
+				return;
+			}
+
+			var s = this.getStore ();
+			s.remove (data);
+			s.sync ();
 		}
-
-		var s = this.getStore ();
-		s.remove (data);
-		s.sync ();
+		, this);
 	}
 
 ,	initComponent : function (opt)

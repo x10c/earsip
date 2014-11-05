@@ -116,15 +116,24 @@ Ext.define ('Earsip.view.RefIndeksRelatif', {
 
 ,	do_delete : function (b)
 	{
-		var d = this.getSelectionModel ().getSelection ();
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus data indeks relatif?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var d = this.getSelectionModel ().getSelection ();
 
-		if (d.length <= 0) {
-			return;
+			if (d.length <= 0) {
+				return;
+			}
+
+			var s = this.getStore ();
+			s.remove (d);
+			s.sync ();
 		}
-
-		var s = this.getStore ();
-		s.remove (d);
-		s.sync ();
+		, this);
 	}
 
 ,	do_submit : function (b)

@@ -224,28 +224,37 @@ Ext.define ('Earsip.view.Pemindahan', {
 
 ,	master_do_delete : function (b)
 	{
-		var grid		= this.down ('#pemindahan_grid');
-		var grid_rinci	= this.down ('#berkas_pindah_grid');
-		var data		= grid.getSelectionModel ().getSelection ();
-
-		if (data.length <= 0) {
-			return;
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus data pemindahan?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var grid		= this.down ('#pemindahan_grid');
+			var grid_rinci	= this.down ('#berkas_pindah_grid');
+			var data		= grid.getSelectionModel ().getSelection ();
+	
+			if (data.length <= 0) {
+				return;
+			}
+	
+			var store = grid.getStore ();
+			store.remove (data);
+			store.sync ({
+				scope	:this
+			,	success	:function ()
+				{
+					grid_rinci.getStore ().loadData ([], false);
+					Ext.msg.info ("Data telah dihapus");
+				}
+			,	failure	:function ()
+				{
+					Ext.msg.error ("Gagal menghapus data.");
+				}
+			});
 		}
-
-		var store = grid.getStore ();
-		store.remove (data);
-		store.sync ({
-			scope	:this
-		,	success	:function ()
-			{
-				grid_rinci.getStore ().loadData ([], false);
-				Ext.msg.info ("Data telah dihapus");
-			}
-		,	failure	:function ()
-			{
-				Ext.msg.error ("Gagal menghapus data.");
-			}
-		});
+		, this);
 	}
 
 ,	detail_on_selectionchange : function (sm, r)
@@ -269,16 +278,25 @@ Ext.define ('Earsip.view.Pemindahan', {
 
 ,	detail_do_delete : function (b)
 	{
-		var grid = b.up ('#berkas_pindah_grid');
-		var data = grid.getSelectionModel ().getSelection ();
-
-		if (data.length <= 0) {
-			return;
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus data berkas?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var grid = b.up ('#berkas_pindah_grid');
+			var data = grid.getSelectionModel ().getSelection ();
+	
+			if (data.length <= 0) {
+				return;
+			}
+	
+			var store = grid.getStore ();
+			store.remove (data);
+			store.sync ();
 		}
-
-		var store = grid.getStore ();
-		store.remove (data);
-		store.sync ();
+		, this);
 	}
 
 ,	detail_do_print : function (b)

@@ -167,16 +167,25 @@ Ext.define ('Earsip.view.Pegawai', {
 
 ,	do_delete : function (b)
 	{
-		var data = this.getSelectionModel ().getSelection ();
+		Ext.Msg.confirm ('Konfirmasi'
+		, 'Apakah anda yakin mau menghapus pegawai?'
+		, function (b)
+		{
+			if (b == 'no') {
+				return;
+			}
+			var data = this.getSelectionModel ().getSelection ();
 
-		if (data.length <= 0) {
-			return;
+			if (data.length <= 0) {
+				return;
+			}
+
+			this.win.down ('#password').allowBlank = true;
+			this.win.action = 'destroy';
+
+			this.do_submit (b);
 		}
-
-		this.win.down ('#password').allowBlank = true;
-		this.win.action = 'destroy';
-
-		this.do_submit (b);
+		, this);
 	}
 
 ,	do_submit : function (b)
