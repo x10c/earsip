@@ -74,6 +74,21 @@ try {
 	}
 
 	if (action.equalsIgnoreCase ("create")) {
+		// check if NIP already exist.
+		q	=" select	1 as exist"
+			+" from		m_pegawai "
+			+" where	nip = ?";
+
+		db_stmt = db_con.prepareStatement (q);
+		db_stmt.setString (1, nip);
+		rs = db_stmt.executeQuery ();
+
+		if (rs.next ()) {
+			out.print ("{success:false,info:'Pegawai dengan NIP \""+ nip +"\" sudah ada'}");
+			return;
+		}
+
+		// insert new pegawai
 		q	=" insert into m_pegawai (nip, nama, unit_kerja_id, jabatan_id, grup_id, psw)"
 			+" values (?, ?, ?, ?, ?, md5(?))";
 		db_stmt = db_con.prepareStatement (q);
