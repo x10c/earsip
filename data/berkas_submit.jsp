@@ -2,11 +2,13 @@
 	Copyright 2014 - kilabit.info
 
 	Author(s):
-	- m.shulhan (ms@kilabit.info)
+	- mhd sulhan (ms@kilabit.info)
 --%>
 <%@ include file="init.jsp"%>
+<%@ page import="java.io.FileFilter" %>
+<%@ page import="org.apache.commons.io.filefilter.WildcardFileFilter" %>
 <%!
-	public int delete_recursively (Connection db_con, int org_id)
+	public int delete_recursively (Connection db_con, String user_dir, int org_id)
 	{
 		PreparedStatement	db_ps		= null;
 		ResultSet			db_rs		= null;
@@ -16,11 +18,13 @@
 		int					id			= 0;
 		int					pid			= 0;
 		int					tipe_file	= 0;
+		String				sha			= "";
 
 		try {
 			q	="	select	id"
 				+"	,		pid"
 				+"	,		tipe_file"
+				+"	,		sha"
 				+"	from	m_berkas"
 				+"	where	pid = ?";
 
@@ -32,9 +36,48 @@
 				id			= db_rs.getInt ("id");
 				pid			= db_rs.getInt ("pid");
 				tipe_file	= db_rs.getInt ("tipe_file");
+				sha			= db_rs.getString ("sha");
 
 				if (tipe_file == 0) {
-					delete_recursively (db_con, id);
+					// if file type is directory, delete content
+					delete_recursively (db_con, user_dir, id);
+				} else if (sha != null && !sha.isEmpty ()) {
+					// delete file in system
+					File		dir			= new File (user_dir);
+					FileFilter	fileFilter	= new WildcardFileFilter (sha +"*");
+					File[]		files		= dir.listFiles (fileFilter);
+
+					for (int i = 0; i < files.length; i++) {
+						files[i].delete ();
+					}
+				}
+			}
+
+			db_rs.close ();
+			db_ps.close ();
+
+			// delete file in system
+			q	="	select	tipe_file"
+				+"	,		sha"
+				+"	from	m_berkas"
+				+"	where	id = ?";
+
+			db_ps	= db_con.prepareStatement (q);
+			db_ps.setInt (1, org_id);
+			db_rs	= db_ps.executeQuery ();
+
+			while (db_rs.next ()) {
+				tipe_file	= db_rs.getInt ("tipe_file");
+				sha			= db_rs.getString ("sha");
+
+				if (sha != null && ! sha.isEmpty ()) {
+					File		dir			= new File (user_dir);
+					FileFilter	fileFilter	= new WildcardFileFilter (sha +"*");
+					File[]		files		= dir.listFiles (fileFilter);
+
+					for (int i = 0; i < files.length; i++) {
+						files[i].delete ();
+					}
 				}
 			}
 
@@ -74,7 +117,11 @@ try {
 	int		tipe_file	= Integer.parseInt (request.getParameter ("tipe_file"));
 
 	if (0 == stat_hapus) {
-		delete_recursively (db_con, id);
+		String	rpath		= session.getServletContext ().getRealPath ("/");
+		String	repo		= (String) session.getAttribute ("sys.repository_root");
+		String	user_dir	= rpath + repo + File.separator + _user_id + File.separator;
+
+		delete_recursively (db_con, user_dir, id);
 	} else {
 		q	=" update	m_berkas"
 			+" set		nama			= ?"
