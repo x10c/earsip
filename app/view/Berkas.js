@@ -476,30 +476,22 @@ Ext.define ('Earsip.view.Berkas', {
 		}
 	}
 
-,	win_ir_on_selectionchange : function (m, r)
-	{
-		var form = this.win_ir.down ('#form_ir');
-		form.loadRecord (r[0]);
-	}
-
 ,	win_ir_on_ambil : function (btn)
 	{
-		var win = this.win_ir;
-		var grid = win.down ('#grid_ir');
+		var grid = this.win_ir.down ('#grid_ir');
 		var data = grid.getSelectionModel ().getSelection ();
 
 		if (data.length <= 0) {
 			return;
 		}
 
-		var form = win.down ('#form_ir').getForm ();
 		var berkasform = this.down ("#berkasform");
 		var combo_klas = berkasform.down ('#berkas_klas_id');
-		var id = form.getRecord ().get ('berkas_klas_id');
+		var id = data[0].get ('berkas_klas_id');
 		var r = combo_klas.getStore ().getById (id);
 		combo_klas.setValue (id);
 		this.berkasform_on_select_berkas_klas (combo_klas, new Array(r));
-		win.close ();
+		this.win_ir.hide ();
 	}
 
 ,	initComponent	: function()
@@ -544,7 +536,6 @@ Ext.define ('Earsip.view.Berkas', {
 		if (this.win_ir == undefined) {
 			this.win_ir = Ext.create ('Earsip.view.WinIndeksRelatif', {});
 
-			this.win_ir.down ("#grid_ir").on ("selectionchange", this.win_ir_on_selectionchange, this);
 			this.win_ir.down ("#ambil").on ("click", this.win_ir_on_ambil, this);
 		}
 	}

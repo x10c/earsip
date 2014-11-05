@@ -25,20 +25,6 @@ Ext.define('Earsip.view.WinIndeksRelatif',{
 		,	dataIndex	: 'keterangan'
 		,	flex		: 1
 		}]
-	},{
-		xtype	: 'form'
-	,	hidden	: true
-	,	itemId	: 'form_ir'
-	,	defaults : {
-			xtype 	: 'textfield'
-		}
-	,	items	: [{
-			itemId 	: 'berkas_klas_id'
-		,	name	: 'berkas_klas_id'
-		},{
-			itemId	: 'keterangan'
-		,	name	: 'keterangan'
-		}]
 	}]
 ,	buttons : [{
 		text	: 'Ambil'
@@ -48,6 +34,7 @@ Ext.define('Earsip.view.WinIndeksRelatif',{
 ,	listeners	: {
 		activate : function ()
 		{
+			Ext.getStore ("KlasArsip").clearFilter ();
 			this.down ('#grid_ir').getStore ().load ();
 		}
 	}
