@@ -75,6 +75,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 				,	allowBlank		: false
 				,	editable		: false
 				,	value			: new Date ()
+				,	maxValue		: new Date ()
 				},{
 					fieldLabel		: 'Penanggung Jawab Unit Kerja'
 				,	itemId			: 'pj_unit_kerja'
@@ -124,6 +125,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					,	allowBlank		: false
 					,	autoSelect		: true
 					,	triggerAction	: 'all'
+					,	editable		: false
 					}
 				,	renderer	: function (v, md, r, rowidx, colidx)
 					{
@@ -169,6 +171,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					,	allowBlank		: false
 					,	autoSelect		: true
 					,	triggerAction	: 'all'
+					,	editable		: false
 					}
 				,	renderer	: function (v, md, r, rowidx, colidx)
 					{
@@ -190,6 +193,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					,	allowBlank: false
 					, 	allowNegative : false
 					,	minValue	: 1
+					,	maxValue	: 32767
 					}
 				},{	
 					text	 	: 'Jumlah Set'
@@ -201,6 +205,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					,	allowBlank: false
 					, 	allowNegative : false
 					,	minValue	: 1
+					,	maxValue	: 32767
 					}
 				},{	
 					text	 	: 'Jumlah Berkas'
@@ -212,6 +217,7 @@ Ext.define('Earsip.view.PemusnahanWin', {
 					,	allowBlank: false
 					, 	allowNegative : false
 					,	minValue	: 1
+					,	maxValue	: 32767
 					}
 				}]
 			,	dockedItems	: [{
