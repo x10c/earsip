@@ -28,6 +28,24 @@
 .prev {background-image: url(images/prev16.png) !important;}
 .up		{background-image: url(images/up16.png) !important;}
 .down	{background-image: url(images/down16.png) !important;}
+.sharedfoldertree {background-image: url(images/folder_shared.png) !important;}
+.sharedfolder
+{
+	background-image: url(images/folder_shared.png) !important;
+	background-position	:0;
+	background-repeat	:no-repeat;
+	padding				:0px 0px 0px 20px;
+	margin				:0px
+}
+
+.sharedfile
+{
+	background-image: url(images/file_shared.png) !important;
+	background-position	:0;
+	background-repeat	:no-repeat;
+	padding				:0px 0px 0px 20px;
+	margin				:0px
+}
 
 .treeicon 
 { 

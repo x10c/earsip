@@ -5,6 +5,7 @@ Ext.define ('Earsip.model.BerkasTree', {
 		'id'
 	,	'pid'
 	,	'text'
+	,	'shared'
 	,	'children'
 	]
 });
@@ -30,7 +31,10 @@ Ext.define ('Earsip.store.BerkasTree', {
 
 , 	listeners: {
         append: function( thisNode, newChildNode, index, eOpts ) {
-                newChildNode.set('iconCls', 'treeicon');
+				var newrec = newChildNode.get('shared');
+				if (newrec > 0)
+					newChildNode.set('iconCls', 'sharedfoldertree');
+				else newChildNode.set('iconCls', 'treeicon');
         }
     }
 });
