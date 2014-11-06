@@ -81,6 +81,8 @@ Ext.define('Earsip.view.PengembalianWin', {
 			,	name			: 'tgl_kembali'
 			,	anchor			: '100%'
 			,	allowBlank		: false
+			,	value			: new Date ()
+			,	maxValue		: new Date ()
 			}]
 		},{
 			xtype			: 'grid'
