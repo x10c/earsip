@@ -82,6 +82,7 @@ Ext.define('Earsip.view.PeminjamanWin', {
 					,	itemId			: 'tgl_pinjam'
 					,	name			: 'tgl_pinjam'
 					,	value			: new Date ()
+					,	maxValue		: new Date ()
 					,	editable		: false
 					},{
 						xtype			: 'datefield'
