@@ -41,10 +41,10 @@ try {
 		}
 		data	+="\n{ id						: "+ rs.getString ("id")
 				+ "\n, unit_kerja_peminjam_id	: "+ rs.getString ("unit_kerja_peminjam_id")
-				+ "\n, nama_petugas				:'"+ rs.getString ("nama_petugas") +"'"
-				+ "\n, nama_pimpinan_petugas	:'"+ rs.getString ("nama_pimpinan_petugas") +"'"
-				+ "\n, nama_peminjam			:'"+ rs.getString ("nama_peminjam") +"'"
-				+ "\n, nama_pimpinan_peminjam	:'"+ rs.getString ("nama_pimpinan_peminjam") +"'"
+				+ "\n, nama_petugas				:'"+ rs.getString ("nama_petugas").replace ("'", "\\'") +"'"
+				+ "\n, nama_pimpinan_petugas	:'"+ rs.getString ("nama_pimpinan_petugas").replace ("'", "\\'") +"'"
+				+ "\n, nama_peminjam			:'"+ rs.getString ("nama_peminjam").replace ("'", "\\'") +"'"
+				+ "\n, nama_pimpinan_peminjam	:'"+ rs.getString ("nama_pimpinan_peminjam").replace ("'", "\\'") +"'"
 				+ "\n, tgl_pinjam				:'"+ rs.getString ("tgl_pinjam") +"'"
 				+ "\n, tgl_batas_kembali		:'"+ rs.getString ("tgl_batas_kembali") +"'"
 				+ "\n, tgl_kembali				:'"+ rs.getString ("tgl_kembali") +"'"
