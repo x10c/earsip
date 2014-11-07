@@ -14,12 +14,14 @@ try {
 	ResultSet	rs		= null;
 	String		q		= "";
 	String		name	= "";
+	
 	JSONArray	childs	= null;
 	JSONObject	node	= null;
 
 	q	=" select	id"
 		+" ,		pid"
 		+" ,		nama"
+		+" ,		akses_berbagi_id as  shared"
 		+" from		m_berkas"
 		+" where	pid			= "+ id
 		+" and		tipe_file	= 0"
@@ -33,10 +35,12 @@ try {
 		node	= new JSONObject ();
 		name	= rs.getString ("nama");
 		id		= rs.getInt ("id");
+		
 
 		node.put ("id", id);
 		node.put ("pid", rs.getInt ("pid"));
 		node.put ("text", name);
+		node.put ("shared", rs.getInt ("shared"));
 
 		childs = get_list_dir (id, db_con);
 
@@ -82,6 +86,7 @@ try {
 	_o.put ("id"	, id);
 	_o.put ("pid"	, 0);
 	_o.put ("text"	, rs.getString ("nama"));
+	_o.put ("shared", 0);
 
 	rs.close ();
 	db_stmt.close ();

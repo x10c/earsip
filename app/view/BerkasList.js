@@ -18,11 +18,19 @@ Ext.define ('Earsip.view.BerkasList', {
 	,	hideable	: false
 	,	dataIndex	: 'nama'
 	,	renderer	: function (v, md, r)
-		{
+		{ 
 			if (r.get ('tipe_file') == 0) {
-				md.tdCls = 'dir';
+				if (r.get ('akses_berbagi_id') > 0){
+					md.tdCls = 'sharedfolder';
+				} else {
+					md.tdCls = 'dir';
+				}
 			} else {
-				md.tdCls = 'doc';
+				if (r.get ('akses_berbagi_id') > 0){
+					md.tdCls = 'sharedfile';
+				} else {
+					md.tdCls = 'doc';
+				}
 			}
 			return v;
 		}
