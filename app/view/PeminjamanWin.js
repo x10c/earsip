@@ -224,4 +224,15 @@ Ext.define('Earsip.view.PeminjamanWin', {
 			store.load ();
 		}
 	}
+,	initComponent : function ()
+	{
+		this.callParent (arguments);
+
+		this.down ("#tgl_pinjam").on ("change", this.do_limit_minimum_date, this);
+		
+	}
+,	do_limit_minimum_date : function ()
+	{
+		this.down ("#tgl_batas_kembali").setMinValue (this.down ("#tgl_pinjam").getValue ());
+	}
 });
