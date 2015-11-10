@@ -29,6 +29,16 @@ Ext.define('Earsip.view.KlasArsipWin', {
 		,	itemId			: 'id'
 		,	name			: 'id'
 		},{
+			xtype			: 'combo'
+		,	fieldLabel		: 'Unit Kerja'
+		,	itemId			: 'unit_kerja_id'
+		,	name			: 'unit_kerja_id'
+		,	store			: Ext.getStore ('UnitKerja')
+		,	displayField	: 'nama'
+		,	valueField		: 'id'
+		,	triggerAction	: 'all'
+		,	emptyText		: '-'
+		},{
 			fieldLabel		: 'Kode'
 		,	itemId			: 'kode'
 		,	name			: 'kode'
