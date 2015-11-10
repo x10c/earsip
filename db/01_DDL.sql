@@ -442,7 +442,7 @@ ID
 create table R_BERKAS_KLAS (
    ID                   SERIAL               not null,
    UNIT_KERJA_ID        INT4                 null,
-   KODE                 VARCHAR(6)           not null,
+   KODE                 VARCHAR(20)          not null,
    NAMA                 VARCHAR(64)          not null,
    KETERANGAN           VARCHAR(255)         not null,
    JRA_AKTIF			INT4				 not null default 1,
