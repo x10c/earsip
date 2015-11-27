@@ -21,7 +21,7 @@ Ext.define ('Earsip.view.Main', {
 	,	bodyCls	: 'panel-bg'
 	,	html	:
 			'<div class="footer">'+
-			'&copy;2012 Bank Pembangunan Daerah Jawa Tengah'+
+			'&copy;2015 Bank Pembangunan Daerah Jawa Tengah'+
 			'</div>'
 	},{
 		id		: 'main'
