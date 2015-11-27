@@ -155,6 +155,15 @@ try {
 
 		db_stmt.executeUpdate ();
 
+		// update root folder name in berkas
+		q	="update m_berkas set nama = ? where pegawai_id = ? and pid = 0";
+
+		db_stmt = db_con.prepareStatement (q);
+		db_stmt.setString (1, nama);
+		db_stmt.setInt (2, Integer.parseInt (id));
+
+		db_stmt.executeUpdate ();
+
 		out.print ("{success:true,info:'Data pegawai \""+ nama +"\" telah tersimpan.'}");
 	} else if (action.equalsIgnoreCase ("destroy")) {
 		q	=" select delete_pegawai ("+ id +") as del_stat ";
