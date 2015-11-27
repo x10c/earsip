@@ -117,6 +117,25 @@ try {
 	response.addCookie (c_user_grup_id);
 	response.addCookie (c_user_name);
 
+	// create root folder if not exist
+	q =" select id from m_berkas where pid = 0 and pegawai_id = ? ";
+
+	db_pstmt = db_con.prepareStatement (q);
+	db_pstmt.setInt (1, Integer.parseInt(user_id));
+
+	rs = db_pstmt.executeQuery ();
+
+	if (! rs.next ()) {
+		q	=" insert into m_berkas (pid, pegawai_id, nama)"
+			+" values (0, ?, ?)";
+
+		db_pstmt = db_con.prepareStatement (q);
+		db_pstmt.setInt (1, Integer.parseInt (user_id));
+		db_pstmt.setString (2, user_name);
+
+		db_pstmt.executeUpdate ();
+	}
+
 	if (psw_is_expired.equalsIgnoreCase ("f")) {
 		out.print ("{success:true"
 				+", psw_is_expired:1"
