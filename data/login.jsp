@@ -117,24 +117,6 @@ try {
 	response.addCookie (c_user_grup_id);
 	response.addCookie (c_user_name);
 
-	dir_name = user_name;
-
-	q	=" select	id"
-		+" from		m_berkas"
-		+" where	nama		='"+ dir_name +"'"
-		+" and		pid			= 0"
-		+" and		tipe_file	= 0";
-
-	db_stmt = db_con.createStatement ();
-
-	rs = db_stmt.executeQuery (q);
-
-	if (! rs.next ()) {
-		q	=" insert into m_berkas (pid, pegawai_id, nama)"
-			+" values (0, "+ user_id +",'"+ dir_name +"')";
-
-		db_stmt.executeUpdate (q);
-	}
 	if (psw_is_expired.equalsIgnoreCase ("f")) {
 		out.print ("{success:true"
 				+", psw_is_expired:1"
