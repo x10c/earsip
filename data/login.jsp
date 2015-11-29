@@ -6,17 +6,21 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="java.io.InputStream" %>
+<%@ page import="org.sirr.*" %>
+
 <%
 Connection			db_con				= null;
 PreparedStatement	db_pstmt			= null;
 Statement			db_stmt				= null;
 ResultSet			rs					= null;
 Cookie				c_sid				= null;
+Cookie				c_user				= null;
 Cookie				c_user_id			= null;
 Cookie				c_user_uk_id		= null;
 Cookie				c_user_grup_id		= null;
 Cookie				c_user_nip			= null;
 Cookie				c_user_name			= null;
+ActiveUser			active_user			= null;
 String				q					= "";
 String				sid					= "";
 String				user_id				= "";
@@ -83,40 +87,10 @@ try {
 	user_grup_id	= rs.getString ("grup_id");
 	user_name		= rs.getString ("nama");
 	psw_is_expired	= rs.getString ("psw_is_expired");
-
-	session.setAttribute ("user.id", user_id);
-	session.setAttribute ("user.nip", user_nip);
-	session.setAttribute ("user.unit_kerja_id", user_uk_id);
-	session.setAttribute ("user.grup_id", user_grup_id);
-	session.setAttribute ("user.nama", user_name);
-
-	c_sid				= new Cookie ("earsip.sid", session.getId ());
-	c_user_id			= new Cookie ("earsip.user.id", user_id);
-	c_user_nip			= new Cookie ("earsip.user.nip", user_nip);
-	c_user_uk_id		= new Cookie ("earsip.user.unit_kerja_id", user_uk_id);
-	c_user_grup_id		= new Cookie ("earsip.user.grup_id", user_grup_id);
-	c_user_name			= new Cookie ("earsip.user.nama", user_name);
-
-	c_sid.setMaxAge (c_max_age);
-	c_sid.setPath (c_path);
-	c_user_id.setMaxAge (c_max_age);
-	c_user_id.setPath (c_path);
-	c_user_nip.setMaxAge (c_max_age);
-	c_user_nip.setPath (c_path);
-	c_user_uk_id.setMaxAge (c_max_age);
-	c_user_uk_id.setPath (c_path);
-	c_user_grup_id.setMaxAge (c_max_age);
-	c_user_grup_id.setPath (c_path);
-	c_user_name.setMaxAge (c_max_age);
-	c_user_name.setPath (c_path);
-
-	response.addCookie (c_sid);
-	response.addCookie (c_user_id);
-	response.addCookie (c_user_nip);
-	response.addCookie (c_user_uk_id);
-	response.addCookie (c_user_grup_id);
-	response.addCookie (c_user_name);
-
+	
+	
+	
+	
 	dir_name = user_name;
 
 	q	=" select	id"
@@ -135,18 +109,55 @@ try {
 
 		db_stmt.executeUpdate (q);
 	}
-	if (psw_is_expired.equalsIgnoreCase ("f")) {
-		out.print ("{success:true"
-				+", psw_is_expired:1"
+	
+	rs.close ();	
+	
+	active_user = new ActiveUser (Long.parseLong (user_id));
+	
+	session.setAttribute ("user", active_user);
+	session.setAttribute ("user.id", user_id);
+	session.setAttribute ("user.nip", user_nip);
+	session.setAttribute ("user.unit_kerja_id", user_uk_id);
+	session.setAttribute ("user.grup_id", user_grup_id);
+	session.setAttribute ("user.nama", user_name);
+
+	c_sid				= new Cookie ("earsip.sid", session.getId ());
+	c_user				= new Cookie ("earsip.user", active_user.toString());
+	c_user_id			= new Cookie ("earsip.user.id", user_id);
+	c_user_nip			= new Cookie ("earsip.user.nip", user_nip);
+	c_user_uk_id		= new Cookie ("earsip.user.unit_kerja_id", user_uk_id);
+	c_user_grup_id		= new Cookie ("earsip.user.grup_id", user_grup_id);
+	c_user_name			= new Cookie ("earsip.user.nama", user_name);
+
+	c_sid.setMaxAge (c_max_age);
+	c_sid.setPath (c_path);
+	c_user.setMaxAge (c_max_age);
+	c_user.setPath (c_path);
+	c_user_id.setMaxAge (c_max_age);
+	c_user_id.setPath (c_path);
+	c_user_nip.setMaxAge (c_max_age);
+	c_user_nip.setPath (c_path);
+	c_user_uk_id.setMaxAge (c_max_age);
+	c_user_uk_id.setPath (c_path);
+	c_user_grup_id.setMaxAge (c_max_age);
+	c_user_grup_id.setPath (c_path);
+	c_user_name.setMaxAge (c_max_age);
+	c_user_name.setPath (c_path);
+
+	response.addCookie (c_sid);
+	response.addCookie (c_user);
+	response.addCookie (c_user_id);
+	response.addCookie (c_user_nip);
+	response.addCookie (c_user_uk_id);
+	response.addCookie (c_user_grup_id);
+	response.addCookie (c_user_name);
+	
+	
+	out.print ("{success:true"
+				+", psw_is_expired:" + (psw_is_expired.equalsIgnoreCase ("f") ? 1 : 0)
 				+", user_name:'"+ user_name +"'"
 				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? 1 : 0) +"}");
-	} else {
-		out.print ("{success:true"
-				+", psw_is_expired:0"
-				+", user_name:'"+ user_name +"'"
-				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? 1 : 0) +"}");
-	}
-	rs.close ();
+	
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''").replace("\"", "\\\"") +"'}");

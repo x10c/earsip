@@ -6,6 +6,8 @@
 <%@ page import="java.io.InputStream" %>
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.io.File" %>
+<%@ page import="org.sirr.*" %>
+
 <%
 Properties props = new Properties ();
 
@@ -23,6 +25,7 @@ Connection	db_con			= DriverManager.getConnection (db_url, props);
 Statement	db_stmt			= db_con.createStatement ();
 ResultSet	rs				= null;
 Object		user			= session.getAttribute ("user.id");
+ActiveUser 	active_user 	= (ActiveUser)session.getAttribute ("user");
 Cookie[]	cookies			= request.getCookies ();
 String		q				= "";
 String		sid				= "";
@@ -38,12 +41,11 @@ int			is_login		= 0;
 int			is_pusatarsip	= 0;
 
 /* get user cookies data */
-if (cookies != null) {
+if (active_user != null) {
 	for (int i = 0; i < cookies.length; i++) {
 		c_name = cookies[i].getName ();
 		if (c_name.equalsIgnoreCase ("earsip.sid")) {
 			sid				= cookies[i].getValue ();
-			is_login		= 1;
 		} else if (c_name.equalsIgnoreCase ("earsip.user.id")) {
 			user_id			= cookies[i].getValue ();
 		} else if (c_name.equalsIgnoreCase ("earsip.user.unit_kerja_id")) {
@@ -84,6 +86,7 @@ if (user == null) {
 	/* if user cookie exist then skip login window */
 	if (user_id != null && user_uk_id != null && user_grup_id != null
 	&& user_name != null && user_nip != null) {
+		session.setAttribute ("user", user);
 		session.setAttribute ("user.id", user_id);
 		session.setAttribute ("user.unit_kerja_id", user_uk_id);
 		session.setAttribute ("user.grup_id", user_grup_id);
