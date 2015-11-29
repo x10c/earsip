@@ -1,7 +1,30 @@
 <%@ include file="init.jsp"%>
 <%
 try {
+	int	start		= 0;
+	int	limit		= 0;
+	int	total		= 0;
 	String berkas_id	= request.getParameter ("berkas_id");
+
+	start	= Integer.parseInt (request.getParameter ("start"));
+	limit	= Integer.parseInt (request.getParameter ("limit"));
+
+	q	=" select	count(*) total"
+		+" from		m_berkas"
+		+" where	pegawai_id		= "+ _user_id
+		+" and		pid				= "+ berkas_id
+		+" and		status			= 1" // 1: aktif, 0:inaktif
+		+" and		status_hapus	= 1";
+
+	db_stmt = db_con.createStatement ();
+	rs		= db_stmt.executeQuery (q);
+
+	if (rs.next ()) {
+		total = rs.getInt ("total");
+	}
+
+	rs.close ();
+	db_stmt.close ();
 
 	q	=" select	id"
 		+" ,		pid"
@@ -30,7 +53,8 @@ try {
 		+" and		pid				= "+ berkas_id
 		+" and		status			= 1" // 1: aktif, 0:inaktif
 		+" and		status_hapus	= 1"
-		+" order by tipe_file, nama";
+		+" order by tipe_file, nama"
+		+" limit "+ limit +" offset "+ start;
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -68,6 +92,7 @@ try {
 
 	_r.put ("success", true);
 	_r.put ("data", _a);
+	_r.put ("total", total);
 } catch (Exception e) {
 	_r.put ("success", false);
 	_r.put ("data", e);

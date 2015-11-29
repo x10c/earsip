@@ -3,7 +3,8 @@ Ext.define ('Earsip.view.MainToolbar', {
 ,	alias			: 'widget.maintoolbar'
 ,	id				: 'maintoolbar'
 ,	flex			: 1
-,	height			: 26
+,	height			: 42
+,	cls				: 'maintoolbarbg'
 ,	initComponent	: function ()
 	{
 		this.callParent (arguments);
@@ -21,6 +22,12 @@ Ext.define ('Earsip.view.MainToolbar', {
 				if (o.success == true) {
 					this.suspendLayout = true;
 					this.removeAll (true);
+
+					this.add ({
+						xtype	: 'tbspacer'
+					,	width	: 80
+					});
+					this.add ('-');
 
 					for (var i = 0; i < o.menu.length; i++) {
 						this.add (o.menu[i]);

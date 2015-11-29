@@ -87,31 +87,7 @@ try {
 	user_grup_id	= rs.getString ("grup_id");
 	user_name		= rs.getString ("nama");
 	psw_is_expired	= rs.getString ("psw_is_expired");
-	
-	
-	
-	
-	dir_name = user_name;
 
-	q	=" select	id"
-		+" from		m_berkas"
-		+" where	nama		='"+ dir_name +"'"
-		+" and		pid			= 0"
-		+" and		tipe_file	= 0";
-
-	db_stmt = db_con.createStatement ();
-
-	rs = db_stmt.executeQuery (q);
-
-	if (! rs.next ()) {
-		q	=" insert into m_berkas (pid, pegawai_id, nama)"
-			+" values (0, "+ user_id +",'"+ dir_name +"')";
-
-		db_stmt.executeUpdate (q);
-	}
-	
-	rs.close ();	
-	
 	active_user = new ActiveUser (Long.parseLong (user_id));
 	
 	session.setAttribute ("user", active_user);
@@ -151,13 +127,38 @@ try {
 	response.addCookie (c_user_uk_id);
 	response.addCookie (c_user_grup_id);
 	response.addCookie (c_user_name);
-	
-	
-	out.print ("{success:true"
-				+", psw_is_expired:" + (psw_is_expired.equalsIgnoreCase ("f") ? 1 : 0)
+
+	// create root folder if not exist
+	q =" select id from m_berkas where pid = 0 and pegawai_id = ? ";
+
+	db_pstmt = db_con.prepareStatement (q);
+	db_pstmt.setInt (1, Integer.parseInt(user_id));
+
+	rs = db_pstmt.executeQuery ();
+
+	if (! rs.next ()) {
+		q	=" insert into m_berkas (pid, pegawai_id, nama)"
+			+" values (0, ?, ?)";
+
+		db_pstmt = db_con.prepareStatement (q);
+		db_pstmt.setInt (1, Integer.parseInt (user_id));
+		db_pstmt.setString (2, user_name);
+
+		db_pstmt.executeUpdate ();
+	}
+
+	if (psw_is_expired.equalsIgnoreCase ("f")) {
+		out.print ("{success:true"
+				+", psw_is_expired:1"
 				+", user_name:'"+ user_name +"'"
 				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? 1 : 0) +"}");
-	
+	} else {
+		out.print ("{success:true"
+				+", psw_is_expired:0"
+				+", user_name:'"+ user_name +"'"
+				+", is_pusatarsip:"+ (user_grup_id.equals ("3") ? 1 : 0) +"}");
+	}
+	rs.close ();
 }
 catch (Exception e) {
 	out.print("{success:false,info:'"+ e.toString().replace("'","''").replace("\"", "\\\"") +"'}");

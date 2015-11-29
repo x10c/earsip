@@ -64,12 +64,24 @@ Ext.define ('Earsip.view.BerkasList', {
 			return 'Non-Aktif';
 		}
 	}]
+,	bbar		:[{
+		xtype		:'pagingtoolbar'
+	,	store		:'Berkas'
+	,	displayInfo	:true
+	}]
 
 ,	initComponent	: function ()
 	{
 		this.callParent (arguments);
 
 		Earsip.win_viewer = Ext.create ('Earsip.view.DocViewer', {});
+
+		var ds = this.store;
+
+		ds.on('beforeload', function() {
+			var proxy = ds.getProxy();
+			proxy.setExtraParam('berkas_id', Earsip.berkas.tree.id)
+		});
 	}
 
 ,	do_refresh	: function (id)

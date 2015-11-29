@@ -10,6 +10,7 @@
 .doc {background-image: url(images/doc16.png) !important;}
 .edit {background-image: url(images/edit16.png) !important;}
 .export {background-image: url(images/export16.png) !important;}
+.logo {background-image: url(images/logo.png) !important;}
 .logout {background-image: url(images/logout16.png) !important;}
 .module {background-image: url(images/module16.png) !important;}
 .print {background-image: url(images/print16.png) !important;}
@@ -86,6 +87,13 @@
 	text-align	: center;
 	text-shadow	: black 0.1em 0.1em 0.2em;
 	font-weight	: bold;
+}
+
+.maintoolbarbg {
+	background-image	: url("images/logo.png") !important;
+	background-repeat	: no-repeat;
+	background-position	: left top;
+	background-size		: 80px;
 }
 
 /* Ext.msg */

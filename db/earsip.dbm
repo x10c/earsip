@@ -1,0 +1,1820 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.8.2-alpha1" last-position="887,1153" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<role name="earsip"
+      inherit="true"
+      login="true"
+      encrypted="true"
+      password="********"
+      sql-disabled="true">
+</role>
+
+<database name="earsip" encoding="UTF8" lc-collate="en_GB" lc-ctype="en_GB" sql-disabled="true">
+	<role name="earsip"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="log">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[LOG]]></comment>
+	<position x="787.091" y="679"/>
+	<column name="id" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="menu_id">
+		<type name="integer"/>
+	</column>
+	<column name="pegawai_id">
+		<type name="integer"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="aksi">
+		<type name="character varying" length="32"/>
+	</column>
+	<constraint name="pk_log" type="pk-constr" table="public.log">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="log_pk" table="public.log"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref_user__log_fk" table="public.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pegawai_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__menu__log_fk" table="public.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="menu_id"/>
+		</idxelement>
+</index>
+
+<table name="menu_akses">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[HAK AKSES TERHADAP MENU]]></comment>
+	<position x="1301.77" y="360"/>
+	<column name="menu_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="grup_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="hak_akses_id" default-value="0">
+		<type name="smallint"/>
+	</column>
+	<constraint name="pk_menu_akses" type="pk-constr" table="public.menu_akses">
+		<columns names="menu_id,grup_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="menu_akses_pk" table="public.menu_akses"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="menu_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="grup_id"/>
+		</idxelement>
+</index>
+
+<index name="ref_mnu__mnu_acs_fk" table="public.menu_akses"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="menu_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__group__mnu_acs_fk" table="public.menu_akses"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="grup_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__akses_akses_fk" table="public.menu_akses"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="hak_akses_id"/>
+		</idxelement>
+</index>
+
+<table name="m_arsip">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER ARSIP]]></comment>
+	<position x="2583.53" y="931.545"/>
+	<column name="berkas_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="kode_folder">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="kode_rak">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="kode_box">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_m_arsip" type="pk-constr" table="public.m_arsip">
+		<columns names="berkas_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_arsip_pk" table="public.m_arsip"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<sequence name="m_berkas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="m_berkas">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER BERKAS]]></comment>
+	<position x="2004.53" y="938"/>
+	<column name="id" not-null="true" sequence="public.m_berkas_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="pid">
+		<type name="integer"/>
+	</column>
+	<column name="pegawai_id">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_klas_id">
+		<type name="integer"/>
+	</column>
+	<column name="unit_kerja_id">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_tipe_id">
+		<type name="integer"/>
+	</column>
+	<column name="tipe_file" default-value="0">
+		<type name="smallint"/>
+	</column>
+	<column name="mime">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="sha">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="tgl_unggah" not-null="true" default-value="('now'::text)::date">
+		<type name="date"/>
+	</column>
+	<column name="tgl_dibuat">
+		<type name="date"/>
+	</column>
+	<column name="nomor">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="pembuat">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="judul">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="masalah">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="jra_aktif" default-value="1">
+		<type name="smallint"/>
+	</column>
+	<column name="jra_inaktif" default-value="1">
+		<type name="smallint"/>
+	</column>
+	<column name="status" default-value="1">
+		<type name="smallint"/>
+		<comment><![CDATA[1 = AKTIF; 2 : INAKTIF]]></comment>
+	</column>
+	<column name="status_hapus" default-value="1">
+		<type name="smallint"/>
+	</column>
+	<column name="akses_berbagi_id" default-value="0">
+		<type name="smallint"/>
+	</column>
+	<column name="arsip_status_id" default-value="0">
+		<type name="smallint"/>
+	</column>
+	<column name="n_output_images" not-null="true" default-value="0">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_m_berkas" type="pk-constr" table="public.m_berkas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_berkas_pk" table="public.m_berkas"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref_tipe_arsip_fk" table="public.m_berkas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_tipe_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__klas__arsip_fk" table="public.m_berkas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_klas_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__unit__berkas_fk" table="public.m_berkas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="unit_kerja_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__pegawai__berkas_fk" table="public.m_berkas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pegawai_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__akses_berkas_fk" table="public.m_berkas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="akses_berbagi_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__arsip_status_fk" table="public.m_berkas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="arsip_status_id"/>
+		</idxelement>
+</index>
+
+<sequence name="m_berkas_berbagi_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="m_berkas_berbagi">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER UNTUK BERBAGI BERKAS]]></comment>
+	<position x="1726.3" y="680"/>
+	<column name="bagi_ke_peg_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.m_berkas_berbagi_id_seq">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_m_berkas_berbagi" type="pk-constr" table="public.m_berkas_berbagi">
+		<columns names="bagi_ke_peg_id,berkas_id,id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_berkas_berbagi_pk" table="public.m_berkas_berbagi"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="bagi_ke_peg_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref_pegawai__berbagi_fk" table="public.m_berkas_berbagi"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="bagi_ke_peg_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__berkas__berbagi_fk" table="public.m_berkas_berbagi"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<sequence name="m_grup_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="m_grup">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[GRUP PEGAWAI]]></comment>
+	<position x="1707" y="568.2"/>
+	<column name="id" not-null="true" sequence="public.m_grup_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_m_grup" type="pk-constr" table="public.m_grup">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_grup_pk" table="public.m_grup"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<sequence name="m_menu_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="m_menu">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER MENU]]></comment>
+	<position x="785" y="436.2"/>
+	<column name="id" not-null="true" sequence="public.m_menu_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="icon">
+		<type name="character varying" length="16"/>
+	</column>
+	<column name="pid">
+		<type name="bigint"/>
+	</column>
+	<column name="nama_ref">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<constraint name="pk_m_menu" type="pk-constr" table="public.m_menu">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_menu_pk" table="public.m_menu"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<sequence name="m_pegawai_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="m_pegawai">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER USER/PEGAWAI]]></comment>
+	<position x="1219.77" y="715.2"/>
+	<column name="id" not-null="true" sequence="public.m_pegawai_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="unit_kerja_id">
+		<type name="integer"/>
+	</column>
+	<column name="grup_id">
+		<type name="integer"/>
+	</column>
+	<column name="jabatan_id">
+		<type name="integer"/>
+	</column>
+	<column name="nip">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="psw">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="psw_expire" default-value="'2000-01-01'::date">
+		<type name="date"/>
+	</column>
+	<column name="status" default-value="1">
+		<type name="smallint"/>
+		<comment><![CDATA[0 = NON AKTIF; 1 = AKTIF ]]></comment>
+	</column>
+	<constraint name="pk_m_pegawai" type="pk-constr" table="public.m_pegawai">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="ak_key_2_m_pegawa" type="uq-constr" table="public.m_pegawai">
+		<columns names="nip" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_pegawai_pk" table="public.m_pegawai"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref__group__user_fk" table="public.m_pegawai"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="grup_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__jab__pegawai_fk" table="public.m_pegawai"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="jabatan_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__unit_peg_fk" table="public.m_pegawai"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="unit_kerja_id"/>
+		</idxelement>
+</index>
+
+<table name="m_sysconfig">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER KONFIGURASI SYSTEM]]></comment>
+	<position x="797.531" y="359.2"/>
+	<column name="repository_root" not-null="true">
+		<type name="character varying" length="1024"/>
+	</column>
+	<column name="max_upload_size" default-value="5000">
+		<type name="integer"/>
+	</column>
+</table>
+
+<sequence name="m_unit_kerja_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="m_unit_kerja">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[MASTER UNIT KERJA]]></comment>
+	<position x="774.531" y="1141.2"/>
+	<column name="direksi_id" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="divisi_id" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.m_unit_kerja_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="kode" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="nama_pimpinan">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="urutan" default-value="0">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_m_unit_kerja" type="pk-constr" table="public.m_unit_kerja">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="ak_key_2_m_unit_k" type="uq-constr" table="public.m_unit_kerja">
+		<columns names="kode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="m_unit_kerja_pk" table="public.m_unit_kerja"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<table name="peminjaman_rinci">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[PEMINJAMAN DETAIL]]></comment>
+	<position x="2490" y="1808.4"/>
+	<column name="peminjaman_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_peminjaman_rinci" type="pk-constr" table="public.peminjaman_rinci">
+		<columns names="peminjaman_id,berkas_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="peminjaman_rinci_pk" table="public.peminjaman_rinci"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="peminjaman_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__berkas__pin_rin_fk" table="public.peminjaman_rinci"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<table name="r_akses_berbagi">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI UNTUK BERBAGI AKSES]]></comment>
+	<position x="2575.77" y="1148.4"/>
+	<column name="id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_r_akses_berbagi" type="pk-constr" table="public.r_akses_berbagi">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_akses_berbagi_pk" table="public.r_akses_berbagi"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<table name="r_akses_menu">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI AKSES MENU
+]]></comment>
+	<position x="1223.53" y="577.4"/>
+	<column name="id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_r_akses_menu" type="pk-constr" table="public.r_akses_menu">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_akses_menu_pk" table="public.r_akses_menu"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<table name="r_arsip_status">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI ARSIP STATUS]]></comment>
+	<position x="2574.3" y="1254.4"/>
+	<column name="id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_r_arsip_status" type="pk-constr" table="public.r_arsip_status">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_arsip_status_pk" table="public.r_arsip_status"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<sequence name="r_berkas_klas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="r_berkas_klas">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI KLASIFIKASI BERKAS]]></comment>
+	<position x="1242.06" y="1216.4"/>
+	<column name="id" not-null="true" sequence="public.r_berkas_klas_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="unit_kerja_id">
+		<type name="integer"/>
+	</column>
+	<column name="kode" not-null="true">
+		<type name="character varying" length="6"/>
+	</column>
+	<column name="nama" not-null="true">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="keterangan" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="jra_aktif" not-null="true" default-value="1">
+		<type name="integer"/>
+	</column>
+	<column name="jra_inaktif" not-null="true" default-value="1">
+		<type name="integer"/>
+	</column>
+	<column name="r_mode_arsip_id" not-null="true" default-value="2">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_r_berkas_klas" type="pk-constr" table="public.r_berkas_klas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_berkas_klas_pk" table="public.r_berkas_klas"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref__unit__klas_fk" table="public.r_berkas_klas"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="unit_kerja_id"/>
+		</idxelement>
+</index>
+
+<sequence name="r_berkas_tipe_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="r_berkas_tipe">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI TIPE ARSIP]]></comment>
+	<position x="2576" y="1035.6"/>
+	<column name="id" not-null="true" sequence="public.r_berkas_tipe_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_r_berkas_tipe" type="pk-constr" table="public.r_berkas_tipe">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_berkas_tipe_pk" table="public.r_berkas_tipe"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<sequence name="r_ir_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="r_ir">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERNSI INDEKS RELATIF]]></comment>
+	<position x="1697.77" y="1336.6"/>
+	<column name="id" not-null="true" sequence="public.r_ir_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_klas_id">
+		<type name="integer"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="64"/>
+	</column>
+	<constraint name="pk_r_ir" type="pk-constr" table="public.r_ir">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_ir_pk" table="public.r_ir"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref__klas__ir_fk" table="public.r_ir"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_klas_id"/>
+		</idxelement>
+</index>
+
+<sequence name="r_jabatan_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="r_jabatan">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI JABATAN]]></comment>
+	<position x="764.766" y="868.6"/>
+	<column name="id" not-null="true" sequence="public.r_jabatan_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="urutan" default-value="0">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_r_jabatan" type="pk-constr" table="public.r_jabatan">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_jabatan_pk" table="public.r_jabatan"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<sequence name="r_pemusnahan_metoda_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="r_pemusnahan_metoda">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[REFERENSI METODA PEMUSNAHAN]]></comment>
+	<position x="3650.77" y="840.6"/>
+	<column name="id" not-null="true" sequence="public.r_pemusnahan_metoda_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_r_pemusnahan_metoda" type="pk-constr" table="public.r_pemusnahan_metoda">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="r_pemusnahan_metoda_pk" table="public.r_pemusnahan_metoda"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90" sql-disabled="true">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<sequence name="t_pemindahan_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="t_pemindahan">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[TRANSAKSI PEMINDAHAN]]></comment>
+	<position x="1309.53" y="1573.6"/>
+	<column name="id" not-null="true" sequence="public.t_pemindahan_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="unit_kerja_id">
+		<type name="integer"/>
+	</column>
+	<column name="kode">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="tgl">
+		<type name="date"/>
+	</column>
+	<column name="status">
+		<type name="smallint"/>
+		<comment><![CDATA[0 = TIDAK LENGKAP; 1 LENGKAP]]></comment>
+	</column>
+	<column name="nama_petugas">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="pj_unit_kerja">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="pj_unit_arsip">
+		<type name="character varying" length="128"/>
+	</column>
+	<constraint name="pk_t_pemindahan" type="pk-constr" table="public.t_pemindahan">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="t_pemindahan_pk" table="public.t_pemindahan"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref__unit_pindah_fk" table="public.t_pemindahan"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="unit_kerja_id"/>
+		</idxelement>
+</index>
+
+<table name="t_pemindahan_rinci">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[RINCIAN PEMINDAHAN]]></comment>
+	<position x="1839" y="1569.8"/>
+	<column name="pemindahan_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_t_pemindahan_rinci" type="pk-constr" table="public.t_pemindahan_rinci">
+		<columns names="pemindahan_id,berkas_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="t_pemindahan_rinci_pk" table="public.t_pemindahan_rinci"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pemindahan_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<index name="ref_pindah___rinci_fk" table="public.t_pemindahan_rinci"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pemindahan_id"/>
+		</idxelement>
+</index>
+
+<index name="ref_berkas__pindah_fk" table="public.t_pemindahan_rinci"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<sequence name="t_peminjaman_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="t_peminjaman">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[TRANSAKSI PEMINJAMAN]]></comment>
+	<position x="943.766" y="1830.8"/>
+	<column name="id" not-null="true" sequence="public.t_peminjaman_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="unit_kerja_peminjam_id">
+		<type name="integer"/>
+	</column>
+	<column name="nama_petugas">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="nama_pimpinan_petugas">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="nama_peminjam">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="nama_pimpinan_peminjam">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="tgl_pinjam">
+		<type name="date"/>
+	</column>
+	<column name="tgl_batas_kembali">
+		<type name="date"/>
+	</column>
+	<column name="tgl_kembali">
+		<type name="date"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_t_peminjaman" type="pk-constr" table="public.t_peminjaman">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="t_peminjaman_pk" table="public.t_peminjaman"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref__unit__pinjam_fk" table="public.t_peminjaman"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="unit_kerja_peminjam_id"/>
+		</idxelement>
+</index>
+
+<sequence name="t_pemusnahan_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="earsip"/>
+</sequence>
+
+<table name="t_pemusnahan">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[TRANSAKSI PEMUSNAHAN]]></comment>
+	<position x="3090.77" y="728.8"/>
+	<column name="id" not-null="true" sequence="public.t_pemusnahan_id_seq">
+		<type name="integer"/>
+	</column>
+	<column name="metoda_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="nama_petugas">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="tgl">
+		<type name="date"/>
+	</column>
+	<column name="pj_unit_kerja">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="pj_berkas_arsip">
+		<type name="character varying" length="128"/>
+	</column>
+	<constraint name="pk_t_pemusnahan" type="pk-constr" table="public.t_pemusnahan">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="t_pemusnahan_pk" table="public.t_pemusnahan"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="id"/>
+		</idxelement>
+</index>
+
+<index name="ref__metoda___pemusnahan_fk" table="public.t_pemusnahan"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="metoda_id"/>
+		</idxelement>
+</index>
+
+<table name="t_pemusnahan_rinci">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[PEMUSNAHAN DETAIL]]></comment>
+	<position x="2577.86" y="755.467"/>
+	<column name="pemusnahan_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="berkas_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="keterangan">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="jml_lembar">
+		<type name="smallint"/>
+	</column>
+	<column name="jml_set">
+		<type name="smallint"/>
+	</column>
+	<column name="jml_berkas">
+		<type name="smallint"/>
+	</column>
+	<constraint name="pk_t_pemusnahan_rinci" type="pk-constr" table="public.t_pemusnahan_rinci">
+		<columns names="pemusnahan_id,berkas_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="t_pemusnahan_rinci_pk" table="public.t_pemusnahan_rinci"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pemusnahan_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<index name="ref_musnah__musnah_rinci_fk" table="public.t_pemusnahan_rinci"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pemusnahan_id"/>
+		</idxelement>
+</index>
+
+<index name="ref__berkas_rinci_fk" table="public.t_pemusnahan_rinci"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="berkas_id"/>
+		</idxelement>
+</index>
+
+<table name="t_tim_pemusnahan">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<comment><![CDATA[TIM PEMUSNAHAN]]></comment>
+	<position x="3650.76" y="669.262"/>
+	<column name="pemusnahan_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="nomor" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="nama">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="jabatan">
+		<type name="character varying" length="128"/>
+	</column>
+	<constraint name="pk_t_tim_pemusnahan" type="pk-constr" table="public.t_tim_pemusnahan">
+		<columns names="pemusnahan_id,nomor" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="t_tim_pemusnahan_pk" table="public.t_tim_pemusnahan"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pemusnahan_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="nomor"/>
+		</idxelement>
+</index>
+
+<index name="ref__musnah__team_fk" table="public.t_tim_pemusnahan"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="pemusnahan_id"/>
+		</idxelement>
+</index>
+
+<function name="delete_pegawai" sql-disabled="true"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="character varying"/>
+	</return-type>
+	<parameter name="_id">
+		<type name="integer"/>
+	</parameter>
+	<definition><![CDATA[
+declare c int;
+BEGIN
+	SELECT	count(id)
+	INTO	c
+	FROM	m_berkas
+	WHERE	pegawai_id = _id
+	AND		pid != 0;
+	IF c > 0 THEN
+		return 'failure';
+	END IF;
+	delete from m_berkas where pegawai_id = _id;
+	delete from m_pegawai where id = _id;
+	return 'success';
+END;
+]]></definition>
+</function>
+
+<function name="update_menu_akses" sql-disabled="true"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="void"/>
+	</return-type>
+	<parameter name="_menu_id">
+		<type name="integer"/>
+	</parameter>
+	<parameter name="_grup_id">
+		<type name="integer"/>
+	</parameter>
+	<parameter name="_hak_akses_id">
+		<type name="integer"/>
+	</parameter>
+	<definition><![CDATA[
+BEGIN
+	LOOP
+		UPDATE	menu_akses
+		SET		hak_akses_id	= _hak_akses_id
+		WHERE	menu_id			= _menu_id
+		and		grup_id			= _grup_id;
+		IF found THEN
+			RETURN;
+		END IF;
+		BEGIN
+			INSERT INTO	menu_akses (menu_id, grup_id, hak_akses_id)
+			VALUES (_menu_id, _grup_id, _hak_akses_id);
+			RETURN;
+		EXCEPTION WHEN unique_violation THEN
+			-- do nothing, and loop to try the UPDATE again
+		END;
+	END LOOP;
+END;
+]]></definition>
+</function>
+
+<function name="get_berkas_path" sql-disabled="true"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="character varying"/>
+	</return-type>
+	<parameter name="_berkas_id">
+		<type name="integer"/>
+	</parameter>
+	<definition><![CDATA[
+declare _id int;
+declare _nama varchar (255);
+begin
+	if _berkas_id = 0 then
+		return '';
+	end if;
+
+	select	pid
+	,		nama
+	into	_id, _nama
+	from	m_berkas
+	where	id = _berkas_id;
+
+	return get_berkas_path (_id) || '/' || _nama;
+end;
+]]></definition>
+</function>
+
+<function name="datediff" sql-disabled="true"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="integer"/>
+	</return-type>
+	<parameter name="units">
+		<type name="character varying"/>
+	</parameter>
+	<parameter name="start_t">
+		<type name="timestamp"/>
+	</parameter>
+	<parameter name="end_t">
+		<type name="timestamp"/>
+	</parameter>
+	<definition><![CDATA[
+   DECLARE
+     diff_interval INTERVAL; 
+     diff INT = 0;
+     years_diff INT = 0;
+   BEGIN
+     IF units IN ('yy', 'yyyy', 'year', 'mm', 'm', 'month') THEN
+       years_diff = DATE_PART('year', end_t) - DATE_PART('year', start_t);
+ 
+       IF units IN ('yy', 'yyyy', 'year') THEN
+         -- SQL Server does not count full years passed (only difference between year parts)
+         RETURN years_diff;
+       ELSE
+         -- If end month is less than start month it will subtracted
+         RETURN years_diff * 12 + (DATE_PART('month', end_t) - DATE_PART('month', start_t)); 
+       END IF;
+     END IF;
+ 
+     -- Minus operator returns interval 'DDD days HH:MI:SS'  
+     diff_interval = end_t - start_t;
+ 
+     diff = diff + DATE_PART('day', diff_interval);
+ 
+     IF units IN ('wk', 'ww', 'week') THEN
+       diff = diff/7;
+       RETURN diff;
+     END IF;
+ 
+     IF units IN ('dd', 'd', 'day') THEN
+       RETURN diff;
+     END IF;
+ 
+     diff = diff * 24 + DATE_PART('hour', diff_interval); 
+ 
+     IF units IN ('hh', 'hour') THEN
+        RETURN diff;
+     END IF;
+ 
+     diff = diff * 60 + DATE_PART('minute', diff_interval);
+ 
+     IF units IN ('mi', 'n', 'minute') THEN
+        RETURN diff;
+     END IF;
+ 
+     diff = diff * 60 + DATE_PART('second', diff_interval);
+ 
+     RETURN diff;
+   END;
+]]></definition>
+</function>
+
+<function name="dateadd" sql-disabled="true"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="100"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<language name="plpgsql" sql-disabled="true"/>
+	<return-type>
+	<type name="timestamp"/>
+	</return-type>
+	<parameter name="difftype">
+		<type name="character varying"/>
+	</parameter>
+	<parameter name="incrementvalue">
+		<type name="integer"/>
+	</parameter>
+	<parameter name="inputdate">
+		<type name="timestamp"/>
+	</parameter>
+	<definition><![CDATA[
+DECLARE
+   YEAR_CONST Char(15) := 'year';
+   MONTH_CONST Char(15) := 'month';
+   DAY_CONST Char(15) := 'day';
+
+   dateTemp Date;
+   intervals interval;
+BEGIN
+   IF lower($1) = lower(YEAR_CONST) THEN
+       select cast(cast(incrementvalue as character varying) || ' year' as interval) into intervals;
+   ELSEIF lower($1) = lower(MONTH_CONST) THEN
+       select cast(cast(incrementvalue as character varying) || ' months' as interval) into intervals;
+   ELSEIF lower($1) = lower(DAY_CONST) THEN
+       select cast(cast(incrementvalue as character varying) || ' day' as interval) into intervals;
+   END IF;
+
+   dateTemp:= inputdate + intervals;
+
+   RETURN dateTemp;
+END;
+]]></definition>
+</function>
+
+<table name="r_mode_arsip">
+	<schema name="public"/>
+	<role name="earsip"/>
+	<position x="1482" y="1482"/>
+	<column name="id" default-value="2">
+		<type name="serial"/>
+	</column>
+	<column name="nama">
+		<type name="varchar" length="32"/>
+	</column>
+</table>
+
+<constraint name="fk_log_ref_user__m_pegawa" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_pegawai" table="public.log">
+	<columns names="pegawai_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_log_ref__menu_m_menu" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_menu" table="public.log">
+	<columns names="menu_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_menu_aks_ref_mnu___m_menu" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_menu" table="public.menu_akses">
+	<columns names="menu_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_menu_aks_ref__akse_r_akses_" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_akses_menu" table="public.menu_akses">
+	<columns names="hak_akses_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_menu_aks_ref__grou_m_grup" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_grup" table="public.menu_akses">
+	<columns names="grup_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_arsip_ref__arsi_m_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_berkas" table="public.m_arsip">
+	<columns names="berkas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref_tipe__r_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_berkas_tipe" table="public.m_berkas">
+	<columns names="berkas_tipe_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref__akse_r_akses_" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_akses_berbagi" table="public.m_berkas">
+	<columns names="akses_berbagi_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref__arsi_r_arsip_" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_arsip_status" table="public.m_berkas">
+	<columns names="arsip_status_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref__klas_r_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_berkas_klas" table="public.m_berkas">
+	<columns names="berkas_klas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref__pega_m_pegawa" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_pegawai" table="public.m_berkas">
+	<columns names="pegawai_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref__unit_m_unit_k" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_unit_kerja" table="public.m_berkas">
+	<columns names="unit_kerja_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref_pegaw_m_pegawa" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_pegawai" table="public.m_berkas_berbagi">
+	<columns names="bagi_ke_peg_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_berkas_ref__berk_m_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_berkas" table="public.m_berkas_berbagi">
+	<columns names="berkas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_pegawa_ref__grou_m_grup" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_grup" table="public.m_pegawai">
+	<columns names="grup_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_pegawa_ref__jab__r_jabata" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_jabatan" table="public.m_pegawai">
+	<columns names="jabatan_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_m_pegawa_ref__unit_m_unit_k" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_unit_kerja" table="public.m_pegawai">
+	<columns names="unit_kerja_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_peminjam_ref_pmj_a_t_peminj" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.t_peminjaman" table="public.peminjaman_rinci">
+	<columns names="peminjaman_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_peminjam_ref__berk_m_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_berkas" table="public.peminjaman_rinci">
+	<columns names="berkas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_r_berkas_ref__unit_m_unit_k" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_unit_kerja" table="public.r_berkas_klas">
+	<columns names="unit_kerja_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="r_berkas_klas_fk_r_mode_arsip" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.r_mode_arsip" table="public.r_berkas_klas">
+	<columns names="r_mode_arsip_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_r_ir_ref__klas_r_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_berkas_klas" table="public.r_ir">
+	<columns names="berkas_klas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_pemind_ref__unit_m_unit_k" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_unit_kerja" table="public.t_pemindahan">
+	<columns names="unit_kerja_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_pemind_ref_berka_m_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_berkas" table="public.t_pemindahan_rinci">
+	<columns names="berkas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_pemind_ref_pinda_t_pemind" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.t_pemindahan" table="public.t_pemindahan_rinci">
+	<columns names="pemindahan_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_peminj_ref__unit_m_unit_k" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_unit_kerja" table="public.t_peminjaman">
+	<columns names="unit_kerja_peminjam_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_pemusn_ref__meto_r_pemusn" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.r_pemusnahan_metoda" table="public.t_pemusnahan">
+	<columns names="metoda_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_pemusn_ref_musna_t_pemusn" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.t_pemusnahan" table="public.t_pemusnahan_rinci">
+	<columns names="pemusnahan_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_pemusn_ref__berk_m_berkas" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.m_berkas" table="public.t_pemusnahan_rinci">
+	<columns names="berkas_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_t_tim_pe_ref__musn_t_pemusn" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.t_pemusnahan" table="public.t_tim_pemusnahan">
+	<columns names="pemusnahan_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_log_m_pegawai" type="relfk"
+	 custom-color="#f1d670"
+	 src-table="public.log"
+	 dst-table="public.m_pegawai"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_log_m_menu" type="relfk"
+	 custom-color="#716602"
+	 src-table="public.log"
+	 dst-table="public.m_menu"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_menu_akses_m_menu" type="relfk"
+	 custom-color="#adf79c"
+	 src-table="public.menu_akses"
+	 dst-table="public.m_menu"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_menu_akses_r_akses_menu" type="relfk"
+	 custom-color="#14c03b"
+	 src-table="public.menu_akses"
+	 dst-table="public.r_akses_menu"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_menu_akses_m_grup" type="relfk"
+	 custom-color="#e256cc"
+	 src-table="public.menu_akses"
+	 dst-table="public.m_grup"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_arsip_m_berkas" type="relfk"
+	 custom-color="#70cbb6"
+	 src-table="public.m_arsip"
+	 dst-table="public.m_berkas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_r_berkas_tipe" type="relfk"
+	 custom-color="#062c6a"
+	 src-table="public.m_berkas"
+	 dst-table="public.r_berkas_tipe"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_r_akses_berbagi" type="relfk"
+	 custom-color="#3b2456"
+	 src-table="public.m_berkas"
+	 dst-table="public.r_akses_berbagi"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_r_arsip_status" type="relfk"
+	 custom-color="#d622a3"
+	 src-table="public.m_berkas"
+	 dst-table="public.r_arsip_status"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_r_berkas_klas" type="relfk"
+	 custom-color="#1df6f1"
+	 src-table="public.m_berkas"
+	 dst-table="public.r_berkas_klas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_m_pegawai" type="relfk"
+	 custom-color="#f818a9"
+	 src-table="public.m_berkas"
+	 dst-table="public.m_pegawai"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_m_unit_kerja" type="relfk"
+	 custom-color="#121ec4"
+	 src-table="public.m_berkas"
+	 dst-table="public.m_unit_kerja"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_berbagi_m_pegawai" type="relfk"
+	 custom-color="#a414e2"
+	 src-table="public.m_berkas_berbagi"
+	 dst-table="public.m_pegawai"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_berkas_berbagi_m_berkas" type="relfk"
+	 custom-color="#7af202"
+	 src-table="public.m_berkas_berbagi"
+	 dst-table="public.m_berkas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_pegawai_m_grup" type="relfk"
+	 custom-color="#f06ca5"
+	 src-table="public.m_pegawai"
+	 dst-table="public.m_grup"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_pegawai_r_jabatan" type="relfk"
+	 custom-color="#3b9504"
+	 src-table="public.m_pegawai"
+	 dst-table="public.r_jabatan"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_m_pegawai_m_unit_kerja" type="relfk"
+	 custom-color="#3cf0ba"
+	 src-table="public.m_pegawai"
+	 dst-table="public.m_unit_kerja"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_peminjaman_rinci_t_peminjaman" type="relfk"
+	 custom-color="#ede319"
+	 src-table="public.peminjaman_rinci"
+	 dst-table="public.t_peminjaman"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_peminjaman_rinci_m_berkas" type="relfk"
+	 custom-color="#b34041"
+	 src-table="public.peminjaman_rinci"
+	 dst-table="public.m_berkas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_r_berkas_klas_m_unit_kerja" type="relfk"
+	 custom-color="#d6eb1a"
+	 src-table="public.r_berkas_klas"
+	 dst-table="public.m_unit_kerja"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_r_ir_r_berkas_klas" type="relfk"
+	 custom-color="#d43dbe"
+	 src-table="public.r_ir"
+	 dst-table="public.r_berkas_klas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_pemindahan_m_unit_kerja" type="relfk"
+	 custom-color="#5e5b2a"
+	 src-table="public.t_pemindahan"
+	 dst-table="public.m_unit_kerja"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_pemindahan_rinci_m_berkas" type="relfk"
+	 custom-color="#7ebaa5"
+	 src-table="public.t_pemindahan_rinci"
+	 dst-table="public.m_berkas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_pemindahan_rinci_t_pemindahan" type="relfk"
+	 custom-color="#1904e0"
+	 src-table="public.t_pemindahan_rinci"
+	 dst-table="public.t_pemindahan"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_peminjaman_m_unit_kerja" type="relfk"
+	 custom-color="#ed1922"
+	 src-table="public.t_peminjaman"
+	 dst-table="public.m_unit_kerja"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_pemusnahan_r_pemusnahan_metoda" type="relfk"
+	 custom-color="#e8cc09"
+	 src-table="public.t_pemusnahan"
+	 dst-table="public.r_pemusnahan_metoda"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_pemusnahan_rinci_t_pemusnahan" type="relfk"
+	 custom-color="#77b191"
+	 src-table="public.t_pemusnahan_rinci"
+	 dst-table="public.t_pemusnahan"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_pemusnahan_rinci_m_berkas" type="relfk"
+	 custom-color="#80d951"
+	 src-table="public.t_pemusnahan_rinci"
+	 dst-table="public.m_berkas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_t_tim_pemusnahan_t_pemusnahan" type="relfk"
+	 custom-color="#f4629c"
+	 src-table="public.t_tim_pemusnahan"
+	 dst-table="public.t_pemusnahan"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_r_berkas_klas_r_mode_arsip" type="relfk"
+	 src-table="public.r_berkas_klas"
+	 dst-table="public.r_mode_arsip"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
