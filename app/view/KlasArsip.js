@@ -1,6 +1,7 @@
 Ext.require ([
 	'Earsip.store.KlasArsip'
 ,	'Earsip.store.UnitKerja'
+,	'Earsip.store.ModeArsip'
 ,	'Earsip.view.KlasArsipWin'
 ]);
 
@@ -81,6 +82,26 @@ Ext.define ('Earsip.view.KlasArsip', {
 			xtype		: 'numberfield'
 		,	allowBlank	: false
 		,	minValue	: 1
+		}
+	},{
+		text		: 'Mode Arsip'
+	,	dataIndex	: 'mode_arsip_id'
+	,	flex		: 1
+	,	editor		: {
+			xtype			: 'combo'
+		,	store			: Ext.create ('Earsip.store.ModeArsip', {
+				autoLoad		: true
+			})
+		,	displayField	: 'nama'
+		,	valueField		: 'id'
+		,	mode			: 'local'
+		,	typeAhead		: false
+		,	triggerAction	: 'all'
+		,	lazyRender		: true
+		}
+	,	renderer	: function (v, md, r, rowidx, colidx)
+		{
+			return combo_renderer (v, this.columns[colidx]);
 		}
 	},{
 		text		: 'Keterangan'

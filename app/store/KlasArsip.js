@@ -10,6 +10,7 @@ Ext.define ('Earsip.model.KlasArsip', {
 	,	'keterangan'
 	,	'jra_aktif'
 	,	'jra_inaktif'
+	,	'mode_arsip_id'
 	]
 });
 
