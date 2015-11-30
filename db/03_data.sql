@@ -91,8 +91,8 @@ INSERT INTO r_jabatan (nama, keterangan, urutan) VALUES ('Teknisi', 'Teknisi', 1
 --
 
 INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (18, 1, 2, '1', 'Administrator', '21232f297a57a5a743894a0e4a801fc3', 1);
-INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (1, 2, 2, 'NIP.0001', 'User Pusat Berkas', 'e50310084113a16a9ac94ec85156cb8c', 1);
-INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (10, 3, 2, 'NIP.0002', 'User Pusat Arsip', '3ac53a0f0b6ee2a6203176a72c61a153', 1);
+INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (2, 2, 2, 'NIP.0001', 'User Pusat Berkas', 'e50310084113a16a9ac94ec85156cb8c', 1);
+INSERT INTO m_pegawai (unit_kerja_id, grup_id, jabatan_id, nip, nama, psw, status) VALUES (14, 3, 2, 'NIP.0002', 'User Pusat Arsip', '3ac53a0f0b6ee2a6203176a72c61a153', 1);
 
 
 --
