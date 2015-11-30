@@ -19,7 +19,7 @@ try {
 		q	+="	where	id = "+ _user_uk;
 	}
 
-	q	+=" order by urutan desc";
+	q	+=" order by id";
 
 	db_stmt	= db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);

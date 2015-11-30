@@ -15,6 +15,7 @@ try {
 		+" , 		A.keterangan"
 		+" ,		A.jra_aktif"
 		+" ,		A.jra_inaktif"
+		+" ,		A.mode_arsip_id"
 		+" from 	r_berkas_klas	A"
 		+" ,		m_unit_kerja	B"
 		+" where	A.unit_kerja_id = B.id";
@@ -26,7 +27,7 @@ try {
 			q	+="	and A.nama ilike '%"+ query +"%'";
 		}
 
-		q +=" order by B.nama, A.kode, A.nama";
+		q +=" order by A.unit_kerja_id, B.nama, A.kode, A.nama";
 
 	db_stmt = db_con.createStatement ();
 	rs		= db_stmt.executeQuery (q);
@@ -41,6 +42,7 @@ try {
 		_o.put ("keterangan"	, rs.getString ("keterangan"));
 		_o.put ("jra_aktif"		, rs.getString ("jra_aktif"));
 		_o.put ("jra_inaktif"	, rs.getString ("jra_inaktif"));
+		_o.put ("mode_arsip_id"	, rs.getInt ("mode_arsip_id"));
 
 		_a.put (_o);
 	}
