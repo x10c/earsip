@@ -111,13 +111,13 @@ UPDATE t_peminjaman SET unit_kerja_peminjam_id = 14 WHERE unit_kerja_peminjam_id
 TRUNCATE r_berkas_klas RESTART IDENTITY;
 
 --- alter r_berkas_klas
-ALTER TABLE public.r_berkas_klas ADD COLUMN r_mode_arsip_id integer NOT NULL DEFAULT 2;
+ALTER TABLE public.r_berkas_klas ADD COLUMN mode_arsip_id integer NOT NULL DEFAULT 2;
 
 ALTER TABLE public.r_berkas_klas ALTER COLUMN kode TYPE VARCHAR(64);
 ALTER TABLE public.r_berkas_klas ALTER COLUMN nama TYPE VARCHAR(1024);
 
 --- {{{ insert new data
-COPY r_berkas_klas(id, unit_kerja_id, kode, nama, keterangan, jra_aktif, jra_inaktif, r_mode_arsip_id)
+COPY r_berkas_klas(id, unit_kerja_id, kode, nama, keterangan, jra_aktif, jra_inaktif, mode_arsip_id)
 	FROM stdin WITH DELIMITER ';';
 1;1;HT.01.01;Surat Keputusan Direksi;Naskah-naskah yang berkaitan dengan proses penyusunan dan penerbitan Surat Keputusan Direksi.;3;10;1
 2;1;HT.01.02;Surat Edaran Direksi;Naskah - naskah yang berkaitan dengan proses penyusunan dan penerbitan Surat Edaran.;3;10;1
@@ -1060,7 +1060,7 @@ ALTER TABLE m_berkas
 	ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 ALTER TABLE public.r_berkas_klas
-	ADD CONSTRAINT r_berkas_klas_fk_r_mode_arsip FOREIGN KEY (r_mode_arsip_id)
+	ADD CONSTRAINT r_berkas_klas_fk_r_mode_arsip FOREIGN KEY (mode_arsip_id)
 	REFERENCES public.r_mode_arsip (id) MATCH FULL
 	ON DELETE NO ACTION ON UPDATE NO ACTION;
 

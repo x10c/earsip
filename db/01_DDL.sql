@@ -337,6 +337,8 @@ create table M_UNIT_KERJA (
    NAMA_PIMPINAN        VARCHAR(128)         null,
    KETERANGAN           VARCHAR(255)         null,
    URUTAN				INT4				default 0,
+   DIREKSI_ID			INT4				default 0,
+   DIVISI_ID            INT4				default 0,
    constraint PK_M_UNIT_KERJA primary key (ID),
    constraint AK_KEY_2_M_UNIT_K unique (KODE)
 );
@@ -443,10 +445,11 @@ create table R_BERKAS_KLAS (
    ID                   SERIAL               not null,
    UNIT_KERJA_ID        INT4                 null,
    KODE                 VARCHAR(20)          not null,
-   NAMA                 VARCHAR(64)          not null,
-   KETERANGAN           VARCHAR(255)         not null,
+   NAMA                 VARCHAR(1024)        not null,
+   KETERANGAN           VARCHAR(1024)        not null,
    JRA_AKTIF			INT4				 not null default 1,
    JRA_INAKTIF			INT4				 not null default 1,
+   MODE_ARSIP_ID		INT4				default 0,
    constraint PK_R_BERKAS_KLAS primary key (ID)
 );
 
@@ -900,3 +903,30 @@ alter table T_TIM_PEMUSNAHAN
       references T_PEMUSNAHAN (ID)
       on delete restrict on update restrict;
 
+---
+--- add new table: r_mode_arsip
+---
+CREATE TABLE public.r_mode_arsip(
+	id serial,
+	nama text,
+	CONSTRAINT r_mode_arsip_pk primary key (id)
+);
+
+INSERT INTO r_mode_arsip (id, nama) VALUES
+(0, 'Tidak ada'),
+(1, 'Permanen'),
+(2, 'Musnah'),
+(3, 'Disimpan selama pegawai masih aktif'),
+(4, 'Disimpan dalam Soft Copy');
+
+-- reset sequence
+SELECT setval(pg_get_serial_sequence ('r_mode_arsip', 'id')
+		        ,       coalesce (max(id), 0) + 1
+		        ,       false) as "r_mode_arsip sequence"
+FROM r_mode_arsip;
+
+-- add foreign key from r_berkas_klas(mode_arsip_id) to r_mode_arsip
+ALTER TABLE public.r_berkas_klas
+	ADD CONSTRAINT r_berkas_klas_fk_r_mode_arsip FOREIGN KEY (mode_arsip_id)
+	REFERENCES public.r_mode_arsip (id) MATCH FULL
+	ON DELETE NO ACTION ON UPDATE NO ACTION;
