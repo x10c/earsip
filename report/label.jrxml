@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="label" columnCount="2" printOrder="Horizontal" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="472" columnSpacing="23" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="57"/>
+	<property name="ireport.y" value="71"/>
 	<parameter name="div_id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[new Integer (0)]]></defaultValueExpression>
 	</parameter>
@@ -33,7 +33,10 @@ LEFT 	JOIN m_unit_kerja B ON A.unit_kerja_id = B.id
 RIGHT 	JOIN m_arsip C ON A.id = C.berkas_id
 WHERE  A.unit_kerja_id = $P!{div_id}
 $P!{extra_query}
-$P!{extra_query2}]]>
+$P!{extra_query2}
+AND	status != 1
+AND	status_hapus = 1
+AND	arsip_status_id in (0,1)]]>
 	</queryString>
 	<field name="kode_rak" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
