@@ -21,7 +21,7 @@ Ext.define ('Earsip.view.Berkas', {
 		,	itemId		: 'upload'
 		,	iconCls		: 'upload'
 		},'-',{
-			text		:'Berkas tanpa scan'
+			text		:'Membuat Folder Indeks'
 		,	itemId		:'berkas_baru'
 		,	iconCls		:'add'
 		,	formBind	:true
