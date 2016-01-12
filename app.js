@@ -179,6 +179,7 @@ Ext.application ({
 	,	'Pegawai'
 	,	'Jabatan'
 	,	'MetodaPemusnahan'
+	,	'ModeArsip'
 	,	'KlasArsip'
 	,	'TipeArsip'
 	,	'IndeksRelatif'

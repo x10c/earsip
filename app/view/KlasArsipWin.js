@@ -65,6 +65,17 @@ Ext.define('Earsip.view.KlasArsipWin', {
 		,	minValue		: 1
 		,	allowBlank		:false
 		},{
+			xtype			: 'combo'
+		,	fieldLabel		: 'Mode Arsip'
+		,	itemId			: 'mode_arsip_id'
+		,	name			: 'mode_arsip_id'
+		,	store			: Ext.getStore ('ModeArsip')
+		,	displayField	: 'nama'
+		,	valueField		: 'id'
+		,	triggerAction	: 'all'
+		,	emptyText		: ''
+		,	allowBlank		:false
+		},{
 			xtype			: 'textarea'
 		,	fieldLabel		: 'Keterangan'
 		,	itemId			: 'keterangan'
@@ -80,5 +91,4 @@ Ext.define('Earsip.view.KlasArsipWin', {
 	,	iconCls			: 'save'
 	,	formBind		: true
 	}]
-
 });

@@ -36,7 +36,7 @@ try {
 	}
 	action	= request.getParameter ("action");
 	id 		= request.getParameter ("id");
-	
+
 	if (id == null) {
 		reader	= request.getReader ();
 		line	= reader.readLine ();
@@ -45,7 +45,7 @@ try {
 			line = reader.readLine();
 		}
 		reader.close();
-		
+
 		data			= sb.toString();
 		o				= (JSONObject) new JSONObject (data);
 		id				= o.getString ("id");
@@ -65,7 +65,7 @@ try {
 		jra_inaktif		= Integer.parseInt (request.getParameter ("jra_inaktif"));
 		mode_arsip_id	= Integer.parseInt (request.getParameter ("mode_arsip_id"));
 	}
-	
+
 	if (action.equalsIgnoreCase ("create")) {
 		q	=" insert into r_berkas_klas (unit_kerja_id, kode, nama, keterangan, jra_aktif, jra_inaktif, mode_arsip_id)"
 			+" values (?, ?, ?, ?, ?, ?, ?)";
@@ -81,14 +81,14 @@ try {
 	} else if (action.equalsIgnoreCase ("update")) {
 		q	=" update	r_berkas_klas "
 			+" set		unit_kerja_id 	= ?"
-			+" , 		kode		 	= ?"			
+			+" , 		kode		 	= ?"
 			+" , 		nama		 	= ?"
 			+" ,		keterangan		= ?"
 			+" ,		jra_aktif		= ?"
 			+" ,		jra_inaktif		= ?"
 			+" ,		mode_arsip_id	= ?"
 			+" where	id				= ?";
-		
+
 		db_stmt = db_con.prepareStatement (q);
 		db_stmt.setInt(1, Integer.parseInt (uk_id));
 		db_stmt.setString (2, kode);
